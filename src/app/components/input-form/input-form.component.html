@@ -5,7 +5,9 @@
       [type]="type" 
       [value]="value" 
       [placeholder]="placeHolder" 
-      (input)="onInput($event)">
+      (input)="onInput($event)"
+      autocomplete="on"
+      >
     <div class="input-icon">
       <ng-content></ng-content>
     </div>

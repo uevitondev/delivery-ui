@@ -2,40 +2,42 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { AuthLayoutComponent } from '../../components/auth-layout/auth-layout.component';
 import { InputFormComponent } from '../../components/input-form/input-form.component';
+import { AuthLayoutComponent } from '../../components/auth-layout/auth-layout.component';
 
 @Component({
-  selector: 'app-signin',
+  selector: 'app-signup',
   standalone: true,
   imports: [
     AuthLayoutComponent,
     InputFormComponent,
     ReactiveFormsModule
   ],
-  templateUrl: './signin.component.html',
-  styleUrl: './signin.component.scss'
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss'
 })
-export class SigninComponent {
-
+export class SignupComponent {
   router = inject(Router);
   toast = inject(ToastrService);
-  signinForm!: FormGroup;
+  signupForm!: FormGroup;
 
   constructor() {
-    this.signinForm = new FormGroup({
+    this.signupForm = new FormGroup({
+      firstName: new FormControl('', [Validators.required]),
+      lastName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4)])
+      password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(4)])
     });
   }
 
   submit() {
-    console.log(this.signinForm.value);
+    console.log(this.signupForm.value);
     this.toast.success("Login Efetuado com sucesso!");
   }
 
   navigate() {
-    this.router.navigate(["signup"]);
+    this.router.navigate(["signin"]);
   }
 
 }
