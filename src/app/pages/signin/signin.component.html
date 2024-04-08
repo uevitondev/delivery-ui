@@ -1,2 +1,26 @@
-<app-signin-layout>
+<app-signin-layout
+  (submit)="submit()"
+  (navigate)="navigate()"
+>
+  <form [formGroup]="signinForm">
+    <app-input-form 
+        formControlName="email"
+        inputName="email" 
+        type="email" 
+        label="Your Email:"       
+        placeHolder="user@hostemail.com"
+        >
+      <img src="/assets/imgs/signin/signin-email-icon.svg">
+    </app-input-form>
+    <app-input-form 
+        formControlName="password"
+        inputName="password" 
+        type="password" 
+        label="Your Password:"       
+        placeHolder="your password"
+      >
+      <img src="/assets/imgs/signin/signin-password-icon.svg">
+    </app-input-form>
+    <span>Forgot password?</span>
+  </form>
 </app-signin-layout>

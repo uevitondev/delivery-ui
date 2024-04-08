@@ -1,0 +1,29 @@
+.input-wrapper {
+  color: black;
+  font-size: 16px;
+  text-align: start;
+  label{
+    margin-bottom: 10px;
+  }
+
+  .input-content {
+    display: flex;
+    width: 100%;
+    border-radius: 8px;
+
+    input {
+      font-size: 16px;
+      border: none;
+      border-radius: 8px 0 0 8px;
+      background-color: rgb(221, 216, 216);
+      padding: 12px 0 12px 20px;
+      width: 100%;
+    }
+
+    .input-icon {
+      padding: 12px;
+      border-radius: 0 8px 8px 0;
+      //background-color: blueviolet;
+    }
+  }
+}

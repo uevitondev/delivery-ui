@@ -1,20 +1,18 @@
 <main>
   <section class="main-section">
-    <h1>Food Delivery</h1>
+    <h1>Delivery App</h1>
     <img src="/assets/imgs/signin/signin-banner.svg" alt="">
   </section>
 
   <section class="form-section">
     <img src="/assets/imgs/signin/signin-logo.svg" alt="">
     <h2>Sign-In</h2>
-    <form>
-     
-    </form>
+    <ng-content></ng-content>
     <div class="btn-wrapper">
-      <button class="btn-signin">SignIn</button>
+      <button class="btn-signin" (click)="submit()">SignIn</button>
       <div class="divider">    
       </div>     
-      <button class="btn-signup">SignUp</button>
+      <button class="btn-signup" (click)="navigate()">SignUp</button>
     </div>
   </section>
 </main>

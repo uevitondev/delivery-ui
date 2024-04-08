@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, input } from '@angular/core';
 
 @Component({
   selector: 'app-signin-layout',
@@ -8,4 +8,16 @@ import { Component, Input, input } from '@angular/core';
   styleUrl: './signin-layout.component.scss'
 })
 export class SigninLayoutComponent {
+
+  @Output("submit") onSubmit = new EventEmitter();
+  @Output("navigate") onNavigate = new EventEmitter();
+
+  submit() {
+    this.onSubmit.emit();
+  }
+
+  navigate() {
+    this.onNavigate.emit();
+  }
+
 }
