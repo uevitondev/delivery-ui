@@ -10,13 +10,12 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 8px;
     height: 100%;
   }
 
-
   .main-section {
     flex-grow: 1;
+    gap: 35px;
     background-color: rgb(230, 221, 221);
 
     h1 {
@@ -27,8 +26,11 @@ main {
 
   .form-section {
     flex-grow: 0.4;
-    gap: 35px;
     padding: 0 35px;
+
+    img {
+      width: 10%;
+    }
 
     h2 {
       font-size: 20px;

@@ -1,0 +1,16 @@
+:host {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  main {
+    height: 100%;
+  }
+
+  app-nav-bar {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+  }
+}
