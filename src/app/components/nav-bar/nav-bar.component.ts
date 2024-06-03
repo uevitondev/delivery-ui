@@ -1,9 +1,10 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environment.development';
 import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart.service';
 import { StorageService } from '../../services/storage.service';
@@ -17,21 +18,21 @@ import { StorageService } from '../../services/storage.service';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss'
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
 
   authService = inject(AuthService);
   cartService = inject(CartService);
   storage = inject(StorageService);
   router = inject(Router);
-
-  isLoggedIn = true;
   icon: string = 'dark_mode';
   userImage!: string;
-  userName!: string;
+  isLoggedIn$ = this.authService.isLoggedIn();
 
+  ngOnInit(): void {
+  }
 
   getNameAuthUser() {
-    //return this.authService.getNameAuthUser();
+    return this.storage.get(environment.authUser).authName;
   }
 
   cartCount() {
@@ -46,16 +47,33 @@ export class NavBarComponent {
     return this.icon = 'dark_mode';
   }
 
-  navigateToHome() { }
-  navigateToSignIn() {
-    this.isLoggedIn = true;
+  navigateToHome() {
+    this.router.navigate(["home"]);
   }
-  navigateToSignUp() { }
-  navigateToOrders() { }
-  navigateToAccount() { }
-  navigateToCart() { }
+
+  navigateToStore() {
+    this.router.navigate(["store"]);
+  }
+
+  navigateToSignIn() {
+    this.router.navigate(["signin"]);
+  }
+  navigateToSignUp() {
+    this.router.navigate(["signup"]);
+  }
+  navigateToOrders() {
+    this.router.navigate(["orders"]);
+  }
+  navigateToAccount() {
+    this.router.navigate(["account"]);
+  }
+  navigateToCart() {
+    this.router.navigate(["cart"]);
+  }
+
   logout() {
-    this.isLoggedIn = false;
+    this.authService.userLogout();
+    this.router.navigate(["home"]);
   }
 
 }

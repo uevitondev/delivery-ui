@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
 type InputTypes = "text" | "email" | "password"
@@ -21,7 +21,7 @@ type InputTypes = "text" | "email" | "password"
 })
 export class InputFormComponent implements ControlValueAccessor {
   @Input() inputName: string = ""
-  @Input() type: InputTypes = "text";  
+  @Input() type: InputTypes = "text";
   @Input() label: string = "";
   @Input() placeHolder: string = "";
 

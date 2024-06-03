@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { InputFormComponent } from '../../components/input-form/input-form.component';
 import { AuthLayoutComponent } from '../../components/auth-layout/auth-layout.component';
-import { UserSignUp } from '../../model/user-signup';
+import { UserSignUp } from '../../model/auth/user-signup';
 import { AuthService } from '../../services/auth.service';
 
 @Component({

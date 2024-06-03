@@ -1,31 +1,31 @@
 <mat-toolbar color="primary">
   <nav>
 
-    <div class="nav-start">
-      <span>Delivery App</span>
+    <div class="nav-start">    
+        <span (click)="navigateToHome()">Delivery App</span>    
     </div>
 
-    <div class="nav-links">
-      <button (click)="navigateToHome()">Home</button>     
-
-      @if(!isLoggedIn){
-        <button (click)="navigateToSignIn()">Entrar</button>
-        <button (click)="navigateToSignUp()">Criar uma conta</button>        
-      } @else{        
+    <div class="nav-links">    
+      <button (click)="navigateToStore()">Store</button>
+      @if(isLoggedIn$ | async){
+        <button (click)="navigateToOrders()">Meus Pedidos</button>
         <div class="account-menu" [matMenuTriggerFor]="menu">
-          <mat-icon>account_circle</mat-icon>
-          <span> Olá - Ueviton </span>
+          <span class="auth-name"> {{getNameAuthUser()}}</span>
+          <mat-icon class="auth-icon">account_circle</mat-icon>      
+          
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="navigateToAccount()">Minha Conta</button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>exit_to_app</mat-icon>
+              <span>Sair</span>
+            </button>
+          </mat-menu> 
         </div>        
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="navigateToAccount()">Minha Conta</button>
-          <button mat-menu-item (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon>
-            <span>Sair</span>
-          </button>
-        </mat-menu>
-        
+                  
+      } @else{   
+        <button (click)="navigateToSignIn()">Entrar</button>
+        <button (click)="navigateToSignUp()">Criar uma conta</button>          
       }
-
       <div class="cart-icon" (click)="navigateToCart()">
         <mat-icon>shopping_cart</mat-icon>    
         <span>(vazio)</span>    

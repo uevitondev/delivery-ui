@@ -1,4 +1,4 @@
-export interface UserSignIn {
+export interface AuthRequest {
   username: string,
   password: string,
 }

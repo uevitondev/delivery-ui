@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthResponse } from '../model/auth-response';
+import { AuthResponse } from '../model/auth/auth-response';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +11,7 @@ export class StorageService {
   constructor() {
     //this.storage = window.sessionStorage;
     this.storage = window.localStorage;
-  }
-
-  isLoggedIn(): boolean {
-    const user = this.storage.getItem('authUser');
-    if (user) {
-      return true;
-    }
-    return false;
-  }
+  }  
 
   save(key: string, value: any) {
     this.storage.removeItem(key);
@@ -31,7 +23,6 @@ export class StorageService {
     if (value) {
       return JSON.parse(value);
     }
-    return {};
   }
 
   remove(key: string) {

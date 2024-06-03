@@ -3,15 +3,15 @@
   secondaryTitleText="SignIn"
   primaryButtonText="SignIn"
   secondaryButtonText="SignUp"
-  (teste)="teste()"
+  (teste)="goTestApiComponent()"
   (submit)="submit()"
   (navigate)="navigate()"
   [disableSubmitButton]="!signinForm.valid"
 >
   <form [formGroup]="signinForm">
     <app-input-form 
-        formControlName="email"
-        inputName="email" 
+        formControlName="username"
+        inputName="username" 
         type="email" 
         label="Your Email:"       
         placeHolder="uevitondev@gmail.com"

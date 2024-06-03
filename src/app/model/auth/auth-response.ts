@@ -2,6 +2,7 @@ export interface AuthResponse {
   tokenType: string,
   accessToken: string,
   accessTokenExpiry: string,
-  userName: string,
-  authorities: string
+  authName: string,
+  username: string;
+  roles: string[]
 }

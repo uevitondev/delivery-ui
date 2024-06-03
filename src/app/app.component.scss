@@ -7,9 +7,9 @@
     height: 100%;
   }
 
-  app-nav-bar {
-    position: sticky;
+  app-nav-bar {    
     position: -webkit-sticky;
+    position: sticky;
     top: 0;
     z-index: 1000;
   }
