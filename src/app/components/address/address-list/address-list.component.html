@@ -1,0 +1,9 @@
+<main>
+  @for(address of userAddresses; track address){
+  <div class="address">
+    <span>{{address.street}}, {{address.number}}, {{address.district}}, ({{address.city}} - {{address.uf}}) </span>
+    <span>{{address.complement}}</span>
+    <span>{{address.zipCode}}</span>
+  </div>
+  }
+</main>

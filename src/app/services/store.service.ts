@@ -9,23 +9,19 @@ import { StorageService } from './storage.service';
   providedIn: 'root'
 })
 export class StoreService {
-
-  apiUrl = environment.apiUrl;
+  ENV = environment;
   storageService = inject(StorageService);
   http = inject(HttpClient);
 
   constructor() { }
 
   findAllStores(): Observable<StoreDto[]> {
-    return this.http.get<StoreDto[]>(`${this.apiUrl}/stores`);
+    return this.http.get<StoreDto[]>(`${this.ENV.API_URL}/stores`);
   }
 
-  hasStoreSelected(): boolean {
-    const store = this.storageService.get(environment.store);
-    if (store != null) {
-      return true;
-    }
-    return false;
+  hasStoredStore(): boolean {
+    const storedStore = this.storageService.get(this.ENV.STORED_STORE);
+    return storedStore ? true : false;  
   }
 
 

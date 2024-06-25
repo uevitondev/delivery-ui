@@ -1,0 +1,65 @@
+<main>
+
+  <section class="order-section">
+    @if(order){
+
+    <div class="order-container">
+
+      <div class="order-details">
+        <span>Efetuado: {{ order.createdAt }}</span>
+        <span>Status: {{ order.status }}</span>
+        <span>Payment: {{ order.paymentMethod }}</span>
+        <span>Total: R$ {{ order.total }}</span>
+      </div>
+
+      <div class="order-items">
+        <h3>Items: </h3>
+        @for(orderitem of order.orderItems; track orderitem){
+        <div class="order-item">
+          <div class="order-item-left">
+            <span>{{orderitem.quantity}}x </span>
+            <span>R$ {{orderitem.product.price}}</span>
+            <img src={{orderitem.product.imgUrl}} alt="">
+            <span>{{orderitem.product.name}}</span>       
+          </div>
+          <div class="order-item-right">
+            <span>Total: R$ {{orderitem.total}} </span>
+            <span>Obs: {{orderitem.observation}} </span>
+          </div>
+        </div>
+        }
+      </div>
+
+
+      <div class="order-customer-data">
+        <h3>Cliente:</h3>
+        <span>{{order.customerData.firstName}} {{order.customerData.lastName}}</span>
+        <span>Phone Number: {{order.customerData.phoneNumber}}</span>
+      </div>
+
+      <div class="order-store-data">
+        <h3>Loja:</h3>
+        <div>
+          <img src={{order.storeData.logoUrl}} alt="">
+          <span> {{order.storeData.type}} - {{order.storeData.name}}</span>
+        </div>
+        <span>Phone Number: {{order.storeData.phoneNumber}}</span>
+      </div>
+
+      <div class="order-delivery-address">
+        <H3>Endereço de Entrega:</H3>
+        <span> {{order.deliveryAddress.street}}, {{ order.deliveryAddress.number }} ( {{order.deliveryAddress.district}}
+          ) </span>
+        <span> {{order.deliveryAddress.city}} - {{ order.deliveryAddress.uf }}</span>
+        <span> {{ order.deliveryAddress.complement }}</span>
+      </div>
+
+    </div>
+
+
+    }
+
+  </section>
+
+
+</main>

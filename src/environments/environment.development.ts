@@ -1,6 +1,7 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/v1',
-  authUser: 'authUser',
-  store: 'store'
+  API_URL: 'http://localhost:8080/v1',
+  STORED_AUTH: 'storedAuth',
+  STORED_STORE: 'storedStore',
+  STORED_CART: 'storedCart'
 };

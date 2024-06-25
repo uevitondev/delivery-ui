@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment.development';
 import { AuthService } from '../../services/auth.service';
 import { CartService } from '../../services/cart.service';
 import { StorageService } from '../../services/storage.service';
+import { AuthResponse } from '../../model/auth/auth-response';
 
 @Component({
   selector: 'app-nav-bar',
@@ -20,23 +21,28 @@ import { StorageService } from '../../services/storage.service';
 })
 export class NavBarComponent implements OnInit {
 
+  ENV = environment;
   authService = inject(AuthService);
   cartService = inject(CartService);
-  storage = inject(StorageService);
+  storageService = inject(StorageService);
   router = inject(Router);
   icon: string = 'dark_mode';
   userImage!: string;
-  isLoggedIn$ = this.authService.isLoggedIn();
 
   ngOnInit(): void {
+
   }
 
-  getNameAuthUser() {
-    return this.storage.get(environment.authUser).authName;
+  isAuthLoggedIn() {
+    return this.authService.isLogged();
   }
 
-  cartCount() {
-    return this.cartService.getCartCount();
+  getAuthName() {
+    return this.authService.getAuthName();
+  }
+
+  getItemCount() {
+    return this.cartService.getItemCount();
   }
 
   toggleTheme() {
@@ -72,7 +78,7 @@ export class NavBarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.userLogout();
+    this.authService.logout();
     this.router.navigate(["home"]);
   }
 

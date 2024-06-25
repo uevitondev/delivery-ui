@@ -70,3 +70,15 @@ nav {
     }
   }
 }
+
+@media screen and (max-width: 800px) {
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    .nav-links{
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+  }
+}

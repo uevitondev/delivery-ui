@@ -1,0 +1,35 @@
+<div class="checkout-container">
+    <h2>Checkout do Pedido</h2>
+    <div class="payment-method">
+        <h3>Escolha o Método de Pagamento:</h3>
+
+        <div class="select">
+            <select name="format" id="format" required>
+                <option selected disabled>FORMA DE PAGAMENTO</option>
+                <option value="0">EM ESPÉCIE</option>
+                <option value="txt">CARTÃO</option>
+                <option value="epub">PIX</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="address">
+        <h3>Endereço para Entrega:</h3>
+        <button (click)="getUserAddresses()">Listar Seus Endereços:</button>
+        <div class="user-addresses-select">
+            @for(address of addresses; track address ){
+            <div class="user-address" (click)="setUserAdressToCart(address)">
+                <span>{{address.street}}, {{address.number}} - {{address.district}}</span>
+                <span>{{address.complement}}</span>
+                <span> {{address.city}} - {{address.uf}} </span>
+                <span>{{address.zipCode}}</span>
+            </div>
+            }
+        </div>
+
+    </div>
+    <div class="actions">
+        <button (click)="cancel()">Cancelar</button>
+        <button (click)="confirm()">Confirmar Pedido</button>
+    </div>
+</div>

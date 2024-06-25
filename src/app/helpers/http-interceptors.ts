@@ -9,6 +9,7 @@ import { StorageService } from "../services/storage.service";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
+  private ENV = environment;
 
   constructor(
     private storageService: StorageService,
@@ -51,7 +52,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   private handle401UnauthorizedError(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.authService.refreshToken().pipe(
       switchMap((authResponse) => {
-        this.authService.userLoggedSuccess(authResponse);
+        this.authService.setAuth(authResponse);
         return next.handle(this.requestWithHeader(request)).pipe(
           catchError((error: HttpErrorResponse) => {
             if (error.status === 403) {
@@ -75,30 +76,35 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
   private handleSessionExpired() {
     this.deleteRefreshTokenCookie();
-    this.authService.userLogout();
-    this.toast.info("sessão expirada!");
+    this.authService.logout();
+    this.toast.info("Sessão Expirou!");
     this.router.navigate(["signin"]);
   }
 
   private handle401Error() {
-    this.toast.error("unauthorized - efetue login");
+    this.toast.error("(401) Acesso Não Autorizado!");
     this.router.navigate(['signin']);
   }
 
   private handle403Error() {
-    this.toast.error("forbidden - sem autorização");
-    this.router.navigate(['forbidden']);
+    this.toast.error("(403) Acesso Negado!");
+    this.router.navigate(['403']);
   }
 
   private requestWithHeader(request: HttpRequest<any>): HttpRequest<any> {
-    const authUser = this.storageService.get(environment.authUser);
-    if (authUser != null) {
-      return request.clone({
-        headers: request.headers.set('Authorization', 'Bearer ' + authUser.accessToken),
-      });
-    } else {
+
+    if (this.isRefreshTokenUrl(request.url)) {
       return request;
     }
+
+    if (this.authService.isLogged()) {
+      const storedAuth = this.storageService.get(this.ENV.STORED_AUTH);
+      return request.clone({
+        headers: request.headers.set('Authorization', 'Bearer ' + storedAuth.accessToken),
+      })
+    }
+    return request;
+
   }
 
   private deleteRefreshTokenCookie() {

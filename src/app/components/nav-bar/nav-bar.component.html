@@ -1,36 +1,41 @@
 <mat-toolbar color="primary">
   <nav>
 
-    <div class="nav-start">    
-        <span (click)="navigateToHome()">Delivery App</span>    
+    <div class="nav-start">
+      <span (click)="navigateToHome()">Delivery App</span>
     </div>
 
-    <div class="nav-links">    
+    <div class="nav-links">
       <button (click)="navigateToStore()">Store</button>
-      @if(isLoggedIn$ | async){
-        <button (click)="navigateToOrders()">Meus Pedidos</button>
-        <div class="account-menu" [matMenuTriggerFor]="menu">
-          <span class="auth-name"> {{getNameAuthUser()}}</span>
-          <mat-icon class="auth-icon">account_circle</mat-icon>      
-          
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="navigateToAccount()">Minha Conta</button>
-            <button mat-menu-item (click)="logout()">
-              <mat-icon>exit_to_app</mat-icon>
-              <span>Sair</span>
-            </button>
-          </mat-menu> 
-        </div>        
-                  
-      } @else{   
-        <button (click)="navigateToSignIn()">Entrar</button>
-        <button (click)="navigateToSignUp()">Criar uma conta</button>          
+      @if( isAuthLoggedIn() ){
+      <button (click)="navigateToOrders()">Meus Pedidos</button>
+      <div class="account-menu" [matMenuTriggerFor]="menu">
+        <span class="auth-name"> {{ getAuthName() }}</span>
+        <mat-icon class="auth-icon">account_circle</mat-icon>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="navigateToAccount()">Minha Conta</button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Sair</span>
+          </button>
+        </mat-menu>
+      </div>
+
+      } @else{
+      <button (click)="navigateToSignIn()">Entrar</button>
+      <button (click)="navigateToSignUp()">Criar uma conta</button>
       }
       <div class="cart-icon" (click)="navigateToCart()">
-        <mat-icon>shopping_cart</mat-icon>    
-        <span>(vazio)</span>    
+        <mat-icon>shopping_cart</mat-icon>
+        @if( getItemCount() ) {
+        <span> {{ getItemCount() }} </span>
+        }@else{
+        <span> (vazio) </span>
+        }
+
       </div>
-      <div class="theme-icon"  (click)="toggleTheme()">
+      <div class="theme-icon" (click)="toggleTheme()">
         <mat-icon>{{icon}}</mat-icon>
       </div>
 

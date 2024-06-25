@@ -1,0 +1,48 @@
+<main>
+
+  <section class="account-header">
+    <div class="account-title">
+      <h2>MINHA CONTA</h2>
+    </div>
+  </section>
+
+
+  <section class="account-main">
+
+    <section class="account-left">
+      <div class="account-options">
+        <div>
+          <button (click)="activateSectionAuthAccountData()">Meus Dados</button>
+        </div>
+        <div>
+          <button (click)="activateSectionAuthAddressList()">Meus Endereços</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="account-right">
+      <div class="active-section">
+
+        @if( activeSection === null ){
+          <ng-container>       
+            <h2>Veja seus dados aqui ... (Selecione uma opção) </h2>
+          </ng-container>
+        }
+
+        @if( activeSection === 'auth-account-data' ){
+          <ng-container>
+            <app-auth-account-data></app-auth-account-data>
+          </ng-container>
+        }
+
+        @if( activeSection === 'auth-address-list' ){
+          <ng-container>
+            <app-address-list></app-address-list>
+          </ng-container>
+        }
+
+      </div>
+    </section>
+  </section>
+
+</main>

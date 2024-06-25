@@ -1,0 +1,63 @@
+<main>
+
+
+  <section class="main-section">
+    @if(getItemCount() != 0){
+    <section class="left-section">
+      @for(item of cart.cartItems; track item; let i = $index){
+      <div class="item">
+        <div class="item-info">
+          <div class="product-img">
+            <img src={{item.product.imgUrl}} alt="product icon">
+          </div>
+          <div class="product-name">
+            <span>{{ item.product.name }}</span>
+          </div>
+          <div class="product-price">
+            <span>R$ {{ item.product.price }}</span>
+          </div>
+          <div class="product-qtd">
+            <button (click)="decrementItemQuantity(item)">-</button>
+            <span class="p-quantity"> <strong> {{ item.quantity }} </strong> </span>
+            <button (click)="incrementItemQuantity(item)">+</button>
+          </div>
+          <div class="item-subtotal">
+            <span>subtotal: R$ {{ getSubtotal(item) }}</span>
+          </div>
+        </div>
+        <div class="remove-orderitem">
+          <mat-icon class="btn-remove" (click)="removeItem(item)">delete</mat-icon>
+        </div>
+      </div>
+      }
+    </section>
+
+    <section class="right-section">
+      <div class="cart-checkout">
+        <div>
+          <h1>Total: <strong>R$ {{ getTotal() }}</strong></h1>
+        </div>
+
+
+        <div class="btn-container">
+          <button (click)="clearCart()">Limpar Carrinho</button>
+          <button routerLink="/products">Comprar Mais...</button>
+          <button (click)="goToCheckout()">Prosseguir para Checkout</button>
+        </div>
+      </div>
+
+
+    </section>
+
+    }@else{
+    <div class="cart-blank">
+      <div class="blank">
+        <span> "Vazio" Adicone Produtos! </span>
+        <button class="btn" (click)="navigateToStore()">Comprar Agora</button>
+      </div>
+    </div>
+    }
+
+  </section>
+
+</main>

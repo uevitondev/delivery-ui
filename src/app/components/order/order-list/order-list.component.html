@@ -1,0 +1,18 @@
+<main>
+  <div class="order-list">
+    @for(order of orders; track order){
+      <div class="order">
+        <div class="order-info">
+          <span>{{ order.createdAt }}</span>
+          <span>{{ order.status }}</span>
+          <span>( {{ order.paymentMethod }} )</span>
+          <span>R$ {{ order.total }}</span>
+        </div>
+        <div class="btn-container">
+          <button (click)="navigateToOrderDetail(order)">VER DETALHES DO PEDIDO</button>
+        </div>
+      </div>
+      }
+  </div>
+    
+</main>

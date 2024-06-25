@@ -10,17 +10,23 @@ import { ProductDto } from '../model/product/product-dto';
 })
 export class ProductService {
 
-  apiUrl = environment.apiUrl;
+  ENV = environment;
   http = inject(HttpClient);
-  
+
   constructor() { }
 
-  findAllProductsByStoreId(id: string, pageIndex: number, pageSize: number): Observable<PageProduct> {
-    return this.http.get<PageProduct>(`${this.apiUrl}/products/store/${id}?page=${pageIndex}&size=${pageSize}`);
+
+  findAllProductsByStoreAndCategory(storeId: string, categoryName: string, pageIndex: number, pageSize: number): Observable<PageProduct> {
+    return this.http.get<PageProduct>(`${this.ENV.API_URL}/products/store/${storeId}?categoryName=${categoryName}&page=${pageIndex}&size=${pageSize}`);
+    //return this.http.get<PageProduct>(`${this.ENV.API_URL}/products/store/${storeId}?page=${pageIndex}&size=${pageSize}`);
   }
 
-  findProductById(id: number): Observable<ProductDto> {
-    return this.http.get<ProductDto>(`${this.apiUrl}/products/${id}`);
+  findAllProductsStoreByCategory(storeId: string, categoryName: string, pageIndex: number, pageSize: number): Observable<PageProduct> {
+    return this.http.get<PageProduct>(`${this.ENV.API_URL}/products/store/${storeId}?categoryName=${categoryName}&page=${pageIndex}&size=${pageSize}`);
+  }
+
+  findProductById(id: string): Observable<ProductDto> {
+    return this.http.get<ProductDto>(`${this.ENV.API_URL}/products/${id}`);
   }
 
 }

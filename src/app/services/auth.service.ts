@@ -12,53 +12,57 @@ import { StorageService } from './storage.service';
 })
 export class AuthService {
 
-  apiUrl = environment.apiUrl;
+  ENV = environment;
   httpClient = inject(HttpClient);
-  storage = inject(StorageService);
-  loggedIn = new BehaviorSubject<boolean>(false);
+  storageService = inject(StorageService);
+  private authSubject: BehaviorSubject<AuthResponse | null> = new BehaviorSubject<AuthResponse | null>(null);
+  constructor() {
+    const storedAuth = this.storageService.get(this.ENV.STORED_AUTH);
+    storedAuth ? this.setAuth(storedAuth) : () => { };
+  }
+
+  setAuth(authResponse: AuthResponse): void {
+    this.storageService.save(this.ENV.STORED_AUTH, authResponse);
+    this.authSubject.next(authResponse);
+  }
+
+  clearAuth(): void {
+    this.authSubject.next(null);
+    this.storageService.remove(this.ENV.STORED_AUTH);
+  }
+
+  isLogged(): boolean {
+    return !!this.getAuth();
+  }
+
+  getAuth(): AuthResponse | null {
+    return this.authSubject.getValue();
+  }
+
+  getAuthName(): string | null {
+    const auth = this.getAuth();
+    return auth ? auth.authName : null;
+  }
 
   signup(userSignUp: UserSignUp): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiUrl}/auth/sign-up`, userSignUp);
+    return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/sign-up`, userSignUp);
   }
 
   signin(authRequest: AuthRequest): Observable<AuthResponse> {
-    return this.httpClient.post<AuthResponse>(`${this.apiUrl}/auth/sign-in`, authRequest);
+    return this.httpClient.post<AuthResponse>(`${this.ENV.API_URL}/auth/sign-in`, authRequest);
   }
 
   refreshToken(): Observable<AuthResponse> {
-    return this.httpClient.post<AuthResponse>(`${this.apiUrl}/auth/refresh-token`, {}, { withCredentials: true });
+    return this.httpClient.post<AuthResponse>(`${this.ENV.API_URL}/auth/refresh-token`, {}, { withCredentials: true });
   }
 
-  userLoggedSuccess(authResponse: AuthResponse) {
-    this.storage.save(environment.authUser, authResponse);
-    this.loggedIn.next(true);
-  }
-
-  isLoggedIn() {
-    if (this.storage.get(environment.authUser)) {
-      this.loggedIn.next(true);
-      return this.loggedIn.asObservable();
-    }
-    return this.loggedIn.asObservable();
-  }
-
-  isLogged() {
-    if (this.storage.get(environment.authUser)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  userLogout(): Observable<any> {
-    this.storage.remove(environment.authUser);
-    this.loggedIn.next(false);
-    return new Observable;
+  logout() {
+    this.clearAuth();
   }
 
 
   teste(): Observable<any> {
-    return this.httpClient.get<any>(`${this.apiUrl}/test/admin`);
+    return this.httpClient.get<any>(`${this.ENV.API_URL}/test/admin`);
   }
 
 }
