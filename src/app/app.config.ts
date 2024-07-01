@@ -6,7 +6,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
-import { HttpRequestInterceptor } from './helpers/http-interceptors';
+import { HttpRequestInterceptor } from './core/interceptors/http-interceptors';
 
 export const appConfig: ApplicationConfig = {
   providers: [

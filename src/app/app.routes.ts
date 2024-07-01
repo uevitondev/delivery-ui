@@ -1,18 +1,17 @@
 import { Routes } from '@angular/router';
-import { ListStoreComponent } from './components/store/list-store/list-store.component';
-import { Page403Component } from './pages/403-page/403-page.component';
-import { AuthAccountPageComponent } from './pages/auth-account-page/auth-account-page.component';
-import { CartPageComponent } from './pages/cart-page/cart-page.component';
-import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { OrderDetailsPageComponent } from './pages/order-details-page/order-details-page.component';
-import { OrdersPageComponent } from './pages/orders-page/orders-page.component';
-import { ProductDetailsPageComponent } from './pages/product-details-page/product-details-page.component';
-import { SignInPageComponent } from './pages/signin-page/signin-page.component';
-import { SignUpPageComponent } from './pages/signup-page/signup.component';
-import { StorePageComponent } from './pages/store-page/store-page.component';
-import { TestApiPageComponent } from './pages/testapi-page/testapi-page.component';
-import { AddressEditPageComponent } from './pages/address-edit-page/address-edit-page/address-edit-page.component';
+import { AddressEditPageComponent } from './modules/address/pages/address-edit-page/address-edit-page.component';
+import { AuthAccountPageComponent } from './modules/auth/auth-account-page/auth-account-page.component';
+import { SignInPageComponent } from './modules/auth/signin-page/signin-page.component';
+import { SignUpPageComponent } from './modules/auth/signup-page/signup.component';
+import { CartPageComponent } from './modules/cart/cart-page/cart-page.component';
+import { CheckoutPageComponent } from './modules/cart/checkout-page/checkout-page.component';
+import { Page403Component } from './modules/error/403-page/403-page.component';
+import { HomePageComponent } from './modules/home/home-page/home-page.component';
+import { OrderDetailsPageComponent } from './modules/order/order-details-page/order-details-page.component';
+import { OrdersPageComponent } from './modules/order/orders-page/orders-page.component';
+import { ProductDetailsPageComponent } from './modules/product/product-details-page/product-details-page.component';
+import { ListStoreComponent } from './modules/store/list-store/list-store.component';
+import { StorePageComponent } from './modules/store/store-page/store-page.component';
 
 export const routes: Routes = [
   {
@@ -61,10 +60,6 @@ export const routes: Routes = [
   {
     path: "403",
     component: Page403Component
-  },
-  {
-    path: "testapi",
-    component: TestApiPageComponent
   },
   {
     path: "account",
