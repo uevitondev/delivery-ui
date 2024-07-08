@@ -17,7 +17,9 @@ import { AddressFormComponent } from '../address-form/address-form.component';
 export class AddressListComponent implements OnInit {
 
   @Input() isSelectable: boolean = false;
+  @Input() isEditable: boolean = false;
   @Output() addressSelected = new EventEmitter<AddressDto>();
+
   toastService = inject(ToastrService);
   router = inject(Router);
   addressService = inject(AddressService);

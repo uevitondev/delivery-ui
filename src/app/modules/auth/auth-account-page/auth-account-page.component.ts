@@ -6,6 +6,7 @@ import { AuthService } from '../../../core/services/auth.service';
 import { AddressFormComponent } from '../../address/components/address-form/address-form.component';
 import { AddressListComponent } from '../../address/components/address-list/address-list.component';
 import { AuthAccountDataComponent } from '../auth-account-data/auth-account-data.component';
+import { AddressDto } from '../../../core/models/address';
 
 @Component({
   selector: 'app-auth-account-page',
@@ -44,7 +45,8 @@ export class AuthAccountPageComponent implements OnInit {
   activateSectionAuthAddressList(): void {
     this.activeSection = 'auth-address-list';
   }
-  addEvent(address: any) {
+  
+  getAddressSelectedEvent(address: AddressDto) {
     this.openAddressEditModal(address);
   }
 

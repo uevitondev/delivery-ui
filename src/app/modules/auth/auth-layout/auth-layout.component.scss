@@ -1,22 +1,28 @@
 main {
+  min-height: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  gap: 45px;
 
-  section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-
-  .main-section {
+  .left-section {
     flex-grow: 1;
-    gap: 35px;
-    background-color: rgb(230, 221, 221);
+
+    .container {
+      height: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;     
+      gap: 35px;  
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+
+    }
+
 
     h1 {
       font-size: 20px;
@@ -24,9 +30,12 @@ main {
     }
   }
 
-  .form-section {
-    flex-grow: 0.4;
-    padding: 0 35px;
+  .right-section {
+    flex-grow: 0.5;
+    padding: 16px 65px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+
 
     img {
       width: 10%;

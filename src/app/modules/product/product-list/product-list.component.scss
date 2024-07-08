@@ -1,0 +1,36 @@
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  align-items: center;
+  gap: 20px;
+  padding: 45px;  
+  border-radius: 8px;
+  border: 1px solid #ccc;
+
+  
+}
+
+.card-product {
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+
+
+.card-img {
+  position: relative;
+  width: auto;
+  height: 250px;
+}
+
+.card-header {
+  padding: 15px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 15px;
+}

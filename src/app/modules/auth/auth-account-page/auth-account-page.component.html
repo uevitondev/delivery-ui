@@ -11,12 +11,8 @@
 
     <section class="account-left">
       <div class="account-options">
-        <div>
-          <button (click)="activateSectionAuthAccountData()">Meus Dados</button>
-        </div>
-        <div>
-          <button (click)="activateSectionAuthAddressList()">Meus Endereços</button>
-        </div>
+        <div (click)="activateSectionAuthAccountData()"> Meus Dados </div>
+        <div (click)="activateSectionAuthAddressList()">Meus Endereços</div>
       </div>
     </section>
 
@@ -24,21 +20,20 @@
       <div class="active-section">
 
         @if( activeSection === null ){
-          <ng-container>       
+          <div>       
             <h2>Veja seus dados aqui ... (Selecione uma opção) </h2>
-          </ng-container>
+          </div>
         }
 
-        @if( activeSection === 'auth-account-data' ){
-          <ng-container>
-            <app-auth-account-data></app-auth-account-data>
-          </ng-container>
+        @if( activeSection === 'auth-account-data' ){          
+            <app-auth-account-data></app-auth-account-data>          
         }
 
-        @if( activeSection === 'auth-address-list' ){
-          <ng-container>
-            <app-address-list  (newItemEvent)="addEvent($event)" ></app-address-list>
-          </ng-container>
+        @if( activeSection === 'auth-address-list' ){        
+            <app-address-list  
+            [isEditable]="true"
+            (addressSelected)="getAddressSelectedEvent($event)" >
+            </app-address-list>          
         }
 
       </div>

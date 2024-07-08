@@ -22,45 +22,11 @@
 </section>
 
 <section class="main-section">
-  <section class="categories-section">
-    <div class="categories">
-      <div class="category" (click)="filterProductsAll()">
-        <span>All</span>
-      </div>
-      @for(category of categories; track category){
-      <div class="category" (click)="filterProductsByCategory(category)">
-        <span>{{category.name}}</span>
-      </div>
-      }
-    </div>
+  <div class="categories-container">
+    <app-category-list [isSelectable]="true" (eventSelectedCategory)="sendEventSelectedCategoryToProductList($event)"></app-category-list>
+  </div>
 
-
-  </section>
-
-  <section class="products-section">
-    <div class="products">
-      @for(product of products; track product.id){
-      <div class="card">
-        <div class="product" (click)="navigateToProductDetails(product)">
-          <div class="img-container">
-            <img class="product-img" ngSrc={{product.imgUrl}} fill loading="lazy" title="product image"
-              alt="product image">
-          </div>
-          <div class="product-info">
-            <span class="product-name">{{product.name}}</span>
-            <span class="product-price"> R$ {{product.price}}</span>
-            <span class="product-desc">{{product.description}}</span>
-          </div>
-        </div>
-        <div class="btn-cont">
-          <button class="btn-add-cart" (click)="addToCart(product)">ADICIONAR AO CARRINHO</button>
-        </div>
-
-      </div>
-
-
-
-      }
-    </div>
-  </section>
+  <div class="products-container">
+    <app-product-list></app-product-list>
+  </div>
 </section>

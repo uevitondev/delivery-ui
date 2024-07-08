@@ -16,7 +16,6 @@ export class AuthLayoutComponent {
 
   @Output("submit") onSubmit = new EventEmitter();
   @Output("navigate") onNavigate = new EventEmitter();
-  @Output("teste") onTeste = new EventEmitter();
 
   submit() {
     this.onSubmit.emit();
@@ -25,10 +24,5 @@ export class AuthLayoutComponent {
   navigate() {
     this.onNavigate.emit();
   }
-
-  teste() {
-    this.onTeste.emit();
-  }
-
 
 }

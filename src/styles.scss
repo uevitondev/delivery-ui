@@ -1,27 +1,39 @@
 @use '@angular/material' as mat;
 @include mat.core();
 
-$deliveryapp-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
-$deliveryapp-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
-$deliveryapp-warn: mat.m2-define-palette(mat.$m2-red-palette);
-$deliveryapp-theme: mat.m2-define-light-theme((color: (primary: $deliveryapp-primary,
-        accent: $deliveryapp-accent,
-        warn: $deliveryapp-warn,
-      ),
-      typography: mat.m2-define-typography-config(),
-      density: 0));
 
-@include mat.all-component-themes($deliveryapp-theme);
+$app-light-theme: mat.define-theme((color: (theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+    ));
+
+$app-dark-theme: mat.define-theme((color: (theme-type: dark,
+        primary: mat.$magenta-palette,
+        tertiary: mat.$violet-palette,
+      ),
+    ));
+
+
+:root {
+  @include mat.all-component-themes($app-light-theme); 
+  background: mat.get-theme-color($app-light-theme, surface);
+}
+
+.dark-theme {
+  @include mat.all-component-colors($app-dark-theme); 
+  background: mat.get-theme-color($app-dark-theme, surface);
+}
 
 @import 'ngx-toastr/toastr';
 
-* {
-  box-sizing: border-box;
-}
-
 html,
 body {
+  min-height: 100vh;
+  height: auto;
   margin: 0;
-  padding: 0;
+}
+
+body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }

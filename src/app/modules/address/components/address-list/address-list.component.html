@@ -11,7 +11,8 @@
     <div class="address-right">
       @if(isSelectable) {
         <button (click)="selectAddress(address)">Selecionar</button>
-      }@else{
+      }
+      @if(isEditable){
         <button (click)="editAddress(address)">Editar</button>
         <button (click)="deleteAddress(address.id)">Apagar</button>
       }

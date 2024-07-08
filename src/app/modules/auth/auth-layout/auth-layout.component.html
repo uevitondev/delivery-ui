@@ -1,10 +1,13 @@
 <main>
-  <section class="main-section">
-    <h1>{{ appTitleText }}</h1>
-    <img src="/assets/imgs/auth/auth-banner.svg" alt="">
+  <section class="left-section">
+    <div class="container">
+      <h1>{{ appTitleText }}</h1>
+      <img src="/assets/imgs/auth/auth-banner.svg" alt="">
+    </div>    
   </section>
+  
 
-  <section class="form-section">
+  <section class="right-section">
     <img src="/assets/imgs/auth/auth-logo.svg" alt="">
     <h2>{{ secondaryTitleText }}</h2>
     <ng-content></ng-content>
@@ -12,9 +15,7 @@
       <button class="btn-primary" (click)="submit()" [disabled]="disableSubmitButton">{{ primaryButtonText }}</button>
       <div class="divider">
       </div>
-      <button class="btn-secondary" (click)="navigate()">{{ secondaryButtonText }}</button>
-      <button class="btn-secondary" (click)="teste()">Test Public Api</button>
-      
+      <button class="btn-secondary" (click)="navigate()">{{ secondaryButtonText }}</button>     
     </div>
   </section>
 </main>
