@@ -2,11 +2,11 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AddressDto } from '../../../core/models/address';
 import { AuthService } from '../../../core/services/auth.service';
 import { AddressFormComponent } from '../../address/components/address-form/address-form.component';
 import { AddressListComponent } from '../../address/components/address-list/address-list.component';
 import { AuthAccountDataComponent } from '../auth-account-data/auth-account-data.component';
-import { AddressDto } from '../../../core/models/address';
 
 @Component({
   selector: 'app-auth-account-page',
@@ -45,7 +45,7 @@ export class AuthAccountPageComponent implements OnInit {
   activateSectionAuthAddressList(): void {
     this.activeSection = 'auth-address-list';
   }
-  
+
   getAddressSelectedEvent(address: AddressDto) {
     this.openAddressEditModal(address);
   }

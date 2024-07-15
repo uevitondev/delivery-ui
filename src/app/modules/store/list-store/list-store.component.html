@@ -1,13 +1,11 @@
 <main>
-  <p>list-store works!</p>
-  <section class="main-section" >
+  <div class="stores" >
     <h1>Selecione a loja de sua preferencia:</h1>
     @for (store of stores; track store) {
       <div class="store">
         <span>{{store.name}}</span>
         <button (click)="selectStore( store )">Selecionar</button>
       </div>      
-    }
-    
-  </section>
+    }    
+  </div>
 </main>

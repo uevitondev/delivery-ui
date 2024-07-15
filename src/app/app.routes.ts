@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
 import { AddressEditPageComponent } from './modules/address/pages/address-edit-page/address-edit-page.component';
 import { AuthAccountPageComponent } from './modules/auth/auth-account-page/auth-account-page.component';
-import { SignInPageComponent } from './modules/auth/signin-page/signin-page.component';
-import { SignUpPageComponent } from './modules/auth/signup-page/signup.component';
+import { AuthPageComponent } from './modules/auth/auth-page/auth-page.component';
 import { CartPageComponent } from './modules/cart/cart-page/cart-page.component';
 import { CheckoutPageComponent } from './modules/cart/checkout-page/checkout-page.component';
 import { Page403Component } from './modules/error/403-page/403-page.component';
@@ -50,12 +49,12 @@ export const routes: Routes = [
     ],
   },
   {
-    path: "signin",
-    component: SignInPageComponent
+    path: "auth/:authSession",
+    component: AuthPageComponent
   },
   {
-    path: "signup",
-    component: SignUpPageComponent
+    path: "auth/:authSession",
+    component: AuthPageComponent
   },
   {
     path: "403",

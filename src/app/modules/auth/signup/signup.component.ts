@@ -5,24 +5,23 @@ import { ToastrService } from 'ngx-toastr';
 import { UserSignUp } from '../../../core/models/user-signup';
 import { AuthService } from '../../../core/services/auth.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
-import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 
 @Component({
-  selector: 'app-signup-page',
+  selector: 'app-signup',
   standalone: true,
   imports: [
-    AuthLayoutComponent,
     InputFormComponent,
     ReactiveFormsModule
   ],
-  templateUrl: './signup-page.component.html',
-  styleUrl: './signup-page.component.scss'
+  templateUrl: './signup.component.html',
+  styleUrl: './signup.component.scss'
 })
-export class SignUpPageComponent {
+export class SignUpComponent {
   router = inject(Router);
   toast = inject(ToastrService);
   authService = inject(AuthService);
   signupForm!: FormGroup;
+  disabled = true;
 
   constructor() {
     this.signupForm = new FormGroup({

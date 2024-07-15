@@ -5,20 +5,20 @@
   padding: 25px;
   border-radius: 8px;
   border: 1px solid #ccc;
+}
 
-  .category {   
-    background: rgb(255, 101, 0);
-    font-size: 18px;
-    font-weight: 700;
-    color: rgb(255, 255, 255);
-    border: none;
-    border-radius: 8px;
-    padding: 16px 0;
-    text-align: center;
-    cursor: pointer;
-  }
+.category {
+  background: rgb(255, 101, 0);
+  font-size: 18px;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 8px;
+  padding: 16px 0;
+  text-align: center;
+  cursor: pointer;
+}
 
-  .isSelectable {
-    cursor: pointer;
-  }
+.isSelectable {
+  cursor: pointer;
 }

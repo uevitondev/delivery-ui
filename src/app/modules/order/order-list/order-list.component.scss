@@ -1,55 +1,47 @@
-main {
-  .order-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+main {}
 
-
-    .order {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      gap: 25px;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      background-color: white;
-
-      .order-info {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 25px;
-      }
-
-      .btn-container {
-        button {
-          font-size: 0.75rem;
-          line-height: 1.125rem;
-          font-weight: 700;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 45px;
-          color: rgb(255, 255, 255);
-          border: none;
-          border-radius: 8px;
-          padding: 8px;
-          cursor: pointer;
-          background: rgb(255, 101, 0);
-        }
-      }
-
-    }
-
-  }
-
-
-
+.order-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.order {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
 
+.order-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 25px;
+}
 
+.btn-container {
+
+  button {
+    font-size: 0.75rem;
+    line-height: 1.125rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    background: rgb(255, 101, 0);
+  }
+}
 
 @media (max-width: 600px) {
   .container {

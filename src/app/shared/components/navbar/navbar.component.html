@@ -1,18 +1,18 @@
-<header color="primary">
-  <span (click)="navigateToHome()">Delivery App</span>
+<nav>
+  <span (click)="routerService.toHome()">Delivery App</span>
 
   <div class="spacer"></div>
 
-  <nav>
-    <button (click)="navigateToStore()">Store</button>
+  <div class="nav-links">
+    <button (click)="routerService.toStore()">Store</button>
     @if( isAuthLoggedIn() ){
-    <button (click)="navigateToOrders()">Meus Pedidos</button>
+    <button (click)="routerService.toOrders()">Meus Pedidos</button>
     <div class="account-menu" [matMenuTriggerFor]="menu">      
       <mat-icon class="auth-icon">account_circle</mat-icon>
-      <span class="auth-name"> {{ getAuthName() }}</span>
+      <p class="auth-name"> {{ getAuthName() }}</p>
 
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="navigateToAccount()">Minha Conta</button>
+        <button mat-menu-item (click)="routerService.toAccount()">Minha Conta</button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>
           <span>Sair</span>
@@ -21,10 +21,10 @@
     </div>
 
     } @else{
-    <button (click)="navigateToSignIn()">Entrar</button>
-    <button (click)="navigateToSignUp()">Criar uma conta</button>
+    <button (click)="routerService.toSignIn()">Entrar</button>
+    <button (click)="routerService.toSignUp()">Criar uma conta</button>
     }
-    <div class="cart-icon" (click)="navigateToCart()">
+    <div class="cart-icon" (click)="routerService.toCart()">
       <mat-icon>shopping_cart</mat-icon>
       @if( getItemCount() ) {
       <span> {{ getItemCount() }} </span>
@@ -36,5 +36,5 @@
     <div class="theme-icon" (click)="toggleTheme()">
       <mat-icon>{{icon}}</mat-icon>
     </div>
-  </nav>
-</header>
+  </div>
+</nav>

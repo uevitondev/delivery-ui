@@ -1,0 +1,26 @@
+<main>
+  <section class="left-section">
+    <div class="container">
+      <h1>Delivery</h1>
+      <img src="/assets/imgs/auth/auth-banner.svg" alt="">
+    </div>
+  </section>
+
+  <section class="rigth-section">
+    <div class="container">
+      <div class="active-auth-options">
+        <button (click)="activateSignIn()"> SignIn </button>
+        <button (click)="activateSignUp()"> SignUp </button>
+      </div>
+
+      <div class="active-auth-component">
+        @if( activeAuthComponent === 'signin' ){
+        <app-signin></app-signin>
+        }
+        @if(activeAuthComponent === 'signup'){
+        <app-signup></app-signup>
+        }
+      </div>
+    </div>
+  </section>
+</main>

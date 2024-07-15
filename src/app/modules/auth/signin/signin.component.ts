@@ -6,21 +6,19 @@ import { AuthRequest } from '../../../core/models/auth-request';
 import { AuthService } from '../../../core/services/auth.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
-import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 
 
 @Component({
-  selector: 'app-signin-page',
+  selector: 'app-signin',
   standalone: true,
   imports: [
-    AuthLayoutComponent,
     InputFormComponent,
     ReactiveFormsModule
   ],
-  templateUrl: './signin-page.component.html',
-  styleUrl: './signin-page.component.scss'
+  templateUrl: './signin.component.html',
+  styleUrl: './signin.component.scss'
 })
-export class SignInPageComponent {
+export class SignInComponent {
 
   authService = inject(AuthService);
   storageService = inject(StorageService);

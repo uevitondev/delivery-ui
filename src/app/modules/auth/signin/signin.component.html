@@ -1,0 +1,18 @@
+<form [formGroup]="signinForm">
+  <app-input-form formControlName="username" inputName="username" type="email" label="Email:"
+    placeHolder="email-example@gmail.com">
+    <img src="/assets/imgs/auth/auth-email-icon.svg">
+  </app-input-form>
+  <app-input-form formControlName="password" inputName="password" type="password" label="Senha:"
+    placeHolder="password...">
+    <img src="/assets/imgs/auth/auth-password-icon.svg">
+  </app-input-form>
+  <span>Esqueceu sua Senha?</span>
+
+  <div class="btn-wrapper">
+    <button class="btn-primary" (click)="submit()">Submit</button>
+    <div class="divider">
+    </div>
+    <button class="btn-secondary" (click)="navigate()">Navegar</button>     
+  </div>
+</form>

@@ -1,0 +1,15 @@
+app-navbar {
+  //position: fixed;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+router-outlet {
+  //margin-top: 56px;
+  //overflow-y: auto;
+  //-webkit-overflow-scrolling: touch;
+}
+

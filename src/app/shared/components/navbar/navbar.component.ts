@@ -8,23 +8,24 @@ import { environment } from '../../../../environments/environment.development';
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
 import { StorageService } from '../../../core/services/storage.service';
+import { RouterService } from '../../../core/services/router.service';
 
 @Component({
-  selector: 'app-header',
+  selector: 'app-navbar',
   standalone: true,
   imports: [
     MatToolbarModule, MatMenuModule, MatIconModule, RouterLink, NgIf, AsyncPipe
   ],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.scss'
 })
-export class HeaderComponent implements OnInit {
+export class NavBarComponent implements OnInit {
 
   ENV = environment;
   authService = inject(AuthService);
   cartService = inject(CartService);
   storageService = inject(StorageService);
-  router = inject(Router);
+  routerService = inject(RouterService);
   icon: string = 'dark_mode';
   userImage!: string;
 
@@ -52,33 +53,10 @@ export class HeaderComponent implements OnInit {
     return this.icon = 'dark_mode';
   }
 
-  navigateToHome() {
-    this.router.navigate(["home"]);
-  }
-
-  navigateToStore() {
-    this.router.navigate(["store"]);
-  }
-
-  navigateToSignIn() {
-    this.router.navigate(["signin"]);
-  }
-  navigateToSignUp() {
-    this.router.navigate(["signup"]);
-  }
-  navigateToOrders() {
-    this.router.navigate(["orders"]);
-  }
-  navigateToAccount() {
-    this.router.navigate(["account"]);
-  }
-  navigateToCart() {
-    this.router.navigate(["cart"]);
-  }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(["home"]);
+    this.routerService.toHome();
   }
 
 }

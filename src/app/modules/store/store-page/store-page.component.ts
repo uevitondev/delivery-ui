@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../../environments/environment.development';
+import { CategoryDto } from '../../../core/models/category';
 import { StorageService } from '../../../core/services/storage.service';
 import { CategoryListComponent } from '../../category/category-list/category-list.component';
 import { ProductListComponent } from '../../product/product-list/product-list.component';
-import { CategoryDto } from '../../../core/models/category';
 
 @Component({
   selector: 'app-store-page',
