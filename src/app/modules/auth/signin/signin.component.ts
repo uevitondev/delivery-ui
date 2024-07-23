@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -6,6 +6,7 @@ import { AuthRequest } from '../../../core/models/auth-request';
 import { AuthService } from '../../../core/services/auth.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
+import { RouterService } from '../../../core/services/router.service';
 
 
 @Component({
@@ -18,11 +19,10 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
-export class SignInComponent {
-
+export class SignInComponent {  
+  routerService = inject(RouterService);
   authService = inject(AuthService);
   storageService = inject(StorageService);
-  router = inject(Router);
   toast = inject(ToastrService);
   signinForm!: FormGroup;
 
@@ -33,13 +33,17 @@ export class SignInComponent {
     });
   }
 
-  submit() {
+  onSubmit() {
+    if(this.signinForm.invalid){
+      return;
+    }
+
     const authRequest: AuthRequest = this.signinForm.value;
     this.authService.signin(authRequest).subscribe({
       next: autResponse => {
         this.authService.setAuth(autResponse);
         this.toast.success('Login bem sucedido!');
-        this.router.navigate(['home']);
+        this.routerService.toHome();
       },
       error: e => {
         if (e.status == 401) {
@@ -49,14 +53,6 @@ export class SignInComponent {
         }
       }
     });
-  }
-
-  goTestApiComponent() {
-    this.router.navigate(["testapi"]);
-  }
-
-  navigate() {
-    this.router.navigate(["signup"]);
   }
 
 }

@@ -37,12 +37,11 @@ export class ListStoreComponent {
     });
   }
 
-  selectStore(store: any) {
+  selectStore(store: StoreDto) {
     this.storageService.remove(this.ENV.STORED_STORE);
     this.storageService.save(this.ENV.STORED_STORE, store);
-
-    this.router.navigate(["store"]);
     this.toastService.info("Loja Selecionada!");
+    this.router.navigate(["home"]); 
   }
 
 }

@@ -4,7 +4,7 @@
   <div class="spacer"></div>
 
   <div class="nav-links">
-    <button (click)="routerService.toStore()">Store</button>
+    <button (click)="routerService.toHome()">Home</button>
     @if( isAuthLoggedIn() ){
     <button (click)="routerService.toOrders()">Meus Pedidos</button>
     <div class="account-menu" [matMenuTriggerFor]="menu">      

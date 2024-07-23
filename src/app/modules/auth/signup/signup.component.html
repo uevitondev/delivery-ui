@@ -1,32 +1,25 @@
 <div class="container">
   <form [formGroup]="signupForm">
-    <app-input-form formControlName="firstName" inputName="firstName" type="text" label="Your First Name:"
-      placeHolder="Ueviton">
-      <img src="/assets/imgs/auth/auth-username-icon.svg">
+    <app-input-form formControlName="firstName" inputName="firstName" type="text" label="Nome:"
+      placeHolder="seu primeiro nome...">
     </app-input-form>
-    <app-input-form formControlName="lastName" inputName="lastName" type="text" label="Your Last Name:"
-      placeHolder="Santos">
-      <img src="/assets/imgs/auth/auth-username-icon.svg">
+    <app-input-form formControlName="lastName" inputName="lastName" type="text" label="Sobrenome:"
+      placeHolder="seu sobrenome...">
     </app-input-form>
-
-    <app-input-form formControlName="email" inputName="email" type="email" label="Your Email:"
-      placeHolder="uevitondev@gmail.com">
-      <img src="/assets/imgs/auth/auth-email-icon.svg">
+    <app-input-form formControlName="email" inputName="email" type="email" label="Email:"
+      placeHolder="informe seu email... (example@gmail.com) ">
     </app-input-form>
-    <app-input-form formControlName="password" inputName="password" type="password" label="Your Password:"
-      placeHolder="password...">
-      <img src="/assets/imgs/auth/auth-password-icon.svg">
+    <app-input-form formControlName="password" inputName="password" type="password" label="Senha:"
+      placeHolder="crie uma senha forte...">
     </app-input-form>
     <app-input-form formControlName="passwordConfirm" inputName="passwordConfirm" type="password"
-      label="Confirm Your Password:" placeHolder="password confirm">
-      <img src="/assets/imgs/auth/auth-password-icon.svg">
+      label="Confirme a senha:" placeHolder="confirme sua senha...">
     </app-input-form>
 
     <div class="btn-wrapper">
-      <button class="btn-primary" (click)="submit()">Submit</button>
-      <div class="divider">
-      </div>
-      <button class="btn-secondary" (click)="navigate()">Navegar</button>
+      <button type="submit" [disabled]="!signupForm.valid" class="btn-primary" (click)="onSubmit()">CRIAR</button>
+      <div class="divider"></div>
+      <button class="btn-secondary" (click)="routerService.toSignIn()">ENTRAR</button>
     </div>
   </form>
 

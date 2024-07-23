@@ -17,10 +17,35 @@ main {
 
 .left-section {
   flex-grow: 1;
-  background: gray;
 }
 
-.rigth-section {
+.right-section {
   flex-grow: 0.8;
-  background: gray;
+}
+
+.container-right-section{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+
+.active-auth-options {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 100px;
+  padding: 5px;
+}
+
+.btn-secondary {
+  width: 100%;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
 }

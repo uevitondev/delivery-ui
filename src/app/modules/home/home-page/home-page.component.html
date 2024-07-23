@@ -1,5 +1,12 @@
   <main>
     <app-home-layout></app-home-layout>
+    @if(hasStoredStore){
+      <app-store-page></app-store-page>
+    }@else{
+      <h1>Selecione uma loja</h1>
+      <app-list-store></app-list-store>
+    }
+    
   </main>
 
 

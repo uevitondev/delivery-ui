@@ -16,11 +16,11 @@ export class RouterService {
   }
 
   toSignIn() {
-    this.router.navigate(["auth", "signin"]);
+    this.router.navigate(["auth/signin"]);
   }
 
   toSignUp() {
-    this.router.navigate(["auth", "signup"]);
+    this.router.navigate(["auth/signup"]);
   }
 
   toOrders() {

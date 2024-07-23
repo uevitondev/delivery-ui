@@ -23,6 +23,10 @@ export const routes: Routes = [
     component: HomePageComponent
   },
   {
+    path: "home/:storeName",
+    component: HomePageComponent
+  },
+  {
     path: 'store',
     children: [
       { path: '', component: StorePageComponent },
@@ -49,11 +53,15 @@ export const routes: Routes = [
     ],
   },
   {
-    path: "auth/:authSession",
+    path: "auth/signin",
     component: AuthPageComponent
   },
   {
-    path: "auth/:authSession",
+    path: "auth/signup",
+    component: AuthPageComponent
+  },
+  {
+    path: "auth/signin",
     component: AuthPageComponent
   },
   {

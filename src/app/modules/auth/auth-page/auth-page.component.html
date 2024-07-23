@@ -6,21 +6,14 @@
     </div>
   </section>
 
-  <section class="rigth-section">
-    <div class="container">
-      <div class="active-auth-options">
-        <button (click)="activateSignIn()"> SignIn </button>
-        <button (click)="activateSignUp()"> SignUp </button>
-      </div>
-
-      <div class="active-auth-component">
-        @if( activeAuthComponent === 'signin' ){
-        <app-signin></app-signin>
-        }
-        @if(activeAuthComponent === 'signup'){
-        <app-signup></app-signup>
-        }
-      </div>
+  <section class="right-section">
+    <div class="container-right-section">
+      @if( activatedAuthComponent === 'signin' ){
+      <app-signin> </app-signin>
+      }
+      @if(activatedAuthComponent === 'signup'){
+      <app-signup> </app-signup>
+      }
     </div>
   </section>
 </main>

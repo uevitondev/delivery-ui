@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserSignUp } from '../../../core/models/user-signup';
 import { AuthService } from '../../../core/services/auth.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
+import { RouterService } from '../../../core/services/router.service';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,7 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
   styleUrl: './signup.component.scss'
 })
 export class SignUpComponent {
-  router = inject(Router);
+  routerService = inject(RouterService);
   toast = inject(ToastrService);
   authService = inject(AuthService);
   signupForm!: FormGroup;
@@ -33,7 +34,12 @@ export class SignUpComponent {
     });
   }
 
-  submit() {
+  onSubmit() {
+
+    if(this.signupForm.invalid){
+      return;
+    }
+
     const userSignUp: UserSignUp = {
       firstName: this.signupForm.controls['firstName'].value,
       lastName: this.signupForm.controls['lastName'].value,
@@ -51,10 +57,6 @@ export class SignUpComponent {
         this.toast.error('Erro ao criar Conta!');
       }
     });
-  }
-
-  navigate() {
-    this.router.navigate(["signin"]);
   }
 
 }

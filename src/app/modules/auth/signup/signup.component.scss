@@ -1,11 +1,37 @@
+
 form {
-  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  margin-bottom: 34px;
+  gap: 25px;
+  padding: 25px;
+  border-radius: 8px;
 }
 
-img {
-  width: 50%;;
+
+.btn-wrapper {
+  //width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  gap: 30px;
+  padding: 10px;
 }
+
+.btn-primary {
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+}
+
