@@ -1,10 +1,9 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
+import { RouterService } from '../../../core/services/router.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { ListStoreComponent } from '../../store/list-store/list-store.component';
 import { StoreHomeComponent } from '../../store/store-home/store-home.component';
-import { RouterService } from '../../../core/services/router.service';
 
 @Component({
   selector: 'app-home-layout',

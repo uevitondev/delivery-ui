@@ -1,12 +1,11 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthRequest } from '../../../core/models/auth-request';
 import { AuthService } from '../../../core/services/auth.service';
+import { RouterService } from '../../../core/services/router.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
-import { RouterService } from '../../../core/services/router.service';
 
 
 @Component({
@@ -19,7 +18,7 @@ import { RouterService } from '../../../core/services/router.service';
   templateUrl: './signin.component.html',
   styleUrl: './signin.component.scss'
 })
-export class SignInComponent {  
+export class SignInComponent {
   routerService = inject(RouterService);
   authService = inject(AuthService);
   storageService = inject(StorageService);
@@ -34,7 +33,7 @@ export class SignInComponent {
   }
 
   onSubmit() {
-    if(this.signinForm.invalid){
+    if (this.signinForm.invalid) {
       return;
     }
 

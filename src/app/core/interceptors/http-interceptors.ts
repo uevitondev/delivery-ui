@@ -2,11 +2,11 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
-import { EMPTY, Observable, catchError, switchMap, throwError } from "rxjs";
-import { environment } from "../../../environments/environment.development";
+import { catchError, EMPTY, Observable, switchMap, throwError } from "rxjs";
+import { environment } from "../../../environments/environment";
 import { AuthService } from "../services/auth.service";
-import { StorageService } from "../services/storage.service";
 import { RouterService } from "../services/router.service";
+import { StorageService } from "../services/storage.service";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
@@ -80,18 +80,18 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   private handleSessionExpired() {
     this.toast.info("Sessão Expirou!");
     this.deleteRefreshTokenCookie();
-    this.authService.logout();   
-    this.routerService.toSignIn();    
+    this.authService.logout();
+    this.routerService.toSignIn();
   }
 
-  private handle401Error() {   
+  private handle401Error() {
     this.toast.error("não autorizado");
-    this.routerService.toSignIn();  
+    this.routerService.toSignIn();
   }
 
   private handle403Error() {
     this.toast.error("acesso negado");
-    this.routerService.toForbidden();  
+    this.routerService.toForbidden();
 
   }
 

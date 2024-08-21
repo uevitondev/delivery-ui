@@ -1,15 +1,14 @@
 import { CommonModule, NgIf } from '@angular/common';
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ToastrService } from 'ngx-toastr';
+import { CartItem } from '../../../core/models/cart-item';
 import { CartService } from '../../../core/services/cart.service';
 import { OrderService } from '../../../core/services/order.service';
 import { RouterService } from '../../../core/services/router.service';
-import { CartItem } from '../../../core/models/cart-item';
-import { ShoppingCartStored } from '../../../core/models/shopping-cart-stored';
 import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.component';
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cart',

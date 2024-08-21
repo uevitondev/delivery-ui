@@ -1,7 +1,7 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import { Category } from '../../../core/models/category';
 import { PageProduct } from '../../../core/models/page-product';
 import { Product } from '../../../core/models/product';

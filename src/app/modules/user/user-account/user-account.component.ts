@@ -1,12 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Address } from '../../../core/models/address';
 import { AuthService } from '../../../core/services/auth.service';
+import { RouterService } from '../../../core/services/router.service';
 import { AddressFormComponent } from '../../address/address-form/address-form.component';
 import { AddressListComponent } from '../../address/address-list/address-list.component';
-import { RouterService } from '../../../core/services/router.service';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @Component({

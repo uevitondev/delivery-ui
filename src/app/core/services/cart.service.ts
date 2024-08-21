@@ -1,8 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { CartItem } from '../models/cart-item';
-import { Product } from '../models/product';
 import { ShoppingCartStored } from '../models/shopping-cart-stored';
 import { StorageService } from './storage.service';
 
@@ -24,7 +23,7 @@ export class CartService {
       this.cart.next(storedCart);
     })() : (() => {
       this.cart = new BehaviorSubject<ShoppingCartStored>({
-        store: {id:'', name:''},
+        store: { id: '', name: '' },
         cartItems: []
       });
       return;
@@ -47,7 +46,7 @@ export class CartService {
 
     if (existingItem) {
       existingItem.quantity += item.quantity;
-      existingItem.note = item.note; 
+      existingItem.note = item.note;
     } else {
       cart.cartItems.push({
         product: item.product,

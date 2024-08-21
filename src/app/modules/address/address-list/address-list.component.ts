@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Address } from '../../../core/models/address';
 import { AddressService } from '../../../core/services/address.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { AddressFormComponent } from '../address-form/address-form.component';
 import { RouterService } from '../../../core/services/router.service';
+import { AddressFormComponent } from '../address-form/address-form.component';
 
 @Component({
   selector: 'app-address-list',
@@ -47,7 +46,7 @@ export class AddressListComponent implements OnInit {
     });
   }
 
-  newAddress() {}
+  newAddress() { }
 
   selectAddress(address: Address): void {
     this.selectedAddressEvent.emit(address);
@@ -74,6 +73,6 @@ export class AddressListComponent implements OnInit {
 
 
 
-  
+
 
 }

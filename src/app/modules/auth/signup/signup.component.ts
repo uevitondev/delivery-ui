@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { UserSignUp } from '../../../core/models/user-signup';
 import { AuthService } from '../../../core/services/auth.service';
 import { RouterService } from '../../../core/services/router.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';

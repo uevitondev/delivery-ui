@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import { Store } from '../../../core/models/store';
 import { StorageService } from '../../../core/services/storage.service';
 import { StoreService } from '../../../core/services/store.service';

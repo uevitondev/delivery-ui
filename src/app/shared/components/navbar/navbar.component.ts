@@ -3,12 +3,12 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Router, RouterLink } from '@angular/router';
-import { environment } from '../../../../environments/environment.development';
+import { RouterLink } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
-import { StorageService } from '../../../core/services/storage.service';
 import { RouterService } from '../../../core/services/router.service';
+import { StorageService } from '../../../core/services/storage.service';
 
 @Component({
   selector: 'app-navbar',

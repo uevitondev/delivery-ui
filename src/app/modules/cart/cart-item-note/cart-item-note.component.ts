@@ -1,10 +1,9 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CartItem } from '../../../core/models/cart-item';
 import { CartService } from '../../../core/services/cart.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
-import { Address } from '../../../core/models/address';
+import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
   selector: 'app-cart-item-note',

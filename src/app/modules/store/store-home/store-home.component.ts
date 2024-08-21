@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '../../../../environments/environment';
 import { Category } from '../../../core/models/category';
 import { StorageService } from '../../../core/services/storage.service';
 import { CategoryListComponent } from '../../category/category-list/category-list.component';

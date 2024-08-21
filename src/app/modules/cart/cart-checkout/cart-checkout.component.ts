@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Address } from '../../../core/models/address';
@@ -10,7 +11,6 @@ import { CartService } from '../../../core/services/cart.service';
 import { OrderService } from '../../../core/services/order.service';
 import { RouterService } from '../../../core/services/router.service';
 import { AddressListComponent } from '../../address/address-list/address-list.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart-checkout-page',
@@ -85,7 +85,7 @@ export class CartCheckoutComponent implements OnInit {
     console.log(shoppingCartRequest.cartItems);
 
     this.orderService.saveNew(shoppingCartRequest).subscribe({
-      next: () => {        
+      next: () => {
         this.cartService.clearCart();
         this.routerService.toOrders();
         this.toastService.success("pedido efeuado com sucesso");

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 import { OrderCustomerResponse } from '../models/order-customer-response';
 import { OrderResponse } from '../models/order-response';
 import { ShoppingCartRequest } from '../models/shopping-cart-request';
