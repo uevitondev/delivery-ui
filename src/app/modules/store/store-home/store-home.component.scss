@@ -1,0 +1,27 @@
+:host {
+  display: block;
+}
+
+main{
+  display: flex;
+  flex-direction: column;
+}
+
+.store-home-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;  
+  padding: var(--padding);
+  box-sizing: border-box; 
+}
+
+.left {
+  width: 250px;
+  padding: var(--padding);
+}
+
+.right {
+  flex: 1;
+  padding: var(--padding);
+}
+

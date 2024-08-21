@@ -1,0 +1,143 @@
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  width: 100%;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  flex-grow: 1;
+  padding: 16px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.product-img-container {
+  width: 100%;
+  max-width: 60%;
+  min-width: 300px;
+}
+
+
+.product-img-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+.product-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.product-details-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 2px 2px gray;
+  width: 70%;
+  background-color: var(--primary-color);
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.name {
+  font-size: xx-large;
+  font-weight: bold;
+  word-break: break-word;
+}
+
+.price {
+  font-size: x-large;
+}
+
+.desc-content {
+  max-width: 250px;
+}
+
+
+.quantity-wapper {
+  display: flex;
+  align-items: center;
+}
+
+.btn-quantity {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+}
+
+.quantity {
+  margin: 0 10px;
+  font-size: 16px;
+}
+
+.addtocart-wrapper {
+  margin: auto;
+  padding: 10px;
+  font-weight: bold;
+  font-size: x-large;
+  border-radius: 5px;
+}
+
+.btn-content {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-add-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  color: var(--tertiary-color);
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+
+.note {
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding);
+  background-color: var(--primary-color);
+
+  form {
+    padding: var(--padding);
+    box-sizing: border-box;
+  }
+
+  textarea {
+    max-width: 400px;
+    max-height: 250px;
+    border: none;
+    outline: none;
+    padding: var(--padding);
+    background-color: var(--secondary-color);
+  }
+}

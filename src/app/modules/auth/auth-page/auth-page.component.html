@@ -1,13 +1,14 @@
 <main>
-  <section class="left-section">
-    <div class="container">
+  <div class="left">
+    <div class="left-container">
       <h1>Delivery</h1>
       <img src="/assets/imgs/auth/auth-banner.svg" alt="">
     </div>
-  </section>
+  </div>
 
-  <section class="right-section">
-    <div class="container-right-section">
+
+  <div class="right">
+    <div class="active-auth-wrapper">
       @if( activatedAuthComponent === 'signin' ){
       <app-signin> </app-signin>
       }
@@ -15,5 +16,7 @@
       <app-signup> </app-signup>
       }
     </div>
-  </section>
+
+  </div>
+
 </main>

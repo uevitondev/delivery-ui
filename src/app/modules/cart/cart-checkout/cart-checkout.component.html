@@ -1,0 +1,89 @@
+<main>
+
+    <div class="left">
+        <div class="left-container">
+            <h2>FINALIZAR PEDIDO:</h2>
+            <div class="payment-method-list">
+                <h3>selecionar forma de pagamento:</h3>
+                @for(paymentMethod of paymentMethods; track paymentMethod){
+                <div class="method-payment">
+                    <p>{{paymentMethod}}</p>
+                    <button (click)="selectPaymentMethod(paymentMethod)">Selecionar</button>
+                </div>
+                }
+            </div>
+
+            @if(authService.isLogged()){
+            <app-address-list [isSelectable]="true" (selectedAddressEvent)="selectAddress($event)">
+            </app-address-list>
+            }
+
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="right-container">
+            <h2>RESUMO DO PEDIDO:</h2>
+            <div class="cart-items">
+                <h4>items:</h4>
+                @for(cartitem of cartItems; track cartitem.product.id){
+                <div class="cartitem">
+                    <div class="cartitem-header">
+                        <div class="cartitem-left">
+                            <p>{{cartitem.quantity}}x </p>
+                            <p> {{cartitem.product.price | currency : 'BRL' }}</p>
+                            <p>{{cartitem.product.name}}</p>
+                        </div>
+                        <div class="cartitem-right">
+                            <p>subtotal: {{ cartService.getCartItemSubtotal(cartitem) | currency : 'BRL' }} </p>
+                        </div>
+                    </div>
+                    <div class="note">
+                        <p>nota: <strong>{{ cartitem.note !== "" ? cartitem.note : "" }}</strong> </p>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                }
+            </div>
+          
+
+            <div class="selected-payment">
+                @if(selectedPaymentMethod){
+                <div>
+                    <h4>forma de pagamento:</h4>
+                    <p>{{selectedPaymentMethod}}</p>
+                </div>
+                }@else{
+                <div class="warn">
+                    <p>(Atenção) selecione a forma de pagamento para seu pedido!</p>
+                </div>
+                }
+            </div>
+            <div class="selected-address">
+                @if( selectedAdress){
+                <div>
+                    <h4>endereço de entrega:</h4>
+                    <div class="address">
+                        <span>{{ selectedAdress.street}}, {{ selectedAdress.number}}, {{ selectedAdress.district}},
+                            ({{ selectedAdress.city}} -
+                            {{ selectedAdress.uf}}) </span>
+                        <span>{{ selectedAdress.complement}}</span>
+                        <span>{{ selectedAdress.zipCode}}</span>
+                    </div>
+                </div>
+                }@else{
+                <div class="warn">
+                    <p>(Atenção) selecione o endereço para entrega do seu pedido!</p>
+                </div>
+                }
+            </div>
+
+            <div class="sumary">
+                <span> Total: {{cartService.getCartTotal() | currency : 'BRL' }}</span>
+            </div>
+            <div class="checkout">
+                <button (click)="saveOrder()">FAZER PEDIDO</button>
+            </div>
+        </div>
+    </div>
+</main>

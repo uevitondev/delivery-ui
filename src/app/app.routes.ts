@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
-import { AddressEditPageComponent } from './modules/address/pages/address-edit-page/address-edit-page.component';
-import { AuthAccountPageComponent } from './modules/auth/auth-account-page/auth-account-page.component';
 import { AuthPageComponent } from './modules/auth/auth-page/auth-page.component';
-import { CartPageComponent } from './modules/cart/cart-page/cart-page.component';
-import { CheckoutPageComponent } from './modules/cart/checkout-page/checkout-page.component';
-import { Page403Component } from './modules/error/403-page/403-page.component';
-import { HomePageComponent } from './modules/home/home-page/home-page.component';
-import { OrderDetailsPageComponent } from './modules/order/order-details-page/order-details-page.component';
-import { OrdersPageComponent } from './modules/order/orders-page/orders-page.component';
-import { ProductDetailsPageComponent } from './modules/product/product-details-page/product-details-page.component';
+import { CartCheckoutComponent } from './modules/cart/cart-checkout/cart-checkout.component';
+import { CartComponent } from './modules/cart/cart/cart.component';
+import { ForbiddenComponent } from './modules/error/forbidden/forbidden.component';
+import { NotfoundComponent } from './modules/error/notfound/notfound.component';
+import { HomeComponent } from './modules/home/home/home.component';
+import { OrderDetailsComponent } from './modules/order/order-details/order-details.component';
+import { OrdersComponent } from './modules/order/orders/orders.component';
+import { ProductDetailsComponent } from './modules/product/product-details/product-details.component';
 import { ListStoreComponent } from './modules/store/list-store/list-store.component';
-import { StorePageComponent } from './modules/store/store-page/store-page.component';
+import { StoreHomeComponent } from './modules/store/store-home/store-home.component';
+import { UserAccountComponent } from './modules/user/user-account/user-account.component';
 
 export const routes: Routes = [
   {
@@ -20,36 +20,38 @@ export const routes: Routes = [
   },
   {
     path: "home",
-    component: HomePageComponent
+    component: HomeComponent
   },
   {
     path: "home/:storeName",
-    component: HomePageComponent
-  },
-  {
-    path: 'store',
-    children: [
-      { path: '', component: StorePageComponent },
-      { path: 'products/details/:productId', component: ProductDetailsPageComponent },
-    ],
+    component: HomeComponent
   },
   {
     path: "stores",
     component: ListStoreComponent
   },
   {
-    path: "cart",
-    component: CartPageComponent
+    path: 'store',
+    component: StoreHomeComponent
+  },
+
+  {
+    path: 'product/details/:productId',
+    component: ProductDetailsComponent
   },
   {
-    path: "checkout",
-    component: CheckoutPageComponent
+    path: "cart",
+    component: CartComponent
+  },
+  {
+    path: "cart/checkout",
+    component: CartCheckoutComponent
   },
   {
     path: 'orders',
     children: [
-      { path: '', component: OrdersPageComponent },
-      { path: 'details/:orderId', component: OrderDetailsPageComponent }
+      { path: '', component: OrdersComponent },
+      { path: 'details/:orderId', component: OrderDetailsComponent }
     ],
   },
   {
@@ -65,15 +67,15 @@ export const routes: Routes = [
     component: AuthPageComponent
   },
   {
-    path: "403",
-    component: Page403Component
+    path: "forbidden",
+    component: ForbiddenComponent
   },
   {
-    path: "account",
-    component: AuthAccountPageComponent
+    path: "notfound",
+    component: NotfoundComponent
   },
   {
-    path: "address/edit:addressId",
-    component: AddressEditPageComponent
+    path: "user/account",
+    component: UserAccountComponent
   }
 ];

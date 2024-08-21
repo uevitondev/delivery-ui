@@ -1,7 +1,7 @@
-import { ProductDto } from "./product-dto";
+import { Product } from "./product";
 
 export interface StoreData {
-  products: ProductDto[];
+  products: Product[];
   search: string;
   currentPage: number;
   page?: number;

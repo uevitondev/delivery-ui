@@ -1,5 +1,7 @@
-export interface AddressDto {
+export interface Address {
   id: string,
+  name: string,
+  phoneNumber: number,
   street: string,
   number: number,
   district: string,

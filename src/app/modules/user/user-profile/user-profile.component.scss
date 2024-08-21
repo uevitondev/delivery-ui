@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+main {
+  display: flex;
+  flex-direction: column;  
+  padding: var(--padding);
+}
+
+.divider {
+  width: 100%;
+  background-color: gray;
+  border: 1px solid gray;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding);
+  gap: 16px;
+}

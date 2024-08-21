@@ -1,0 +1,40 @@
+@if(product){
+<div class="left">
+  <div class="product-img-container">
+    <div class="product-img-wrapper">
+      <img class="product-img" ngSrc={{product.imgUrl}} fill title="product image" alt="product image" priority>
+    </div>
+  </div>
+</div>
+
+<div class="right">
+  <div class="product-details-wrapper">
+    <div class="product-details">
+      <span class="name">{{product.name}}</span>
+      <span class="price">{{ product.price | currency : 'BRL'  }}</span>
+      <div class="desc-content">
+        <span class="desc">{{ product.description }}</span>
+      </div>
+    </div>
+    <div class="quantity-wapper">
+      <button class="btn-quantity" (click)="decrementProductQuantity()">-</button>
+      <p class="quantity">{{ productQuantity }}</p>
+      <button class="btn-quantity" (click)="incrementProductQuantity()">+</button>
+    </div>
+    <div class="note">
+      <p>alguma nota pra esse item?</p>
+      <form [formGroup]="noteForm">
+        <div>
+          <textarea maxlength={{noteMaxLength}} rows="5" cols="30" formControlName="note">
+          </textarea>
+        </div>
+
+      </form>
+    </div>
+    <div class="btn-content">
+      <button class="btn-add-cart" (click)="addToCart(product)">ADICIONAR AO CARRINHO</button>
+    </div>
+  </div>
+
+</div>
+}

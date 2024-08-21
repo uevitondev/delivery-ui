@@ -1,0 +1,23 @@
+<main>
+
+  <div class="left">
+    <div class="left-container">
+      <div class="account-option" (click)="viewUserProfile()">Perfil</div>
+      <div class="account-option" (click)="viewUserAddresses()">Endereços</div>
+    </div>
+  </div>
+
+  <div class="right">
+    <div class="right-container">
+      <div class="active-view">
+        @if( activeView === 'user-profile' ){
+        <app-user-profile></app-user-profile>
+        }
+        @if( activeView === 'user-addresses' ){
+        <app-address-list [isAddable]="true" [isEditable]="true" [isDeletable]="true">
+        </app-address-list>
+        }
+      </div>
+    </div>
+  </div>
+</main>

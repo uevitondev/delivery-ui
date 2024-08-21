@@ -1,0 +1,41 @@
+<main>
+    <div>
+        <h3>Meu Perfil</h3>
+        <p>gerenciar dados de perfil</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="user-profile">
+        @if(userProfile ){
+        <form [formGroup]="userProfileForm">
+
+            <div>
+                <label for="fullName">Nome: </label>
+                <input id="fullName" type="text" formControlName="fullName">
+            </div>
+            <div>
+                Número de Telefone: {{ userProfile.phoneNumber }}
+            </div>
+
+            <div>
+                 Email: {{ userProfile.username }} 
+            </div>
+
+            <div>
+                <button>Salvar</button>
+            </div>       
+           
+        </form>
+
+
+
+        }@else{
+        <span>Os dados de perfil não foram carregados!</span>
+        }
+
+
+
+    </div>
+
+</main>

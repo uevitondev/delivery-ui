@@ -1,0 +1,48 @@
+:host {
+  display: block;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding);
+  background-color: var(--primary-color);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding);
+  box-sizing: border-box;
+}
+
+label {
+  margin: 10px 0 5px 0;
+  font-size: 1rem;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+
+.btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-color);
+}

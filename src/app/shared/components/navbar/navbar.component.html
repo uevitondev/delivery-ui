@@ -4,37 +4,39 @@
   <div class="spacer"></div>
 
   <div class="nav-links">
-    <button (click)="routerService.toHome()">Home</button>
+    <button class="nav-button" (click)="routerService.toHome()">Home</button>
     @if( isAuthLoggedIn() ){
-    <button (click)="routerService.toOrders()">Meus Pedidos</button>
-    <div class="account-menu" [matMenuTriggerFor]="menu">      
+    <button class="nav-button" (click)="routerService.toOrders()">Meus Pedidos</button>
+
+    <button class="btn-account-menu" mat-icon-button [matMenuTriggerFor]="accountMenu">
       <mat-icon class="auth-icon">account_circle</mat-icon>
       <p class="auth-name"> {{ getAuthName() }}</p>
+    </button>
 
-      <mat-menu #menu="matMenu">
+    <mat-menu #accountMenu="matMenu">
+      <ng-template matMenuContent>
         <button mat-menu-item (click)="routerService.toAccount()">Minha Conta</button>
         <button mat-menu-item (click)="logout()">
           <mat-icon>exit_to_app</mat-icon>
           <span>Sair</span>
         </button>
-      </mat-menu>
-    </div>
-
+      </ng-template>
+    </mat-menu>
     } @else{
-    <button (click)="routerService.toSignIn()">Entrar</button>
-    <button (click)="routerService.toSignUp()">Criar uma conta</button>
+    <button class="nav-button" (click)="routerService.toSignIn()">Login</button>
+    <button class="nav-button" (click)="routerService.toSignUp()">Criar Conta</button>
     }
-    <div class="cart-icon" (click)="routerService.toCart()">
-      <mat-icon>shopping_cart</mat-icon>
-      @if( getItemCount() ) {
-      <span> {{ getItemCount() }} </span>
-      }@else{
-      <span> (vazio) </span>
-      }
 
+    <div class="cart-count" (click)="routerService.toCart()">
+      <mat-icon>shopping_cart</mat-icon>
+      @if ( cartService.getCartCount(); as count) {
+      <span class="count">{{ count > 0 ? count : "" }}</span>
+      }
     </div>
+
     <div class="theme-icon" (click)="toggleTheme()">
       <mat-icon>{{icon}}</mat-icon>
     </div>
+
   </div>
 </nav>

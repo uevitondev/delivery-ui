@@ -1,15 +1,10 @@
-<main>
-  <div class="categories">
-    @if(isSelectable){
-      <div class="category isSelectable" (click)="selectCategory(category)">TODAS CATEGORIAS</div>
-    }
-    @for(category of categories; track category.id){
-      @if(isSelectable){
-        <div class="category isSelectable" (click)="selectCategory(category)">{{category.name}}</div>
-      }@else{
-        <div class="category"> {{category.name}}</div>
-      }
-    }
-  </div>
-</main>
-
+@if(isSelectable){
+<div class="category isSelectable" (click)="selectCategory(category)">TODAS CATEGORIAS</div>
+}
+@for(category of categories; track category.id){
+@if(isSelectable){
+<div class="category isSelectable" (click)="selectCategory(category)">{{category.name}}</div>
+}@else{
+<div class="category"> {{category.name}}</div>
+}
+}

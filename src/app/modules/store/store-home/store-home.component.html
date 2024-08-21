@@ -1,0 +1,12 @@
+<main>
+  <section class="store-home-section">
+    <div class="left">
+      <app-category-list [isSelectable]="true"
+        (selectedCategoryEvent)="filterProductsByCategory($event)"></app-category-list>
+    </div>
+
+    <div class="right">
+      <app-product-list></app-product-list>
+    </div>
+  </section>
+</main>

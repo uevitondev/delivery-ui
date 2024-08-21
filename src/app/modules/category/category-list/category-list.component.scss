@@ -1,21 +1,23 @@
-.categories {
+:host {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 25px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  box-shadow: var(--box-shadow);
 }
 
 .category {
-  background: rgb(255, 101, 0);
   font-size: 18px;
-  font-weight: 700;
-  color: rgb(255, 255, 255);
-  border: none;
-  border-radius: 8px;
-  padding: 16px 0;
+  font-weight: 700; 
   text-align: center;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  box-shadow: var(--box-shadow);
+  color: var(--text-color);
+  background: var(--secondary-color);
   cursor: pointer;
 }
 

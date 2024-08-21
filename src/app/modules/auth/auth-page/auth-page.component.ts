@@ -1,8 +1,7 @@
-import { Component, EventEmitter, inject, input, Input, OnInit, Output } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { SignInComponent } from '../signin/signin.component';
 import { SignUpComponent } from '../signup/signup.component';
-import { ActivatedRoute, UrlSegment } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-auth-page',
@@ -21,20 +20,20 @@ export class AuthPageComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.url.subscribe(urlSegments => {
       urlSegments.forEach(urlSegment => {
-        if(urlSegment.path === 'signup'){
+        if (urlSegment.path === 'signup') {
           this.activatedAuthComponent = 'signup'
-        } else{
+        } else {
           this.activatedAuthComponent = 'signin'
         }
-      })     
-    }) ;
+      })
+    });
 
   }
 
-  getActivatedAuthComponentEvent(event: string){
-    if(event === 'signup'){
+  getActivatedAuthComponentEvent(event: string) {
+    if (event === 'signup') {
       this.activatedAuthComponent = 'signup';
-    }else{
+    } else {
       this.activatedAuthComponent = 'signin';
     }
   }

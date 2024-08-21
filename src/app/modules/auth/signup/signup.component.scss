@@ -1,3 +1,13 @@
+:host {
+  display: block;
+}
+
+main{
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  box-shadow: var(--box-shadow);
+}
 
 form {
   display: flex;
@@ -9,7 +19,6 @@ form {
 
 
 .btn-wrapper {
-  //width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: end;
@@ -17,21 +26,13 @@ form {
   padding: 10px;
 }
 
-.btn-primary {
-  border-radius: 8px;
+.btn-signin,
+.btn-signup {
   font-size: 16px;
-  font-weight: 500;
-  padding: 12px 24px;
+  font-weight: 700;
   border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-color);
+  padding: var(--padding);
   cursor: pointer;
 }
-
-.btn-secondary {
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-}
-

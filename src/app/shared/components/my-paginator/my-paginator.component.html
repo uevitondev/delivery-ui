@@ -1,0 +1,27 @@
+<main>
+  <div >
+    <button (click)="previousOffset()" [disabled]="currentPageNumber === 0">ANTERIOR</button>
+  </div>
+
+  <div class="pages">
+    @for(page of pages; track page; let currentIndex = $index){
+    <div class="page">
+      <button (click)="onChangePage(page-1)" [ngClass]="{'current-page' : currentPageNumber === page - 1}"> {{ page }}</button>
+    </div>
+    }
+  </div>
+
+  <div>
+    <button (click)="nextOffset()" [disabled]="currentPageNumber == pages.length-1">PRÓXIMO</button>
+  </div>
+
+  <div class="page-size">
+    <p>Itens por página:</p>
+    <select class="" #mySelect [(ngModel)]="selectedPageSize" (ngModelChange)="onChangePageSize()">
+      <option>2</option>
+      <option>4</option>
+      <option>8</option>
+    </select>
+  </div>
+
+</main>

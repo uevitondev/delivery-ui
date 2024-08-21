@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { OrderCustomerResponseDto } from '../models/ordercustomerresponse';
-import { OrderResponseDto } from '../models/orderresponse';
-import { ShoppingCartDto } from '../models/shoppingcart';
+import { OrderCustomerResponse } from '../models/order-customer-response';
+import { OrderResponse } from '../models/order-response';
+import { ShoppingCartRequest } from '../models/shopping-cart-request';
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +14,16 @@ export class OrderService {
   ENV = environment;
   httpClient = inject(HttpClient);
 
-  saveNew(shoppingcart: ShoppingCartDto): Observable<OrderResponseDto> {
-    return this.httpClient.post<OrderResponseDto>(`${this.ENV.API_URL}/orders`, shoppingcart);
+  saveNew(shoppingcart: ShoppingCartRequest): Observable<OrderResponse> {
+    return this.httpClient.post<OrderResponse>(`${this.ENV.API_URL}/orders`, shoppingcart);
   }
 
-  getAllByCustomer(): Observable<OrderResponseDto[]> {
-    return this.httpClient.get<OrderResponseDto[]>(`${this.ENV.API_URL}/orders/customer`);
+  getAllByCustomer(): Observable<OrderResponse[]> {
+    return this.httpClient.get<OrderResponse[]>(`${this.ENV.API_URL}/orders/customer`);
   }
 
-  getByIdWithOrderItems(orderId: string): Observable<OrderCustomerResponseDto> {
-    return this.httpClient.get<OrderCustomerResponseDto>(`${this.ENV.API_URL}/orders/${orderId}/customer`);
+  getByIdWithOrderItems(orderId: string): Observable<OrderCustomerResponse> {
+    return this.httpClient.get<OrderCustomerResponse>(`${this.ENV.API_URL}/orders/${orderId}/customer`);
   }
 
 

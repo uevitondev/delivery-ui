@@ -38,11 +38,7 @@ export class NavBarComponent implements OnInit {
   }
 
   getAuthName() {
-    return this.authService.getAuthName();
-  }
-
-  getItemCount() {
-    return this.cartService.getItemCount();
+    return this.authService.getAuthName()?.toUpperCase();
   }
 
   toggleTheme() {

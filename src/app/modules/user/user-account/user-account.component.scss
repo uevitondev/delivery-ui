@@ -1,0 +1,42 @@
+:host {
+  display: block;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  box-sizing: border-box;
+  gap: 25px;
+  height: calc(100vh - var(--height-navbar));
+  width: 100%;
+}
+
+.left {
+  width: 2  50px;
+  padding: var(--padding);
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+
+  .account-option {
+    cursor: pointer;
+    padding: var(--padding);
+
+    &:hover{
+      color: red;
+    }
+  }
+}
+
+.right {
+  flex: 1;
+  padding: var(--padding);
+}
+
+.active-view {
+  padding: var(--padding);
+  box-shadow: var(--box-shadow);
+}

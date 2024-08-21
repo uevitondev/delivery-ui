@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
+import { CartItem } from '../models/cart-item';
+import { Product } from '../models/product';
+import { ShoppingCartStored } from '../models/shopping-cart-stored';
 import { StorageService } from './storage.service';
-import { Cart } from '../models/cart';
-import { CartItem } from '../models/cartitem';
-import { ProductDto } from '../models/product-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -13,88 +13,106 @@ export class CartService {
   private STORED_CART = environment.STORED_CART;
   private STORED_STORE = environment.STORED_STORE;
   private storageService = inject(StorageService);
-  private cartSubject: BehaviorSubject<Cart>;
+  cart!: BehaviorSubject<ShoppingCartStored>;
 
   constructor() {
     const storedCart = this.storageService.get(this.STORED_CART);
     const storedStore = this.storageService.get(this.STORED_STORE);
-    this.cartSubject = new BehaviorSubject<Cart>(storedCart ? storedCart : {
-      storeId: storedStore ? storedStore.id : '',
-      userAddressId: '',
-      paymentMethod: '',
-      cartItems: []
-    });
+    storedCart && storedStore ? (() => {
+      storedCart.store = storedStore;
+      this.cart = new BehaviorSubject<ShoppingCartStored>(storedCart);
+      this.cart.next(storedCart);
+    })() : (() => {
+      this.cart = new BehaviorSubject<ShoppingCartStored>({
+        store: {id:'', name:''},
+        cartItems: []
+      });
+      return;
+    })();
+
   }
 
   getCart() {
-    return this.cartSubject.asObservable();
+    return this.cart.asObservable();
   }
 
-  updateCart(cart: Cart) {
+  updateCart(cart: ShoppingCartStored) {
     localStorage.setItem(this.STORED_CART, JSON.stringify(cart));
-    this.cartSubject.next(cart);
+    this.cart.next(cart);
   }
 
-  addToCart(product: ProductDto, quantity: number, observation: string = '') {
-    const cart = this.cartSubject.getValue();
-    const existingItem = cart.cartItems.find(item => item.product.id === product.id);
+  addToCart(item: CartItem) {
+    const cart = this.cart.getValue();
+    const existingItem = cart.cartItems.find(cartItem => item.product.id === cartItem.product.id);
 
     if (existingItem) {
-      existingItem.quantity += quantity;
+      existingItem.quantity += item.quantity;
+      existingItem.note = item.note; 
     } else {
       cart.cartItems.push({
-        product,
-        quantity,
-        observation
+        product: item.product,
+        quantity: item.quantity,
+        note: item.note
       });
     }
-
     this.updateCart(cart);
   }
 
-  incrementItemQuantity(item: CartItem) {
-    item.quantity++;
-    this.updateCart(this.cartSubject.getValue());
+  addNote(item: CartItem, note: string,) {
+    const cart = this.cart.getValue();
+    const existingItem = cart.cartItems.find(cartItem => item.product.id === cartItem.product.id);
+    if (existingItem) {
+      existingItem.note = note;
+      this.updateCart(cart);
+      return;
+    }
+    return;
   }
 
-  decrementItemQuantity(item: CartItem) {
+  existingInCart(item: CartItem) {
+    const cart = this.cart.getValue();
+    return cart.cartItems.find(cartItem => item.product.id === cartItem.product.id) ? true : false;
+  }
+
+  getCartItem(item: CartItem) {
+    const cart = this.cart.getValue();
+    return cart.cartItems.find(cartItem => item.product.id === cartItem.product.id);
+  }
+
+
+  increaseCartItemQuantity(item: CartItem) {
+    item.quantity++;
+    this.updateCart(this.cart.getValue());
+  }
+
+  decreaseCartItemQuantity(item: CartItem) {
     if (item.quantity > 1) {
       item.quantity--;
-      this.updateCart(this.cartSubject.getValue());
+      this.updateCart(this.cart.getValue());
     }
   }
 
-  removeItem(item: CartItem) {
-    const cart = this.cartSubject.getValue();
+  removeCartItem(item: CartItem) {
+    const cart = this.cart.getValue();
     cart.cartItems = cart.cartItems.filter(cartItem => cartItem !== item);
     this.updateCart(cart);
   }
 
-  addObservation(item: CartItem, observation: string) {
-    item.observation = observation;
-    this.updateCart(this.cartSubject.getValue());
+  getCartTotal(): number {
+    return this.cart.getValue().cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
   }
 
-  getTotal(): number {
-    return this.cartSubject.getValue().cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
+  getCartCount(): number {
+    return this.cart.getValue().cartItems?.length;
   }
 
-  getItemCount(): number {
-    return this.cartSubject.getValue().cartItems.length;
-  }
-
-  getSubtotal(item: CartItem): number {
+  getCartItemSubtotal(item: CartItem): number {
     return item.product.price * item.quantity;
   }
 
   clearCart() {
-    const emptyCart: Cart = {
-      storeId: '',
-      userAddressId: '',
-      paymentMethod: '',
-      cartItems: []
-    };
-    this.updateCart(emptyCart);
+    this.cart.getValue().cartItems = [];
+    this.updateCart(this.cart.getValue());
   }
 
 }

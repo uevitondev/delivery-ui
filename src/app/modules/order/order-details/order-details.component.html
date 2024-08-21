@@ -1,15 +1,14 @@
 <main>
+  @if(order){
 
-  <section class="order-section">
-    @if(order){
-
-    <div class="order-container">
+  <div class="order-container">
+    <div class="order">
 
       <div class="order-details">
-        <span>Efetuado: {{ order.createdAt }}</span>
+        <span>Efetuado em: {{ order.createdAt  | date : 'dd/MM/yyyy HH:mm' }}</span>
         <span>Status: {{ order.status }}</span>
-        <span>Payment: {{ order.paymentMethod }}</span>
-        <span>Total: R$ {{ order.total }}</span>
+        <span>Pagamento: {{ order.paymentMethod }}</span>
+        <span>Valor do Pedido: R$ {{ order.total | currency : 'BRL' }}</span>
       </div>
 
       <div class="order-items">
@@ -18,13 +17,12 @@
         <div class="order-item">
           <div class="order-item-left">
             <span>{{orderitem.quantity}}x </span>
-            <span>R$ {{orderitem.product.price}}</span>
-            <img src={{orderitem.product.imgUrl}} alt="">
-            <span>{{orderitem.product.name}}</span>       
+            <span>R$ {{orderitem.price | currency : 'BRL'}}</span>
+            <img src={{orderitem.imgUrl}} alt="">
+            <span>{{orderitem.name}}</span>
           </div>
           <div class="order-item-right">
-            <span>Total: R$ {{orderitem.total}} </span>
-            <span>Obs: {{orderitem.observation}} </span>
+            <span>subtotal: {{orderitem.totalPrice | currency : 'BRL'  }} </span>
           </div>
         </div>
         }
@@ -57,9 +55,8 @@
     </div>
 
 
-    }
+  </div>
 
-  </section>
-
+  }
 
 </main>

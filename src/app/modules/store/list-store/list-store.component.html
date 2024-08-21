@@ -1,11 +1,6 @@
-<main>
-  <div class="stores" >
-    <h1>Selecione a loja de sua preferencia:</h1>
-    @for (store of stores; track store) {
-      <div class="store">
-        <span>{{store.name}}</span>
-        <button (click)="selectStore( store )">Selecionar</button>
-      </div>      
-    }    
-  </div>
-</main>
+@for (store of stores; track store) {
+<div class="store">
+  <p>{{store.name}}</p>
+  <button (click)="selectStore(store)">Selecionar</button>
+</div>
+}

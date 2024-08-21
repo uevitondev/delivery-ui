@@ -1,22 +1,34 @@
 <main>
+
+
+
+
   <div class="products">
     @for(product of products; track product.id){
-    <div class="card-product">
-      <a (click)="navigateToProductDetails(product)">
-        <div class="card-img">
-          <img class="product-img" ngSrc={{product.imgUrl}} fill loading="lazy" title="product image" alt="product image">
+    <div class="product">
+      <a (click)="routerService.toProductDetails(product)">
+        <div class="product-img-wrapper">
+          <img class="product-img" ngSrc={{product.imgUrl}} fill title="product image" alt="product image" priority>
         </div>
-        <div class="card-header">
+        <div class="product-info">
           <p class="product-name">{{product.name}}</p>
-          <p class="product-price"> R$ {{product.price}}</p>
+          <p class="product-price">{{product.price | currency : 'BRL' }}</p>
         </div>
       </a>
-  
-      <div class="card-footer">
-        <button class="btn-add-cart" (click)="addToCart(product)">ADICIONAR AO CARRINHO</button>
+
+      <div class="addtocart-wrapper">
+        <button class="btn-addtocart" (click)="addToCart(product)">ADICIONAR AO CARRINHO</button>
       </div>
     </div>
-  
     }
   </div>
+
+  <div class="paginator-container">
+    <app-my-paginator [currentPageNumber]="pageNumber" [currentPageSize]="pageSize" [pages]="pages"
+      (changePaginatorEvent)="setPagination($event)"
+      >
+    </app-my-paginator>
+    
+  </div>
+
 </main>

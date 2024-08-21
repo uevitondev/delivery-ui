@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { StorageService } from './storage.service';
-import { StoreDto } from '../models/store-dto';
+import { Store } from '../models/store';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export class StoreService {
 
   constructor() { }
 
-  getAll(): Observable<StoreDto[]> {
-    return this.http.get<StoreDto[]>(`${this.ENV.API_URL}/stores`);
+  getAll(): Observable<Store[]> {
+    return this.http.get<Store[]>(`${this.ENV.API_URL}/stores`);
   }
 
   hasStoreInStored(): boolean {

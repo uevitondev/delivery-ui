@@ -1,8 +1,8 @@
-import { ProductDto } from "./product-dto";
+import { Product } from "./product";
 
 export interface PageProduct {
-  content: ProductDto[],
-  peageable: any;
+  content: Product[],
+  pageable: any;
   last: boolean,
   totalElements: number,
   totalPages: number,

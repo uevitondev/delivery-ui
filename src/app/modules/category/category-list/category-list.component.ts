@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { CategoryDto } from '../../../core/models/category';
+import { Category } from '../../../core/models/category';
 import { CategoryService } from '../../../core/services/category.service';
 
 @Component({
@@ -13,12 +13,12 @@ import { CategoryService } from '../../../core/services/category.service';
 export class CategoryListComponent implements OnInit {
 
   @Input() isSelectable: boolean = false;
-  @Output() eventSelectedCategory = new EventEmitter<CategoryDto>();
-  category!: CategoryDto;
+  @Output() selectedCategoryEvent= new EventEmitter<Category>();
+  category!: Category;
 
   toastService = inject(ToastrService);
   categoryService = inject(CategoryService);
-  categories!: CategoryDto[];
+  categories!: Category[];
 
   ngOnInit(): void {
     this.loadCategories();
@@ -35,8 +35,8 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
-  selectCategory(category: CategoryDto) {
-    this.eventSelectedCategory.emit(category);
+  selectCategory(category: Category) {
+    this.selectedCategoryEvent.emit(category);
   }
 
 }

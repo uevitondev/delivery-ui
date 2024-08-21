@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  flex-direction: column;
+}
+
+.main-section {
+  box-sizing: border-box; 
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  padding: 45px;
+  //background-color: gray;
+}
+
+.header{
+  width: 80%;
+  height: 400px;
+  background-color: var(--primary-color);
+  padding: 45px;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+h1 {
+  font-size: 46px;
+  font-weight: bold;
+}
+
+p {
+  font-size: 18px;
+  font-weight: 500;
+}

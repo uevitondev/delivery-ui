@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding);
+  background-color: var(--primary-color);
+}
+
+form {
+  padding: var(--padding);
+  box-sizing: border-box;
+}
+
+textarea {
+  max-width: 400px;
+  max-height: 250px;
+  border: none;
+  outline: none;
+  padding: var(--padding);
+  background-color: var(--secondary-color);
+}
+
+.btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-color);
+}

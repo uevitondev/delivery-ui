@@ -29,18 +29,24 @@ $app-dark-theme: mat.define-theme(
 
 @import 'ngx-toastr/toastr';
 
+:root {
+  --primary-color: #ebae34;
+  --secondary-color: #FAFAFA;
+  --tertiary-color: #232423;
+  --accent-color: #FF5252;
+  --font-size: 16px;
+  --padding: 12px;
+  --border-radius: 8px;
+  --border: 1px solid gray;
+  --box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  --height-navbar: 80px;
+}
+
 html,
 body {
-  min-height: 100vh;
-}
-
-body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-app-root {
-  display: flex;
-  flex-direction: column;
+  padding: 0;
   min-height: 100vh;
+  max-height: 100vh;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

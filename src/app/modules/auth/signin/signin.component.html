@@ -1,16 +1,19 @@
-<form [formGroup]="signinForm">
-  <app-input-form formControlName="username" inputName="username" type="email" label="Email:"
-    placeHolder="email-example@gmail.com">
-  </app-input-form>
-  <app-input-form formControlName="password" inputName="password" type="password" label="Senha:"
-    placeHolder="password...">
-  </app-input-form>
-
-  <p>Esqueceu sua Senha?</p>
-
+<main>
+  <form [formGroup]="signinForm">
+    <app-input-form formControlName="username" inputName="username" type="email" label="EMAIL:"
+      placeHolder="email-example@gmail.com">
+    </app-input-form>
+    <app-input-form formControlName="password" inputName="password" type="password" label="SENHA:"
+      placeHolder="password...">
+    </app-input-form>
+    <p>Esqueceu sua Senha?</p>
+  </form>
   <div class="btn-wrapper">
-    <button type="submit" [disabled]="!signinForm.valid" class="btn-primary" (click)="onSubmit()">ENTRAR</button> 
+    <button class="btn-signin" [disabled]="!signinForm.valid" (click)="onSubmit()">ENTRAR</button>
     <div class="divider"></div>
-    <button class="btn-primary" (click)="routerService.toSignUp()">CRIAR CONTA</button> 
+    <div>
+      <p>não tem uma conta?</p>
+      <button class="btn-signup" (click)="routerService.toSignUp()">CRIAR CONTA</button>
+    </div>
   </div>
-</form>
+</main>

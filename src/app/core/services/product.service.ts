@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 import { PageProduct } from '../models/page-product';
-import { ProductDto } from '../models/product-dto';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,8 @@ export class ProductService {
     //return this.http.get<PageProduct>(`${this.ENV.API_URL}/products/store/${storeId}?page=${pageIndex}&size=${pageSize}`);
   }
 
-  getById(id: string): Observable<ProductDto> {
-    return this.http.get<ProductDto>(`${this.ENV.API_URL}/products/${id}`);
+  getById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.ENV.API_URL}/products/${id}`);
   }
 
 }

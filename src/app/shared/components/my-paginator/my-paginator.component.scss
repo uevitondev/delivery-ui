@@ -1,0 +1,38 @@
+:host {
+  display: block;
+}
+
+main{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+  background-color: var(--primary-color);
+}
+
+.pages{ 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+button{
+  border: none;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  padding: var(--padding);
+}
+
+.current-page{
+  border: 1px solid red;
+}
+
+
+.page-size {
+  display: flex;
+}

@@ -1,0 +1,17 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: var(--padding);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color);
+  box-shadow: var(--box-shadow);
+}
+
+.store {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  border-radius: 8px;
+}

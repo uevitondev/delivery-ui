@@ -1,14 +1,17 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { EMPTY, Observable, catchError, switchMap, throwError } from "rxjs";
 import { environment } from "../../../environments/environment.development";
 import { AuthService } from "../services/auth.service";
 import { StorageService } from "../services/storage.service";
+import { RouterService } from "../services/router.service";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
+
+  private routerService = inject(RouterService);
   private ENV = environment;
 
   constructor(
@@ -75,20 +78,21 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   }
 
   private handleSessionExpired() {
-    this.deleteRefreshTokenCookie();
-    this.authService.logout();
     this.toast.info("Sessão Expirou!");
-    this.router.navigate(["signin"]);
+    this.deleteRefreshTokenCookie();
+    this.authService.logout();   
+    this.routerService.toSignIn();    
   }
 
-  private handle401Error() {
-    this.toast.error("(401) Acesso Não Autorizado!");
-    this.router.navigate(['signin']);
+  private handle401Error() {   
+    this.toast.error("não autorizado");
+    this.routerService.toSignIn();  
   }
 
   private handle403Error() {
-    this.toast.error("(403) Acesso Negado!");
-    this.router.navigate(['403']);
+    this.toast.error("acesso negado");
+    this.routerService.toForbidden();  
+
   }
 
   private requestWithHeader(request: HttpRequest<any>): HttpRequest<any> {

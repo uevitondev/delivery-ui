@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { UserAccountDataDto } from '../models/user-accountdata';
+import { UserProfile } from '../models/user-profile';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +14,8 @@ export class UserService {
 
   constructor() { }
 
-  getAccountData(): Observable<UserAccountDataDto> {
-    return this.httpClient.get<UserAccountDataDto>(`${this.ENV.API_URL}/users/account-data`);
+  getUserProfile(): Observable<UserProfile> {
+    return this.httpClient.get<UserProfile>(`${this.ENV.API_URL}/users/account/profile`);
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../environments/environment.development';
-import { StoreDto } from '../../../core/models/store-dto';
+import { Store } from '../../../core/models/store';
 import { StorageService } from '../../../core/services/storage.service';
 import { StoreService } from '../../../core/services/store.service';
 
@@ -19,7 +19,7 @@ export class ListStoreComponent {
   storeService = inject(StoreService);
   toastService = inject(ToastrService);
   router = inject(Router);
-  stores!: StoreDto[];
+  stores!: Store[];
 
   constructor() {
     this.loadStores();
@@ -37,7 +37,7 @@ export class ListStoreComponent {
     });
   }
 
-  selectStore(store: StoreDto) {
+  selectStore(store: Store) {
     this.storageService.remove(this.ENV.STORED_STORE);
     this.storageService.save(this.ENV.STORED_STORE, store);
     this.toastService.info("Loja Selecionada!");

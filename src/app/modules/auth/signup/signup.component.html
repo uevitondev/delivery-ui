@@ -1,10 +1,7 @@
-<div class="container">
+<main>
   <form [formGroup]="signupForm">
-    <app-input-form formControlName="firstName" inputName="firstName" type="text" label="Nome:"
-      placeHolder="seu primeiro nome...">
-    </app-input-form>
-    <app-input-form formControlName="lastName" inputName="lastName" type="text" label="Sobrenome:"
-      placeHolder="seu sobrenome...">
+    <app-input-form formControlName="fullName" inputName="fullName" type="text" label="Nome Completo:"
+      placeHolder="seu nome completo  ...">
     </app-input-form>
     <app-input-form formControlName="email" inputName="email" type="email" label="Email:"
       placeHolder="informe seu email... (example@gmail.com) ">
@@ -15,12 +12,15 @@
     <app-input-form formControlName="passwordConfirm" inputName="passwordConfirm" type="password"
       label="Confirme a senha:" placeHolder="confirme sua senha...">
     </app-input-form>
-
-    <div class="btn-wrapper">
-      <button type="submit" [disabled]="!signupForm.valid" class="btn-primary" (click)="onSubmit()">CRIAR</button>
-      <div class="divider"></div>
-      <button class="btn-secondary" (click)="routerService.toSignIn()">ENTRAR</button>
-    </div>
   </form>
 
-</div>
+  <div class="btn-wrapper">
+    <button [disabled]="!signupForm.valid" class="btn-signup" (click)="onSubmit()">CRIAR</button>
+    <div class="divider"></div>
+    <div>
+      <p>já tem uma conta?</p>
+      <button class="btn-signin" (click)="routerService.toSignIn()">LOGIN</button>
+    </div>
+  </div>
+
+</main>
