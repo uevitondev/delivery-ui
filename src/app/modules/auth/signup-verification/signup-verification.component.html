@@ -1,0 +1,16 @@
+<main>
+  <h1>Ative sua nova conta</h1>
+  <p>token de verificação enviado para: {{email}} </p>
+
+  <form [formGroup]="signupVerificationForm">
+    <app-input-form formControlName="token" inputName="token" type="text" label="Token"
+      placeHolder="token de verificação">
+    </app-input-form>
+    <div (click)="newVerificationToken()">reenviar codigo?</div>
+  </form>
+
+  <div class="btn-wrapper">
+    <button [disabled]="!signupVerificationForm.valid" class="btn-signup" (click)="validateToken()">VALIDAR</button>
+    <div class="divider"></div>
+  </div>
+</main>

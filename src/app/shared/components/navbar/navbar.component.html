@@ -5,6 +5,7 @@
 
   <div class="nav-links">
     <button class="nav-button" (click)="routerService.toHome()">Home</button>
+    <button class="nav-button" (click)="routerService.toStores()">Lojas</button>
     @if( isAuthLoggedIn() ){
     <button class="nav-button" (click)="routerService.toOrders()">Meus Pedidos</button>
 

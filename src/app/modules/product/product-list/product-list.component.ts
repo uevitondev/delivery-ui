@@ -56,8 +56,6 @@ export class ProductListComponent {
   }
 
   loadProductsList(storeId: string, categoryName: string, pageNumber: number, pageSize: number) {
-    console.log('get page with page number: ' + this.pageNumber);
-    console.log('get page with page size: ' + this.pageSize);
     this.productService.getAllByStorePagedAndFiltered(storeId, categoryName, pageNumber, pageSize).subscribe({
       next: (pageProduct) => {
         this.products = pageProduct.content;
@@ -108,27 +106,18 @@ export class ProductListComponent {
   }
 
   setPagination(pagination: { pageNumber: number, pageSize: number }) {
-
     this.pageNumber = pagination.pageNumber;
     this.pageSize = pagination.pageSize;
-    console.log('page size value from paginator: ' + pagination.pageSize);
-
-    console.log('setPagination()');
-    console.log('set page number: ' + this.pageNumber);
-    console.log('set page size: ' + this.pageSize);
     this.loadProductsList(this.storeId, this.categoryName, this.pageNumber, this.pageSize);
-
   }
 
   setPageNumber(pageNumber: number) {
     this.pageNumber = pageNumber;
-    console.log('set page number: ' + this.pageNumber);
     this.loadProductsList(this.storeId, this.categoryName, this.pageNumber, this.pageSize);
   }
 
   setPageSize(pageSize: number) {
     this.pageSize = pageSize;
-    console.log('set page size: ' + this.pageSize);
     this.loadProductsList(this.storeId, this.categoryName, this.pageNumber, this.pageSize);
   }
 
@@ -137,8 +126,6 @@ export class ProductListComponent {
     for (let i = 1; i <= number; i++) {
       numberPagesList.push(i);
     }
-    console.log('pages: ' + numberPagesList);
-    console.log('number of pages length: ' + numberPagesList.length);
     return numberPagesList;
   }
 

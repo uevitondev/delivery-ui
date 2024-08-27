@@ -16,6 +16,10 @@ export class RouterService {
     this.router.navigate(["auth/signup"]);
   }
 
+  toSignUpVerification(email: string) {
+    this.router.navigate(["auth/signup/verification/", email]);
+  }
+
   toHome() {
     this.router.navigate(["home"]);
   }

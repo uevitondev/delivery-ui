@@ -25,11 +25,11 @@ export class MyPaginatorComponent {
   constructor() { }
 
   previousOffset() {
-    this.onChangePage(this.currentPageNumber - 1);
+    this.onChangePageNumber(this.currentPageNumber - 1);
   }
 
   nextOffset() {
-    this.onChangePage(this.currentPageNumber + 1);
+    this.onChangePageNumber(this.currentPageNumber + 1);
   }
 
   onChangePaginator() {
@@ -39,14 +39,12 @@ export class MyPaginatorComponent {
     });
   }
 
-  onChangePage(pageNumber: number): void {
-    console.log("on change page number: " + pageNumber);
+  onChangePageNumber(pageNumber: number) {
     this.currentPageNumber = pageNumber;
     this.onChangePaginator();
   }
 
   onChangePageSize() {
-    console.log("on change page size: " + this.selectedPageSize);
     this.currentPageNumber = 0;
     this.onChangePaginator();
   }

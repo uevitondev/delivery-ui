@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
@@ -16,6 +16,7 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
   styleUrl: './signup.component.scss'
 })
 export class SignUpComponent {
+
   routerService = inject(RouterService);
   toast = inject(ToastrService);
   authService = inject(AuthService);
@@ -43,7 +44,7 @@ export class SignUpComponent {
     }).subscribe({
       next: data => {
         this.toast.success('conta criada com sucesso');
-        this.routerService.toSignIn();
+        this.routerService.toSignUpVerification(this.signupForm.controls['email'].value);
       },
       error: e => {
         this.toast.error('erro ao criar conta');

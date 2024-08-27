@@ -63,9 +63,9 @@ export const routes: Routes = [
     component: AuthPageComponent
   },
   {
-    path: "auth/signin",
+    path: "auth/signup/verification/:email",
     component: AuthPageComponent
-  },
+  },  
   {
     path: "forbidden",
     component: ForbiddenComponent

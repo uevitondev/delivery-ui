@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SignInComponent } from '../signin/signin.component';
+import { SignupVerificationComponent } from '../signup-verification/signup-verification.component';
 import { SignUpComponent } from '../signup/signup.component';
 
 @Component({
@@ -8,34 +9,31 @@ import { SignUpComponent } from '../signup/signup.component';
   standalone: true,
   imports: [
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    SignupVerificationComponent
   ],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.scss'
 })
 export class AuthPageComponent implements OnInit {
-  activatedRoute = inject(ActivatedRoute);
+
+  route = inject(Router);
   activatedAuthComponent: string | null = 'signin';
 
   ngOnInit(): void {
-    this.activatedRoute.url.subscribe(urlSegments => {
-      urlSegments.forEach(urlSegment => {
-        if (urlSegment.path === 'signup') {
-          this.activatedAuthComponent = 'signup'
-        } else {
-          this.activatedAuthComponent = 'signin'
-        }
-      })
-    });
-
+    this.redirectForAuthComponentByRouteUrl(this.route.url);
   }
 
-  getActivatedAuthComponentEvent(event: string) {
-    if (event === 'signup') {
-      this.activatedAuthComponent = 'signup';
+  redirectForAuthComponentByRouteUrl(url: string) {  
+    if (url.includes('auth/signup') && !url.includes('auth/signup/verification')) {
+      this.activatedAuthComponent = 'signup'
+    } else if (url.includes('auth/signup/verification')) {
+      this.activatedAuthComponent = 'signup-verification'
     } else {
-      this.activatedAuthComponent = 'signin';
+      this.activatedAuthComponent = 'signin'
     }
+
   }
+
 
 }

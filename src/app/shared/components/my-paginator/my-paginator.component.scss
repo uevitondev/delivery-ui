@@ -9,9 +9,10 @@ main{
   align-items: center;
   flex-wrap: wrap;
   gap: 25px;
-  border-radius: var(--border-radius);
   padding: var(--padding);
-  background-color: var(--primary-color);
+  border-radius: var(--border-radius);
+  background-color: var(--primary-color); 
+  box-shadow: var(--box-shadow);
 }
 
 .pages{ 

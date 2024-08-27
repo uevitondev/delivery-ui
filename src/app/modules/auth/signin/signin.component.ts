@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthRequest } from '../../../core/models/auth-request';
+import { AuthRequest } from '../../../core/models/signin-request';
 import { AuthService } from '../../../core/services/auth.service';
 import { RouterService } from '../../../core/services/router.service';
 import { StorageService } from '../../../core/services/storage.service';
@@ -46,7 +46,7 @@ export class SignInComponent {
       },
       error: e => {
         if (e.status == 401) {
-          this.toast.error('Falha no login - Email ou Senha Inválidos!');
+          this.toast.error('email ou senha inválidos ou conta desativada - tente novamente');
         } else {
           this.toast.error('Erro inesperado - Não foi possivel prosseguir com sua solicitação!');
         }

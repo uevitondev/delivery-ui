@@ -6,7 +6,7 @@
   <div class="pages">
     @for(page of pages; track page; let currentIndex = $index){
     <div class="page">
-      <button (click)="onChangePage(page-1)" [ngClass]="{'current-page' : currentPageNumber === page - 1}"> {{ page }}</button>
+      <button (click)="onChangePageNumber(page-1)" [ngClass]="{'current-page' : currentPageNumber === page - 1}"> {{ page }}</button>
     </div>
     }
   </div>

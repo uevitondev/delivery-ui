@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { AuthRequest } from '../models/auth-request';
 import { AuthResponse } from '../models/auth-response';
-import { UserSignUp } from '../models/user-signup';
+import { AuthRequest } from '../models/signin-request';
+import { SignUpRequest } from '../models/signup-request';
+import { TokenRequest } from '../models/token-request';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -44,16 +45,20 @@ export class AuthService {
     return auth ? auth.authName : null;
   }
 
-  signup(userSignUp: UserSignUp): Observable<any> {
-    return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/sign-up`, userSignUp);
-  }
-
-  signin(authRequest: AuthRequest): Observable<AuthResponse> {
-    return this.httpClient.post<AuthResponse>(`${this.ENV.API_URL}/auth/sign-in`, authRequest);
+  signin(signinRequest: AuthRequest): Observable<AuthResponse> {
+    return this.httpClient.post<AuthResponse>(`${this.ENV.API_URL}/auth/sign-in`, signinRequest);
   }
 
   refreshToken(): Observable<AuthResponse> {
     return this.httpClient.post<AuthResponse>(`${this.ENV.API_URL}/auth/refresh-token`, {}, { withCredentials: true });
+  }
+
+  signup(signUpRequest: SignUpRequest): Observable<any> {
+    return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/sign-up`, signUpRequest);
+  }
+
+  signupVerificationToken(tokenRequest: TokenRequest): Observable<any> {
+    return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/sign-up/verification`, tokenRequest);
   }
 
   logout() {
