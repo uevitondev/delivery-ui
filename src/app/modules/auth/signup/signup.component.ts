@@ -1,5 +1,5 @@
 import { Component, EventEmitter, inject, Output } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
 import { RouterService } from '../../../core/services/router.service';
@@ -17,54 +17,52 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
 })
 export class SignUpComponent {
 
-  routerService = inject(RouterService);
-  toast = inject(ToastrService);
-  authService = inject(AuthService);
-  signupForm!: FormGroup;
-  disabled = true;
+  signupForm: FormGroup;
 
-  constructor() {
-    this.signupForm = new FormGroup({
-      fullName: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      passwordConfirm: new FormControl('', [Validators.required, Validators.minLength(4)])
-    });
+  constructor(private fb: FormBuilder) {
+    this.signupForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(2)]],
+      lastName: ['', [Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]]
+    }, { validators: this.passwordsMatchValidator });
+  }
+
+  passwordsMatchValidator(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
   }
 
   onSubmit() {
-    if (this.signupForm.invalid) {
-      return;
+    if (this.signupForm.valid) {
+      console.log('Formulário de signup submetido', this.signupForm.value);
+      // Lógica para enviar os dados para o backend
+    } else {
+      console.log('Formulário inválido');
     }
-    this.authService.signup({
-      firstName: this.getFirstNameByFullName(this.signupForm.controls['fullName'].value),
-      lastName: this.getLastNameByFullName(this.signupForm.controls['fullName'].value),
-      email: this.signupForm.controls['email'].value,
-      password: this.signupForm.controls['password'].value,
-    }).subscribe({
-      next: data => {
-        this.toast.success('conta criada com sucesso');
-        this.routerService.toSignUpVerification(this.signupForm.controls['email'].value);
-      },
-      error: e => {
-        this.toast.error('erro ao criar conta');
-        return;
-      }
-    });
   }
 
-  getFirstNameByFullName(fullName: string): string {
-    return fullName.split(' ')[0];
+  get firstName() {
+    return this.signupForm.get('firstName');
   }
 
-
-  getLastNameByFullName(fullName: string) {
-    let lastNames: string[] = fullName.split(' ');
-    let finalLastNames: string[] = [];
-    for (let i = 1; i < lastNames.length; i++) {
-      finalLastNames.push(lastNames[i]);
-    }
-    return finalLastNames.join(' ');
+  get lastName() {
+    return this.signupForm.get('lastName');
   }
+
+  get email() {
+    return this.signupForm.get('email');
+  }
+
+  get password() {
+    return this.signupForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.signupForm.get('confirmPassword');
+  }
+
 
 }

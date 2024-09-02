@@ -1,25 +1,11 @@
 <main>
-  <div class="left">
-    <div class="left-container">
-      <h1>Delivery</h1>
-      <img src="/assets/imgs/auth/auth-banner.svg" alt="">
-    </div>
-  </div>
-
-
-  <div class="right">
-    <div class="active-auth-wrapper">
-      @if( activatedAuthComponent === 'signin' ){
-      <app-signin> </app-signin>
-      }
-      @if(activatedAuthComponent === 'signup'){
-      <app-signup> </app-signup>
-      }
-      @if(activatedAuthComponent === 'signup-verification'){
-      <app-signup-confirmation> </app-signup-confirmation>
-      }
-    </div>
-
-  </div>
-
+    @if( activatedAuthComponent==='signin' ){
+        <app-signin> </app-signin>
+    }
+    @if(activatedAuthComponent === 'signup'){
+        <app-signup> </app-signup>
+    }
+    @if(activatedAuthComponent === 'signup-verification'){
+        <app-signup-confirmation> </app-signup-confirmation>
+    }
 </main>

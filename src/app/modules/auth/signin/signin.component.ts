@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthRequest } from '../../../core/models/signin-request';
 import { AuthService } from '../../../core/services/auth.service';
@@ -25,12 +25,22 @@ export class SignInComponent {
   toast = inject(ToastrService);
   signinForm!: FormGroup;
 
-  constructor() {
-    this.signinForm = new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4)])
+  constructor(private fb: FormBuilder) {
+    this.signinForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]]
     });
   }
+
+
+  get email() {
+    return this.signinForm.get('email');
+  }
+
+  get password() {
+    return this.signinForm.get('password');
+  }
+
 
   onSubmit() {
     if (this.signinForm.invalid) {

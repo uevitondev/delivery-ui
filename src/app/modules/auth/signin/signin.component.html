@@ -1,19 +1,40 @@
+
 <main>
-  <form [formGroup]="signinForm">
-    <app-input-form formControlName="username" inputName="username" type="email" label="EMAIL:"
-      placeHolder="email-example@gmail.com">
-    </app-input-form>
-    <app-input-form formControlName="password" inputName="password" type="password" label="SENHA:"
-      placeHolder="password...">
-    </app-input-form>
-    <p>Esqueceu sua Senha?</p>
-  </form>
-  <div class="btn-wrapper">
-    <button class="btn-signin" [disabled]="!signinForm.valid" (click)="onSubmit()">ENTRAR</button>
-    <div class="divider"></div>
-    <div>
-      <p>não tem uma conta?</p>
-      <button class="btn-signup" (click)="routerService.toSignUp()">CRIAR CONTA</button>
-    </div>
+  <div class="form-container">
+    <h1>Faça Login</h1>
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">      
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" type="email" placeholder="Digite seu email" />
+        @if(email?.invalid && email?.touched){
+        <div class="error-message">
+          @if(email?.errors?.['required']){
+          <small>O email é obrigatório.</small>
+          }
+          @if(email?.errors?.['email']){
+          <small>O email deve ser válido.</small>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="input-group">
+        <label for="password">Senha</label>
+        <input id="password" formControlName="password" type="password" placeholder="Digite sua senha" />
+        @if(password?.invalid && password?.touched){
+          <div class="error-message">
+            @if(password?.errors?.['required']){
+              <small>A senha é obrigatória.</small>
+            }
+            @if(password?.errors?.['minlength']){
+              <small>A senha deve ter no mínimo 6 caracteres.</small>
+            }          
+          </div>
+        }        
+      </div>
+      <button type="submit" [disabled]="signinForm.invalid">Entrar</button>
+    </form>
+    <p>Não tem uma conta? <a routerLink="/signin">Criar</a></p>
   </div>
 </main>

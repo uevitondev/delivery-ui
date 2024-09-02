@@ -1,26 +1,85 @@
 <main>
-  <form [formGroup]="signupForm">
-    <app-input-form formControlName="fullName" inputName="fullName" type="text" label="Nome Completo:"
-      placeHolder="seu nome completo  ...">
-    </app-input-form>
-    <app-input-form formControlName="email" inputName="email" type="email" label="Email:"
-      placeHolder="informe seu email... (example@gmail.com) ">
-    </app-input-form>
-    <app-input-form formControlName="password" inputName="password" type="password" label="Senha:"
-      placeHolder="crie uma senha forte...">
-    </app-input-form>
-    <app-input-form formControlName="passwordConfirm" inputName="passwordConfirm" type="password"
-      label="Confirme a senha:" placeHolder="confirme sua senha...">
-    </app-input-form>
-  </form>
+  <div class="form-container">
+    <h1>Crie sua conta</h1>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <label for="firstName">Nome</label>
+        <input id="firstName" formControlName="firstName" type="text" placeholder="Digite seu nome" />
+        @if(firstName?.invalid && firstName?.touched){
+        <div class="error-message">
+          @if(firstName?.errors?.['required']){
+          <small>O nome é obrigatório.</small>
+          }
+          @if(firstName?.errors?.['minlength']){
+          <small>O nome deve ter no mínimo 2 caracteres.</small>
+          }
+        </div>
+        }
+      </div>
 
-  <div class="btn-wrapper">
-    <button [disabled]="!signupForm.valid" class="btn-signup" (click)="onSubmit()">CRIAR</button>
-    <div class="divider"></div>
-    <div>
-      <p>já tem uma conta?</p>
-      <button class="btn-signin" (click)="routerService.toSignIn()">LOGIN</button>
-    </div>
+      <div class="input-group">
+        <label for="lastName">Sobrenome</label>
+        <input id="lastName" formControlName="lastName" type="text" placeholder="Digite seu sobrenome" />
+        @if(lastName?.invalid && lastName?.touched){
+        <div class="error-message">
+          @if(lastName?.errors?.['required']){
+          <small>O sobrenome é obrigatório.</small>
+          }
+          @if(lastName?.errors?.['minlength']){
+          <small>O sobrenome deve ter no mínimo 2 caracteres.</small>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input id="email" formControlName="email" type="email" placeholder="Digite seu email" />
+        @if(email?.invalid && email?.touched){
+        <div class="error-message">
+          @if(email?.errors?.['required']){
+          <small>O email é obrigatório.</small>
+          }
+          @if(email?.errors?.['email']){
+          <small>O email deve ser válido.</small>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="input-group">
+        <label for="password">Senha</label>
+        <input id="password" formControlName="password" type="password" placeholder="Digite sua senha" />
+        @if(password?.invalid && password?.touched){
+        <div class="error-message">
+          @if(password?.errors?.['required']){
+          <small>A senha é obrigatória.</small>
+          }
+          @if(password?.errors?.['minlength']){
+          <small>A senha deve ter no mínimo 6 caracteres.</small>
+          }
+        </div>
+        }
+      </div>
+
+      <div class="input-group">
+        <label for="confirmPassword">Confirme sua senha</label>
+        <input id="confirmPassword" formControlName="confirmPassword" type="password"
+          placeholder="Confirme sua senha" />
+        @if(confirmPassword?.invalid && confirmPassword?.touched){
+        <div class="error-message">
+          @if(confirmPassword?.errors?.['required']){
+          <small>A confirmação da senha é obrigatória.</small>
+          }
+          @if(signupForm.errors?.['mismatch']){
+          <small>As senhas não coincidem.</small>
+          }
+        </div>
+        }
+      </div>
+
+      <button type="submit" [disabled]="signupForm.invalid">Criar Conta</button>
+    </form>
+    <p>Já tem uma conta? <a routerLink="/signin">Entrar</a></p>
   </div>
-
 </main>

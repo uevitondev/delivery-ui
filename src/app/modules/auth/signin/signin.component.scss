@@ -1,36 +1,121 @@
-:host {
-  display: block; 
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box; 
 }
 
-main{
-  padding: var(--padding);
-  border-radius: var(--border-radius); 
-  box-shadow: var(--box-shadow);
+.form-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
   background-color: var(--primary-color);
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
 }
 
 
-.btn-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  gap: 30px;
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+
+.input-group input {
+  width: 100%;
   padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
 }
 
-.btn-signin,
-.btn-signup {
-  font-size: 16px;
-  font-weight: 700;
+.input-group input:focus {
+  border-color: #48c6ef;
+  outline: none;
+  box-shadow: 0 0 5px rgba(72, 198, 239, 0.5);
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  background-color: #48c6ef;
   border: none;
-  border-radius: var(--border-radius);
-  background-color: var(--secondary-color);
-  padding: var(--padding);
+  border-radius: 4px;
+  color: white;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:not(:disabled):hover {
+  background-color: #6f86d6;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+p a {
+  color: #48c6ef;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.error-message small {
+  display: block;
+}
+
+.input-group input.ng-invalid.ng-touched {
+  border-color: #e74c3c;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 14px;
+  }
 }

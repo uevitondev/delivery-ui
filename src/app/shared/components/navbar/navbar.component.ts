@@ -21,6 +21,8 @@ import { StorageService } from '../../../core/services/storage.service';
 })
 export class NavBarComponent implements OnInit {
 
+  isNavbarCollapsed = false;
+
   ENV = environment;
   authService = inject(AuthService);
   cartService = inject(CartService);
@@ -31,6 +33,10 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }  
+
+  toggleNavbar() {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
 
   isAuthLoggedIn() {
