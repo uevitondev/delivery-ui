@@ -1,6 +1,5 @@
 <main>
-  @if(cartItems.length != 0) {
-
+  @if(!cartIsEmpty()){
   <div class="left">
     <div class="cart-items">
       @for(cartitem of cartItems; track cartitem){
@@ -32,6 +31,13 @@
           <button (click)="addOrEditNote(cartitem)">ADICIONAR / EDITAR</button>
         </div>
       </div>
+      } @empty {
+      <div class="cart-empty ">
+        <span> "VAZIO" ADICIONE PRODUTOS</span>
+        <div class="btn-container">
+          <button (click)="routerService.toStore()">ADICIONAR AGORA</button>
+        </div>
+      </div>
       }
     </div>
   </div>
@@ -42,23 +48,19 @@
         <h1>Total: <strong>{{ cartService.getCartTotal() | currency : 'BRL' }}</strong></h1>
       </div>
       <div class="btn-container">
-        <button (click)="cartService.clearCart()">Limpar Carrinho</button>
-        <button (click)="routerService.toStore()">Continuar Comprando</button>
-        <button (click)="routerService.toCheckout()">Ir para Checkout</button>
+        <button (click)="cartService.clearCart()">LIMPAR CARRINHO</button>
+        <button (click)="routerService.toStore()">CONTINUAR COMPRANDO</button>
+        <button (click)="routerService.toCheckout()">IR PARA CHECKOUT</button>
       </div>
     </div>
   </div>
-
-
-  }@else{
-
-  <div class="cart-blank">
-    <span> "Vazio" Adicone Produtos! </span>
+  }@else {
+  <div class="cart-empty ">
+    <span> "VAZIO" ADICIONE PRODUTOS</span>
     <div class="btn-container">
-      <button (click)="routerService.toStore()">Continuar Comprando</button>
+      <button (click)="routerService.toStore()">ADICIONAR AGORA</button>
     </div>
   </div>
-
   }
 
 </main>

@@ -1,9 +1,19 @@
 <main>
   @for (store of stores; track store) {
-    <div class="store">
-      <p>{{store.name}}</p>
-      <button (click)="selectStore(store)">Selecionar</button>
+  <div class="store">
+    <div class="left">
+      <div class="left-header ">
+        <img src="{{store.logoUrl}}" alt="">
+        <p> {{store.type}} - {{store.name}} </p>
+      </div>
+      <p>+55 {{store.phoneNumber}}</p>
     </div>
-    }
-</main>
 
+    <div class="right">
+      <button (click)="selectStore(store)">VER PRODUTOS</button>
+    </div>
+  </div>
+  } @empty {
+  <p>"NENHUMA LOJA PARA LISTAR"</p>
+  }
+</main>

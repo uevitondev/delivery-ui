@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { PageProduct } from '../models/page-product';
+import { PageData } from '../models/page-data';
 import { Product } from '../models/product';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class ProductService {
 
   constructor() { }
 
-  getAllByStorePagedAndFiltered(storeId: string, categoryName: string, pageIndex: number, pageSize: number): Observable<PageProduct> {
-    return this.http.get<PageProduct>(`${this.ENV.API_URL}/products/store/${storeId}?categoryName=${categoryName}&page=${pageIndex}&size=${pageSize}`);
+  getAllByStorePagedAndFiltered(storeId: string, categoryName: string, pageIndex: number, pageSize: number): Observable<PageData> {
+    return this.http.get<PageData>(`${this.ENV.API_URL}/products/store/${storeId}?categoryName=${categoryName}&page=${pageIndex}&size=${pageSize}`);
     //return this.http.get<PageProduct>(`${this.ENV.API_URL}/products/store/${storeId}?page=${pageIndex}&size=${pageSize}`);
   }
 

@@ -13,6 +13,9 @@
           @if(firstName?.errors?.['minlength']){
           <small>O nome deve ter no mínimo 2 caracteres.</small>
           }
+          @if(firstName?.errors?.['maxlength']){
+          <small>O nome deve ter no máximo 25 caracteres.</small>
+          }
         </div>
         }
       </div>
@@ -27,6 +30,9 @@
           }
           @if(lastName?.errors?.['minlength']){
           <small>O sobrenome deve ter no mínimo 2 caracteres.</small>
+          }
+          @if(lastName?.errors?.['maxlength']){
+          <small>O sobrenome deve ter no máximo 60 caracteres.</small>
           }
         </div>
         }
@@ -50,13 +56,16 @@
       <div class="input-group">
         <label for="password">Senha</label>
         <input id="password" formControlName="password" type="password" placeholder="Digite sua senha" />
-        @if(password?.invalid && password?.touched){
+        @if(password?.touched && password?.errors){
         <div class="error-message">
           @if(password?.errors?.['required']){
           <small>A senha é obrigatória.</small>
           }
           @if(password?.errors?.['minlength']){
           <small>A senha deve ter no mínimo 6 caracteres.</small>
+          }
+          @if(password?.errors?.['maxlength']){
+          <small>A senha deve ter no máximo 16 caracteres.</small>
           }
         </div>
         }
@@ -66,20 +75,32 @@
         <label for="confirmPassword">Confirme sua senha</label>
         <input id="confirmPassword" formControlName="confirmPassword" type="password"
           placeholder="Confirme sua senha" />
-        @if(confirmPassword?.invalid && confirmPassword?.touched){
+        @if(confirmPassword?.touched && confirmPassword?.errors){
         <div class="error-message">
-          @if(confirmPassword?.errors?.['required']){
+          @if( confirmPassword?.errors?.['required'] ){
           <small>A confirmação da senha é obrigatória.</small>
           }
-          @if(signupForm.errors?.['mismatch']){
+          @if(confirmPassword?.errors?.['mismatch'] ){
           <small>As senhas não coincidem.</small>
           }
         </div>
         }
       </div>
 
-      <button type="submit" [disabled]="signupForm.invalid">Criar Conta</button>
+      {{ signupForm.errors | json }}
+
+
+      <div >
+        <button type="submit" [disabled]="signupForm.invalid">Criar Conta</button>
+        @if(isloading){
+          <button class="btn btn-primary" [disabled]="isloading" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="sr-only">Solicitado criação de conta aguarde...</span>
+          </button>
+        }
+      </div>    
+      
     </form>
-    <p>Já tem uma conta? <a routerLink="/signin">Entrar</a></p>
+    <p>Já tem uma conta? <a (click)="routerService.toSignIn()">Entrar</a></p>
   </div>
 </main>

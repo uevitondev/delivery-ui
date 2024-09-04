@@ -13,29 +13,30 @@
 
   <div class="addresses">
     @for(address of addresses; track address){
-      <div class="address">
-        <div class="left">
-          <span>{{address.name}} | {{address.phoneNumber}}</span>
-          <span>{{address.street}}, {{address.number}}, {{address.district}}, ({{address.city}} - {{address.uf}}) </span>
-          <span>{{address.complement}}</span>
-          <span>{{address.zipCode}}</span>
-        </div>
-    
-        <div class="right">
-          @if(isSelectable) {
-          <button (click)="selectAddress(address)">Selecionar</button>
-          }
-          @if(isEditable){
-          <button (click)="editAddress(address)">Editar</button>     
-          }
-          @if(isDeletable){
-            <button (click)="deleteAddress(address.id)">Apagar</button>
-          }
-    
-        </div>
+    <div class="address">
+      <div class="left">
+        <span>{{address.name}} | {{address.phoneNumber}}</span>
+        <span>{{address.street}}, {{address.number}}, {{address.district}}, ({{address.city}} - {{address.uf}}) </span>
+        <span>{{address.complement}}</span>
+        <span>{{address.zipCode}}</span>
       </div>
-      }
 
+      <div class="right">
+        @if(isSelectable) {
+        <button (click)="selectAddress(address)">Selecionar</button>
+        }
+        @if(isEditable){
+        <button (click)="editAddress(address)">Editar</button>
+        }
+        @if(isDeletable){
+        <button (click)="deleteAddress(address.id)">Apagar</button>
+        }
+
+      </div>
+    </div>
+    }@empty {
+    <p>"VOCÊ NÃO TEM ENDEREÇOS CADASTRADOS"</p>
+    }
   </div>
 
 

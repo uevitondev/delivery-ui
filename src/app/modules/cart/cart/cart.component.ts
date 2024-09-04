@@ -45,4 +45,9 @@ export class CartComponent implements OnInit {
     });
   }
 
+  cartIsEmpty(){
+    return Array.isArray(this.cartItems) && this.cartItems.length === 0
+  }
+
+
 }

@@ -1,9 +1,5 @@
-import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
@@ -14,14 +10,14 @@ import { StorageService } from '../../../core/services/storage.service';
   selector: 'app-navbar',
   standalone: true,
   imports: [
-    MatToolbarModule, MatMenuModule, MatIconModule, RouterLink, NgIf, AsyncPipe
+    MatIconModule
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavBarComponent implements OnInit {
 
-  isNavbarCollapsed = false;
+  isMenuOpen = false;
 
   ENV = environment;
   authService = inject(AuthService);
@@ -32,19 +28,10 @@ export class NavBarComponent implements OnInit {
   userImage!: string;
 
   ngOnInit(): void {
-
-  }  
-
-  toggleNavbar() {
-    this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
 
-  isAuthLoggedIn() {
-    return this.authService.isLogged();
-  }
-
-  getAuthName() {
-    return this.authService.getAuthName()?.toUpperCase();
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   toggleTheme() {

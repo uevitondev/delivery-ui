@@ -22,7 +22,7 @@ $app-dark-theme: mat.define-theme((color: (theme-type: dark,
 @import 'ngx-toastr/toastr';
 
 :root {
-  --primary-color: #ebae34;
+  --primary-color: #FBD148;
   --secondary-color: #FAFAFA;
   --tertiary-color: #232423;
   --accent-color: #FF5252;
@@ -47,4 +47,3 @@ body {
   padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-

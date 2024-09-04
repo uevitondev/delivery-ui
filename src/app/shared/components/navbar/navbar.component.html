@@ -1,44 +1,56 @@
-<nav class="navbar" [class.collapsed]="!isNavbarCollapsed">
-  <span class="navbar-brand" (click)="routerService.toHome()">Delivery App</span>
+<nav class="navbar">
+  <span class="navbar-brand" (click)="routerService.toHome(); isMenuOpen ? toggleMenu() : null">Delivery App</span>
 
   <div class="spacer"></div>
 
-  <button class="navbar-toggler" (click)="toggleNavbar()">
-    <mat-icon>menu</mat-icon>
-  </button>
-
-  <div class="nav-links" [class.collapse]="isNavbarCollapsed">
-    <button class="nav-button" (click)="routerService.toHome()">Home</button>
-    <button class="nav-button" (click)="routerService.toStores()">Lojas</button>
-    @if(isAuthLoggedIn()) {
-    <button class="nav-button" (click)="routerService.toOrders()">Meus Pedidos</button>
-    <button class="btn-account-menu" mat-icon-button [matMenuTriggerFor]="accountMenu">
-      <mat-icon class="auth-icon">account_circle</mat-icon>
-      <p class="auth-name"> {{ getAuthName() }}</p>
+  <div class="nav-menu" [class.ismenuopen]="isMenuOpen" [class.ismenuclosed]="!isMenuOpen">
+    <button class="nav-button" (click)="routerService.toHome();  isMenuOpen ? toggleMenu() : null">Home</button>
+    <button class="nav-button" (click)="routerService.toStores();  isMenuOpen ? toggleMenu() : null">Lojas</button>
+    @if(authService.isLogged()) {
+    <button class="nav-button" (click)="routerService.toOrders();  isMenuOpen ? toggleMenu() : null">Meus Pedidos</button>
+    <button class="nav-button" (click)="routerService.toAccount();  isMenuOpen ? toggleMenu() : null"> 
+      <span class="nav-button-wrapper">
+        <mat-icon>account_circle</mat-icon>
+        {{ authService.getAuthName() }}
+      </span>      
     </button>
-    <mat-menu #accountMenu="matMenu">
-      <div matMenuContent>
-        <button mat-menu-item (click)="routerService.toAccount()">Minha Conta</button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon>exit_to_app</mat-icon>
-          <span>Sair</span>
-        </button>
-      </div>
-    </mat-menu>
+    <button class="nav-button" (click)="logout();  isMenuOpen ? toggleMenu() : null">
+      <span class="nav-button-wrapper">
+        <mat-icon>exit_to_app</mat-icon>
+        Sair
+      </span>    
+    </button>
     } @else {
-    <button class="nav-button" (click)="routerService.toSignIn()">Login</button>
-    <button class="nav-button" (click)="routerService.toSignUp()">Criar Conta</button>
+    <button class="nav-button" (click)="routerService.toSignIn(); isMenuOpen ? toggleMenu() : null">Login</button>
+    <button class="nav-button" (click)="routerService.toSignUp();  isMenuOpen ? toggleMenu() : null">Criar Conta</button>
     }
+  </div>
 
-    <div class="cart-count" (click)="routerService.toCart()">
+  <button class="nav-button" (click)="routerService.toCart()">
+    <span class="nav-button-wrapper cart-count">
       <mat-icon>shopping_cart</mat-icon>
       @if (cartService.getCartCount(); as count) {
-      <span class="count">{{ count > 0 ? count : "" }}</span>
-      }
-    </div>
+       <span class="count"> {{ count > 0 ? count : "" }}</span>
+        }
+    </span>      
+  </button>
 
-    <div class="theme-icon" (click)="toggleTheme()">
+  <button class="nav-button" (click)="toggleTheme()">
+    <span class="nav-button-wrapper">
       <mat-icon>{{icon}}</mat-icon>
-    </div>
-  </div>
+    </span>   
+  </button>
+
+  <button class="nav-button menu-toggle" (click)="toggleMenu()">
+    <span>
+      @if(isMenuOpen){
+        <mat-icon>close</mat-icon>
+        }@else{
+        <mat-icon>menu</mat-icon>
+        }
+    </span>    
+  </button>
+
+
+
 </nav>

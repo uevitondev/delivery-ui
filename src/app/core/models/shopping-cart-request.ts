@@ -1,10 +1,10 @@
 import { Address } from "./address"
 import { CartItem } from "./cart-item"
-import { Store } from "./store"
+import { StoreResponse } from "./store-response"
 
-export interface ShoppingCartRequest {  
+export interface ShoppingCartRequest {
   address: Address,
-  store: Store,
+  store: StoreResponse,
   paymentMethod: string,
   cartItems: CartItem[]
 }

@@ -1,21 +1,17 @@
 <main>
-  <section class="main-section">
-    <div class="header">
+  <section class="home-header">
+    <div>
       <h1>Delivery App</h1>
       <p>Encontre as melhores opções, diversos estabelecimentos, faça seu pedido online.</p>
     </div>
   </section>
-  
-  @if(hasStoredStore){
-    <section>
-      <app-store-home></app-store-home>
-    </section>
-  }@else{
-    <section>
-      <h1>Selecione uma loja</h1>
-      <app-list-store></app-list-store>
-    </section>
-  }  
 
+  <section>
+    @if(hasStoredStore){
+    <app-store-home></app-store-home>
+    }@else{
+    <h1>Selecione uma loja</h1>
+    <app-list-store></app-list-store>
+    }
+  </section>
 </main>
-

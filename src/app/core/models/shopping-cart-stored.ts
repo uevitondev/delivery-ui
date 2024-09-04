@@ -1,7 +1,7 @@
 import { CartItem } from "./cart-item"
-import { Store } from "./store"
+import { StoreResponse } from "./store-response"
 
 export interface ShoppingCartStored {
-  store: Store,
+  store: StoreResponse,
   cartItems: CartItem[]
 }

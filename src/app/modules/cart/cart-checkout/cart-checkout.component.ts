@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Address } from '../../../core/models/address';
 import { CartItem } from '../../../core/models/cart-item';
 import { ShoppingCartRequest } from '../../../core/models/shopping-cart-request';
-import { Store } from '../../../core/models/store';
+import { StoreResponse } from '../../../core/models/store-response';
 import { AddressService } from '../../../core/services/address.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
@@ -32,7 +32,7 @@ export class CartCheckoutComponent implements OnInit {
   orderService = inject(OrderService);
 
   cartItems: CartItem[] = [];
-  store!: Store;
+  store!: StoreResponse;
 
   isLogged: Boolean = false;
   paymentMethods: string[] = ["DINHEIRO (ESPÉCIE)", "PIX", "CARTÃO"];

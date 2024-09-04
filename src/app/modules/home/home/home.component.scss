@@ -1,13 +1,12 @@
-.main-section {
+.home-header{
   display: flex;
   align-items: center;
-  justify-content: center;  
-}
-
-.header{
-  background-color: var(--primary-color);
+  justify-content: center; 
+  padding: var(--padding);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
+  background-color: var(--primary-color);
+  min-height: 400px;
 }
 
 h1 {

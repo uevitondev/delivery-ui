@@ -23,7 +23,7 @@ export class CartService {
       this.cart.next(storedCart);
     })() : (() => {
       this.cart = new BehaviorSubject<ShoppingCartStored>({
-        store: { id: '', name: '' },
+        store: { id: '', logoUrl:'', name: '', phoneNumber:'',type:'' },
         cartItems: []
       });
       return;

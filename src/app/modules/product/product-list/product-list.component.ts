@@ -3,9 +3,8 @@ import { Component, inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../environments/environment';
 import { Category } from '../../../core/models/category';
-import { PageProduct } from '../../../core/models/page-product';
+import { PageData } from '../../../core/models/page-data';
 import { Product } from '../../../core/models/product';
-import { StoreData } from '../../../core/models/store-data';
 import { CartService } from '../../../core/services/cart.service';
 import { CategoryService } from '../../../core/services/category.service';
 import { ProductService } from '../../../core/services/product.service';
@@ -37,14 +36,13 @@ export class ProductListComponent {
 
   STORED_STORE = environment.STORED_STORE;
   products: Product[] = [];
-  storeData!: StoreData;
   storeId!: string;
   categoryName: string = "";
   orderBy: string = "";
   selectedItem: any;
 
   pageNumber: number = 0;
-  pageSize: number = 8;
+  pageSize: number = 12;
   pages: number[] = [];
 
   ngOnInit(): void {
@@ -57,10 +55,10 @@ export class ProductListComponent {
 
   loadProductsList(storeId: string, categoryName: string, pageNumber: number, pageSize: number) {
     this.productService.getAllByStorePagedAndFiltered(storeId, categoryName, pageNumber, pageSize).subscribe({
-      next: (pageProduct) => {
-        this.products = pageProduct.content;
-        this.pageNumber = pageProduct.pageable.pageNumber;
-        this.pages = this.generateNumberList(pageProduct.totalPages);
+      next: (pageData: PageData) => {
+        this.products = pageData.content;
+        this.pageNumber = pageData.page.number;
+        this.pages = this.generateNumberList(pageData.page.totalPages);
       },
       error: (e) => {
         this.toastService.error("Erro ao Carregar Dados da Loja!");
@@ -81,19 +79,6 @@ export class ProductListComponent {
       this.loadProductsList(this.storeId, this.categoryName, this.pageNumber, this.pageSize);
     })() : this.filterProductsAll();
 
-  }
-
-  getStoreDataFromPageProduct(pageProduct: PageProduct): StoreData {
-    let data: StoreData = {
-      products: pageProduct.content,
-      search: "",
-      currentPage: pageProduct.number,
-      page: pageProduct.totalPages,
-      pageable: pageProduct.pageable,
-      totalElements: pageProduct.totalElements,
-      pageSize: pageProduct.size,
-    };
-    return data;
   }
 
   addToCart(product: Product) {
@@ -127,6 +112,11 @@ export class ProductListComponent {
       numberPagesList.push(i);
     }
     return numberPagesList;
+  }
+
+
+  productsIsEmpty(){
+    return Array.isArray(this.products) && this.products.length === 0
   }
 
 }
