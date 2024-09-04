@@ -31,9 +31,14 @@ export class SignupVerificationComponent implements OnInit {
     let email = this.activatedRoute.snapshot.params['email'];
     this.email = email;
     this.signupVerificationForm = new FormGroup({
-      token: new FormControl('', [Validators.required, Validators.maxLength(6)])
+      token: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)])
     });
 
+  }
+
+  
+  get token() {
+    return this.signupVerificationForm.get('token');
   }
 
   newVerificationToken() { }

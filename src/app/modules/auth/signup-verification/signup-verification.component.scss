@@ -1,12 +1,17 @@
-:host {
-  display: block;
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-main{
-  padding: var(--padding);
+.container {
+  width: 100%;
+  max-width: 450px;
+  text-align: center;
+  background: #fff;
+  padding: 30px;
   border-radius: var(--border-radius);
-  background-color: var(--primary-color);
-  box-shadow: var(--box-shadow);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -17,6 +22,17 @@ form {
   border-radius: 8px;
 }
 
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
 
 .btn-wrapper {
   display: flex;
@@ -26,8 +42,7 @@ form {
   padding: 10px;
 }
 
-.btn-signin,
-.btn-signup {
+.btn-validate {
   font-size: 16px;
   font-weight: 700;
   border: none;
@@ -35,4 +50,45 @@ form {
   background-color: var(--secondary-color);
   padding: var(--padding);
   cursor: pointer;
+}
+
+
+input {
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: rgb(221, 216, 216);
+  padding: 12px;
+}
+
+
+.error-message {
+  color: #e74c3c;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.error-message small {
+  display: block;
+}
+
+.input-group input.ng-invalid.ng-touched {
+  border-color: #e74c3c;
+}
+
+p {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+p a {
+  color: #48c6ef;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+p a:hover {
+  text-decoration: underline;
 }

@@ -35,6 +35,6 @@
       </div>
       <button type="submit" [disabled]="signinForm.invalid">Entrar</button>
     </form>
-    <p>Não tem uma conta? <a routerLink="/signin">Criar</a></p>
+    <p>Não tem uma conta? <a (click)="routerService.toSignUp()">Criar</a></p>
   </div>
 </main>
