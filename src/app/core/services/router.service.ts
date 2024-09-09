@@ -28,10 +28,6 @@ export class RouterService {
     this.router.navigate(['home/', storeName]);
   }
 
-  toStore() {
-    this.router.navigate(["store"]);
-  }
-
   toStores() {
     this.router.navigate(["stores"]);
   }

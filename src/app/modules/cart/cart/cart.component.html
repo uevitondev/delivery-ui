@@ -35,7 +35,7 @@
       <div class="cart-empty ">
         <span> "VAZIO" ADICIONE PRODUTOS</span>
         <div class="btn-container">
-          <button (click)="routerService.toStore()">ADICIONAR AGORA</button>
+          <button (click)="routerService.toHome()">ADICIONAR AGORA</button>
         </div>
       </div>
       }
@@ -49,7 +49,7 @@
       </div>
       <div class="btn-container">
         <button (click)="cartService.clearCart()">LIMPAR CARRINHO</button>
-        <button (click)="routerService.toStore()">CONTINUAR COMPRANDO</button>
+        <button (click)="routerService.toHome()">CONTINUAR COMPRANDO</button>
         <button (click)="routerService.toCheckout()">IR PARA CHECKOUT</button>
       </div>
     </div>
@@ -58,7 +58,7 @@
   <div class="cart-empty ">
     <span> "VAZIO" ADICIONE PRODUTOS</span>
     <div class="btn-container">
-      <button (click)="routerService.toStore()">ADICIONAR AGORA</button>
+      <button (click)="routerService.toHome()">ADICIONAR AGORA</button>
     </div>
   </div>
   }

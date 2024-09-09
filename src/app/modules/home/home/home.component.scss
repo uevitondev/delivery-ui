@@ -1,20 +1,21 @@
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
 .home-header{
   display: flex;
-  align-items: center;
-  justify-content: center; 
+  justify-content: center;
+  padding: var(--padding);
+}
+
+.header-brand {
+  width: 100%;
+  max-width: 80%;
+  height: 250px;
   padding: var(--padding);
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  background-color: var(--primary-color);
-  min-height: 400px;
-}
-
-h1 {
-  font-size: 46px;
-  font-weight: bold;
-}
-
-p {
-  font-size: 18px;
-  font-weight: 500;
+  background-color: var(--primary-color);  
 }
