@@ -1,16 +1,18 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SignInComponent } from '../signin/signin.component';
-import { SignupVerificationComponent } from '../signup-verification/signup-verification.component';
-import { SignUpComponent } from '../signup/signup.component';
+import { Router } from '@angular/router';
+import { AuthResetPasswordComponent } from '../auth-resetpassword/auth-resetpassword.component';
+import { AuthSignInComponent } from '../auth-signin/auth-signin.component';
+import { AuthSignUpComponent } from '../auth-signup/auth-signup.component';
+import { AuthVerificationComponent } from '../auth-verification/auth-verification.component';
 
 @Component({
   selector: 'app-auth-page',
   standalone: true,
   imports: [
-    SignInComponent,
-    SignUpComponent,
-    SignupVerificationComponent
+    AuthSignInComponent,
+    AuthResetPasswordComponent,
+    AuthSignUpComponent,
+    AuthVerificationComponent
   ],
   templateUrl: './auth-page.component.html',
   styleUrl: './auth-page.component.scss'
@@ -24,13 +26,15 @@ export class AuthPageComponent implements OnInit {
     this.redirectForAuthComponentByRouteUrl(this.route.url);
   }
 
-  redirectForAuthComponentByRouteUrl(url: string) {  
-    if (url.includes('auth/signup') && !url.includes('auth/signup/verification')) {
-      this.activatedAuthComponent = 'signup'
-    } else if (url.includes('auth/signup/verification')) {
-      this.activatedAuthComponent = 'signup-verification'
+  redirectForAuthComponentByRouteUrl(url: string) {
+    if (url.includes('auth/signup')) {
+      this.activatedAuthComponent = 'auth-signup'
+    } else if (url.includes('auth/verification')) {
+      this.activatedAuthComponent = 'auth-verification'
+    } else if (url.includes('auth/reset-password')) {
+      this.activatedAuthComponent = 'auth-reset-password'
     } else {
-      this.activatedAuthComponent = 'signin'
+      this.activatedAuthComponent = 'auth-signin'
     }
 
   }

@@ -31,7 +31,10 @@
               <small>A senha deve ter no mínimo 6 caracteres.</small>
             }          
           </div>
-        }        
+        }    
+        <p>
+          <a (click)="routerService.toResetPassword()">esqueceu sua senha?</a>  
+        </p>
       </div>
       <button type="submit" [disabled]="signinForm.invalid">Entrar</button>
     </form>

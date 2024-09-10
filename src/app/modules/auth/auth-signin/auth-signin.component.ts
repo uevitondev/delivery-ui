@@ -9,16 +9,16 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
 
 
 @Component({
-  selector: 'app-signin',
+  selector: 'app-auth-signin',
   standalone: true,
   imports: [
     InputFormComponent,
     ReactiveFormsModule
   ],
-  templateUrl: './signin.component.html',
-  styleUrl: './signin.component.scss'
+  templateUrl: './auth-signin.component.html',
+  styleUrl: './auth-signin.component.scss'
 })
-export class SignInComponent implements OnInit {
+export class AuthSignInComponent implements OnInit {
   routerService = inject(RouterService);
   authService = inject(AuthService);
   storageService = inject(StorageService);

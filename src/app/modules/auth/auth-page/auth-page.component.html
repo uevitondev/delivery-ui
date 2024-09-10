@@ -1,11 +1,14 @@
 <main>
-    @if( activatedAuthComponent==='signin' ){
-        <app-signin> </app-signin>
+    @if( activatedAuthComponent==='auth-signin' ){
+        <app-auth-signin></app-auth-signin>
     }
-    @if(activatedAuthComponent === 'signup'){
-        <app-signup> </app-signup>
+    @if(activatedAuthComponent === 'auth-reset-password'){
+        <app-auth-resetpassword> </app-auth-resetpassword>
     }
-    @if(activatedAuthComponent === 'signup-verification'){
-        <app-signup-confirmation> </app-signup-confirmation>
+    @if(activatedAuthComponent === 'auth-signup'){
+        <app-auth-signup></app-auth-signup>
+    }
+    @if(activatedAuthComponent === 'auth-verification'){
+        <app-auth-verification> </app-auth-verification>
     }
 </main>

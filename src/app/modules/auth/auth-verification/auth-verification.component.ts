@@ -7,17 +7,17 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
-  selector: 'app-signup-confirmation',
+  selector: 'app-auth-verification',
   standalone: true,
   imports: [
     InputFormComponent,
     ReactiveFormsModule,
     InputFormComponent
   ],
-  templateUrl: './signup-verification.component.html',
-  styleUrl: './signup-verification.component.scss'
+  templateUrl: './auth-verification.component.html',
+  styleUrl: './auth-verification.component.scss'
 })
-export class SignupVerificationComponent implements OnInit {
+export class AuthVerificationComponent implements OnInit {
 
   activatedRoute = inject(ActivatedRoute);
   routerService = inject(RouterService);
@@ -25,6 +25,7 @@ export class SignupVerificationComponent implements OnInit {
   authService = inject(AuthService);
   signupVerificationForm!: FormGroup;
   email: string = '';
+  isloading = false;
 
 
   ngOnInit(): void {
@@ -47,16 +48,18 @@ export class SignupVerificationComponent implements OnInit {
     if (this.signupVerificationForm.invalid) {
       return;
     }
-
+    this.isloading = true;
     this.authService.signupVerificationToken({
       token: this.signupVerificationForm.controls['token'].value
     }).subscribe({
-      next: data => {
+      next: data => {        
         this.toastService.success('conta ativada com sucesso');
+        this.isloading = false;
         this.routerService.toSignIn();
       },
       error: e => {
         this.toastService.error('token invalido');
+        this.isloading = false;
         return;
       }
     });

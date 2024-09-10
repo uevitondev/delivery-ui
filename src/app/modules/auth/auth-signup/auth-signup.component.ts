@@ -7,17 +7,17 @@ import { RouterService } from '../../../core/services/router.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-  selector: 'app-signup',
+  selector: 'app-auth-signup',
   standalone: true,
   imports: [
     CommonModule,
     InputFormComponent,
     ReactiveFormsModule
   ],
-  templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  templateUrl: './auth-signup.component.html',
+  styleUrl: './auth-signup.component.scss'
 })
-export class SignUpComponent implements OnInit {
+export class AuthSignUpComponent implements OnInit {
   routerService = inject(RouterService);
   authService = inject(AuthService);
   toastService = inject(ToastrService);

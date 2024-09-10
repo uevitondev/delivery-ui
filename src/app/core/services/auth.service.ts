@@ -7,6 +7,7 @@ import { AuthRequest } from '../models/signin-request';
 import { SignUpRequest } from '../models/signup-request';
 import { TokenRequest } from '../models/token-request';
 import { StorageService } from './storage.service';
+import { PasswordResetToken } from '../models/password-reset-token';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,14 @@ export class AuthService {
     return this.httpClient.post<AuthResponse>(`${this.ENV.API_URL}/auth/sign-in`, signinRequest);
   }
 
+  resetPassword(email: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/reset-password?email=${email}`, {});
+  }
+
+  changePassword(passwordResetToken: PasswordResetToken): Observable<any> {
+    return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/change-password`, passwordResetToken);
+  }
+
   refreshToken(): Observable<AuthResponse> {
     return this.httpClient.post<AuthResponse>(`${this.ENV.API_URL}/auth/refresh-token`, {}, { withCredentials: true });
   }
@@ -58,7 +67,7 @@ export class AuthService {
   }
 
   signupVerificationToken(tokenRequest: TokenRequest): Observable<any> {
-    return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/sign-up/verification`, tokenRequest);
+    return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/verification`, tokenRequest);
   }
 
   logout() {

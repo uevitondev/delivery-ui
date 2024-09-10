@@ -59,11 +59,15 @@ export const routes: Routes = [
     component: AuthPageComponent
   },
   {
+    path: "auth/reset-password",
+    component: AuthPageComponent
+  }, 
+  {
     path: "auth/signup",
     component: AuthPageComponent
   },
   {
-    path: "auth/signup/verification/:email",
+    path: "auth/verification/:email",
     component: AuthPageComponent
   },  
   {

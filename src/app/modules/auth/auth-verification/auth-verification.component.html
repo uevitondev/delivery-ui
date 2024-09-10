@@ -1,5 +1,5 @@
 <main>
-  <div class="container">
+  <div class="form-container">
     <h1>Ative sua nova conta</h1>
     <p>token de verificação enviado para: {{email}} </p>
     <form [formGroup]="signupVerificationForm">
@@ -24,8 +24,17 @@
 
     <p>não recebeu o código? <a (click)="newVerificationToken()">reenviar codigo</a></p>
 
-    <div class="btn-wrapper">
-      <button [disabled]="!signupVerificationForm.valid" class="btn-validate" (click)="validateToken()">VALIDAR TOKEN</button>
+    <div>
+      @if(isloading){
+        <button class="btn btn-primary" [disabled]="isloading" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <span class="sr-only">SOLICITANDO...AGUARDE!</span>
+        </button>
+      }@else{
+        <button
+        [disabled]="!signupVerificationForm.valid"
+        (click)="validateToken()">VALIDAR TOKEN</button>
+      }  
     </div>
   </div>
 

@@ -87,15 +87,15 @@
         }
       </div>
       <div>
-        <button type="submit" [disabled]="signupForm.invalid">Criar Conta</button>
         @if(isloading){
-        <button class="btn btn-primary" [disabled]="isloading" type="button" disabled>
-          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          <span class="sr-only">Solicitado criação de conta aguarde...</span>
-        </button>
-        }
+          <button class="btn btn-primary" [disabled]="isloading" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span class="sr-only">SOLICITANDO...AGUARDE!</span>
+          </button>
+        }@else{
+          <button type="submit" [disabled]="signupForm.invalid">Criar Conta</button>
+        }        
       </div>
-
     </form>
     <p>Já tem uma conta? <a (click)="routerService.toSignIn()">Entrar</a></p>
   </div>

@@ -12,12 +12,16 @@ export class RouterService {
     this.router.navigate(["auth/signin"]);
   }
 
+  toResetPassword(){
+    this.router.navigate(["auth/reset-password"]);
+  }
+  
   toSignUp() {
     this.router.navigate(["auth/signup"]);
   }
 
   toSignUpVerification(email: string) {
-    this.router.navigate(["auth/signup/verification/", email]);
+    this.router.navigate(["auth/verification/", email]);
   }
 
   toHome() {
