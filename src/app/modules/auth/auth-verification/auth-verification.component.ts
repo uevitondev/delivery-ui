@@ -42,14 +42,30 @@ export class AuthVerificationComponent implements OnInit {
     return this.signupVerificationForm.get('token');
   }
 
-  newVerificationToken() { }
+  newVerificationToken() {
+
+    this.authService.verificationNewToken(this.email).subscribe({
+      next: data => {        
+        this.toastService.success('Novo Token Enviado');
+        return;
+      },
+      error: e => {
+        this.toastService.error('Erro Ao Solicitar Token');
+        this.isloading = false;
+        return;
+      }
+    });
+
+
+
+   }
 
   validateToken() {
     if (this.signupVerificationForm.invalid) {
       return;
     }
     this.isloading = true;
-    this.authService.signupVerificationToken({
+    this.authService.verificationToken({
       token: this.signupVerificationForm.controls['token'].value
     }).subscribe({
       next: data => {        

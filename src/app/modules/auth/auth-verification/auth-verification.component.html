@@ -1,7 +1,7 @@
 <main>
   <div class="form-container">
-    <h1>Ative sua nova conta</h1>
-    <p>token de verificação enviado para: {{email}} </p>
+    <h1>HABILITE SUA NOVA CONTA</h1>
+    <p>token de verificação enviado! consulte sua caixa de entrada...</p>
     <form [formGroup]="signupVerificationForm">
       <div class="input-group">
         <label for="email">Token</label>
@@ -22,7 +22,7 @@
       </div>
     </form>
 
-    <p>não recebeu o código? <a (click)="newVerificationToken()">reenviar codigo</a></p>
+    <p>não recebeu o token? <a (click)="newVerificationToken()">reenviar token</a></p>
 
     <div>
       @if(isloading){

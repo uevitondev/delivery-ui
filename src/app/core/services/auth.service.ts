@@ -66,9 +66,16 @@ export class AuthService {
     return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/sign-up`, signUpRequest);
   }
 
-  signupVerificationToken(tokenRequest: TokenRequest): Observable<any> {
+  verificationNewToken(email: string): Observable<any> {
+    return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/verification/new-token?email=${email}`, {});
+  }
+
+  verificationToken(tokenRequest: TokenRequest): Observable<any> {
     return this.httpClient.post<any>(`${this.ENV.API_URL}/auth/verification`, tokenRequest);
   }
+
+
+
 
   logout() {
     this.clearAuth();
