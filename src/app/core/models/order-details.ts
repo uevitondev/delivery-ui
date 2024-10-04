@@ -1,14 +1,14 @@
 import { Address } from "./address";
 
-export interface OrderCustomerResponse {
+export interface OrderDetails {
   id: number,
   createdAt: string,
   updatedAt: string,
   status: string,
   paymentMethod: string,
   total: number,
-  customerData: any,
-  storeData: any, 
+  customer: any,
+  store: any, 
   deliveryAddress: Address,
   orderItems: any
 }

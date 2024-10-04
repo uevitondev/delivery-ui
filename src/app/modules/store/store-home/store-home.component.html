@@ -1,12 +1,22 @@
 <main>
-  <section class="store-home-section">
-    <div class="left">
-      <app-category-list [isSelectable]="true"
-        (selectedCategoryEvent)="filterProductsByCategory($event)"></app-category-list>
+  @if(hasStore){
+  <div class="container">
+
+    <div class="products-categories">
+      <h4>FILTRAR POR CATEGORIA</h4>
+      <app-category-list [isChecked]="true" (selectedCategoryEvent)="filterProductsByCategory($event)">
+      </app-category-list>
     </div>
 
-    <div class="right">
-      <app-product-list></app-product-list>
+    <div class="store-products">
+      <app-product-list [store]="store">
+      </app-product-list>
     </div>
-  </section>
+  </div>
+  }@else{
+  <div class="store-empty">
+    <p>NEHUMA LOJA SELECIONADA </p>
+    <button (click)="routerService.toStores()">VER LOJAS</button>
+  </div>
+  }
 </main>

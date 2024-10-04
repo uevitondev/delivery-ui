@@ -26,8 +26,9 @@ export class AuthResetPasswordComponent implements OnInit {
   emailForm!: FormGroup;
   passwordResetForm!: FormGroup;
 
-  emailFormSubmited = false;
-  passwordResetFormSubmited = false;
+
+  resetPasswordSuccess = false;
+  changePasswordSuccess = false;
   isLoading = false;
 
   ngOnInit(): void {
@@ -96,19 +97,19 @@ export class AuthResetPasswordComponent implements OnInit {
       return;
     }
 
-    this.emailFormSubmited = true;
     this.emailForm.disable();
     this.isLoading = true;
 
     this.authService.resetPassword(this.email?.value).subscribe({
       next: data => {
-        this.isLoading = false;
         this.toastService.success('Solicitção Enviada - Consulte seu email');
+        this.isLoading = false;
+        this.resetPasswordSuccess = true;         
       },
       error: e => {
-        this.emailForm.enable();
-        this.isLoading = false;
         this.toastService.error('erro ao socilicar alteração da senha');
+        this.emailForm.enable();
+        this.isLoading = false;        
         return;
       }
     });
@@ -122,9 +123,8 @@ export class AuthResetPasswordComponent implements OnInit {
       return;
     }
 
-    this.passwordResetForm.disable();
-    this.passwordResetFormSubmited = true;
     this.isLoading = true;
+    this.passwordResetForm.disable();  
 
 
     this.authService.changePassword({
@@ -132,14 +132,15 @@ export class AuthResetPasswordComponent implements OnInit {
       newPassword: this.newPassword?.value
     }).subscribe({
       next: data => {
-        this.isLoading = false
         this.toastService.success('Senha Alterada com sucesso!');
+        this.isLoading = false  
+        this.changePasswordSuccess = true;     
         this.routerService.toSignIn();
       },
       error: e => {
-        this.isLoading = false;
-        this.passwordResetForm.enable();
         this.toastService.error('Erro ao fazer alteração da senha!');
+        this.passwordResetForm.enable();
+        this.isLoading = false;      
         return;
       }
     });

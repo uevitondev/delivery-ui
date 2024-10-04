@@ -1,44 +1,54 @@
 <main>
-  <div class=" list-header">
-    <div>
-      <h3>Meus Endereços</h3>
-    </div>
-
-    @if(isAddable){
-    <div>
-      <button (click)="newAddress()"> + NOVO ENDEREÇO</button>
-    </div>
-    }
-  </div>
-
-  <div class="addresses">
-    @for(address of addresses; track address){
-    <div class="address">
-      <div class="left">
-        <span>{{address.name}} | {{address.phoneNumber}}</span>
-        <span>{{address.street}}, {{address.number}}, {{address.district}}, ({{address.city}} - {{address.uf}}) </span>
-        <span>{{address.complement}}</span>
-        <span>{{address.zipCode}}</span>
+  <div class="container">
+    <div class="header">
+      <div class="title">
+        <p>Meus Endereços</p>
       </div>
 
-      <div class="right">
-        @if(isSelectable) {
-        <button (click)="selectAddress(address)">Selecionar</button>
-        }
-        @if(isEditable){
-        <button (click)="editAddress(address)">Editar</button>
-        }
-        @if(isDeletable){
-        <button (click)="deleteAddress(address.id)">Apagar</button>
-        }
-
+      @if(isAddable){
+      <div class="addable">
+        <button (click)="routerService.toNewAddress()">NOVO ENDEREÇO</button>
       </div>
+      }
     </div>
-    }@empty {
-    <p>"VOCÊ NÃO TEM ENDEREÇOS CADASTRADOS"</p>
-    }
+
+    <div class="addresses">
+      @for(address of addresses; track address){
+      <div class="address">
+        <div class="wrapper">
+          <div class="details">
+            <p>{{address.name}} +55 {{address.phoneNumber}}</p>
+            <p>{{address.street}} - {{address.number}} </p>
+            <p>{{address.complement}}</p>
+            <p>{{address.district}}</p>
+            <p>{{address.city}} - {{address.uf}} - {{address.zipCode}}</p>
+          </div>
+
+          @if(isSelectable) {
+          <div class="select">
+            <input type="radio" name="radiogroup" [value]="address.id" (change)="selectAddress(address)">
+          </div>
+          }
+        </div>
+
+        <div class="actions">
+          @if(isEditable){
+          <div class="edit">
+            <button (click)="editAddress(address)">editar</button>
+          </div>
+          }
+
+          @if(isDeletable){
+          <div class="delete">
+            <button (click)="deleteAddress(address.id)">excluir</button>
+          </div>
+          }
+        </div>
+      </div>
+
+      }@empty {
+      <p>"VOCÊ NÃO TEM ENDEREÇOS CADASTRADOS"</p>
+      }
+    </div>
   </div>
-
-
-
 </main>

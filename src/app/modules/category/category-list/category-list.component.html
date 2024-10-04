@@ -1,10 +1,18 @@
-@if(isSelectable){
-<div class="category isSelectable" (click)="selectCategory(category)">TODAS CATEGORIAS</div>
-}
-@for(category of categories; track category.id){
-@if(isSelectable){
-<div class="category isSelectable" (click)="selectCategory(category)">{{category.name}}</div>
-}@else{
-<div class="category"> {{category.name}}</div>
-}
-}
+<main>
+  <div class="categories">
+    @for(category of categories; track category.id; let i = $index){
+    <div class="category">
+      @if(isChecked) {
+      <form [formGroup]="checkForm">
+        <div formArrayName="checkboxes">
+          <input type="checkbox" [formControlName]="i" (change)="onCheck(i)">
+        </div>
+      </form>
+      }
+      <p>{{category.name}}</p>
+    </div>
+    }@empty{
+    <p> "VAZIO" NÃO HÁ CATEGORIAS</p>
+    }
+  </div>
+</main>

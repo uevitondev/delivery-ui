@@ -1,35 +1,47 @@
 <main>
-  @if(!productsIsEmpty()){
-  <div class="products">
-    @for(product of products; track product.id){
-    <div class="product">
-      <a (click)="routerService.toProductDetails(product)">
-        <div class="product-img-wrapper">
-          <img class="product-img" ngSrc={{product.imgUrl}} fill title="product image" alt="product image" priority>
-        </div>
-        <div class="product-info">
-          <p class="product-name">{{product.name}}</p>
-          <p class="product-price">{{product.price | currency : 'BRL' }}</p>
-        </div>
-      </a>
-
-      <div class="addtocart-wrapper">
-        <button class="btn-addtocart" (click)="addToCart(product)">ADICIONAR AO CARRINHO</button>
-      </div>
+  <div class="container">
+    @if(isLoading){
+    <div class="product-list-loading">
+      <p>CARREGANDO PRODUTOS...</p>
     </div>
-    }
-    @empty {
-      <p> "VAZIO" NÃO HÁ PRODUTOS</p>
+    }@else{
+      @if(products.length > 0){
+        <div class="products">
+          @for(product of products; track product.id){
+          <div class="product">
+            <a (click)="routerService.toProductDetails(product)">
+              <div class="product-img-wrapper">
+                <img class="product-img" ngSrc={{product.imgUrl}} fill title="product image" alt="product image" priority>
+              </div>
+              <div class="product-info">
+                <p class="product-name">{{product.name}}</p>
+                <p class="product-price">{{product.price | currency : 'BRL' }}</p>
+              </div>
+            </a>
+    
+            <div class="addtocart-wrapper">
+              <button class="btn-addtocart" (click)="addToCart(product)">ADICIONAR AO CARRINHO</button>
+            </div>
+          </div>
+          }     
+        </div> 
+
+        <div class="paginator-container">
+          <app-my-paginator 
+            [currentPageNumber]="pageNumber" 
+            [currentPageSize]="pageSize" 
+            [pages]="pages"
+            (changePaginatorEvent)="setPagination($event)"
+          >
+          </app-my-paginator>
+        </div>
+  
+      }@else{
+        <div class="product-list-empty">
+          <p> "VAZIO" NÃO HÁ PRODUTOS</p>
+        </div>
+      }     
+
     }
   </div>
-
-  <div class="paginator-container">
-    <app-my-paginator [currentPageNumber]="pageNumber" [currentPageSize]="pageSize" [pages]="pages"
-      (changePaginatorEvent)="setPagination($event)">
-    </app-my-paginator>
-  </div>
-
-  }@else {
-    <p> "VAZIO" NÃO HÁ PRODUTOS</p>
-  }
 </main>

@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AddressNewComponent } from './modules/address/address-new/address-new.component';
 import { AuthPageComponent } from './modules/auth/auth-page/auth-page.component';
 import { CartCheckoutComponent } from './modules/cart/cart-checkout/cart-checkout.component';
 import { CartComponent } from './modules/cart/cart/cart.component';
@@ -20,10 +21,6 @@ export const routes: Routes = [
   },
   {
     path: "home",
-    component: HomeComponent
-  },
-  {
-    path: "home/:storeName",
     component: HomeComponent
   },
   {
@@ -55,13 +52,17 @@ export const routes: Routes = [
     ],
   },
   {
+    path: "address/new",
+    component: AddressNewComponent
+  },
+  {
     path: "auth/signin",
     component: AuthPageComponent
   },
   {
     path: "auth/reset-password",
     component: AuthPageComponent
-  }, 
+  },
   {
     path: "auth/signup",
     component: AuthPageComponent
@@ -69,7 +70,7 @@ export const routes: Routes = [
   {
     path: "auth/verification/:email",
     component: AuthPageComponent
-  },  
+  },
   {
     path: "forbidden",
     component: ForbiddenComponent

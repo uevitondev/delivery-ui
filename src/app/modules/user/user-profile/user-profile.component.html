@@ -11,16 +11,22 @@
         <form [formGroup]="userProfileForm">
 
             <div>
-                <label for="fullName">Nome: </label>
-                <input id="fullName" type="text" formControlName="fullName">
+                <label for="firstName">Nome: </label>
+                <input id="firstName" type="text" formControlName="firstName">
             </div>
+
+            <div>
+                <label for="lastName">Sobrenome: </label>
+                <input id="lastName" type="text" formControlName="lastName">
+            </div>
+            <div>
+                Email: {{ userProfile.email }} 
+           </div>
             <div>
                 Número de Telefone: {{ userProfile.phoneNumber }}
             </div>
 
-            <div>
-                 Email: {{ userProfile.username }} 
-            </div>
+         
 
             <div>
                 <button>Salvar</button>

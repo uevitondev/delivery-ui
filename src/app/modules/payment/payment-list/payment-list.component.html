@@ -1,0 +1,12 @@
+<main>
+  <div class="payments">
+    @for(payment of paymentMethods; track payment){
+    <div class="payment">
+      <p>{{payment}}</p>
+      <input type="radio" name="radiogroup" [value]="" (change)="selectPaymentMethod(payment)">
+    </div>
+    }@empty{
+    <p>Não há formas de pagamento para listar</p>
+    }
+  </div>
+</main>

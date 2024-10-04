@@ -7,20 +7,20 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
 import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-address-form',
+  selector: 'app-address-edit',
   standalone: true,
   imports: [
     ReactiveFormsModule,
     InputFormComponent,
     MatDialogModule
   ],
-  templateUrl: './address-form.component.html',
-  styleUrl: './address-form.component.scss'
+  templateUrl: './address-edit.component.html',
+  styleUrl: './address-edit.component.scss'
 })
 
-export class AddressFormComponent implements OnInit {
+export class AddressEditComponent implements OnInit {
 
-  dialogRef = inject(MatDialogRef<AddressFormComponent>);
+  dialogRef = inject(MatDialogRef<AddressEditComponent>);
   data: Address = inject(MAT_DIALOG_DATA)
   addressService = inject(AddressService);
   addressForm!: FormGroup;

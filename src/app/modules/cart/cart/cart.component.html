@@ -1,66 +1,44 @@
 <main>
-  @if(!cartIsEmpty()){
-  <div class="left">
-    <div class="cart-items">
-      @for(cartitem of cartItems; track cartitem){
-      <div class="item">
-        <div class="item-top">
-          <div class="item-image">
-            <img src="{{cartitem.product.imgUrl}}" alt="product icon">
-          </div>
-          <div class="item-details">
-            <h3 class="item-name">{{ cartitem.product.name }}</h3>
-            <p class="item-price">Preço unitário: {{ cartitem.product.price | currency : 'BRL' }}</p>
-          </div>
-          <div class="item-quantity">
-            <button class="quantity-button" (click)="cartService.decreaseCartItemQuantity(cartitem)">-</button>
-            <p class="quantity">{{ cartitem.quantity }}</p>
-            <button class="quantity-button" (click)="cartService.increaseCartItemQuantity(cartitem)">+</button>
-          </div>
-          <div class="item-subtotal">
-            <p class="subtotal">subtotal: {{cartService.getCartItemSubtotal(cartitem) | currency : 'BRL' }}</p>
-          </div>
-          <div class="item-actions">
-            <button class="remove-button" mat-icon-button (click)="cartService.removeCartItem(cartitem)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </div>
-        <div class="item-note">
-          <p>alguma nota para esse item?</p>
-          <button (click)="addOrEditNote(cartitem)">ADICIONAR / EDITAR</button>
+  @if(cartItems$ | async; as cartItems){
+  @if(cartItems.length > 0){
+  <div class="cart-flex-1">
+    <div class="cart">
+      <div class="cart-header">
+        <p>Carrinho de Compras</p>
+        <div class="cart-header-actions">
+          <button (click)="cartService.clearCart()">LIMPAR CARRINHO</button>
+          <button (click)="routerService.toHome()">COMPRAR MAIS</button>
         </div>
       </div>
-      } @empty {
-      <div class="cart-empty ">
-        <span> "VAZIO" ADICIONE PRODUTOS</span>
-        <div class="btn-container">
-          <button (click)="routerService.toHome()">ADICIONAR AGORA</button>
-        </div>
-      </div>
-      }
+
+      <app-cartitem-list
+        [showEditQuantity]="true"
+        [showRemove]="true"
+      >
+      </app-cartitem-list>
+
     </div>
   </div>
 
-  <div class="right">
-    <div class="cart-details">
-      <div>
-        <h1>Total: <strong>{{ cartService.getCartTotal() | currency : 'BRL' }}</strong></h1>
+  <div class="cart-resume">
+    <div class="resume">
+      <div class="resume-details">
+        <span class="resume-title">Resumo</span>
+        <span>Total: <strong>{{ cartService.getTotal() | currency : 'BRL' }}</strong></span>
       </div>
-      <div class="btn-container">
-        <button (click)="cartService.clearCart()">LIMPAR CARRINHO</button>
-        <button (click)="routerService.toHome()">CONTINUAR COMPRANDO</button>
-        <button (click)="routerService.toCheckout()">IR PARA CHECKOUT</button>
+      <div class="resume-actions">
+        <button (click)="routerService.toCheckout()">CONTINUAR</button>
       </div>
     </div>
   </div>
-  }@else {
-  <div class="cart-empty ">
-    <span> "VAZIO" ADICIONE PRODUTOS</span>
+  }@else{
+  <div class="cart-empty">
+    <mat-icon class="cart-icon">shopping_cart</mat-icon>
+    <span> "SEU CARRINHO ESTÁ VAZIO"</span>
     <div class="btn-container">
-      <button (click)="routerService.toHome()">ADICIONAR AGORA</button>
+      <button (click)="routerService.toHome()">IR PARA PRODUTOS...</button>
     </div>
   </div>
   }
-
+  }
 </main>

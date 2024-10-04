@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { OrderCustomerResponse } from '../models/order-customer-response';
+import { OrderDetails } from '../models/order-details';
 import { OrderResponse } from '../models/order-response';
 import { ShoppingCartRequest } from '../models/shopping-cart-request';
 
@@ -22,8 +22,8 @@ export class OrderService {
     return this.httpClient.get<OrderResponse[]>(`${this.ENV.API_URL}/orders/customer`);
   }
 
-  getByIdWithOrderItems(orderId: string): Observable<OrderCustomerResponse> {
-    return this.httpClient.get<OrderCustomerResponse>(`${this.ENV.API_URL}/orders/${orderId}/customer`);
+  getByIdWithOrderItems(orderId: string): Observable<OrderDetails> {
+    return this.httpClient.get<OrderDetails>(`${this.ENV.API_URL}/orders/${orderId}/customer`);
   }
 
 

@@ -1,0 +1,19 @@
+main{
+  padding: var(--padding);
+}
+
+.payments {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--padding);
+}
+
+.payment {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}

@@ -31,17 +31,17 @@
 
       <div class="order-customer-data">
         <h3>Cliente:</h3>
-        <span>{{order.customerData.firstName}} {{order.customerData.lastName}}</span>
-        <span>Phone Number: {{order.customerData.phoneNumber}}</span>
+        <span>{{order.customer.name}}</span>
+        <span>Phone Number: {{order.customer.phoneNumber}}</span>
       </div>
 
       <div class="order-store-data">
         <h3>Loja:</h3>
         <div>
-          <img src={{order.storeData.logoUrl}} alt="">
-          <span> {{order.storeData.type}} - {{order.storeData.name}}</span>
+          <img src={{order.store.logoUrl}} alt="">
+          <span> {{order.store.type}} - {{order.store.name}}</span>
         </div>
-        <span>Phone Number: {{order.storeData.phoneNumber}}</span>
+        <span>Phone Number: {{order.store.phoneNumber}}</span>
       </div>
 
       <div class="order-delivery-address">

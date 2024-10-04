@@ -22,18 +22,7 @@
         <button class="btn-quantity" (click)="incrementProductQuantity()">+</button>
       </div>
 
-      <form [formGroup]="noteForm" class="note-form">
-        <p>alguma nota pra esse item?</p>
-        <textarea 
-          maxlength={{noteMaxLength}}
-          formControlName="note">
-        </textarea>
-      </form>
-
-
-
-      <button class="btn-add-cart" (click)="addToCart(product)">ADICIONAR AO CARRINHO</button>
-
+      <button class="btn-add-cart" (click)="addToCart(product)">COMPRAR AGORA</button>
 
     </div>
   </div>

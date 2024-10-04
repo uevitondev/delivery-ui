@@ -1,7 +1,7 @@
+import { Location } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AuthRequest } from '../../../core/models/signin-request';
 import { AuthService } from '../../../core/services/auth.service';
 import { RouterService } from '../../../core/services/router.service';
 import { StorageService } from '../../../core/services/storage.service';
@@ -19,6 +19,8 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
   styleUrl: './auth-signin.component.scss'
 })
 export class AuthSignInComponent implements OnInit {
+
+  location = inject(Location);
   routerService = inject(RouterService);
   authService = inject(AuthService);
   storageService = inject(StorageService);
@@ -28,6 +30,10 @@ export class AuthSignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.initSignInForm();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   initSignInForm() {
@@ -57,8 +63,8 @@ export class AuthSignInComponent implements OnInit {
     }).subscribe({
       next: autResponse => {
         this.authService.setAuth(autResponse);
-        this.toastService.success('Login bem sucedido!');
-        this.routerService.toHome();
+        this.toastService.success('LOGIN BEM SUCEDIDO');
+        this.goBack();
       },
       error: e => {
         if (e.status == 401) {

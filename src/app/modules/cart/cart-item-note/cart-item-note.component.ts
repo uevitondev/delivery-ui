@@ -1,9 +1,10 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { CartItem } from '../../../core/models/cart-item';
 import { CartService } from '../../../core/services/cart.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart-item-note',
@@ -17,41 +18,29 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
   styleUrl: './cart-item-note.component.scss'
 })
 export class CartItemNoteComponent implements OnInit {
+  @Input() cartItem!: CartItem;
 
-  dialogRef = inject(MatDialogRef<CartItemNoteComponent>);
-  data: CartItem = inject(MAT_DIALOG_DATA)
-  @Output() noteItemEvent = new EventEmitter<string>();
-
+  toastService = inject(ToastrService);
   cartService = inject(CartService);
   noteForm!: FormGroup;
-  noteMaxLength = 60;
-  noteIsValid = true;
+  maxLengthNote: number = 120;
 
   ngOnInit(): void {
+    this.initNoteForm();
+  }
+
+  initNoteForm() {
     this.noteForm = new FormGroup({
-      note: new FormControl(this.data.note, [Validators.required, Validators.maxLength(this.noteMaxLength)])
+      note: new FormControl(this.cartItem.note, [Validators.required, Validators.maxLength(this.maxLengthNote)])
     });
   }
 
-  handleValueChange(event: any) {
-    console.log(event);
+  saveNote() {
     if (this.noteForm.invalid) {
-      this.noteIsValid = false;
-      console.log("nota invalida: " + this.noteForm.value.note);
       return;
     }
-
-    this.noteItemEvent.emit(this.noteForm.value.note);
-    console.log("nota valida: " + this.noteForm.value.note);
-  }
-
-  close(): void {
-    this.dialogRef.close(false);
-  }
-
-  save() {
-    this.cartService.addNote(this.data, this.noteForm.value.note);
-    this.dialogRef.close(true);
+    this.cartService.addNoteToCartItem(this.cartItem, this.noteForm.value.note);
+    this.toastService.info("NOTA SALVA");
   }
 
 }

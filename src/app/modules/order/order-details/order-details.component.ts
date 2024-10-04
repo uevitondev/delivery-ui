@@ -1,10 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { OrderCustomerResponse } from '../../../core/models/order-customer-response';
+import { OrderDetails } from '../../../core/models/order-details';
 import { OrderService } from '../../../core/services/order.service';
 import { StorageService } from '../../../core/services/storage.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-order-details',
@@ -21,7 +21,7 @@ export class OrderDetailsComponent implements OnInit {
   storageService = inject(StorageService);
   orderService = inject(OrderService);
 
-  order!: OrderCustomerResponse;
+  order!: OrderDetails;
 
   ngOnInit(): void {
     let orderId = this.activatedRoute.snapshot.params['orderId'];

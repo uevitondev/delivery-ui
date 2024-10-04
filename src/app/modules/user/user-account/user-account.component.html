@@ -1,14 +1,37 @@
 <main>
 
-  <div class="left">
-    <div class="left-container">
-      <div class="account-option" (click)="viewUserProfile()">Perfil</div>
-      <div class="account-option" (click)="viewUserAddresses()">Endereços</div>
-    </div>
-  </div>
 
-  <div class="right">
-    <div class="right-container">
+
+  <div class="content">
+    <div class="lateral-menu" [class.ismenuopen]="isMenuOpen" [class.ismenuclosed]="!isMenuOpen">
+
+      <div class="menu-options">
+        <a class="view-btn" (click)="viewUserProfile()">Perfil</a>
+        <a class="view-btn" (click)="viewUserAddresses()">Endereços</a>
+        <a class="view-btn" (click)="logout()">
+          <div class="exit_to-app">
+            <mat-icon>exit_to_app</mat-icon>
+            <p>SAIR</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="toggle-menu">
+        <button class="btn-toggle-menu" (click)="toggleMenu()">
+          <span>
+            @if(isMenuOpen){
+            <mat-icon>close</mat-icon>
+            }@else{
+            <mat-icon>menu</mat-icon>
+            }
+          </span>
+        </button>
+      </div>
+
+    </div>
+
+
+    <div class="right">
       <div class="active-view">
         @if( activeView === 'user-profile' ){
         <app-user-profile></app-user-profile>
@@ -18,6 +41,8 @@
         </app-address-list>
         }
       </div>
+
     </div>
   </div>
+
 </main>

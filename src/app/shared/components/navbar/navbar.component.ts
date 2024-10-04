@@ -15,20 +15,17 @@ import { StorageService } from '../../../core/services/storage.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
-export class NavBarComponent implements OnInit {
-
-  isMenuOpen = false;
+export class NavBarComponent {
 
   ENV = environment;
   authService = inject(AuthService);
   cartService = inject(CartService);
   storageService = inject(StorageService);
   routerService = inject(RouterService);
+
   icon: string = 'dark_mode';
   userImage!: string;
-
-  ngOnInit(): void {
-  }
+  isMenuOpen = false;
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;

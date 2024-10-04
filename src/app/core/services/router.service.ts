@@ -28,12 +28,12 @@ export class RouterService {
     this.router.navigate(["home"]);
   }
 
-  toHomeStore(storeName: string) {
-    this.router.navigate(['home/', storeName]);
-  }
-
   toStores() {
     this.router.navigate(["stores"]);
+  }
+
+  toNewAddress() {
+    this.router.navigate(["address/new"]);
   }
 
   toProductDetails(product: Product) {
@@ -46,6 +46,10 @@ export class RouterService {
 
   toCheckout() {
     this.router.navigate(["cart/checkout"]);
+  }
+
+  toCheckoutAddresses() {
+    this.router.navigate(["cart/checkout/addresses"]);
   }
 
   toOrders() {

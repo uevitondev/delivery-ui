@@ -23,7 +23,7 @@ export class AuthSignUpComponent implements OnInit {
   toastService = inject(ToastrService);
 
   signupForm!: FormGroup;
-  isloading: boolean = false;
+  isLoading: boolean = false;
 
   ngOnInit(): void {
     this.initSignupForm();
@@ -71,7 +71,7 @@ export class AuthSignUpComponent implements OnInit {
       return;
     }
 
-    this.isloading = true;
+    this.isLoading = true;
     this.signupForm.disable();
 
     this.authService.signup({
@@ -81,12 +81,12 @@ export class AuthSignUpComponent implements OnInit {
       password: this.signupForm.controls['password'].value,
     }).subscribe({
       next: data => {
-        this.isloading = false;
+        this.isLoading = false;
         this.toastService.success('conta criada com sucesso');
         this.routerService.toSignUpVerification(this.signupForm.controls['email'].value);
       },
       error: e => {
-        this.isloading = false;
+        this.isLoading = false;
         this.signupForm.enable();
         this.toastService.error('erro ao criar conta');
         return;

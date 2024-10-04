@@ -7,6 +7,7 @@ import { Product } from '../../../core/models/product';
 import { CartService } from '../../../core/services/cart.service';
 import { ProductService } from '../../../core/services/product.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
+import { RouterService } from '../../../core/services/router.service';
 
 @Component({
   selector: 'app-product-details',
@@ -21,49 +22,31 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
   styleUrl: './product-details.component.scss'
 })
 export class ProductDetailsComponent implements OnInit {
+
   toastService = inject(ToastrService);
+  routerService = inject(RouterService);
   activatedRoute = inject(ActivatedRoute);
   productService = inject(ProductService);
   cartService = inject(CartService);
-  noteForm!: FormGroup;
-  noteMaxLength: number = 60;
+
   product!: Product;
   productQuantity: number = 1;
 
 
   ngOnInit(): void {
     let productId = this.activatedRoute.snapshot.params['productId'];
-    this.loadProduct(productId);
-    this.noteForm = new FormGroup({
-      note: new FormControl('', [Validators.required, Validators.maxLength(this.noteMaxLength)])
-    });
-
+    this.loadProduct(productId); 
   }
 
   loadProduct(productId: string) {
     this.productService.getById(productId).subscribe({
       next: (productDto) => {
         this.product = productDto;
-        this.getNoteIfIsInCart(this.product);
       },
       error: (error) => {
         this.toastService.error("erro ao carregar dados do produto");
       }
     });
-  }
-
-  getNoteIfIsInCart(product: Product) {
-    const cartItem = this.cartService.getCartItem({
-      product: product,
-      quantity: 1,
-      note: ''
-    });
-
-    if (cartItem) {
-      this.noteForm.patchValue({
-        note: cartItem.note
-      });
-    }
   }
 
 
@@ -83,10 +66,9 @@ export class ProductDetailsComponent implements OnInit {
     this.cartService.addToCart({
       product: product,
       quantity: this.productQuantity,
-      note: this.noteForm.value.note
+      note: ''
     });
-
-    this.toastService.info("Adicionado ao carrinho!")
+    this.routerService.toCart();
   }
 
 

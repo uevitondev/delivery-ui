@@ -37,7 +37,10 @@ export class UserProfileComponent implements OnInit {
     }
 
     this.userProfileForm = new FormGroup({
-      fullName: new FormControl(''),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      email: new FormControl(''),
+      phoneNumber: new FormControl(''),
     });
 
     this.loadUserAccountProfile();
@@ -48,9 +51,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserProfile().subscribe({
       next: (userProfile) => {
         this.userProfile = userProfile;
-        this.userProfileForm.patchValue({
-          fullName: this.userProfile.fullName
-        })
+        this.userProfileForm.patchValue(userProfile);
       },
       error: (e) => {
         this.toastService.error("Erro ao listar dados!");

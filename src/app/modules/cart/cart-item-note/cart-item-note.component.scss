@@ -1,40 +1,48 @@
-:host {
-  display: block;
+main {
+  padding: var(--padding);
 }
 
-main {
+.container {
   display: flex;
   flex-direction: column;
+  gap: 8px;
   padding: var(--padding);
-  background-color: var(--primary-color);
 }
 
 form {
-  padding: var(--padding);
-  box-sizing: border-box;
+  position: relative;
 }
 
 textarea {
-  max-width: 400px;
-  max-height: 250px;
-  border: none;
-  outline: none;
-  padding: var(--padding);
-  background-color: var(--secondary-color);
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  margin: 10px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1.3px;
+  border-radius: 5px;
 }
 
-.btn-wrapper {
+textarea:focus {
+  outline: 1px solid rgb(14, 51, 14);
+}
+
+.count {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+
+.actions {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
+  justify-content: flex-end;
 }
 
 button {
-  border: none;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
+  background: white;
+  border: 1px solid gray;
   cursor: pointer;
-  padding: var(--padding);
-  border-radius: var(--border-radius);
-  background-color: var(--secondary-color);
 }

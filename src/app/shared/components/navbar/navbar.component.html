@@ -1,4 +1,13 @@
 <nav class="navbar">
+  <button class="nav-button menu-toggle" (click)="toggleMenu()">
+    <span>
+      @if(isMenuOpen){
+      <mat-icon>close</mat-icon>
+      }@else{
+      <mat-icon>menu</mat-icon>
+      }
+    </span>
+  </button>
   <span class="navbar-brand" (click)="routerService.toHome(); isMenuOpen ? toggleMenu() : null">Delivery App</span>
 
   <div class="spacer"></div>
@@ -7,48 +16,34 @@
     <button class="nav-button" (click)="routerService.toHome();  isMenuOpen ? toggleMenu() : null">Home</button>
     <button class="nav-button" (click)="routerService.toStores();  isMenuOpen ? toggleMenu() : null">Lojas</button>
     @if(authService.isLogged()) {
-    <button class="nav-button" (click)="routerService.toOrders();  isMenuOpen ? toggleMenu() : null">Meus Pedidos</button>
-    <button class="nav-button" (click)="routerService.toAccount();  isMenuOpen ? toggleMenu() : null"> 
+    <button class="nav-button" (click)="routerService.toOrders();  isMenuOpen ? toggleMenu() : null">Meus
+      Pedidos</button>
+    <button class="nav-button" (click)="routerService.toAccount();  isMenuOpen ? toggleMenu() : null">
       <span class="nav-button-wrapper">
         <mat-icon>account_circle</mat-icon>
         {{ authService.getAuthName() }}
-      </span>      
-    </button>
-    <button class="nav-button" (click)="logout();  isMenuOpen ? toggleMenu() : null">
-      <span class="nav-button-wrapper">
-        <mat-icon>exit_to_app</mat-icon>
-        Sair
-      </span>    
+      </span>
     </button>
     } @else {
     <button class="nav-button" (click)="routerService.toSignIn(); isMenuOpen ? toggleMenu() : null">Login</button>
-    <button class="nav-button" (click)="routerService.toSignUp();  isMenuOpen ? toggleMenu() : null">Criar Conta</button>
+    <button class="nav-button" (click)="routerService.toSignUp();  isMenuOpen ? toggleMenu() : null">Criar
+      Conta</button>
     }
   </div>
 
-  <button class="nav-button" (click)="routerService.toCart()">
-    <span class="nav-button-wrapper cart-count">
-      <mat-icon>shopping_cart</mat-icon>
-      @if (cartService.getCartCount(); as count) {
-       <span class="count"> {{ count > 0 ? count : "" }}</span>
-        }
-    </span>      
-  </button>
+
 
   <button class="nav-button" (click)="toggleTheme()">
     <span class="nav-button-wrapper">
       <mat-icon>{{icon}}</mat-icon>
-    </span>   
+    </span>
   </button>
 
-  <button class="nav-button menu-toggle" (click)="toggleMenu()">
-    <span>
-      @if(isMenuOpen){
-        <mat-icon>close</mat-icon>
-        }@else{
-        <mat-icon>menu</mat-icon>
-        }
-    </span>    
+  <button class="nav-button" (click)="routerService.toCart()">
+    <span class="nav-button-wrapper cart-count">
+      <mat-icon>shopping_cart</mat-icon>
+      <span class="count">{{cartService.getCount()}}</span>
+    </span>
   </button>
 
 

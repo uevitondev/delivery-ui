@@ -1,11 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Address } from '../../../core/models/address';
 import { AddressService } from '../../../core/services/address.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { RouterService } from '../../../core/services/router.service';
-import { AddressFormComponent } from '../address-form/address-form.component';
 
 @Component({
   selector: 'app-address-list',
@@ -23,22 +22,30 @@ export class AddressListComponent implements OnInit {
 
   @Output() selectedAddressEvent = new EventEmitter<Address>();
 
-  dialog = inject(MatDialog);
   toastService = inject(ToastrService);
   routerService = inject(RouterService);
   authService = inject(AuthService);
   addressService = inject(AddressService);
+  location = inject(Location);
 
   addresses: Address[] = [];
+  defaultAddress!: Address;
 
   ngOnInit(): void {
     this.loadAddresses();
+  }
+
+  goBack() {
+    this.location.back();
   }
 
   loadAddresses(): void {
     this.addressService.getAllByUser().subscribe({
       next: (addresses) => {
         this.addresses = addresses;
+        if (this.addresses.length != 0) {
+          this.defaultAddress = this.addresses[0];
+        }
       },
       error: (e) => {
         this.toastService.error("Erro ao listar endereços!");
@@ -48,25 +55,16 @@ export class AddressListComponent implements OnInit {
 
   newAddress() { }
 
+  editAddress(address: Address) { }
+
+
   selectAddress(address: Address): void {
     this.selectedAddressEvent.emit(address);
   }
 
-  editAddress(address: any): void {
-    const dialogRef = this.dialog.open(AddressFormComponent, {
-      width: '50%',
-      data: address
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.loadAddresses();
-      }
-    });
-  }
 
   deleteAddress(addressId: string): void {
-    this.addressService.deleteAddress(addressId).subscribe(() => {
+    this.addressService.deleteAddressById(addressId).subscribe(() => {
       this.loadAddresses();
     });
   }

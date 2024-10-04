@@ -22,7 +22,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     request = request.clone({
       withCredentials: true
     });
@@ -50,7 +49,11 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         return throwError(() => error);
       })
     );
+
   }
+
+
+
 
   private handle401UnauthorizedError(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.authService.refreshToken().pipe(

@@ -1,53 +1,33 @@
 import { CommonModule, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ToastrService } from 'ngx-toastr';
-import { CartItem } from '../../../core/models/cart-item';
 import { CartService } from '../../../core/services/cart.service';
 import { OrderService } from '../../../core/services/order.service';
 import { RouterService } from '../../../core/services/router.service';
 import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.component';
+import { CartitemListComponent } from '../cartitem-list/cartitem-list.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
   imports: [
+    CommonModule,
     MatIconModule,
     NgIf,
     MatMenuModule,
-    CartItemNoteComponent,
-    CommonModule
+    CartitemListComponent,
+    CartItemNoteComponent,   
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
-export class CartComponent implements OnInit {
-  dialog = inject(MatDialog);
+export class CartComponent {
   routerService = inject(RouterService);
   toastService = inject(ToastrService);
   orderService = inject(OrderService);
   cartService = inject(CartService);
-  cartItems: CartItem[] = [];
-
-
-  ngOnInit(): void {
-    this.cartService.getCart().subscribe(cart => {
-      this.cartItems = cart.cartItems;
-    });
-  }
-
-  addOrEditNote(cartItem: CartItem) {
-    this.dialog.open(CartItemNoteComponent, {
-      width: 'auto',
-      data: cartItem
-    });
-  }
-
-  cartIsEmpty(){
-    return Array.isArray(this.cartItems) && this.cartItems.length === 0
-  }
-
+  cartItems$ = this.cartService.cartItems.asObservable();
 
 }

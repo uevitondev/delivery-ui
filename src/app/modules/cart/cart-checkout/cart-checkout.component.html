@@ -1,89 +1,97 @@
 <main>
 
-    <div class="left">
-        <div class="left-container">
-            <h2>FINALIZAR PEDIDO:</h2>
-            <div class="payment-method-list">
-                <h3>selecionar forma de pagamento:</h3>
-                @for(paymentMethod of paymentMethods; track paymentMethod){
-                <div class="method-payment">
-                    <p>{{paymentMethod}}</p>
-                    <button (click)="selectPaymentMethod(paymentMethod)">Selecionar</button>
+    @if(authService.isLogged()){
+    <div class="checkout-flex-01">
+        <div class="checkout">
+            <h2>CHECKOUT DE PEDIDO</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h3>Endereço de Entrega</h3>
+                    <button (click)="modalAddresses.toggle()">Alterar</button>
                 </div>
+                <app-modal #modalAddresses>
+                    <app-address-list 
+                    [isAddable]="true" 
+                    [isSelectable]="true"
+                    (selectedAddressEvent)=selectAddress($event)
+                    >
+                    </app-address-list>
+                </app-modal>
+                @if(checkoutAddress){
+                <div class="address">
+                    <p>{{checkoutAddress.name}} | +55 {{checkoutAddress.phoneNumber}}</p>
+                    <p>{{checkoutAddress.street}} - {{checkoutAddress.number}} </p>
+                    <p>{{checkoutAddress.complement}}</p>
+                    <p>{{checkoutAddress.district}}</p>
+                    <p>{{checkoutAddress.city}} - {{checkoutAddress.uf}} - {{checkoutAddress.zipCode}}</p>
+                </div>
+                }@else{
+                <p>selecione um endereço para entrega</p>
                 }
             </div>
 
-            @if(authService.isLogged()){
-            <app-address-list [isSelectable]="true" (selectedAddressEvent)="selectAddress($event)">
-            </app-address-list>
-            }
+            <div class="card">
+                <div class="card-header">
+                    <h3>Forma de Pagamento</h3>
+                    <button (click)="modalPayments.toggle()">Alterar</button>
+                </div>
+                <app-modal #modalPayments>
+                    <app-payment-list 
+                    (selectedPaymentMethodEvent)=selectPaymentMethod($event)
+                    >
+                    </app-payment-list>
+                </app-modal>
+                @if(checkoutPaymentMethod){
+                <div class="payment">
+                    {{checkoutPaymentMethod}}
+                </div>
+                }@else{
+                <p>selecione uma forma de pagamento</p>
+                }
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Items do Carrinho</h3>
+                </div>
+
+                <app-cartitem-list 
+                    [showQuantity]="true" 
+                    [showNote]="true"
+                >
+                </app-cartitem-list>
+            </div>
 
         </div>
     </div>
 
-    <div class="right">
-        <div class="right-container">
-            <h2>RESUMO DO PEDIDO:</h2>
-            <div class="cart-items">
-                <h4>items:</h4>
-                @for(cartitem of cartItems; track cartitem.product.id){
-                <div class="cartitem">
-                    <div class="cartitem-header">
-                        <div class="cartitem-left">
-                            <p>{{cartitem.quantity}}x </p>
-                            <p> {{cartitem.product.price | currency : 'BRL' }}</p>
-                            <p>{{cartitem.product.name}}</p>
-                        </div>
-                        <div class="cartitem-right">
-                            <p>subtotal: {{ cartService.getCartItemSubtotal(cartitem) | currency : 'BRL' }} </p>
-                        </div>
-                    </div>
-                    <div class="note">
-                        <p>nota: <strong>{{ cartitem.note !== "" ? cartitem.note : "" }}</strong> </p>
-                    </div>
-                </div>
-                <div class="divider"></div>
-                }
-            </div>
-          
 
-            <div class="selected-payment">
-                @if(selectedPaymentMethod){
-                <div>
-                    <h4>forma de pagamento:</h4>
-                    <p>{{selectedPaymentMethod}}</p>
-                </div>
+    <div class="checkout-flex-02">
+        <div class="resume card">
+            <div class="resume-details">
+                <h2 class="resume-title">RESUMO</h2>
+                <p>Total: <strong>{{ cartService.getTotal() | currency : 'BRL' }}</strong></p>
+            </div>
+            <div class="resume-actions">
+                @if(isLoading){
+                    <button class="btn btn-primary" [disabled]="isLoading" type="button" disabled>
+                      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                      <span class="sr-only">PROCESSANDO PEDIDO...AGUARDE!</span>
+                    </button>
                 }@else{
-                <div class="warn">
-                    <p>(Atenção) selecione a forma de pagamento para seu pedido!</p>
-                </div>
-                }
-            </div>
-            <div class="selected-address">
-                @if( selectedAdress){
-                <div>
-                    <h4>endereço de entrega:</h4>
-                    <div class="address">
-                        <span>{{ selectedAdress.street}}, {{ selectedAdress.number}}, {{ selectedAdress.district}},
-                            ({{ selectedAdress.city}} -
-                            {{ selectedAdress.uf}}) </span>
-                        <span>{{ selectedAdress.complement}}</span>
-                        <span>{{ selectedAdress.zipCode}}</span>
-                    </div>
-                </div>
-                }@else{
-                <div class="warn">
-                    <p>(Atenção) selecione o endereço para entrega do seu pedido!</p>
-                </div>
-                }
-            </div>
-
-            <div class="sumary">
-                <span> Total: {{cartService.getCartTotal() | currency : 'BRL' }}</span>
-            </div>
-            <div class="checkout">
-                <button (click)="saveOrder()">FAZER PEDIDO</button>
+                    <button [disabled]="checkoutIsInvalid()" (click)="saveOrder()">FAZER PEDIDO</button>
+                }                    
             </div>
         </div>
     </div>
+
+
+
+
+    }@else{
+    <div class="no-auth">
+        <p>LOGIN NECESSÁRIO</p>
+        <button (click)="routerService.toSignIn()">LOGIN</button>
+    </div>
+    }
 </main>

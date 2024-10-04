@@ -1,10 +1,8 @@
-import { Address } from "./address"
 import { CartItem } from "./cart-item"
-import { StoreResponse } from "./store-response"
 
 export interface ShoppingCartRequest {
-  address: Address,
-  store: StoreResponse,
+  addressId: string,
+  storeId: string,
   paymentMethod: string,
   cartItems: CartItem[]
 }

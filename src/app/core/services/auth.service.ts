@@ -43,7 +43,7 @@ export class AuthService {
 
   getAuthName(): string | null {
     const auth = this.getAuth();
-    return auth ? auth.authName : null;
+    return auth ? auth.name : null;
   }
 
   signin(signinRequest: AuthRequest): Observable<AuthResponse> {
