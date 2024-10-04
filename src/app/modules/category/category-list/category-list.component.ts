@@ -44,7 +44,6 @@ export class CategoryListComponent implements OnInit {
   }
 
   onCheck(index: number) {
-    console.log("Inicio OnCheck", this.checkboxesArray.value);
     this.checkboxesArray.controls.forEach((control, i) => {
       if (control.value === true && index == i) {
         control.setValue(true);
@@ -52,8 +51,6 @@ export class CategoryListComponent implements OnInit {
         control.setValue(false);
       }
     });
-
-    console.log("Final OnCheck", this.checkboxesArray.value);
     let hasChecked = false;
     this.checkboxesArray.value.forEach((checkbox: boolean) => {
       if (checkbox === true) {

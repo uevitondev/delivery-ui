@@ -29,10 +29,8 @@ export class CartService {
 
   addToCart(item: CartItem) {
     const cartItems = this.cartItems.getValue();
-    const existingItem = this.existingInCart(item);
-    
-
-    if (existingItem) {
+    let cartItem = cartItems.find(cartItem => cartItem.product.id === item.product.id);
+    if (cartItem) {
       this.increaseCartItemQuantity(item);
     } else {
       cartItems.push({
@@ -40,30 +38,23 @@ export class CartService {
         quantity: item.quantity,
         note: item.note
       });
+      this.updateCart(cartItems);
     }
-    this.updateCart(cartItems);
   }
 
   addNoteToCartItem(item: CartItem, note: string) {
     const cartItems = this.cartItems.getValue();
     let cartItem = cartItems.find(cartItem => cartItem.product.id === item.product.id);
-    if(cartItem){
+    if (cartItem) {
       cartItem.note = note;
       this.updateCart(cartItems);
-    }   
-
-  }
-
-  existingInCart(item: CartItem) {
-    const cartItems = this.cartItems.getValue();
-    return cartItems.find(cartItem => cartItem.product.id === item.product.id) ? true : false;
+    }
   }
 
   getCartItem(item: CartItem) {
     const cartItems = this.cartItems.getValue();
     return cartItems.find(cartItem => cartItem.product.id === item.product.id);
   }
-
 
   increaseCartItemQuantity(item: CartItem) {
     item.quantity++;
