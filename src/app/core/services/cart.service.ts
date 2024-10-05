@@ -31,7 +31,7 @@ export class CartService {
   }
 
   cartCount() {
-    return this.cart.getValue().reduce((count, item) => count + item.quantity, 0);
+    return this.cart.value.reduce((count, item) => count + item.quantity, 0);
   }
 
 
