@@ -40,7 +40,7 @@
   <button class="nav-button" (click)="routerService.toCart()">
     <div class=" nav-button-wrapper cart-count">
       <mat-icon>shopping_cart</mat-icon>
-      <p class="count">0</p>
+      <p class="count">{{cartService.cartCount()}}</p>
     </div>
   </button>
 

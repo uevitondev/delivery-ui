@@ -73,7 +73,7 @@ export class CartCheckoutComponent implements OnInit {
   checkoutPaymentMethod!: string;
 
   isLoading: boolean = false;
-  cartItems = this.cartService.cartItems;
+  cartItems = this.cartService.cartItems();
 
   ngOnInit(): void {
     this.loadCheckoutStore();

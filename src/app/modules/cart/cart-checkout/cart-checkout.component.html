@@ -62,8 +62,8 @@
         <div class="resume card">
             <div class="resume-details">
                 <p class="resume-title">RESUMO</p>
-                <p>Subtotal: {{ cartService.cartSubtotal | currency : "BRL" }}</p>
-                <p>Total: <strong>{{ cartService.cartTotal | currency : "BRL" }}</strong></p>
+                <p>Subtotal: {{ cartService.cartSubtotal() | currency : "BRL" }}</p>
+                <p>Total: <strong>{{ cartService.cartTotal() | currency : "BRL" }}</strong></p>
             </div>
             <div class="resume-actions">
                 @if(isLoading){
