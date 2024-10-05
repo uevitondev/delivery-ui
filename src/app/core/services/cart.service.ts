@@ -28,15 +28,15 @@ export class CartService {
   }
 
   get cartCount() {
-    return computed(() => this.storedCart.getValue().reduce((acc, curr) => acc + curr.quantity, 0));
+    return this.storedCart.getValue().reduce((acc, curr) => acc += curr.quantity, 0);
   }
 
   get cartSubtotal() {
-    return computed(() => this.storedCart.getValue().reduce((acc, curr) => acc + (curr.quantity * curr.product.price), 0));
+    return this.storedCart.getValue().reduce((acc, curr) => acc + (curr.quantity * curr.product.price), 0);
   }
 
   get cartTotal() {
-    return computed(() => this.cartSubtotal());
+    return this.cartSubtotal;
   }
 
 

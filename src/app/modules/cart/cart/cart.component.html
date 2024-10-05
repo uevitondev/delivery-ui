@@ -21,8 +21,8 @@
     <div class="resume">
       <div class="resume-details">
         <p class="resume-title">Resumo</p>
-        <p>Subtotal: {{ cartService.cartSubtotal() | currency : 'BRL' }} </p>
-        <p>Total: <strong>{{ cartService.cartTotal() | currency : 'BRL' }}</strong></p>
+        <p>Subtotal: {{ cartService.cartSubtotal | currency : 'BRL' }} </p>
+        <p>Total: <strong>{{ cartService.cartTotal | currency : 'BRL' }}</strong></p>
       </div>
       <div class="resume-actions">
         <button (click)="routerService.toCheckout()">CONTINUAR</button>
