@@ -33,8 +33,6 @@ export class NavBarComponent {
   userImage!: string;
   isMenuOpen = false;
 
-  //cartCount = this.cartService.cartCount();
-
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
