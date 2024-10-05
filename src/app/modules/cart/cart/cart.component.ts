@@ -1,4 +1,4 @@
-import { CommonModule, NgIf } from '@angular/common';
+import { AsyncPipe, CommonModule, CurrencyPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -19,6 +19,7 @@ import { CartitemListComponent } from '../cartitem-list/cartitem-list.component'
     MatMenuModule,
     CartitemListComponent,
     CartItemNoteComponent,
+    AsyncPipe, CurrencyPipe
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
@@ -28,5 +29,5 @@ export class CartComponent {
   toastService = inject(ToastrService);
   orderService = inject(OrderService);
   cartService = inject(CartService);
-  cartItems$ = this.cartService.cartItems();
+  cartItems = this.cartService.cartItems;
 }

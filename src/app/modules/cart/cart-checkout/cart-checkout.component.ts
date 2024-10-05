@@ -73,15 +73,10 @@ export class CartCheckoutComponent implements OnInit {
   checkoutPaymentMethod!: string;
 
   isLoading: boolean = false;
-  finalCartItems!: CartItem[];
+  cartItems = this.cartService.cartItems;
 
   ngOnInit(): void {
     this.loadCheckoutStore();
-    this.cartService.cartItems().subscribe({
-      next: (cartItems) => {
-        this.finalCartItems = cartItems;
-      }
-    });
   }
 
   loadCheckoutStore() {
@@ -104,7 +99,7 @@ export class CartCheckoutComponent implements OnInit {
       this.checkoutAddress === undefined ||
       this.checkoutStore === undefined ||
       this.checkoutPaymentMethod === undefined ||
-      this.finalCartItems.length < 1
+      this.cartItems.length < 1
     ) {
       return true;
     } else {
@@ -120,7 +115,7 @@ export class CartCheckoutComponent implements OnInit {
       addressId: this.checkoutAddress.id,
       storeId: this.checkoutStore.id,
       paymentMethod: this.checkoutPaymentMethod,
-      cartItems: this.finalCartItems
+      cartItems: this.cartItems
     }
 
     this.orderService.saveNew(shoppingCartRequest)

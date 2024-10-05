@@ -26,7 +26,5 @@ export class CartitemListComponent {
   @Input() showEditQuantity: boolean = false;
   @Input() showRemove: boolean = false;
   @Input() showNote: boolean = false;
-
   cartService = inject(CartService);
-  cartItems$ = this.cartService.cartItems();
 }

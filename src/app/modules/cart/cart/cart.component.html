@@ -1,10 +1,10 @@
 <main>
-  @if(cartItems$ | async; as cartItems){
-  @if(cartItems.length > 0){
+  @if(cartService.cartItems){
+  @if(cartService.cartItems.length > 0){
   <div class="cart-flex-1">
     <div class="cart">
       <div class="cart-header">
-        <p>Carrinho de Compras</p>
+        <p>CARRINHO DE COMPRAS</p>
         <div class="cart-header-actions">
           <button (click)="cartService.clearCart()">LIMPAR CARRINHO</button>
           <button (click)="routerService.toHome()">COMPRAR MAIS</button>
@@ -20,9 +20,9 @@
   <div class="cart-resume">
     <div class="resume">
       <div class="resume-details">
-        <p class="resume-title">Resumo</p>
-        <p>Subtotal: {{ cartService.cartSubtotal() | currency : 'BRL' }} </p>
-        <p>Total: <strong>{{ cartService.cartTotal() | currency : 'BRL' }}</strong></p>
+        <p class="resume-title">RESUMO</p>
+        <p>Subtotal: {{ cartService.cartSubtotal | currency : "BRL" }}</p>
+        <p>Total: <strong>{{ cartService.cartTotal | currency : "BRL" }}</strong></p>
       </div>
       <div class="resume-actions">
         <button (click)="routerService.toCheckout()">CONTINUAR</button>

@@ -1,6 +1,6 @@
 <main>
   <div class="cart-items">
-    @for(cartitem of cartItems$ | async; track cartitem){
+    @for(cartitem of cartService.cartItems; track cartitem){
     <div class="cart-item">
 
       <div class="image">
