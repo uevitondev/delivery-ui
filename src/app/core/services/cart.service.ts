@@ -18,13 +18,9 @@ export class CartService {
     this.storedCart ? this.storedCart : []
   );
 
-
-
   cartItems() {
     return this.cart;
   }
-
-
 
   cartSubtotal() {
     return this.cart.getValue().reduce((count, item) => count += (item.product.price * item.quantity), 0);
@@ -35,8 +31,9 @@ export class CartService {
   }
 
   cartCount() {
-    return this.cart.getValue().reduce((count, item) => count += item.quantity, 0);
+    return this.cart.getValue().reduce((count, item) => count + item.quantity, 0);
   }
+
 
   addItemToCart(item: CartItem): void {
     const indexFound = this.cart.getValue().findIndex((cartItem) => cartItem.product.id === item.product.id);
