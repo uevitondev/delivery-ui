@@ -1,5 +1,7 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule, NgIf } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
@@ -10,6 +12,10 @@ import { StorageService } from '../../../core/services/storage.service';
   selector: 'app-navbar',
   standalone: true,
   imports: [
+    CommonModule,
+    MatIconModule,
+    NgIf,
+    MatMenuModule,
     MatIconModule
   ],
   templateUrl: './navbar.component.html',
@@ -38,7 +44,6 @@ export class NavBarComponent {
     }
     return this.icon = 'dark_mode';
   }
-
 
   logout() {
     this.authService.logout();

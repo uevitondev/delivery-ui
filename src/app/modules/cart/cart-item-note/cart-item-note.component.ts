@@ -1,10 +1,10 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { CartItem } from '../../../core/models/cart-item';
 import { CartService } from '../../../core/services/cart.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart-item-note',
@@ -39,7 +39,7 @@ export class CartItemNoteComponent implements OnInit {
     if (this.noteForm.invalid) {
       return;
     }
-    this.cartService.addNoteToCartItem(this.cartItem, this.noteForm.value.note);
+    this.cartService.addNoteToItem(this.cartItem, this.noteForm.value.note);
     this.toastService.info("NOTA SALVA");
   }
 

@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { delay } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Address } from '../../../core/models/address';
+import { CartItem } from '../../../core/models/cart-item';
 import { ShoppingCartRequest } from '../../../core/models/shopping-cart-request';
 import { Store } from '../../../core/models/store';
 import { AddressService } from '../../../core/services/address.service';
@@ -65,16 +66,22 @@ export class CartCheckoutComponent implements OnInit {
   addressService = inject(AddressService);
   cartService = inject(CartService);
   orderService = inject(OrderService);
+  cartItems$ = this.cartService.cartItems;
 
-  cartItems$ = this.cartService.cartItems.asObservable();
   checkoutStore!: Store;
   checkoutAddress!: Address;
   checkoutPaymentMethod!: string;
 
   isLoading: boolean = false;
+  finalCartItems!: CartItem[];
 
   ngOnInit(): void {
     this.loadCheckoutStore();
+    this.cartService.cartItems.subscribe({
+      next: (cartItems) => {
+        this.finalCartItems = cartItems;
+      }
+    });
   }
 
   loadCheckoutStore() {
@@ -97,7 +104,7 @@ export class CartCheckoutComponent implements OnInit {
       this.checkoutAddress === undefined ||
       this.checkoutStore === undefined ||
       this.checkoutPaymentMethod === undefined ||
-      this.cartService.cartItems.getValue().length < 1
+      this.finalCartItems.length < 1
     ) {
       return true;
     } else {
@@ -113,7 +120,7 @@ export class CartCheckoutComponent implements OnInit {
       addressId: this.checkoutAddress.id,
       storeId: this.checkoutStore.id,
       paymentMethod: this.checkoutPaymentMethod,
-      cartItems: this.cartService.cartItems.getValue()
+      cartItems: this.finalCartItems
     }
 
     this.orderService.saveNew(shoppingCartRequest)

@@ -7,15 +7,9 @@
 
     <form [formGroup]="noteForm">
       <label for="note">nota:</label>
-      <textarea 
-        #noteInput
-        maxlength={{maxLengthNote}} 
-        rows="5" 
-        cols="30" 
-        formControlName="note"
-       >       
+      <textarea #noteInput maxlength={{maxLengthNote}} rows="5" cols="30" formControlName="note">
       </textarea>
-      <span class="count">{{noteInput.value.length}}/{{ maxLengthNote }}</span>      
+      <span class="count">{{noteInput.value.length}}/{{ maxLengthNote }}</span>
     </form>
 
     <div class="actions">

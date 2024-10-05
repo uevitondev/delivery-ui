@@ -1,8 +1,8 @@
-import { Component, inject, Input } from '@angular/core';
-import { CartService } from '../../../core/services/cart.service';
 import { CommonModule, NgIf } from '@angular/common';
+import { Component, inject, Input } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { CartService } from '../../../core/services/cart.service';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.component';
 
@@ -28,5 +28,5 @@ export class CartitemListComponent {
   @Input() showNote: boolean = false;
 
   cartService = inject(CartService);
-  cartItems$ = this.cartService.cartItems.asObservable();
+  cartItems$ = this.cartService.cartItems;
 }

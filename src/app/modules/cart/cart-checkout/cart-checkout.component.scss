@@ -17,6 +17,14 @@ main {
     display: flex;
     flex-direction: column;
     gap: 25px;
+
+
+}
+
+.checkout-title {
+    color: #222;
+    font-weight: 700;
+    font-size: 24px;
 }
 
 .card {
@@ -81,7 +89,6 @@ button {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 25px;
 }
 
 .resume {
@@ -114,7 +121,6 @@ button {
     gap: 8px;
 
     button {
-        width: 190px;
         padding-top: 10px;
         padding-bottom: 10px;
         background: #fff;
@@ -180,10 +186,10 @@ button {
         align-items: center;
         padding: 5px;
         height: 100%;
-
+    
         .resume-title {
-            display: none;
+          display: none;
         }
-    }
+      }
 
 }

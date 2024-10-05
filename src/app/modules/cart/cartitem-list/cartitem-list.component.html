@@ -1,65 +1,58 @@
 <main>
   <div class="cart-items">
-      @for(cartitem of cartItems$ | async; track cartitem){
-        <div class="cart-item">            
+    @for(cartitem of cartItems$ | async; track cartitem){
+    <div class="cart-item">
 
-    
-          <div class="image">
-            <img src="{{cartitem.product.imgUrl}}" alt="product icon">
-          </div>   
+      <div class="image">
+        <img src="{{cartitem.product.imgUrl}}" alt="product icon">
+      </div>
 
-     
+      <div class="details">
+        <p class="cart-item-name">
+          @if(showQuantity){
+          {{ cartitem.quantity }}x -
+          }
+          {{ cartitem.product.name}}
+        </p>
 
-          <div class="details">   
-            <p class="cart-item-name">
-              @if(showQuantity){
-                {{ cartitem.quantity }}x -
-              }
-              {{ cartitem.product.name}}
-            </p>          
-                     
-            <div class="test">
-              <div class="price">
-                <p>{{ cartitem.product.price | currency : 'BRL' }}</p>
-              </div>
-              
-              @if(showEditQuantity){
-                <div class="edit-quantity">
-                  <div class="edit-quantity-border">
-                    <button (click)="cartService.decreaseCartItemQuantity(cartitem)">-</button>
-                    <span class="edit-quantity-value">{{ cartitem.quantity }}</span>
-                    <button (click)="cartService.increaseCartItemQuantity(cartitem)">+</button>
-                  </div>
-                </div>
-              }
+        <div class="details-flex">
+          <div class="price">
+            <p>{{ cartitem.product.price | currency : 'BRL' }}</p>
+          </div>
 
-              @if(showRemove){
-                <div class="remove">
-                  <mat-icon mat-icon-button (click)="cartService.removeCartItem(cartitem)">
-                    delete
-                  </mat-icon>
-                </div>  
-              }     
-
-              @if(showNote){
-                <div class="note">                
-                  <button (click)="modalNote.toggle()">Add/Editar (Nota)</button>
-                  <app-modal #modalNote>
-                      <app-cart-item-note
-                        [cartItem]="cartitem">
-                      </app-cart-item-note>
-                  </app-modal>
-                </div>    
-              }  
-
-              
-              
+          @if(showEditQuantity){
+          <div class="edit-quantity">
+            <div class="edit-quantity-border">
+              <button (click)="cartService.decreaseItemQuantity(cartitem)">-</button>
+              <span class="edit-quantity-value">{{ cartitem.quantity }}</span>
+              <button (click)="cartService.increaseItemQuantity(cartitem)">+</button>
             </div>
-            
-          </div>        
+          </div>
+          }
+
+          @if(showRemove){
+          <div class="remove">
+            <mat-icon mat-icon-button (click)="cartService.removeItem(cartitem)">
+              delete
+            </mat-icon>
+          </div>
+          }
+
+          @if(showNote){
+          <div class="note">
+            <button (click)="modalNote.toggle()">Add/Editar (Nota)</button>
+            <app-modal #modalNote>
+              <app-cart-item-note [cartItem]="cartitem">
+              </app-cart-item-note>
+            </app-modal>
+          </div>
+          }
+
         </div>
-        }@empty{
-          <p>vazio</p>
-        }
+      </div>
+    </div>
+    }@empty{
+    <p>vazio</p>
+    }
   </div>
 </main>

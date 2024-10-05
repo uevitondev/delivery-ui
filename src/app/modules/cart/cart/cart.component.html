@@ -11,10 +11,7 @@
         </div>
       </div>
 
-      <app-cartitem-list
-        [showEditQuantity]="true"
-        [showRemove]="true"
-      >
+      <app-cartitem-list [showEditQuantity]="true" [showRemove]="true">
       </app-cartitem-list>
 
     </div>
@@ -23,8 +20,9 @@
   <div class="cart-resume">
     <div class="resume">
       <div class="resume-details">
-        <span class="resume-title">Resumo</span>
-        <span>Total: <strong>{{ cartService.getTotal() | currency : 'BRL' }}</strong></span>
+        <p class="resume-title">Resumo</p>
+        <p>Subtotal: {{ cartService.cartSubtotal() | currency : 'BRL' }} </p>
+        <p>Total: <strong>{{ cartService.cartTotal() | currency : 'BRL' }}</strong></p>
       </div>
       <div class="resume-actions">
         <button (click)="routerService.toCheckout()">CONTINUAR</button>

@@ -86,7 +86,7 @@ export class ProductListComponent {
   }
 
   addToCart(product: Product) {
-    this.cartService.addToCart({
+    this.cartService.addItemToCart({
       product: product,
       quantity: 1,
       note: ""

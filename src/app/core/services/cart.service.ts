@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { CartItem } from '../models/cart-item';
@@ -11,84 +11,103 @@ export class CartService {
 
   private STORED_CART = environment.STORED_CART;
   private storageService = inject(StorageService);
-  cartItems = new BehaviorSubject<CartItem[]>([]);
+  private storedCart = new BehaviorSubject<CartItem[]>([]);
 
   constructor() {
-    const cartItems = this.storageService.get(this.STORED_CART);
-    cartItems ? (() => {
-      this.cartItems.next(cartItems);
+    const stored = this.storageService.get(this.STORED_CART);
+    stored ? (() => {
+      this.storedCart.next(stored);
+      this.saveCart();
     })() : (() => {
-      return;
+      this.saveCart();
     })();
   }
 
-  updateCart(cartItems: CartItem[]) {
-    localStorage.setItem(this.STORED_CART, JSON.stringify(cartItems));
-    this.cartItems.next(cartItems);
+  get cartItems() {
+    return this.storedCart;
   }
 
-  addToCart(item: CartItem) {
-    const cartItems = this.cartItems.getValue();
-    let cartItem = cartItems.find(cartItem => cartItem.product.id === item.product.id);
-    if (cartItem) {
-      this.increaseCartItemQuantity(item);
+  get cartCount() {
+    return computed(() => this.storedCart.getValue().reduce((acc, curr) => acc + curr.quantity, 0));
+  }
+
+  get cartSubtotal() {
+    return computed(() => this.storedCart.getValue().reduce((acc, curr) => acc + (curr.quantity * curr.product.price), 0));
+  }
+
+  get cartTotal() {
+    return computed(() => this.cartSubtotal());
+  }
+
+
+  addItemToCart(item: CartItem): void {
+    const indexFound = this.storedCart.getValue().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    if (indexFound >= 0) {
+      this.updateItemQuantity(item);
     } else {
-      cartItems.push({
-        product: item.product,
-        quantity: item.quantity,
-        note: item.note
-      });
-      this.updateCart(cartItems);
+      this.storedCart.getValue().push(item);
+      this.storedCart.next(this.storedCart.getValue());
+    }
+    this.saveCart();
+  }
+
+  updateItemQuantity(item: CartItem): void {
+    const indexFound = this.cartItems.getValue().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    if (indexFound >= 0) {
+      const itemFound: CartItem = this.cartItems.getValue()[indexFound];
+      itemFound.quantity += item.quantity;
+      this.cartItems.next(this.cartItems.getValue().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
+      this.saveCart();
     }
   }
 
-  addNoteToCartItem(item: CartItem, note: string) {
-    const cartItems = this.cartItems.getValue();
-    let cartItem = cartItems.find(cartItem => cartItem.product.id === item.product.id);
-    if (cartItem) {
-      cartItem.note = note;
-      this.updateCart(cartItems);
+  decreaseItemQuantity(item: CartItem) {
+    const indexFound = this.storedCart.getValue().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    if (indexFound >= 0) {
+      const itemFound: CartItem = this.storedCart.getValue()[indexFound];
+      if (itemFound.quantity > 1) {
+        itemFound.quantity--;
+        this.storedCart.next(this.storedCart.getValue().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
+        this.saveCart();
+      }
     }
   }
 
-  getCartItem(item: CartItem) {
-    const cartItems = this.cartItems.getValue();
-    return cartItems.find(cartItem => cartItem.product.id === item.product.id);
-  }
 
-  increaseCartItemQuantity(item: CartItem) {
-    item.quantity++;
-    this.updateCart(this.cartItems.getValue());
-  }
-
-  decreaseCartItemQuantity(item: CartItem) {
-    if (item.quantity > 1) {
-      item.quantity--;
-      this.updateCart(this.cartItems.getValue());
+  increaseItemQuantity(item: CartItem) {
+    const indexFound = this.storedCart.getValue().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    if (indexFound >= 0) {
+      const itemFound: CartItem = this.storedCart.getValue()[indexFound];
+      itemFound.quantity++;
+      this.storedCart.next(this.storedCart.getValue().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
     }
+    this.saveCart();
   }
 
-  removeCartItem(item: CartItem) {
-    let cartItems = this.cartItems.getValue();
-    cartItems = cartItems.filter(cartItem => cartItem !== item);
-    this.updateCart(cartItems);
+
+  addNoteToItem(item: CartItem, note: string) {
+    const indexFound = this.storedCart.getValue().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    if (indexFound >= 0) {
+      const itemFound: CartItem = this.storedCart.getValue()[indexFound];
+      itemFound.note = note;
+      this.storedCart.next(this.storedCart.getValue().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
+    }
+    this.saveCart();
   }
 
-  getTotal(): number {
-    return this.cartItems.getValue().reduce((total, item) => total + item.product.price * item.quantity, 0);
-  }
-
-  getCount(): number {
-    return this.cartItems.getValue().length;
-  }
-
-  getCartItemSubtotal(item: CartItem): number {
-    return item.product.price * item.quantity;
+  removeItem(item: CartItem): void {
+    this.storedCart.next(this.storedCart.getValue().filter((cartItem) => cartItem.product.id !== item.product.id));
+    this.saveCart();
   }
 
   clearCart() {
-    let emptyCart: CartItem[] = [];
-    this.updateCart(emptyCart);
+    const emptyCart: CartItem[] = [];
+    this.storedCart.next(emptyCart);
+    this.saveCart();
+  }
+
+  saveCart() {
+    this.storageService.save(this.STORED_CART, this.storedCart.getValue());
   }
 
 }

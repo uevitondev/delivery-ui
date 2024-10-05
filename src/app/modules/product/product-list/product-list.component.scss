@@ -17,7 +17,7 @@ main {
 
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 10px;
 }
 
@@ -25,7 +25,7 @@ main {
   max-width: 300px;
   border-radius: var(--border-radius);
   border: 1px solid gray;
-  //box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow);
   background-color: var(--primary-color);
   cursor: pointer;
 }

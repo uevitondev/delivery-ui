@@ -18,7 +18,7 @@ import { CartitemListComponent } from '../cartitem-list/cartitem-list.component'
     NgIf,
     MatMenuModule,
     CartitemListComponent,
-    CartItemNoteComponent,   
+    CartItemNoteComponent,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
@@ -28,6 +28,5 @@ export class CartComponent {
   toastService = inject(ToastrService);
   orderService = inject(OrderService);
   cartService = inject(CartService);
-  cartItems$ = this.cartService.cartItems.asObservable();
-
+  cartItems$ = this.cartService.cartItems;
 }
