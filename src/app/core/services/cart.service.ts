@@ -17,7 +17,7 @@ export class CartService {
   cartItems() { return this.cart.getValue(); }
   cartSubtotal() { return this.cartItems().reduce((count, item) => count += (item.product.price * item.quantity), 0); }
   cartTotal() { return this.cartSubtotal(); }
-  cartCount() { return this.cartItems().reduce((count, item) => count += item.quantity, 0); }
+  //cartCount() { return this.cartItems().reduce((count, item) => count += item.quantity, 0); }
 
   addItemToCart(item: CartItem): void {
     const indexFound = this.cartItems().findIndex((cartItem) => cartItem.product.id === item.product.id);
