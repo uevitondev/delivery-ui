@@ -27,9 +27,6 @@ export class CartService {
     return this.storedCart;
   }
 
-  cartCount() {
-    return this.storedCart.getValue().reduce((count, item) => count += item.quantity, 0);
-  }
 
   cartSubtotal() {
     return this.storedCart.getValue().reduce((count, item) => count += (item.product.price * item.quantity), 0);
