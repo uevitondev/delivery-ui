@@ -77,7 +77,7 @@ export class CartCheckoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCheckoutStore();
-    this.cartService.cartItems.subscribe({
+    this.cartService.cartItems().subscribe({
       next: (cartItems) => {
         this.finalCartItems = cartItems;
       }

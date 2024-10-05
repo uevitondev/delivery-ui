@@ -28,5 +28,5 @@ export class CartComponent {
   toastService = inject(ToastrService);
   orderService = inject(OrderService);
   cartService = inject(CartService);
-  cartItems$ = this.cartService.cartItems;
+  cartItems$ = this.cartService.cartItems();
 }

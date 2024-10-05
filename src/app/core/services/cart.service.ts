@@ -1,4 +1,4 @@
-import { Injectable, computed, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { CartItem } from '../models/cart-item';
@@ -14,7 +14,7 @@ export class CartService {
   private storedCart = new BehaviorSubject<CartItem[]>([]);
 
   constructor() {
-    const stored = this.storageService.get(this.STORED_CART);
+    const stored: CartItem[] = this.storageService.get(this.STORED_CART);
     stored ? (() => {
       this.storedCart.next(stored);
       this.saveCart();
@@ -23,22 +23,21 @@ export class CartService {
     })();
   }
 
-  get cartItems() {
+  cartItems() {
     return this.storedCart;
   }
 
-  get cartCount() {
-    return this.storedCart.getValue().reduce((acc, curr) => acc += curr.quantity, 0);
+  cartCount() {
+    return this.storedCart.getValue().reduce((count, item) => count += item.quantity, 0);
   }
 
-  get cartSubtotal() {
-    return this.storedCart.getValue().reduce((acc, curr) => acc + (curr.quantity * curr.product.price), 0);
+  cartSubtotal() {
+    return this.storedCart.getValue().reduce((count, item) => count += (item.product.price * item.quantity), 0);
   }
 
-  get cartTotal() {
-    return this.cartSubtotal;
+  cartTotal() {
+    return this.cartSubtotal();
   }
-
 
   addItemToCart(item: CartItem): void {
     const indexFound = this.storedCart.getValue().findIndex((cartItem) => cartItem.product.id === item.product.id);
@@ -52,11 +51,11 @@ export class CartService {
   }
 
   updateItemQuantity(item: CartItem): void {
-    const indexFound = this.cartItems.getValue().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    const indexFound = this.storedCart.getValue().findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
-      const itemFound: CartItem = this.cartItems.getValue()[indexFound];
+      const itemFound: CartItem = this.storedCart.getValue()[indexFound];
       itemFound.quantity += item.quantity;
-      this.cartItems.next(this.cartItems.getValue().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
+      this.storedCart.next(this.storedCart.getValue().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
       this.saveCart();
     }
   }

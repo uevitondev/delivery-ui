@@ -28,5 +28,5 @@ export class CartitemListComponent {
   @Input() showNote: boolean = false;
 
   cartService = inject(CartService);
-  cartItems$ = this.cartService.cartItems;
+  cartItems$ = this.cartService.cartItems();
 }
