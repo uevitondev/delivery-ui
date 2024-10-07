@@ -15,16 +15,17 @@ export class CartService {
   cart = new BehaviorSubject<CartItem[]>([])
 
   constructor() {
-    const storedCart = this.storageService.get(this.STORED_CART);
-    this.cart.next(storedCart ? storedCart : []);
+    const cartItems = this.storageService.get(this.STORED_CART);
+    this.cart.next(cartItems ? cartItems : []);
   }
 
   cartItems() {
-    return this.cart.getValue();
+    const cartItems: CartItem[] = this.cart.getValue();
+    return cartItems
   }
 
   cartSubtotal() {
-    const cartItems = this.cartItems();
+    const cartItems: CartItem[] = this.cart.getValue();
     return cartItems.reduce((count, item) => count += (item.product.price * item.quantity), 0);
   }
 
@@ -33,11 +34,12 @@ export class CartService {
   }
 
   cartCount() {    
-    return 0;
+    const cartItems: CartItem[] = this.cart.getValue();
+    return cartItems.reduce((count, item) => count += item.quantity, 0);
   }
 
   addItemToCart(item: CartItem): void {
-    const cartItems = this.cartItems();
+    const cartItems: CartItem[] = this.cart.getValue();
     const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
       this.updateItemQuantity(item);
@@ -49,7 +51,7 @@ export class CartService {
   }
 
   updateItemQuantity(item: CartItem): void {
-    const cartItems = this.cartItems();
+    const cartItems: CartItem[] = this.cart.getValue();
     const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
       const itemFound = cartItems[indexFound];
@@ -60,7 +62,7 @@ export class CartService {
   }
 
   decreaseItemQuantity(item: CartItem) {
-    const cartItems = this.cartItems();
+    const cartItems: CartItem[] = this.cart.getValue();
     const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
       const itemFound = cartItems[indexFound];
@@ -74,7 +76,7 @@ export class CartService {
 
 
   increaseItemQuantity(item: CartItem) {
-    const cartItems = this.cartItems();
+    const cartItems: CartItem[] = this.cart.getValue();
     const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
       const itemFound = cartItems[indexFound];
@@ -86,7 +88,7 @@ export class CartService {
 
 
   addNoteToItem(item: CartItem, note: string) {
-    const cartItems = this.cartItems();
+    const cartItems: CartItem[] = this.cart.getValue();
     const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
       const itemFound = cartItems[indexFound];
@@ -97,7 +99,7 @@ export class CartService {
   }
 
   removeItem(item: CartItem): void {
-    const cartItems = this.cartItems();
+    const cartItems: CartItem[] = this.cart.getValue();
     this.cart.next(cartItems.filter((cartItem) => cartItem.product.id !== item.product.id));
     this.saveCart();
   }
@@ -109,7 +111,7 @@ export class CartService {
   }
 
   saveCart() {
-    const cartItems = this.cartItems();
+    const cartItems: CartItem[] = this.cart.getValue();
     this.storageService.save(this.STORED_CART, cartItems);
   }
 
