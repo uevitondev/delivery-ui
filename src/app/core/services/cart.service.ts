@@ -32,9 +32,8 @@ export class CartService {
     return this.cartSubtotal();
   }
 
-  cartCount() {
-    const cartItems = this.cartItems();
-    return cartItems.reduce((count, item) => count += item.quantity, 0);
+  cartCount() {    
+    return 0;
   }
 
   addItemToCart(item: CartItem): void {
