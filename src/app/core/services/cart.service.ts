@@ -24,8 +24,10 @@ export class CartService {
   }
 
   cartSubtotal() {
-    const cartItems: CartItem[] = this.cart.getValue();
-    return cartItems.reduce((count, item) => count += (item.product.price * item.quantity), 0);
+    const cartItems = this.cart.getValue();
+    let subtotal = 0;
+    cartItems.map((cartItem) => subtotal += (cartItem.quantity * cartItem.product.price));
+    return subtotal;
   }
 
   cartTotal() {
@@ -33,9 +35,9 @@ export class CartService {
   }
 
   cartCount() {
-    const cartItems: CartItem[] = this.cart.getValue();
+    const cartItems = this.cart.getValue();
     let count = 0;
-    cartItems.forEach((cartItem) => count += cartItem.quantity);
+    cartItems.map((cartItem) => count += cartItem.quantity);
     return count;
   }
 
