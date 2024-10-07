@@ -9,33 +9,40 @@ import { StorageService } from './storage.service';
 })
 export class CartService {
 
-  private storageService = inject(StorageService);
-  private STORED_CART = environment.STORED_CART;
-  private storedCart: CartItem[] = this.storageService.get(this.STORED_CART);
-  cart = new BehaviorSubject<CartItem[]>(this.storedCart ? this.storedCart : [])
+  storageService = inject(StorageService);
+  STORED_CART = environment.STORED_CART;
 
-  cartItems() { return this.cart.getValue(); }
+  cart = new BehaviorSubject<CartItem[]>([])
+
+  constructor() {
+    const storedCart = this.storageService.get(this.STORED_CART);
+    this.cart.next(storedCart ? storedCart : []);
+  }
+
+  cartItems(): CartItem[] { return this.cart.getValue(); }
   cartSubtotal() { return this.cartItems().reduce((count, item) => count += (item.product.price * item.quantity), 0); }
   cartTotal() { return this.cartSubtotal(); }
-  //cartCount() { return this.cartItems().reduce((count, item) => count += item.quantity, 0); }
+  cartCount() { return this.cartItems().reduce((count, item) => count += item.quantity, 0); }
 
   addItemToCart(item: CartItem): void {
-    const indexFound = this.cartItems().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    const cartItems = this.cartItems();
+    const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
       this.updateItemQuantity(item);
     } else {
-      this.cartItems().push(item);
-      this.cart.next(this.cartItems());
+      cartItems.push(item);
+      this.cart.next(cartItems);
     }
     this.saveCart();
   }
 
   updateItemQuantity(item: CartItem): void {
-    const indexFound = this.cartItems().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    const cartItems = this.cartItems();
+    const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
-      const itemFound: CartItem = this.cartItems()[indexFound];
+      const itemFound = cartItems[indexFound];
       itemFound.quantity += item.quantity;
-      this.cart.next(this.cartItems().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
+      this.cart.next(cartItems.map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
       this.saveCart();
     }
   }
