@@ -19,10 +19,23 @@ export class CartService {
     this.cart.next(storedCart ? storedCart : []);
   }
 
-  cartItems(): CartItem[] { return this.cart.getValue(); }
-  cartSubtotal() { return this.cartItems().reduce((count, item) => count += (item.product.price * item.quantity), 0); }
-  cartTotal() { return this.cartSubtotal(); }
-  cartCount() { return this.cartItems().reduce((count, item) => count += item.quantity, 0); }
+  cartItems() {
+    return this.cart.getValue();
+  }
+
+  cartSubtotal() {
+    const cartItems = this.cartItems();
+    return cartItems.reduce((count, item) => count += (item.product.price * item.quantity), 0);
+  }
+
+  cartTotal() {
+    return this.cartSubtotal();
+  }
+
+  cartCount() {
+    const cartItems = this.cartItems();
+    return cartItems.reduce((count, item) => count += item.quantity, 0);
+  }
 
   addItemToCart(item: CartItem): void {
     const cartItems = this.cartItems();
@@ -48,12 +61,13 @@ export class CartService {
   }
 
   decreaseItemQuantity(item: CartItem) {
-    const indexFound = this.cartItems().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    const cartItems = this.cartItems();
+    const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
-      const itemFound: CartItem = this.cartItems()[indexFound];
+      const itemFound = cartItems[indexFound];
       if (itemFound.quantity > 1) {
         itemFound.quantity--;
-        this.cart.next(this.cartItems().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
+        this.cart.next(cartItems.map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
         this.saveCart();
       }
     }
@@ -61,28 +75,31 @@ export class CartService {
 
 
   increaseItemQuantity(item: CartItem) {
-    const indexFound = this.cartItems().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    const cartItems = this.cartItems();
+    const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
-      const itemFound: CartItem = this.cartItems()[indexFound];
+      const itemFound = cartItems[indexFound];
       itemFound.quantity++;
-      this.cart.next(this.cartItems().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
+      this.cart.next(cartItems.map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
     }
     this.saveCart();
   }
 
 
   addNoteToItem(item: CartItem, note: string) {
-    const indexFound = this.cartItems().findIndex((cartItem) => cartItem.product.id === item.product.id);
+    const cartItems = this.cartItems();
+    const indexFound = cartItems.findIndex((cartItem) => cartItem.product.id === item.product.id);
     if (indexFound >= 0) {
-      const itemFound: CartItem = this.cartItems()[indexFound];
+      const itemFound = cartItems[indexFound];
       itemFound.note = note;
-      this.cart.next(this.cartItems().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
+      this.cart.next(cartItems.map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem));
     }
     this.saveCart();
   }
 
   removeItem(item: CartItem): void {
-    this.cart.next(this.cartItems().filter((cartItem) => cartItem.product.id !== item.product.id));
+    const cartItems = this.cartItems();
+    this.cart.next(cartItems.filter((cartItem) => cartItem.product.id !== item.product.id));
     this.saveCart();
   }
 
@@ -93,7 +110,8 @@ export class CartService {
   }
 
   saveCart() {
-    this.storageService.save(this.STORED_CART, this.cartItems);
+    const cartItems = this.cartItems();
+    this.storageService.save(this.STORED_CART, cartItems);
   }
 
 }
