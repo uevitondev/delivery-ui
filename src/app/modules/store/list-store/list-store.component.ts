@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../environments/environment';
 import { Store } from '../../../core/models/store';
 import { StorageService } from '../../../core/services/storage.service';
 import { StoreService } from '../../../core/services/store.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-list-store',
@@ -13,26 +14,32 @@ import { StoreService } from '../../../core/services/store.service';
   templateUrl: './list-store.component.html',
   styleUrl: './list-store.component.scss'
 })
-export class ListStoreComponent {
-  ENV = environment;
+export class ListStoreComponent implements OnInit {
+
   storageService = inject(StorageService);
   storeService = inject(StoreService);
   toastService = inject(ToastrService);
   router = inject(Router);
-  stores!: Store[];
 
-  constructor() {
+  ENV = environment;
+  stores!: Store[];
+  isLoading: boolean = false;
+
+  ngOnInit(): void {
     this.loadStores();
   }
 
 
   loadStores() {
+    this.isLoading = true;
     this.storeService.getAll().subscribe({
       next: (stores) => {
         this.stores = stores;
+        this.isLoading = false;
       },
-      error: (error) => {
-        this.toastService.error("Erro ao listar Lojas!");
+      error: (e) => {
+        this.isLoading = false;
+        throw new Error(e);
       }
     });
   }
@@ -40,8 +47,7 @@ export class ListStoreComponent {
   selectStore(store: Store) {
     this.storageService.remove(this.ENV.STORED_STORE);
     this.storageService.save(this.ENV.STORED_STORE, store);
-    this.toastService.info("Loja Selecionada!");
-    this.router.navigate(["home"]); 
+    this.router.navigate(["home"]);
   }
 
 }

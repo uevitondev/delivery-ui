@@ -24,9 +24,9 @@ export class CategoryListComponent implements OnInit {
   categoryService = inject(CategoryService);
 
   checkForm!: FormGroup;
-
   categories!: Category[];
   category!: Category;
+  isLoading: boolean = false;
 
   ngOnInit(): void {
     this.loadCategories();
@@ -72,13 +72,16 @@ export class CategoryListComponent implements OnInit {
 
 
   loadCategories() {
+    this.isLoading = true;
     this.categoryService.getAll().subscribe({
       next: (categories) => {
         this.categories = categories;
         this.initCheckForm();
+        this.isLoading = false;
       },
-      error: (error) => {
-        throw new Error();
+      error: (e) => {
+        this.isLoading = false;
+        throw new Error(e);
       }
     });
   }

@@ -1,28 +1,32 @@
 <main>
 
-
   @if(product){
-  <div class="left">
-    <div class="img-container">
-      <div class="product-img">
-        <img ngSrc="{{product.imgUrl}}" alt="product image" style="object-fit: cover;" fill priority>
-      </div>
+
+  <div class="wrapper-flex-01">
+    <div class="product-image">
+      <img src="{{product.imgUrl}}" alt="product image">
     </div>
   </div>
 
-  <div class="right">
-    <div class="details-container">
-      <span class="name">{{product.name}}</span>
-      <span class="price">{{ product.price | currency : 'BRL' }}</span>
-      <span class="desc">{{ product.description }}</span>
+  <div class="wrapper-flex-02">
+    <div class="details-wrapper">
 
-      <div class="quantity-wapper">
-        <button class="btn-quantity" (click)="decrementProductQuantity()">-</button>
-        <p class="quantity">{{ productQuantity }}</p>
-        <button class="btn-quantity" (click)="incrementProductQuantity()">+</button>
+      <div class="product-details">
+        <p class="name">{{product.name}}</p>
+        <p class="price">{{ product.price | currency : 'BRL' }}</p>
+        <p class="desc">{{ product.description }}</p>
       </div>
 
-      <button class="btn-add-cart" (click)="addToCart(product)">COMPRAR AGORA</button>
+
+      <div class="product-edit-quantity">
+        <button (click)="decrementProductQuantity()">-</button>
+        <p class="quantity">{{ productQuantity }}</p>
+        <button (click)="incrementProductQuantity()">+</button>
+      </div>
+
+      <div class="product-actions">
+        <button class="btn-add-cart" (click)="addToCart(product)">COMPRAR AGORA</button>
+      </div>
 
     </div>
   </div>

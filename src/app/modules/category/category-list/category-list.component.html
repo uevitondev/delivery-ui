@@ -1,4 +1,9 @@
 <main>
+  @if(isLoading){
+  <div class="category-list-loading">
+    <p>CARREGANDO CATEGORIAS...</p>
+  </div>
+  }@else{
   <div class="categories">
     @for(category of categories; track category.id; let i = $index){
     <div class="category">
@@ -15,4 +20,6 @@
     <p> "VAZIO" NÃO HÁ CATEGORIAS</p>
     }
   </div>
+  }
+
 </main>

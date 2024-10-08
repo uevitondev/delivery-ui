@@ -64,8 +64,8 @@ export class ProductListComponent {
         this.isLoading = false;
       },
       error: (e) => {
-        this.toastService.error("Erro ao Carregar Dados da Loja!");
         this.isLoading = false;
+        throw new Error(e);
       }
     });
   }

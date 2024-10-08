@@ -20,11 +20,11 @@ export class CartService {
   }
 
   cartItems() {
-    return this.cart.getValue()?.cartItems;
+    return this.cart.getValue().cartItems;
   }
 
   cartSubtotal() {
-    return this.cartItems().reduce((count, cartItem) => count += (cartItem.product.price * cartItem.quantity), 0);    
+    return this.cartItems().reduce((count, cartItem) => count += (cartItem.product.price * cartItem.quantity), 0);
   }
 
   cartTotal() {
@@ -47,18 +47,14 @@ export class CartService {
     this.saveCart();
   }
 
-
   decreaseItemQuantity(item: CartItem) {
     const itemFound = this.cartItems().find((cartItem) => cartItem.product.id === item.product.id);
-    if (itemFound) {
-      if (itemFound.quantity > 1) {
-        itemFound.quantity--;
-        this.cart.next({ cartItems: this.cartItems().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem) });
-        this.saveCart();
-      }
+    if (itemFound && itemFound.quantity > 1) {
+      itemFound.quantity--;
+      this.cart.next({ cartItems: this.cartItems().map((cartItem) => cartItem.product.id === itemFound.product.id ? itemFound : cartItem) });
+      this.saveCart();
     }
   }
-
 
   increaseItemQuantity(item: CartItem) {
     const itemFound = this.cartItems().find((cartItem) => cartItem.product.id === item.product.id);
@@ -68,7 +64,6 @@ export class CartService {
     }
     this.saveCart();
   }
-
 
   addNoteToItem(item: CartItem, note: string) {
     const itemFound = this.cartItems().find((cartItem) => cartItem.product.id === item.product.id);

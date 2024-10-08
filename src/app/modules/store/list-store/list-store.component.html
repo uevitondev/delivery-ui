@@ -1,19 +1,31 @@
 <main>
-  @for (store of stores; track store) {
-  <div class="store">
-    <div class="left">
-      <div class="left-header ">
-        <img src="{{store.logoUrl}}" alt="">
-        <p> {{store.type}} - {{store.name}} </p>
-      </div>
-      <p>+55 {{store.phoneNumber}}</p>
-    </div>
-
-    <div class="right">
-      <button (click)="selectStore(store)">VER PRODUTOS</button>
-    </div>
+  @if(isLoading){
+  <div class="store-list-loading">
+    <p>CARREGANDO LOJAS...</p>
   </div>
-  } @empty {
-  <p>"NENHUMA LOJA PARA LISTAR"</p>
+  }@else{
+  <div class="stores">
+    @for (store of stores; track store) {
+    <div class="store">
+
+      <div class="store-details-wrapper">
+        <div class="store-logo">
+          <img src="{{store.logoUrl}}" alt="">
+        </div>
+        <div class="store-details">
+          <p> <strong>Nome:</strong> {{store.name}} </p>
+          <p><strong>Contato:</strong> +55 {{store.phoneNumber}}</p>
+          <p><strong>Tipo:</strong> {{store.type}} </p>
+        </div>
+      </div>
+      
+      <div class="store-actions">
+        <button (click)="selectStore(store)">VER PRODUTOS</button>
+      </div>
+    </div>
+    } @empty {
+    <p>"NENHUMA LOJA PARA LISTAR"</p>
+    }
+  </div>
   }
 </main>

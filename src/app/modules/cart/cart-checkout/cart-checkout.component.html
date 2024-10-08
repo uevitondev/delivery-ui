@@ -69,7 +69,7 @@
                 @if(isLoading){
                 <button class="btn btn-primary" [disabled]="isLoading" type="button" disabled>
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <span class="sr-only">PROCESSANDO PEDIDO...AGUARDE!</span>
+                    <span class="sr-only">PROCESSANDO...</span>
                 </button>
                 }@else{
                 <button [disabled]="checkoutIsInvalid()" (click)="saveOrder()">FAZER PEDIDO</button>
