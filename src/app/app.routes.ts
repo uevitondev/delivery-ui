@@ -9,8 +9,8 @@ import { HomeComponent } from './modules/home/home/home.component';
 import { OrderDetailsComponent } from './modules/order/order-details/order-details.component';
 import { OrdersComponent } from './modules/order/orders/orders.component';
 import { ProductDetailsComponent } from './modules/product/product-details/product-details.component';
-import { ListStoreComponent } from './modules/store/list-store/list-store.component';
 import { StoreHomeComponent } from './modules/store/store-home/store-home.component';
+import { StoreListComponent } from './modules/store/store-list/store-list.component';
 import { UserAccountComponent } from './modules/user/user-account/user-account.component';
 
 export const routes: Routes = [
@@ -25,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: "stores",
-    component: ListStoreComponent
+    component: StoreListComponent
   },
   {
     path: 'store',

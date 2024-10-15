@@ -1,3 +1,9 @@
+.cartitem-list-empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .cart-items {
   display: flex;
   flex-direction: column;
@@ -8,10 +14,6 @@
 .cart-item {
   display: flex;
   gap: 5px;
-  padding: 8px;
-  border-radius: var(--border-radius);
-  background-color: var(--primary-color);
-  box-shadow: var(--box-shadow);
 }
 
 .quantity {
@@ -100,11 +102,4 @@
 .note {
   display: flex;
   align-items: center;
-
-  button {
-    padding: 6px 2px;
-    background-color: #f0f0f0;
-    background: white;
-    cursor: pointer;
-  }
 }

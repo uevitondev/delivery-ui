@@ -1,20 +1,53 @@
 <main>
-  @if(order){
+    @if(orderDetails){
+    <div class="order-details">
+      @if(orderDetails; as order){
+        <div class="order card">
+          <span>Efetuado em: {{ order.createdAt | date : 'dd/MM/yyyy HH:mm' }}</span>
+          <span>Status: {{ order.status }}</span>
+          <span>Pagamento: {{ order.paymentMethod }}</span>
+          <span>Valor do Pedido: R$ {{ order.total | currency : 'BRL' }}</span>
+        </div>
+      }@else{
+        <p>Não foi possível carregar dados do pedido</p>
+      }
 
-  <div class="order-container">
-    <div class="order">
+   
 
-      <div class="order-details">
-        <span>Efetuado em: {{ order.createdAt  | date : 'dd/MM/yyyy HH:mm' }}</span>
-        <span>Status: {{ order.status }}</span>
-        <span>Pagamento: {{ order.paymentMethod }}</span>
-        <span>Valor do Pedido: R$ {{ order.total | currency : 'BRL' }}</span>
+      <div class="details-address">
+        <p>Enviado para:</p>
+        @if(orderDetails.deliveryAddress; as address){        
+        <div class="address card">
+          <p>{{address.name}} +55 {{address.phoneNumber}}</p>
+          <p>{{address.street}} - {{address.number}} </p>
+          <p>{{address.complement}}</p>
+          <p>{{address.district}}</p>
+          <p>{{address.city}} - {{address.uf}} - {{address.zipCode}}</p>
+        </div>
+        }@else{
+        <p>Não foi possível carregar dados de entrega do pedido</p>
+        }
       </div>
 
+      <div class="details-store">
+        <p>Loja:</p>
+        @if(orderDetails.store; as store){   
+          <app-storec
+          [logoUrl]="store.logoUrl"
+          [name]="store.name"
+          [phoneNumber]="store.phoneNumber"
+          [type]="store.type"
+          >
+          </app-storec>  
+        }@else{
+        <p>Não foi possível carregar dados de loja do pedido</p>
+        }
+      </div>  
+
       <div class="order-items">
-        <h3>Items: </h3>
-        @for(orderitem of order.orderItems; track orderitem){
-        <div class="order-item">
+        <p>Items: </p>
+        @for(orderitem of orderDetails.orderItems; track orderitem){
+        <div class="order-item card">
           <div class="order-item-left">
             <span>{{orderitem.quantity}}x </span>
             <span>R$ {{orderitem.price | currency : 'BRL'}}</span>
@@ -22,41 +55,11 @@
             <span>{{orderitem.name}}</span>
           </div>
           <div class="order-item-right">
-            <span>subtotal: {{orderitem.totalPrice | currency : 'BRL'  }} </span>
+            <span>subtotal: {{orderitem.totalPrice | currency : 'BRL' }} </span>
           </div>
         </div>
         }
       </div>
-
-
-      <div class="order-customer-data">
-        <h3>Cliente:</h3>
-        <span>{{order.customer.name}}</span>
-        <span>Phone Number: {{order.customer.phoneNumber}}</span>
-      </div>
-
-      <div class="order-store-data">
-        <h3>Loja:</h3>
-        <div>
-          <img src={{order.store.logoUrl}} alt="">
-          <span> {{order.store.type}} - {{order.store.name}}</span>
-        </div>
-        <span>Phone Number: {{order.store.phoneNumber}}</span>
-      </div>
-
-      <div class="order-delivery-address">
-        <H3>Endereço de Entrega:</H3>
-        <span> {{order.deliveryAddress.street}}, {{ order.deliveryAddress.number }} ( {{order.deliveryAddress.district}}
-          ) </span>
-        <span> {{order.deliveryAddress.city}} - {{ order.deliveryAddress.uf }}</span>
-        <span> {{ order.deliveryAddress.complement }}</span>
-      </div>
-
     </div>
-
-
-  </div>
-
   }
-
 </main>

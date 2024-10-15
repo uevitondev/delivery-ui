@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { StorageService } from '../../../core/services/storage.service';
-import { ListStoreComponent } from '../../store/list-store/list-store.component';
-import { StoreHomeComponent } from '../../store/store-home/store-home.component';
 import { Store } from '../../../core/models/store';
+import { StorageService } from '../../../core/services/storage.service';
+import { StoreHomeComponent } from '../../store/store-home/store-home.component';
+import { StoreListComponent } from '../../store/store-list/store-list.component';
 
 @Component({
   selector: 'app-home-layout',
   standalone: true,
   imports: [
     StoreHomeComponent,
-    ListStoreComponent
+    StoreListComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'

@@ -5,24 +5,19 @@ main{
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 8px;
 }
 
 .pages{ 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 8px;
 }
 
-button{
-  border: none;
-  cursor: pointer;
-  padding: var(--padding);
-}
 
 .current-page{
-  border: 1px solid red;
+  border: 2px solid var(--primary);
 }
 
 

@@ -1,5 +1,13 @@
-main{
+main {
   padding: var(--padding);
+}
+
+.payment-list-loading,
+.payment-list-empty {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 .payments {

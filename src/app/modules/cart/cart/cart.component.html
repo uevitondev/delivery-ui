@@ -1,42 +1,48 @@
 <main>
-  @if(cartService.cartItems()){
-  @if(cartService.cartItems().length > 0){
-  <div class="cart-flex-1">
-    <div class="cart">
-      <div class="cart-header">
-        <p>CARRINHO DE COMPRAS</p>
-        <div class="cart-header-actions">
-          <button (click)="cartService.clearCart()">LIMPAR CARRINHO</button>
-          <button (click)="routerService.toHome()">COMPRAR MAIS</button>
+
+
+  <div class="cart-flex">
+    @if(cartService.cartItems()){
+    @if(cartService.cartItems().length > 0){
+    <div class="cart-flex-01">
+
+      <div class="cart-content">
+        <div class="header">
+          <p>CARRINHO DE COMPRAS</p>
+          <div class="header-actions">
+            <button class="btn-primary" (click)="cartService.clearCart()">LIMPAR CARRINHO</button>
+            <button class="btn-primary" (click)="routerService.toHome()">COMPRAR MAIS</button>
+          </div>
+        </div>
+
+        <app-cartitem-list [showEditQuantity]="true" [showRemove]="true">
+        </app-cartitem-list>
+
+      </div>
+    </div>
+
+    <div class="cart-flex-02">
+      <div class="cart-resume card">
+        <div class="cart-resume-details">
+          <p class="cart-resume-title">RESUMO</p>
+          <p>Subtotal: {{ cartService.cartSubtotal() | currency : "BRL" }}</p>
+          <p>Total: <strong>{{ cartService.cartTotal() | currency : "BRL" }}</strong></p>
+        </div>
+        <div class="cart-resume-actions">
+          <button class="btn-secondary" (click)="routerService.toCheckout()">CONTINUAR</button>
         </div>
       </div>
-
-      <app-cartitem-list [showEditQuantity]="true" [showRemove]="true">
-      </app-cartitem-list>
-
     </div>
-  </div>
-
-  <div class="cart-resume">
-    <div class="resume">
-      <div class="resume-details">
-        <p class="resume-title">RESUMO</p>
-        <p>Subtotal: {{ cartService.cartSubtotal() | currency : "BRL" }}</p>
-        <p>Total: <strong>{{ cartService.cartTotal() | currency : "BRL" }}</strong></p>
-      </div>
-      <div class="resume-actions">
-        <button (click)="routerService.toCheckout()">CONTINUAR</button>
+    }@else{
+    <div class="cart-empty">
+      <mat-icon class="cart-icon">shopping_cart</mat-icon>
+      <span> "SEU CARRINHO ESTÁ VAZIO"</span>
+      <div class="cart-empty-actions">
+        <button class="btn-primary" (click)="routerService.toHome()">IR PARA PRODUTOS...</button>
       </div>
     </div>
+    }
+    }
   </div>
-  }@else{
-  <div class="cart-empty">
-    <mat-icon class="cart-icon">shopping_cart</mat-icon>
-    <span> "SEU CARRINHO ESTÁ VAZIO"</span>
-    <div class="btn-container">
-      <button (click)="routerService.toHome()">IR PARA PRODUTOS...</button>
-    </div>
-  </div>
-  }
-  }
+
 </main>

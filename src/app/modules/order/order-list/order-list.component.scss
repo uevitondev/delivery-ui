@@ -1,12 +1,15 @@
-:host {
-  display: block;
-}
-
 main {
   display: flex;
   justify-content: center;
   padding: var(--padding);
-  min-height: calc(100vh - var(--height-navbar));
+}
+
+.order-list-loading,
+.order-list-empty {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
 }
 
 .orders {
@@ -20,10 +23,6 @@ main {
   flex-direction: column;
   flex-wrap: wrap;
   gap: 25px;
-  padding: var(--padding);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  background-color: var(--primary-color); 
 }
 
 .header {
@@ -32,21 +31,10 @@ main {
   justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 25px;
-  padding: var(--padding);
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  background-color: var(--primary-color);
 }
 
 .bottom {
   display: flex;
   justify-content: end;
 
-}
-
-.btn-wrapper button {
-  border: none;
-  cursor: pointer;
-  padding: var(--padding);
-  border-radius: var(--border-radius);
 }

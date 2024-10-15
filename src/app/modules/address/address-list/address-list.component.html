@@ -7,14 +7,19 @@
 
       @if(isAddable){
       <div class="addable">
-        <button (click)="routerService.toNewAddress()">NOVO ENDEREÇO</button>
+        <button class="btn-primary" (click)="routerService.toNewAddress()">NOVO ENDEREÇO</button>
       </div>
       }
     </div>
 
+    @if(isLoading){
+    <div class="address-list-loading">
+      <p>CARREGANDO ENDEREÇOS...</p>
+    </div>
+    }@else{
     <div class="addresses">
       @for(address of addresses; track address){
-      <div class="address">
+      <div class="address card">
         <div class="wrapper">
           <div class="details">
             <p>{{address.name}} +55 {{address.phoneNumber}}</p>
@@ -34,21 +39,23 @@
         <div class="actions">
           @if(isEditable){
           <div class="edit">
-            <button (click)="editAddress(address)">editar</button>
+            <button class="btn-secondary" (click)="editAddress(address)">editar</button>
           </div>
           }
 
           @if(isDeletable){
           <div class="delete">
-            <button (click)="deleteAddress(address.id)">excluir</button>
+            <button class="btn-secondary" (click)="deleteAddress(address.id)">excluir</button>
           </div>
           }
         </div>
       </div>
-
       }@empty {
-      <p>"VOCÊ NÃO TEM ENDEREÇOS CADASTRADOS"</p>
+      <div class="address-list-empty">
+        <p>"VOCÊ NÃO TEM ENDEREÇOS CADASTRADOS"</p>
+      </div>
       }
     </div>
+    }
   </div>
 </main>

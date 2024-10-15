@@ -6,7 +6,7 @@
   }@else{
   <div class="stores">
     @for (store of stores; track store) {
-    <div class="store">
+    <div class="store card">
 
       <div class="store-details-wrapper">
         <div class="store-logo">
@@ -20,11 +20,13 @@
       </div>
       
       <div class="store-actions">
-        <button (click)="selectStore(store)">VER PRODUTOS</button>
+        <button class="btn-secondary" (click)="selectStore(store)">VER PRODUTOS</button>
       </div>
     </div>
     } @empty {
-    <p>"NENHUMA LOJA PARA LISTAR"</p>
+      <div class="store-list-empty">
+        <p>LOJAS "VAZIO"</p>
+      </div>   
     }
   </div>
   }

@@ -5,6 +5,7 @@ import { Address } from '../../../core/models/address';
 import { AddressService } from '../../../core/services/address.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { RouterService } from '../../../core/services/router.service';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-address-list',
@@ -29,7 +30,7 @@ export class AddressListComponent implements OnInit {
   location = inject(Location);
 
   addresses: Address[] = [];
-  defaultAddress!: Address;
+  isLoading = false;
 
   ngOnInit(): void {
     this.loadAddresses();
@@ -40,15 +41,15 @@ export class AddressListComponent implements OnInit {
   }
 
   loadAddresses(): void {
+    this.isLoading = true;
     this.addressService.getAllByUser().subscribe({
       next: (addresses) => {
         this.addresses = addresses;
-        if (this.addresses.length != 0) {
-          this.defaultAddress = this.addresses[0];
-        }
+        this.isLoading = false;
       },
       error: (e) => {
-        this.toastService.error("Erro ao listar endereços!");
+        this.isLoading = false;
+        throw new Error(e);
       }
     });
   }
@@ -68,8 +69,6 @@ export class AddressListComponent implements OnInit {
       this.loadAddresses();
     });
   }
-
-
 
 
 

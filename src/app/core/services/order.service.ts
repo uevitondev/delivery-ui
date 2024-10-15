@@ -11,21 +11,19 @@ import { ShoppingCartRequest } from '../models/shopping-cart-request';
 })
 export class OrderService {
 
-  ENV = environment;
+  apiUrl = environment.API_URL;
   httpClient = inject(HttpClient);
 
   saveNew(shoppingcart: ShoppingCartRequest): Observable<OrderResponse> {
-    return this.httpClient.post<OrderResponse>(`${this.ENV.API_URL}/orders`, shoppingcart);
+    return this.httpClient.post<OrderResponse>(`${this.apiUrl}/orders`, shoppingcart);
   }
 
   getAllByCustomer(): Observable<OrderResponse[]> {
-    return this.httpClient.get<OrderResponse[]>(`${this.ENV.API_URL}/orders/customer`);
+    return this.httpClient.get<OrderResponse[]>(`${this.apiUrl}/orders/customer`);
   }
 
   getByIdWithOrderItems(orderId: string): Observable<OrderDetails> {
-    return this.httpClient.get<OrderDetails>(`${this.ENV.API_URL}/orders/${orderId}/customer`);
+    return this.httpClient.get<OrderDetails>(`${this.apiUrl}/orders/${orderId}/customer`);
   }
-
-
 
 }

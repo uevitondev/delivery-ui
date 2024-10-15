@@ -5,11 +5,15 @@ import { ToastrService } from 'ngx-toastr';
 import { OrderDetails } from '../../../core/models/order-details';
 import { OrderService } from '../../../core/services/order.service';
 import { StorageService } from '../../../core/services/storage.service';
+import { StorecComponent } from '../../store/storec/storec.component';
 
 @Component({
   selector: 'app-order-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    StorecComponent,
+    CommonModule
+  ],
   templateUrl: './order-details.component.html',
   styleUrl: './order-details.component.scss'
 })
@@ -21,21 +25,21 @@ export class OrderDetailsComponent implements OnInit {
   storageService = inject(StorageService);
   orderService = inject(OrderService);
 
-  order!: OrderDetails;
+  orderDetails!: OrderDetails;
 
   ngOnInit(): void {
     let orderId = this.activatedRoute.snapshot.params['orderId'];
-    this.loadOrder(orderId);
+    this.loadOrderDetails(orderId);
   }
 
 
-  loadOrder(orderId: string) {
+  loadOrderDetails(orderId: string) {
     return this.orderService.getByIdWithOrderItems(orderId).subscribe({
-      next: (orderCustomerResponse) => {
-        this.order = orderCustomerResponse;
+      next: (response) => {
+        this.orderDetails = response;
       },
       error: (e) => {
-        this.toastService.error('ERRO AO CARREGAR DADOS DO PEDIDO!');
+        return new Error(e);
       }
     });
   }

@@ -1,8 +1,14 @@
 main {
-    margin: 24px auto;
+    width: 100%;
+    min-height: 100%;
+}
+
+.checkout-flex {
     display: flex;
-    gap: 30px;
-    width: 90%;
+    gap: 100px;
+    width: 75%;
+    padding: 12px;
+    margin: 0 auto;
 }
 
 
@@ -10,47 +16,55 @@ main {
     flex: 1;
 }
 
-.checkout {
-    max-width: 768px;
-    padding: 12px;
-    padding: 12px;
+.checkout-content {
+    width: 100%;
+    max-width: 650px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 5px;
+    padding: var(--padding);
 
+    .header {
+        display: flex;
+        flex-direction: column;
+        padding: var(--padding);
 
+        p {
+            color: #222;
+            font-weight: 700;
+            font-size: 24px;
+        }
+    }
 }
 
-.checkout-title {
-    color: #222;
-    font-weight: 700;
-    font-size: 24px;
-}
 
-.card {
+
+.checkout-items {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 8px;
-    border-radius: 8px;
-    box-shadow: var(--box-shadow);
-    background-color: var(--primary-color);
+    gap: 12px;
 }
 
-.card-header {
+.checkout-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: var(--padding);
+}
+
+
+.item-header {
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
 }
 
-button {
-    padding: 5px 10px;
-    background-color: #f0f0f0;
-    background: white;
-    border: none;
-    cursor: pointer;
+.divider {
+    border: 1px solid gray;
+    background: gray;
 }
+
 
 
 .address {
@@ -85,48 +99,38 @@ button {
 }
 
 .checkout-flex-02 {
-    flex: 0.3;
+    flex: 0.5;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.resume {
+.checkout-resume {
+    width: 100%;
+    max-width: 340px;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    border-radius: 0;
-    padding: var(--padding);
-    background-color: var(--primary-color);
-    box-shadow: var(--box-shadow);
 }
 
-.resume-details {
+.checkout-resume-details {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.resume-title {
+.checkout-resume-title {
     color: #222;
     font-size: 24px;
     font-weight: 700;
 }
 
-.resume-actions {
+.checkout-resume-actions {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 8px;
-
-    button {
-        padding-top: 10px;
-        padding-bottom: 10px;
-        background: #fff;
-        border: none;
-        cursor: pointer;
-    }
 }
 
 .no-auth {
@@ -147,20 +151,15 @@ button {
 }
 
 
-@media (max-width: 768px) {
-    main {
-        width: 100%;
-        padding: 5px;
-    }
+@media (max-width: 1024px) {
 
-    .checkout-flex-01 {
+    .checkout-flex {
         width: 100%;
         margin: 0;
         padding: 0;
-        margin-bottom: 100px;
     }
 
-    .checkout {
+    .checkout-content {
         margin: 0;
         padding: 0;
     }
@@ -177,7 +176,11 @@ button {
         right: 0;
     }
 
-    .resume {
+    .checkout-items {
+        margin-bottom: 100px;
+    }
+
+    .checkout-resume {
         width: 100%;
         max-width: 100%;
         display: flex;
@@ -186,10 +189,12 @@ button {
         align-items: center;
         padding: 5px;
         height: 100%;
-    
-        .resume-title {
-          display: none;
+        border-radius: 0;
+        margin-bottom: 100px;
+
+        .checkout-resume-title {
+            display: none;
         }
-      }
+    }
 
 }

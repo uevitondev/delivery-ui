@@ -1,17 +1,24 @@
 main {
-  margin: 24px auto;
+  width: 100%;
+  min-height: 100%;
+}
+
+.cart-flex {
   display: flex;
-  gap: 30px;
-  width: 90%;
+  gap: 100px;
+  width: 75%;
+  padding: 12px;
+  margin: 0 auto;
 }
 
 
-.cart-flex-1 {
+.cart-flex-01 {
   flex: 1;
 }
 
-.cart {
-  max-width: 768px;
+.cart-content {
+  width: 100%;
+  max-width: 650px;
   padding: 12px;
   padding: 12px;
   display: flex;
@@ -20,9 +27,10 @@ main {
 }
 
 
-.cart-header {
+.header {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 16px;
 
@@ -32,156 +40,47 @@ main {
     font-size: 24px;
   }
 
-  .cart-header-actions {
+  .header-actions {
     display: flex;
     gap: 16px;
-
-    button {
-      padding-top: 10px;
-      padding-bottom: 10px;
-      background: #fff;
-      border: 1px solid black;
-      cursor: pointer;
-    }
-  }
-}
-
-.cart-items {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-height: 100%;
-}
-
-.cart-item {
-  display: flex;
-  gap: 12px;
-  padding: 8px;
-  border-radius: var(--border-radius);
-  background-color: var(--primary-color);
-  box-shadow: var(--box-shadow);
-}
-
-
-.cart-item-image {
-  border-radius: 50%;
-  width: 80px;
-
-  img {
-    border-radius: 100%;
-    width: 100%;
-  }
-}
-
-
-.cart-item-details {
-  width: 100%;
-  display: flex;
-}
-
-.cart-item-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-
-
-.cart-item-actions {
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.cart-item-quantity {
-  display: block;
-  align-content: center;
-
-  .cart-item-quantiry-border {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid gray;
-  }
-
-  button {
-    padding: 5px 10px;
-    background-color: #f0f0f0;
-    background: white;
-    border: none;
-    cursor: pointer;
   }
 }
 
 
 
-.quantity {
-  width: 25px;
-  align-items: center;
-  text-align: center;
-  margin: 0 10px;
-
-}
-
-.cart-item-remove {
-  display: flex;
-  align-items: center;
-  margin-left: 16px;
-  margin-right: 16px;
-}
-
-.btn-remove-cart-item {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-.cart-resume {
-  flex: 0.3;
+.cart-flex-02 {
+  flex: 0.5;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.resume {
+.cart-resume {
+  width: 100%;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
   gap: 25px;
-  border-radius: 0;
-  padding: var(--padding);
-  background-color: var(--primary-color);
-  box-shadow: var(--box-shadow);
 }
 
-.resume-details {
+.cart-resume-details {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.resume-title {
+.cart-resume-title {
   color: #222;
   font-size: 24px;
   font-weight: 700;
 }
 
-.resume-actions {
+.cart-resume-actions {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 8px;
-
-
-  button {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background: #fff;
-    border: none;
-    cursor: pointer;
-  }
 }
 
 
@@ -201,28 +100,15 @@ main {
     height: 150px;
     width: 150px;
   }
-  .btn-container button {
-    width: 190px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background: #fff;
-    border: 1px solid gray;
-    cursor: pointer;
-  }
-  
+
 }
 
-@media (max-width: 768px) {
-  main {
-    width: 100%;
-    padding: 5px;
-  }
+@media (max-width: 1024px) {
 
-  .cart {
+  .cart-flex {
     width: 100%;
     margin: 0;
     padding: 0;
-    margin-bottom: 100px;
   }
 
   .cart-header {
@@ -234,6 +120,7 @@ main {
     flex-direction: column;
     margin: 0;
     padding: 5px;
+    margin-bottom: 100px;
   }
 
   .cart-item {
@@ -258,7 +145,7 @@ main {
   }
 
 
-  .cart-resume {
+  .cart-flex-02 {
     display: block;
     position: fixed;
     width: 100%;
@@ -270,17 +157,17 @@ main {
     right: 0;
   }
 
-  .resume {
+  .cart-resume {
     width: 100%;
     max-width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
+    border-radius: 0;
     height: 100%;
 
-    .resume-title {
+    .cart-resume-title {
       display: none;
     }
   }

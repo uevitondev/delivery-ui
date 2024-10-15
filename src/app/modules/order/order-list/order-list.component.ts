@@ -1,10 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { OrderResponse } from '../../../core/models/order-response';
 import { OrderService } from '../../../core/services/order.service';
 import { StorageService } from '../../../core/services/storage.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-order-list',
@@ -20,18 +20,22 @@ export class OrderListComponent implements OnInit {
   storageService = inject(StorageService);
   orderService = inject(OrderService);
   orders!: OrderResponse[];
+  isLoading: boolean = false;
 
   ngOnInit(): void {
     this.loadOrders();
   }
 
   loadOrders() {
+    this.isLoading = true;
     return this.orderService.getAllByCustomer().subscribe({
       next: (orderResponse) => {
         this.orders = orderResponse;
+        this.isLoading = false;
       },
       error: (e) => {
-        this.toastService.error('ERRO AO LISTAR PEDIDOS!');
+        this.isLoading = false;
+        throw new Error(e);
       }
     });
   }

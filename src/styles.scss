@@ -22,16 +22,42 @@ $app-dark-theme: mat.define-theme((color: (theme-type: dark,
 @import 'ngx-toastr/toastr';
 
 :root {
-  --primary-color: #FBD148;
-  --secondary-color: #FAFAFA;
-  --tertiary-color: #232423;
-  --accent-color: #FF5252;
-  --font-size: 16px;
-  --padding: 12px;
-  --border-radius: 8px;
+  --primary: #FBD148;
+  --secondary: #FAFAFA;
+  --tertiary: #232423;
+  --box-shadow: 2px 2px gray;
+  --padding: 8px;
   --border: 1px solid gray;
-  --box-shadow: 2px 2px 2px 2px gray;
+  --radius: 8px;
   --navbar-height: 60px;
+}
+
+.card{
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: var(--padding);
+  box-shadow: var(--box-shadow);
+  background-color: var(--primary);
+  
+}
+
+
+.btn-primary {
+  font-size: 13px;
+  border-radius: 99px;
+  padding: 4px 10px;
+  border: var(--border);
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+.btn-secondary {
+  font-size: 13px;
+  border-radius: 99px;
+  padding: 4px 10px;
+  border: var(--border);
+  background-color: var(--secondary);
+  cursor: pointer;
 }
 
 * {

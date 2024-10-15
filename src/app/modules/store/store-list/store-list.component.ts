@@ -5,24 +5,25 @@ import { environment } from '../../../../environments/environment';
 import { Store } from '../../../core/models/store';
 import { StorageService } from '../../../core/services/storage.service';
 import { StoreService } from '../../../core/services/store.service';
-import { delay } from 'rxjs';
+import { RouterService } from '../../../core/services/router.service';
 
 @Component({
-  selector: 'app-list-store',
+  selector: 'app-store-list',
   standalone: true,
   imports: [],
-  templateUrl: './list-store.component.html',
-  styleUrl: './list-store.component.scss'
+  templateUrl: './store-list.component.html',
+  styleUrl: './store-list.component.scss'
 })
-export class ListStoreComponent implements OnInit {
+export class StoreListComponent implements OnInit {
 
   storageService = inject(StorageService);
   storeService = inject(StoreService);
   toastService = inject(ToastrService);
-  router = inject(Router);
+  routerService = inject(RouterService);
 
-  ENV = environment;
-  stores!: Store[];
+  storedStore = environment.STORED_STORE;
+
+  stores: Store[] = [];
   isLoading: boolean = false;
 
   ngOnInit(): void {
@@ -39,15 +40,15 @@ export class ListStoreComponent implements OnInit {
       },
       error: (e) => {
         this.isLoading = false;
-        throw new Error(e);
+        return new Error(e);
       }
     });
   }
 
   selectStore(store: Store) {
-    this.storageService.remove(this.ENV.STORED_STORE);
-    this.storageService.save(this.ENV.STORED_STORE, store);
-    this.router.navigate(["home"]);
+    this.storageService.remove(this.storedStore);
+    this.storageService.save(this.storedStore, store);
+    this.routerService.toHome();
   }
 
 }

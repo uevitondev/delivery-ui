@@ -1,90 +1,108 @@
 <main>
 
-    @if(authService.isLogged()){
-    <div class="checkout-flex-01">
-        <div class="checkout">
-            <p class="checkout-title">CHECKOUT DE PEDIDO</p>
-            <div class="card">
-                <div class="card-header">
-                    <h3>Endereço de Entrega</h3>
-                    <button (click)="modalAddresses.toggle()">Alterar</button>
-                </div>
-                <app-modal #modalAddresses>
-                    <app-address-list [isAddable]="true" [isSelectable]="true"
-                        (selectedAddressEvent)=selectAddress($event)>
-                    </app-address-list>
-                </app-modal>
-                @if(checkoutAddress){
-                <div class="address">
-                    <p>{{checkoutAddress.name}} | +55 {{checkoutAddress.phoneNumber}}</p>
-                    <p>{{checkoutAddress.street}} - {{checkoutAddress.number}} </p>
-                    <p>{{checkoutAddress.complement}}</p>
-                    <p>{{checkoutAddress.district}}</p>
-                    <p>{{checkoutAddress.city}} - {{checkoutAddress.uf}} - {{checkoutAddress.zipCode}}</p>
-                </div>
-                }@else{
-                <p>selecione um endereço para entrega</p>
-                }
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>Forma de Pagamento</h3>
-                    <button (click)="modalPayments.toggle()">Alterar</button>
-                </div>
-                <app-modal #modalPayments>
-                    <app-payment-list (selectedPaymentMethodEvent)=selectPaymentMethod($event)>
-                    </app-payment-list>
-                </app-modal>
-                @if(checkoutPaymentMethod){
-                <div class="payment">
-                    {{checkoutPaymentMethod}}
-                </div>
-                }@else{
-                <p>selecione uma forma de pagamento</p>
-                }
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>Items do Carrinho</h3>
+    <div class="checkout-flex">
+        @if(authService.isLogged()){
+        <div class="checkout-flex-01">
+            <div class="checkout-content">
+                <div class="header">
+                    <p>CHECKOUT DE PEDIDO</p>
                 </div>
 
-                <app-cartitem-list [showQuantity]="true" [showNote]="true">
-                </app-cartitem-list>
-            </div>
+                <div class="checkout-items">
+                    <div class="checkout-item">
+                        <div class="item-header">
+                            <h3>Endereço de Entrega</h3>
+                            <button class="btn-primary" (click)="modalAddresses.toggle()">Alterar</button>
+                        </div>
 
-        </div>
-    </div>
+                        <app-modal #modalAddresses>
+                            <app-address-list [isAddable]="true" [isSelectable]="true"
+                                (selectedAddressEvent)=selectAddress($event)>
+                            </app-address-list>
+                        </app-modal>
+                        @if(checkoutAddress){
+                        <div class="address card">
+                            <p>{{checkoutAddress.name}} | +55 {{checkoutAddress.phoneNumber}}</p>
+                            <p>{{checkoutAddress.street}} - {{checkoutAddress.number}} </p>
+                            <p>{{checkoutAddress.complement}}</p>
+                            <p>{{checkoutAddress.district}}</p>
+                            <p>{{checkoutAddress.city}} - {{checkoutAddress.uf}} - {{checkoutAddress.zipCode}}</p>
+                        </div>
+                        }@else{
+                        <div>
+                            <div class="divider"></div>
+                            <p>Escolha um endereço para entrega do pedido.</p>
+                        </div>
+                        }
+                    </div>
+
+                    <div class="checkout-item">
+                        <div class="item-header">
+                            <h3>Forma de Pagamento</h3>
+                            <button class="btn-primary" (click)="modalPayments.toggle()">Alterar</button>
+                        </div>
+                        <app-modal #modalPayments>
+                            <app-payment-list (selectedPaymentMethodEvent)=selectPaymentMethod($event)>
+                            </app-payment-list>
+                        </app-modal>
+                        @if(checkoutPaymentMethod){
+                        <div class="payment card">
+                            {{checkoutPaymentMethod}}
+                        </div>
+                        }@else{
+                        <div>
+                            <div class="divider"></div>
+                            <p>Escolha a forma de pagameto para entrega do pedido.</p>
+                        </div>
+                        }
+                    </div>
+
+                    <div class="checkout-item">
+                        <div class="item-header">
+                            <h3>Items do Carrinho</h3>
+                        </div>
+
+                        <app-cartitem-list [showQuantity]="true" [showNote]="true">
+                        </app-cartitem-list>
+                    </div>
+
+                </div>
 
 
-    <div class="checkout-flex-02">
-        <div class="resume card">
-            <div class="resume-details">
-                <p class="resume-title">RESUMO</p>
-                <p>Subtotal: {{ cartService.cartSubtotal() | currency : "BRL" }}</p>
-                <p>Total: <strong>{{ cartService.cartTotal() | currency : "BRL" }}</strong></p>
-            </div>
-            <div class="resume-actions">
-                @if(isLoading){
-                <button class="btn btn-primary" [disabled]="isLoading" type="button" disabled>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                    <span class="sr-only">PROCESSANDO...</span>
-                </button>
-                }@else{
-                <button [disabled]="checkoutIsInvalid()" (click)="saveOrder()">FAZER PEDIDO</button>
-                }
+
             </div>
         </div>
+
+
+        <div class="checkout-flex-02">
+            <div class="checkout-resume card">
+                <div class="checkout-resume-details">
+                    <p class="checkout-resume-title">RESUMO</p>
+                    <p>Subtotal: {{ cartService.cartSubtotal() | currency : "BRL" }}</p>
+                    <p>Total: <strong>{{ cartService.cartTotal() | currency : "BRL" }}</strong></p>
+                </div>
+                <div class="checkout-resume-actions">
+                    @if(isLoading){
+                    <button class="btn-primary" [disabled]="isLoading" type="button" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span class="sr-only">PROCESSANDO...</span>
+                    </button>
+                    }@else{
+                    <button class="btn-secondary" [disabled]="checkoutIsInvalid()" (click)="saveOrder()">FAZER
+                        PEDIDO</button>
+                    }
+                </div>
+            </div>
+        </div>
+
+        }@else{
+        <div class="no-auth">
+            <p>LOGIN NECESSÁRIO</p>
+            <button (click)="routerService.toSignIn()">LOGIN</button>
+        </div>
+        }
+
     </div>
 
 
-
-
-    }@else{
-    <div class="no-auth">
-        <p>LOGIN NECESSÁRIO</p>
-        <button (click)="routerService.toSignIn()">LOGIN</button>
-    </div>
-    }
 </main>

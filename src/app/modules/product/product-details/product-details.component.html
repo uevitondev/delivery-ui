@@ -9,7 +9,7 @@
   </div>
 
   <div class="wrapper-flex-02">
-    <div class="details-wrapper">
+    <div class="details-wrapper card">
 
       <div class="product-details">
         <p class="name">{{product.name}}</p>
@@ -17,15 +17,15 @@
         <p class="desc">{{ product.description }}</p>
       </div>
 
+      <div class="product-actions">    
+      
+        <div class="product-edit-quantity">          
+          <button (click)="decrementProductQuantity()">-</button>
+          <p class="quantity">{{ productQuantity }}</p>
+          <button (click)="incrementProductQuantity()">+</button>
+        </div>
 
-      <div class="product-edit-quantity">
-        <button (click)="decrementProductQuantity()">-</button>
-        <p class="quantity">{{ productQuantity }}</p>
-        <button (click)="incrementProductQuantity()">+</button>
-      </div>
-
-      <div class="product-actions">
-        <button class="btn-add-cart" (click)="addToCart(product)">COMPRAR AGORA</button>
+        <button class="btn-secondary" (click)="addToCart(product)">COMPRAR AGORA</button>
       </div>
 
     </div>

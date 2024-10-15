@@ -1,4 +1,9 @@
 <main>
+  @if(isLoading){
+  <div class="payment-list-loading">
+    <p>CARREGANDO FORMAS DE PAGAMENTO...</p>
+  </div>
+  }@else{
   <div class="payments">
     @for(payment of paymentMethods; track payment){
     <div class="payment">
@@ -6,7 +11,11 @@
       <input type="radio" name="radiogroup" [value]="" (change)="selectPaymentMethod(payment)">
     </div>
     }@empty{
-    <p>Não há formas de pagamento para listar</p>
+    <div class="payment-list-empty">
+      <p>FORMAS DE PAGAMENTO "VAZIO"</p>
+    </div>
     }
   </div>
+  }
+
 </main>
