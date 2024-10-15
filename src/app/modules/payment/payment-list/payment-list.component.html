@@ -1,17 +1,17 @@
 <main>
   @if(isLoading){
-  <div class="payment-list-loading">
+  <div class="payment-method-list-loading">
     <p>CARREGANDO FORMAS DE PAGAMENTO...</p>
   </div>
   }@else{
-  <div class="payments">
+  <div class="payment-methods">
     @for(payment of paymentMethods; track payment){
-    <div class="payment">
-      <p>{{payment}}</p>
+    <div class="payment-method card">
+      <p>{{payment.name}}</p>
       <input type="radio" name="radiogroup" [value]="" (change)="selectPaymentMethod(payment)">
     </div>
     }@empty{
-    <div class="payment-list-empty">
+    <div class="payment-method-list-empty">
       <p>FORMAS DE PAGAMENTO "VAZIO"</p>
     </div>
     }

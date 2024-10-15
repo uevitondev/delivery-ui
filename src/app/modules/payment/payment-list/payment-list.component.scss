@@ -2,22 +2,22 @@ main {
   padding: var(--padding);
 }
 
-.payment-list-loading,
-.payment-list-empty {
+.payment-method-list-loading,
+.payment-method-list-empty {
   display: flex;
   align-items: center;
   align-content: center;
   justify-content: center;
 }
 
-.payments {
+.payment-methods {
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: var(--padding);
 }
 
-.payment {
+.payment-method {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

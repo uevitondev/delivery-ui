@@ -10,11 +10,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px;
 }
 
 .category {
-  flex: 1;
+  //flex: 1;
   display: flex;
   gap: 8px;
   color: var(--text-color);
@@ -27,6 +26,11 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     flex-wrap: wrap;
+  }
+
+  .category {
+    width: 140px;
   }
 }

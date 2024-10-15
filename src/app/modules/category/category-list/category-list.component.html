@@ -6,7 +6,7 @@
   }@else{
   <div class="categories">
     @for(category of categories; track category.id; let i = $index){
-    <div class="category">
+    <div class="category card">
       @if(isChecked) {
       <form [formGroup]="checkForm">
         <div formArrayName="checkboxes">

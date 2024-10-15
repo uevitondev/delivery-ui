@@ -19,6 +19,8 @@ import { AddressListComponent } from '../../address/address-list/address-list.co
 import { PaymentListComponent } from '../../payment/payment-list/payment-list.component';
 import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.component';
 import { CartitemListComponent } from '../cartitem-list/cartitem-list.component';
+import { PaymentMethod } from '../../../core/models/payment-method';
+import { PaymentService } from '../../../core/services/payment.service';
 
 @Component({
   selector: 'app-cart-checkout',
@@ -64,41 +66,63 @@ export class CartCheckoutComponent implements OnInit {
   routerService = inject(RouterService);
   authService = inject(AuthService);
   addressService = inject(AddressService);
+  paymentService = inject(PaymentService);
   cartService = inject(CartService);
   orderService = inject(OrderService);
-  cartItems$ = this.cartService.cartItems;
 
-  checkoutStore!: Store;
-  checkoutAddress!: Address;
-  checkoutPaymentMethod!: string;
+  address!: Address;
+  paymentMethod!: PaymentMethod;
+  store!: Store;
+  cartItems!: CartItem[];
 
   isLoading: boolean = false;
-  cartItems = this.cartService.cartItems();
 
   ngOnInit(): void {
     this.loadCheckoutStore();
   }
 
   loadCheckoutStore() {
-    let store = this.storageService.get(this.STORED_STORE);
-    if (store) {
-      this.checkoutStore = store;
+    let storedStore = this.storageService.get(this.STORED_STORE);
+    if (storedStore) {
+      this.store = storedStore;
     }
+    this.addressService.getAllByUser().subscribe({
+      next: (response) => {
+        if (response.length >= 1) {
+          this.address = response[0];
+        }
+      },
+      error: (e) => {
+        throw new Error(e);
+      }
+    });
+
+    this.paymentService.getAllPaymentMethods().subscribe({
+      next: (response) => {
+        if (response.length >= 1) {
+          this.paymentMethod = response[0];
+        }
+      },
+      error: (e) => {
+        throw new Error(e);
+      }
+    });
+    this.cartItems = this.cartService.cartItems();
   }
 
-  selectAddress(address: Address): void {
-    this.checkoutAddress = address;
+  selectAddress(selectedAddress: Address): void {
+    this.address = selectedAddress;
   }
 
-  selectPaymentMethod(paymentMethod: string): void {
-    this.checkoutPaymentMethod = paymentMethod;
+  selectPaymentMethod(selectedPaymentMethod: PaymentMethod): void {
+    this.paymentMethod = selectedPaymentMethod;
   }
 
   checkoutIsInvalid() {
     if (
-      this.checkoutAddress === undefined ||
-      this.checkoutStore === undefined ||
-      this.checkoutPaymentMethod === undefined ||
+      this.address === undefined ||
+      this.store === undefined ||
+      this.paymentMethod === undefined ||
       this.cartItems.length < 1
     ) {
       return true;
@@ -112,9 +136,9 @@ export class CartCheckoutComponent implements OnInit {
     this.isLoading = true;
 
     let shoppingCartRequest: ShoppingCartRequest = {
-      addressId: this.checkoutAddress.id,
-      storeId: this.checkoutStore.id,
-      paymentMethod: this.checkoutPaymentMethod,
+      addressId: this.address.id,
+      storeId: this.store.id,
+      paymentMethod: this.paymentMethod.name,
       cartItems: this.cartItems
     }
 
@@ -127,11 +151,12 @@ export class CartCheckoutComponent implements OnInit {
           this.cartService.clearCart();
           this.routerService.toOrders();
           this.isLoading = false;
-          this.toastService.success("pedido efeuado com sucesso");
+          this.toastService.success("PEDIDO EFETUADO COM SUCESSO");
         },
-        error: (error) => {
+        error: (e) => {
           this.isLoading = false;
-          this.toastService.error("erro ao fazer pedido");
+          this.toastService.error("ERRO AO REALIZAR PEDIDO");
+          throw new Error(e);
         }
       });
   }

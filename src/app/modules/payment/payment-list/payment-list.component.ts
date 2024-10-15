@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { PaymentService } from '../../../core/services/payment.service';
+import { PaymentMethod } from '../../../core/models/payment-method';
 
 @Component({
   selector: 'app-payment-list',
@@ -9,8 +11,10 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class PaymentListComponent implements OnInit {
 
-  @Output() selectedPaymentMethodEvent = new EventEmitter<string>;
-  paymentMethods: string[] = [];
+  @Output() selectedPaymentMethodEvent = new EventEmitter<PaymentMethod>;
+
+  paymentService = inject(PaymentService);
+  paymentMethods: PaymentMethod[] = [];
   isLoading: boolean = false;
 
   ngOnInit(): void {
@@ -19,13 +23,20 @@ export class PaymentListComponent implements OnInit {
 
   loadPayments() {
     this.isLoading = true;
-    let payments: string[] = ["DINHEIRO (ESPÉCIE)", "PIX", "CARTÃO"];
-    this.paymentMethods = payments;
-    this.isLoading = false;
+    this.paymentService.getAllPaymentMethods().subscribe({
+      next: (response) => {
+        this.paymentMethods = response;
+        this.isLoading = false;
+      },
+      error: (e) => {
+        this.isLoading = false;
+        throw new Error(e);
+      }
+    });
   }
 
 
-  selectPaymentMethod(paymentMethod: string) {
+  selectPaymentMethod(paymentMethod: PaymentMethod) {
     this.selectedPaymentMethodEvent.emit(paymentMethod);
   }
 
