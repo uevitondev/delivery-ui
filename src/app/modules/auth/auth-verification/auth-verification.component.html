@@ -4,7 +4,7 @@
     <p>token de verificação enviado! consulte sua caixa de entrada...</p>
     <form [formGroup]="signupVerificationForm">
       <div class="input-group">
-        <label for="email">Token</label>
+        <label for="token">Token</label>
         <input id="token" formControlName="token" type="text" placeholder="token de verificação" />
         @if(token?.invalid && token?.touched){
         <div class="error-message">
@@ -25,13 +25,12 @@
     <p>não recebeu o token? <a (click)="newVerificationToken()">reenviar token</a></p>
 
     <div>
-      @if(isloading){
-        <button class="btn btn-primary" [disabled]="isloading" type="button" disabled>
+      @if(isLoading){
+        <button class="btn-primary" [disabled]="isLoading" type="button" disabled>
           <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          <span class="sr-only">SOLICITANDO...AGUARDE!</span>
         </button>
       }@else{
-        <button
+        <button class="btn-primary"
         [disabled]="!signupVerificationForm.valid"
         (click)="validateToken()">VALIDAR TOKEN</button>
       }  

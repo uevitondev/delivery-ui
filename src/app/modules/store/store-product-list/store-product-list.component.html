@@ -1,0 +1,34 @@
+<main>
+  <div class="container">
+    @if (isLoading) {
+      <app-loading></app-loading>
+    } @else {
+      
+      @if (products.length > 0) {
+        <div class="products">
+          @for (product of products; track product.id) {
+            <app-productcard
+              [product]="product"
+              (addToCartEvent)="addToCart($event)"
+            >
+            </app-productcard>
+          }
+        </div>
+
+        <div class="paginator-container">
+          <app-paginator
+            [currentPageNumber]="pageNumber"
+            [currentPageSize]="pageSize"
+            [pages]="pages"
+            (changePaginatorEvent)="setPagination($event)"
+          >
+          </app-paginator>
+        </div>
+      } @else {
+        <div class="product-list-empty">
+          <p>PRODUTOS "VAZIO"</p>
+        </div>
+      }
+    }
+  </div>
+</main>

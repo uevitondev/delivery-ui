@@ -1,0 +1,23 @@
+<main>
+  <form [formGroup]="searchForm" (ngSubmit)="search()">
+    <input
+      class="input-search"
+      id="search"
+      type="search"
+      formControlName="searchValue"
+      placeholder="{{ placeHolder }}"
+    />
+    <button type="submit" class="icon-search">
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+
+  @if(searchedTerm){
+    <div class="search-term">
+      <span>{{ searchedTerm }}</span>
+      <button class="clear-button" (click)="clearSearch()">x</button>
+    </div>
+  }
+
+
+</main>

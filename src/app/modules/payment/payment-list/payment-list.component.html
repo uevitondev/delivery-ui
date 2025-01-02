@@ -5,10 +5,11 @@
   </div>
   }@else{
   <div class="payment-methods">
-    @for(payment of paymentMethods; track payment){
+    @for(paymentMethod of paymentMethods; track paymentMethod){
     <div class="payment-method card">
-      <p>{{payment.name}}</p>
-      <input type="radio" name="radiogroup" [value]="" (change)="selectPaymentMethod(payment)">
+      <p>{{paymentMethod.name}}</p>
+      <input type="radio" name="selectedPaymentMethodRadio" [checked]='selectedId == paymentMethod.id'
+        (change)="selectPaymentMethod(paymentMethod)">
     </div>
     }@empty{
     <div class="payment-method-list-empty">

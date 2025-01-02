@@ -2,10 +2,9 @@ import { AsyncPipe, CommonModule, CurrencyPipe, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
-import { ToastrService } from 'ngx-toastr';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
 import { OrderService } from '../../../core/services/order.service';
-import { RouterService } from '../../../core/services/router.service';
 import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.component';
 import { CartitemListComponent } from '../cartitem-list/cartitem-list.component';
 
@@ -13,20 +12,21 @@ import { CartitemListComponent } from '../cartitem-list/cartitem-list.component'
   selector: 'app-cart',
   standalone: true,
   imports: [
+    RouterLink,
+    RouterOutlet,
     CommonModule,
     MatIconModule,
     NgIf,
     MatMenuModule,
     CartitemListComponent,
     CartItemNoteComponent,
-    AsyncPipe, CurrencyPipe
+    AsyncPipe,
+    CurrencyPipe
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
 export class CartComponent {
-  routerService = inject(RouterService);
-  toastService = inject(ToastrService);
   orderService = inject(OrderService);
   cartService = inject(CartService);
   cartItems = this.cartService.cartItems;

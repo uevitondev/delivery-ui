@@ -1,61 +1,44 @@
 <main>
-  <div class="container">
-    <div class="header">
-      <div class="title">
-        <p>Meus Endereços</p>
-      </div>
-
-      @if(isAddable){
-      <div class="addable">
-        <button class="btn-primary" (click)="routerService.toNewAddress()">NOVO ENDEREÇO</button>
-      </div>
-      }
+  <div class="header">
+    <div class="title">
+      <p>Meus Endereços</p>
     </div>
 
-    @if(isLoading){
-    <div class="address-list-loading">
-      <p>CARREGANDO ENDEREÇOS...</p>
-    </div>
-    }@else{
-    <div class="addresses">
-      @for(address of addresses; track address){
-      <div class="address card">
-        <div class="wrapper">
-          <div class="details">
-            <p>{{address.name}} +55 {{address.phoneNumber}}</p>
-            <p>{{address.street}} - {{address.number}} </p>
-            <p>{{address.complement}}</p>
-            <p>{{address.district}}</p>
-            <p>{{address.city}} - {{address.uf}} - {{address.zipCode}}</p>
-          </div>
 
-          @if(isSelectable) {
-          <div class="select">
-            <input type="radio" name="radiogroup" [value]="address.id" (change)="selectAddress(address)">
-          </div>
-          }
-        </div>
-
-        <div class="actions">
-          @if(isEditable){
-          <div class="edit">
-            <button class="btn-secondary" (click)="editAddress(address)">editar</button>
-          </div>
-          }
-
-          @if(isDeletable){
-          <div class="delete">
-            <button class="btn-secondary" (click)="deleteAddress(address.id)">excluir</button>
-          </div>
-          }
-        </div>
-      </div>
-      }@empty {
-      <div class="address-list-empty">
-        <p>"VOCÊ NÃO TEM ENDEREÇOS CADASTRADOS"</p>
-      </div>
-      }
+    @if(isAddable){
+    <div class="addable">
+      <button class="btn-primary" (click)="openTemplateModal()">NOVO ENDEREÇO</button>
+      <ng-template cdkPortal #modalTemplate="cdkPortal">
+        <app-modal
+          (closeModalEvent)="closeTemplateModal()"
+        >
+          <app-address-form
+            [isAddressNew]="true"
+            (submitNewAddressEvent)="onLoadAddresses()">
+          </app-address-form>
+        </app-modal>    
+      </ng-template>
     </div>
     }
   </div>
+
+  @if(isLoading){
+  <div class="address-list-loading">
+    <p>CARREGANDO ENDEREÇOS...</p>
+  </div>
+  }@else{
+  <div class="addresses">
+    @for(address of addresses; track address){
+    <app-addresscard [address]="address" [isSelectable]="isSelectable" [isEditable]="isEditable"
+      [isDeletable]="isDeletable" [isSelected]="isSelected" [selectedId]="selectedId"
+      (selectedAddressEvent)="selectAddress($event)">
+    </app-addresscard>
+
+    }@empty {
+    <div class="address-list-empty">
+      <p>"VOCÊ NÃO TEM ENDEREÇOS CADASTRADOS"</p>
+    </div>
+    }
+  </div>
+  }
 </main>

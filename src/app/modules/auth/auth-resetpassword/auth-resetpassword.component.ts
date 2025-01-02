@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
-import { RouterService } from '../../../core/services/router.service';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
@@ -20,35 +20,51 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
 export class AuthResetPasswordComponent implements OnInit {
 
   activatedRoute = inject(ActivatedRoute);
-  routerService = inject(RouterService);
-  toastService = inject(ToastrService);
+  router = inject(Router);
   authService = inject(AuthService);
+  toastService = inject(ToastrService);
+  errorHandlerService = inject(ErrorHandlerService);
+
   emailForm!: FormGroup;
   passwordResetForm!: FormGroup;
-
-
   resetPasswordSuccess = false;
   changePasswordSuccess = false;
   isLoading = false;
 
   ngOnInit(): void {
-    this.initEmailForm();
-    this.initPasswordResetForm();
+    this.onInitEmailForm();
+    this.onInitPasswordResetForm();
   }
 
-  initEmailForm() {
+  onInitEmailForm() {
     this.emailForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email])
     });
   }
 
-  initPasswordResetForm() {
-    this.passwordResetForm = new FormGroup({     
+  onInitPasswordResetForm() {
+    this.passwordResetForm = new FormGroup({
       token: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(6)]),
       newPassword: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(16)]),
       confirmNewPassword: new FormControl('', [Validators.required]),
     }, this.confirmPasswordValidator('newPassword', 'confirmNewPassword')
     );
+  }
+
+  get email() {
+    return this.emailForm.get('email');
+  }
+
+  get token() {
+    return this.passwordResetForm.get('token');
+  }
+
+  get newPassword() {
+    return this.passwordResetForm.get('newPassword');
+  }
+
+  get confirmNewPassword() {
+    return this.passwordResetForm.get('confirmNewPassword');
   }
 
   confirmPasswordValidator(newPassword: string, confirmNewPassword: string): Validators {
@@ -75,25 +91,11 @@ export class AuthResetPasswordComponent implements OnInit {
     };
   }
 
-  get email() {
-    return this.emailForm.get('email');
-  }
-
-  get token() {
-    return this.passwordResetForm.get('token');
-  }
-
-  get newPassword() {
-    return this.passwordResetForm.get('newPassword');
-  }
-
-  get confirmNewPassword() {
-    return this.passwordResetForm.get('confirmNewPassword');
-  }
 
 
-  resetPassword(){
-    if(this.emailForm.invalid){
+
+  resetPassword() {
+    if (this.emailForm.invalid) {
       return;
     }
 
@@ -101,22 +103,18 @@ export class AuthResetPasswordComponent implements OnInit {
     this.isLoading = true;
 
     this.authService.resetPassword(this.email?.value).subscribe({
-      next: data => {
-        this.toastService.success('Solicitção Enviada - Consulte seu email');
+      next: (response) => {
         this.isLoading = false;
-        this.resetPasswordSuccess = true;         
+        this.resetPasswordSuccess = true;
+        this.toastService.success('TOKEN DE REDEFINIÇÃO ENVIADO - CONSULTE A CAIXA DE ENTRADA DO SEU EMAIL');
       },
-      error: e => {
-        this.toastService.error('erro ao socilicar alteração da senha');
+      error: (e) => {
         this.emailForm.enable();
-        this.isLoading = false;        
-        return;
+        this.isLoading = false;
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO NA SOLICITAÇÃO DE RESET DA SENHA")
       }
     });
-
-
   }
-
 
   changePassword() {
     if (this.passwordResetForm.invalid) {
@@ -124,24 +122,23 @@ export class AuthResetPasswordComponent implements OnInit {
     }
 
     this.isLoading = true;
-    this.passwordResetForm.disable();  
+    this.passwordResetForm.disable();
 
 
     this.authService.changePassword({
       token: this.token?.value,
       newPassword: this.newPassword?.value
     }).subscribe({
-      next: data => {
-        this.toastService.success('Senha Alterada com sucesso!');
-        this.isLoading = false  
-        this.changePasswordSuccess = true;     
-        this.routerService.toSignIn();
+      next: (response) => {
+        this.isLoading = false
+        this.changePasswordSuccess = true;
+        this.toastService.success('SUA SENHA FOI ALTERADA COM SUCESSO');
+        this.router.navigate(['/auth/signin']);
       },
-      error: e => {
-        this.toastService.error('Erro ao fazer alteração da senha!');
+      error: (e) => {
+        this.isLoading = false;
         this.passwordResetForm.enable();
-        this.isLoading = false;      
-        return;
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO FAZER A ALTERAÇÃO DE SENHA");
       }
     });
 

@@ -1,12 +1,28 @@
-main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
+:host{
+  width: 100%;
 }
 
-.content {
+main {
   display: flex;
-  flex-direction: row;
+  gap: 100px;
+  width: 75%;
+  padding: 12px;
+  margin: 0 auto;
+}
+
+
+.content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1rem;
+}
+
+.logout-header{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 12px;
 }
 
 
@@ -60,13 +76,6 @@ main {
 .right {
   flex: 1;
   padding: var(--padding);
-  min-height: 100%;
-}
-
-.active-view {
-  padding: var(--padding);
-  border: 1px solid gray;
-  border-radius: var(--border-radius);
   min-height: 100%;
 }
 

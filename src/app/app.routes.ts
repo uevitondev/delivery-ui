@@ -1,86 +1,20 @@
 import { Routes } from '@angular/router';
-import { AddressNewComponent } from './modules/address/address-new/address-new.component';
-import { AuthPageComponent } from './modules/auth/auth-page/auth-page.component';
-import { CartCheckoutComponent } from './modules/cart/cart-checkout/cart-checkout.component';
-import { CartComponent } from './modules/cart/cart/cart.component';
-import { ForbiddenComponent } from './modules/error/forbidden/forbidden.component';
-import { NotfoundComponent } from './modules/error/notfound/notfound.component';
+import { AuthGuard } from './core/guards/auth-guard';
 import { HomeComponent } from './modules/home/home/home.component';
-import { OrderDetailsComponent } from './modules/order/order-details/order-details.component';
-import { OrdersComponent } from './modules/order/orders/orders.component';
-import { ProductDetailsComponent } from './modules/product/product-details/product-details.component';
 import { StoreHomeComponent } from './modules/store/store-home/store-home.component';
-import { StoreListComponent } from './modules/store/store-list/store-list.component';
-import { UserAccountComponent } from './modules/user/user-account/user-account.component';
 
-export const routes: Routes = [
-  {
-    path: "",
-    redirectTo: "home",
-    pathMatch: "full"
-  },
-  {
-    path: "home",
-    component: HomeComponent
-  },
-  {
-    path: "stores",
-    component: StoreListComponent
-  },
-  {
-    path: 'store',
-    component: StoreHomeComponent
-  },
+export const APP_ROUTES: Routes = [
+  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "home", component: HomeComponent },
+  { path: "home/:storeName", component: StoreHomeComponent },
 
-  {
-    path: 'product/details/:productId',
-    component: ProductDetailsComponent
-  },
-  {
-    path: "cart",
-    component: CartComponent
-  },
-  {
-    path: "cart/checkout",
-    component: CartCheckoutComponent
-  },
-  {
-    path: 'orders',
-    children: [
-      { path: '', component: OrdersComponent },
-      { path: 'details/:orderId', component: OrderDetailsComponent }
-    ],
-  },
-  {
-    path: "address/new",
-    component: AddressNewComponent
-  },
-  {
-    path: "auth/signin",
-    component: AuthPageComponent
-  },
-  {
-    path: "auth/reset-password",
-    component: AuthPageComponent
-  },
-  {
-    path: "auth/signup",
-    component: AuthPageComponent
-  },
-  {
-    path: "auth/verification/:email",
-    component: AuthPageComponent
-  },
-  {
-    path: "forbidden",
-    component: ForbiddenComponent
-  },
-  {
-    path: "notfound",
-    component: NotfoundComponent
-  },
-  {
-    path: "user/account",
-    component: UserAccountComponent
-  }
+
+  { path: "auth", loadChildren: () => import('./modules/auth/auth.routes').then(r => r.AUTH_ROUTES) },
+  { path: "stores", loadChildren: () => import('./modules/store/store.routes').then(r => r.STORE_ROUTES) },
+  { path: 'products', loadChildren: () => import('./modules/product/product.routes').then(r => r.PRODUCT_ROUTES) },
+  { path: "orders", loadChildren: () => import('./modules/order/order.routes').then(r => r.ORDER_ROUTES), canActivate: [AuthGuard] },
+  { path: "address", loadChildren: () => import('./modules/address/address.routes').then(r => r.ADDRESS_ROUTES), canActivate: [AuthGuard] },
+  { path: "user/account", loadChildren: () => import('./modules/user/user.routes').then(r => r.USER_ROUTES), canActivate: [AuthGuard] },
+  { path: "cart", loadChildren: () => import('./modules/cart/cart.routes').then(r => r.CART_ROUTES) },
+  { path: "error", loadChildren: () => import('./modules/error/error.routes').then(r => r.ERROR_ROUTES) },
 ];

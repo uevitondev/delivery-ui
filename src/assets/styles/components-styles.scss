@@ -1,0 +1,25 @@
+.card {
+  background-color: var(--primary);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: var(--padding);
+}
+
+
+.btn-primary {
+  font-size: 13px;
+  border-radius: 99px;
+  padding: 4px 10px;
+  border: var(--border);
+  background-color: var(--primary);
+  cursor: pointer;
+}
+
+.btn-secondary {
+  font-size: 13px;
+  border-radius: 99px;
+  padding: 4px 10px;
+  border: var(--border);
+  background-color: var(--secondary);
+  cursor: pointer;
+}

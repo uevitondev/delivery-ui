@@ -1,15 +1,28 @@
 main {
-  padding: 8px;
-  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 75%;
+  padding: 12px;
+  margin: 0 auto;
 }
 
-.home-header{
+.home-header {
   display: flex;
   justify-content: center;
 }
 
 .header-brand {
   width: 100%;
-  max-width: 80%;
   height: 250px;
+}
+
+@media (max-width: 1024px) {
+
+  main {
+    width: 100%;
+    padding: 8px;
+    margin: 0;
+  }
+
 }

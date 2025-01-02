@@ -1,21 +1,19 @@
 <main>
-  @if(hasStore){
-  <div class="container">
-
-    <div class="products-categories">
-      <app-category-list [isChecked]="true" (selectedCategoryEvent)="filterProductsByCategory($event)">
+  @if (isLoading) {
+    <app-loading [isLoading]="isLoading"></app-loading>
+  } @else {
+    @if (storeIsValid) {
+      <app-category-list
+        (selectedCategoryEvent)="searchByCategoryName($event)"
+      >
       </app-category-list>
-    </div>
 
-    <div class="store-products">
-      <app-product-list [store]="store">
-      </app-product-list>
-    </div>
-  </div>
-  }@else{
-  <div class="store-empty">
-    <p>NEHUMA LOJA SELECIONADA </p>
-    <button (click)="routerService.toStores()">VER LOJAS</button>
-  </div>
+      <app-search
+        [placeHolder]="'Pesquisar Produtos em ' + store.name"
+        (searchEvent)="searchByProductName($event)"
+      ></app-search>
+
+      <app-store-product-list [store]="store"> </app-store-product-list>
+    }
   }
 </main>

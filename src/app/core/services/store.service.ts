@@ -4,19 +4,32 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Store } from '../models/store';
 import { StorageService } from './storage.service';
+import { PageData } from '../models/page-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreService {
-  ENV = environment;
+
   storageService = inject(StorageService);
   http = inject(HttpClient);
 
-  constructor() { }
+  apiUrl = environment.API_URL;
 
-  getAll(): Observable<Store[]> {
-    return this.http.get<Store[]>(`${this.ENV.API_URL}/stores`);
+  getAll(name: string): Observable<Store[]> {
+    return this.http.get<Store[]>(`${this.apiUrl}/stores?name=${name}`);
+  }
+
+  /*
+
+  getStoreByName(name: string): Observable<Store> {
+    return this.http.get<Store>(`${this.apiUrl}/stores/name?name=${name}`);
+  }
+
+  */
+
+  getAllProductsByStoreId(storeId: string, productName: string, categoryName: string, pageIndex: number, pageSize: number): Observable<PageData> {
+    return this.http.get<PageData>(`${this.apiUrl}/stores/${storeId}/products?name=${productName}&category=${categoryName}&page=${pageIndex}&size=${pageSize}`);
   }
 
 }

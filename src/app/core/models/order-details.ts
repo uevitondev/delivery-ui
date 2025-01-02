@@ -2,6 +2,7 @@ import { Address } from "./address";
 
 export interface OrderDetails {
   id: number,
+  number: number,
   createdAt: string,
   updatedAt: string,
   status: string,

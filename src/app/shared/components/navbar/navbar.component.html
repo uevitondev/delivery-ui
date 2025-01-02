@@ -8,25 +8,25 @@
       }
     </span>
   </button>
-  <span class="navbar-brand" (click)="routerService.toHome(); isMenuOpen ? toggleMenu() : null">Delivery App</span>
+  <span class="navbar-brand" [routerLink]="['/home']" (click)="isMenuOpen ? toggleMenu() : null">Delivery App</span>
 
   <div class="spacer"></div>
 
   <div class="nav-menu" [class.ismenuopen]="isMenuOpen" [class.ismenuclosed]="!isMenuOpen">
-    <button class="nav-button" (click)="routerService.toHome();  isMenuOpen ? toggleMenu() : null">Home</button>
-    <button class="nav-button" (click)="routerService.toStores();  isMenuOpen ? toggleMenu() : null">Lojas</button>
+    <button class="nav-button" [routerLink]="['/home']" (click)="isMenuOpen ? toggleMenu() : null">Home</button>
+    <button class="nav-button" [routerLink]="['/stores']" (click)="isMenuOpen ? toggleMenu() : null">Lojas</button>
     @if(authService.isLogged()) {
-    <button class="nav-button" (click)="routerService.toOrders();  isMenuOpen ? toggleMenu() : null">Meus
+    <button class="nav-button" [routerLink]="['/orders']"  (click)="isMenuOpen ? toggleMenu() : null">Meus
       Pedidos</button>
-    <button class="nav-button" (click)="routerService.toAccount();  isMenuOpen ? toggleMenu() : null">
+    <button class="nav-button" [routerLink]="['/user/account']"  (click)="isMenuOpen ? toggleMenu() : null">
       <span class="nav-button-wrapper">
         <mat-icon>account_circle</mat-icon>
         {{ authService.getAuthName() }}
       </span>
     </button>
     } @else {
-    <button class="nav-button" (click)="routerService.toSignIn(); isMenuOpen ? toggleMenu() : null">Login</button>
-    <button class="nav-button" (click)="routerService.toSignUp();  isMenuOpen ? toggleMenu() : null">Criar
+    <button class="nav-button" [routerLink]="['/auth/signin']" (click)="isMenuOpen ? toggleMenu() : null">Login</button>
+    <button class="nav-button" [routerLink]="['/auth/signup']"  (click)="isMenuOpen ? toggleMenu() : null">Criar
       Conta</button>
     }
   </div>
@@ -37,7 +37,7 @@
     </span>
   </button>
 
-  <button class="nav-button" (click)="routerService.toCart()">
+  <button class="nav-button" [routerLink]="['/cart']">
     <div class=" nav-button-wrapper cart-count">
       <mat-icon>shopping_cart</mat-icon>
       <p class="count">{{cartService.cartCount()}}</p>

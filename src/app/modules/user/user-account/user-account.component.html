@@ -1,48 +1,50 @@
 <main>
-
-
-
   <div class="content">
-    <div class="lateral-menu" [class.ismenuopen]="isMenuOpen" [class.ismenuclosed]="!isMenuOpen">
 
-      <div class="menu-options">
-        <a class="view-btn" (click)="viewUserProfile()">Perfil</a>
-        <a class="view-btn" (click)="viewUserAddresses()">Endereços</a>
-        <a class="view-btn" (click)="logout()">
-          <div class="exit_to-app">
-            <mat-icon>exit_to_app</mat-icon>
-            <p>SAIR</p>
-          </div>
-        </a>
-      </div>
+    <div class="profile card" (click)="openModalProfile(templateProfile)">
+      <p>Perfil</p>
+      <p>Visualize seus dados...</p>
 
-      <div class="toggle-menu">
-        <button class="btn-toggle-menu" (click)="toggleMenu()">
-          <span>
-            @if(isMenuOpen){
-            <mat-icon>close</mat-icon>
-            }@else{
-            <mat-icon>menu</mat-icon>
-            }
-          </span>
-        </button>
-      </div>
+      <ng-template cdkPortal #templateProfile="cdkPortal">
+        <app-modal (closeModalEvent)="closeTemplateModal()">
+          <app-user-profile></app-user-profile>
+        </app-modal>
+      </ng-template>
+    </div>
 
+    <div class="orders card" (click)="openModalOrders(templateOrders)">
+      <p>Pedidos</p>
+      <p>Acompanhe seu histórico de pedidos...</p>
+      <ng-template cdkPortal #templateOrders="cdkPortal">
+        <app-modal (closeModalEvent)="closeTemplateModal()">
+          <app-order-list></app-order-list>
+        </app-modal>
+      </ng-template>
     </div>
 
 
-    <div class="right">
-      <div class="active-view">
-        @if( activeView === 'user-profile' ){
-        <app-user-profile></app-user-profile>
-        }
-        @if( activeView === 'user-addresses' ){
-        <app-address-list [isAddable]="true" [isEditable]="true" [isDeletable]="true">
-        </app-address-list>
-        }
-      </div>
 
+    <div class="addresses card" (click)="openModalAddresses(templateAddresses)">
+      <p>Endereços</p>
+      <p>Liste seus endereços aqui...</p>
+      <ng-template cdkPortal #templateAddresses="cdkPortal">
+        <app-modal (closeModalEvent)="closeTemplateModal()">
+          <app-address-list [isAddable]="true" [isEditable]="true" [isDeletable]="true">
+          </app-address-list>
+        </app-modal>
+      </ng-template>
     </div>
+
+
+    <div class="logout card" (click)="logout()">
+      <div class="logout-header">
+        <mat-icon>exit_to_app</mat-icon>
+        <p>SAIR</p>
+      </div>     
+      <p>Fazer logout...</p>
+    </div>
+
+
+
   </div>
-
 </main>

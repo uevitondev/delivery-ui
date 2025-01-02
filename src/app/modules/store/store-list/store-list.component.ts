@@ -1,54 +1,51 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { environment } from '../../../../environments/environment';
 import { Store } from '../../../core/models/store';
-import { StorageService } from '../../../core/services/storage.service';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { StoreService } from '../../../core/services/store.service';
-import { RouterService } from '../../../core/services/router.service';
+import { SearchComponent } from '../../../shared/components/search/search.component';
+import { StoreCardComponent } from '../storecard/storecard.component';
 
 @Component({
   selector: 'app-store-list',
   standalone: true,
-  imports: [],
+  imports: [StoreCardComponent, SearchComponent],
   templateUrl: './store-list.component.html',
-  styleUrl: './store-list.component.scss'
+  styleUrl: './store-list.component.scss',
 })
 export class StoreListComponent implements OnInit {
-
-  storageService = inject(StorageService);
+  errorHandlerService = inject(ErrorHandlerService);
   storeService = inject(StoreService);
-  toastService = inject(ToastrService);
-  routerService = inject(RouterService);
-
-  storedStore = environment.STORED_STORE;
-
   stores: Store[] = [];
+  storeName: string = '';
   isLoading: boolean = false;
 
   ngOnInit(): void {
-    this.loadStores();
+    this.onLoadStores();
   }
 
-
-  loadStores() {
+  onLoadStores() {
     this.isLoading = true;
-    this.storeService.getAll().subscribe({
-      next: (stores) => {
-        this.stores = stores;
+    this.storeService.getAll(this.storeName).subscribe({
+      next: (response) => {
+        this.stores = response;
         this.isLoading = false;
       },
       error: (e) => {
         this.isLoading = false;
-        return new Error(e);
-      }
+        this.errorHandlerService.handleError(
+          e,
+          'OCORREU UM ERRO AO CARREGAR LOJAS',
+        );
+      },
     });
   }
 
-  selectStore(store: Store) {
-    this.storageService.remove(this.storedStore);
-    this.storageService.save(this.storedStore, store);
-    this.routerService.toHome();
+  searchByStoreName(name: string) {
+    this.storeName = name;
+    this.onLoadStores();
   }
 
+  setStore(store: Store) {
+    console.log(store);
+  }
 }

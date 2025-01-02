@@ -1,11 +1,10 @@
-:host {
-  display: block;
-}
 
 main {
+  width: 100%;
   display: flex;
-  flex-direction: column;  
-  padding: var(--padding);
+  flex-direction: column;
+  gap: 25px;
+  padding: 16px;  
 }
 
 .divider {

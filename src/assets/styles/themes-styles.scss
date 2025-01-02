@@ -1,0 +1,27 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+$app-light-theme: mat.define-theme((color: (theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+    ));
+
+$app-dark-theme: mat.define-theme((color: (theme-type: dark,
+        primary: mat.$magenta-palette,
+        tertiary: mat.$violet-palette,
+      ),
+    ));
+
+
+
+.dark-theme {
+  @include mat.all-component-colors($app-dark-theme);
+  background: mat.get-theme-color($app-dark-theme, surface);
+  background-color: #121212;
+
+  .card {
+    color: #121212;
+      //background-color: #282828;
+  }
+}

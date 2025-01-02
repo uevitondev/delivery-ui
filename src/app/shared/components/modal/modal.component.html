@@ -1,8 +1,9 @@
-@if(showModal){
-<ng-container>
-  <div class="modal" @modal>
-    <ng-content></ng-content>
+
+  <div class="header">
+    <button class="close" (click)="closeModal()">X</button>
   </div>
-  <div (click)="toggle()" @overlay class="overlay"></div>
-</ng-container>
-}
+
+  <div class="content">
+    <ng-content class="modal-content"></ng-content>
+  </div>
+  

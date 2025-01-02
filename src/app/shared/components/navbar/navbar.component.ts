@@ -5,18 +5,19 @@ import { MatMenuModule } from '@angular/material/menu';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
-import { RouterService } from '../../../core/services/router.service';
 import { StorageService } from '../../../core/services/storage.service';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
+    RouterLink,
+    RouterOutlet,
     CommonModule,
-    MatIconModule,
     NgIf,
+    MatIconModule,
     MatMenuModule,
-    MatIconModule
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
@@ -27,7 +28,6 @@ export class NavBarComponent {
   authService = inject(AuthService);
   cartService = inject(CartService);
   storageService = inject(StorageService);
-  routerService = inject(RouterService);
 
   icon: string = 'dark_mode';
   userImage!: string;
@@ -47,7 +47,6 @@ export class NavBarComponent {
 
   logout() {
     this.authService.logout();
-    this.routerService.toHome();
   }
 
 }

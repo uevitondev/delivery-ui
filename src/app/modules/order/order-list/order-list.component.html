@@ -17,7 +17,7 @@
   
         <div class="bottom">
           <div class="btn-wrapper">
-            <button class="btn-secondary" (click)="navigateToOrderDetail(order)">VER DETALHES</button>
+            <button class="btn-secondary" [routerLink]="['order/details/', order.id]">VER DETALHES</button>
           </div>
         </div>
   

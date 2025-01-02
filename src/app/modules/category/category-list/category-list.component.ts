@@ -1,98 +1,91 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Category } from '../../../core/models/category';
 import { CategoryService } from '../../../core/services/category.service';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
+import { CommonModule } from '@angular/common';
+import { CategoryCardComponent } from '../categorycard/categorycard.component';
 
 @Component({
   selector: 'app-category-list',
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
-    InputFormComponent
+    LoadingComponent,
+    CategoryCardComponent,
   ],
   templateUrl: './category-list.component.html',
-  styleUrl: './category-list.component.scss'
+  styleUrl: './category-list.component.scss',
 })
 export class CategoryListComponent implements OnInit {
-
-  @Input() isChecked: boolean = false;
-  @Output() selectedCategoryEvent = new EventEmitter<Category>();
-
-  toastService = inject(ToastrService);
+  errorHandlerService = inject(ErrorHandlerService);
   categoryService = inject(CategoryService);
 
+  @Output() selectedCategoryEvent = new EventEmitter<Category>();
+
+  isLoading: boolean = false;
   checkForm!: FormGroup;
   categories!: Category[];
-  category!: Category;
-  isLoading: boolean = false;
+  selectedCategory!: Category;
+
+  //isSelected: boolean = false;
 
   ngOnInit(): void {
     this.loadCategories();
   }
-
-  initCheckForm() {
-    this.checkForm = new FormGroup({
-      checkboxes: new FormArray([])
-    });
-    this.categories.forEach(() => this.checkboxesArray.push(new FormControl(false)));
-  }
-
-  get checkboxesArray() {
-    return this.checkForm.controls['checkboxes'] as FormArray;
-  }
-
-  onCheck(index: number) {
-    this.checkboxesArray.controls.forEach((control, i) => {
-      if (control.value === true && index == i) {
-        control.setValue(true);
-      } else {
-        control.setValue(false);
-      }
-    });
-    let hasChecked = false;
-    this.checkboxesArray.value.forEach((checkbox: boolean) => {
-      if (checkbox === true) {
-        hasChecked = true;
-      }
-    });
-
-    if (hasChecked) {
-      const selectedCategory = this.categories[index];
-      this.selectCategory(selectedCategory);
-    } else {
-      this.selectCategory({
-        id: '',
-        name: ''
-      });
-    }
-
-  }
-
 
   loadCategories() {
     this.isLoading = true;
     this.categoryService.getAll().subscribe({
       next: (categories) => {
         this.categories = categories;
-        this.initCheckForm();
         this.isLoading = false;
       },
       error: (e) => {
         this.isLoading = false;
-        throw new Error(e);
-      }
+        this.errorHandlerService.handleError(
+          e,
+          'OCORREU UM ERRO AO CARREGAR CATEGORIAS',
+        );
+      },
     });
   }
 
-  selectCategory(category: Category) {
-    this.selectedCategoryEvent.emit(category);
+  onSelectCategory(category: Category) {
+    if (this.selectedCategory && this.selectedCategory.name === category.name) {
+      let undefinedCategory!: Category;
+      this.selectedCategory = undefinedCategory;
+      this.selectedCategoryEvent.emit(this.selectedCategory);
+    } else{
+      this.selectedCategory = category;
+      this.selectedCategoryEvent.emit(this.selectedCategory);
+    }
   }
 
+  onNull() {
+    console.log('null');
+    this.selectedCategoryEvent.emit(undefined);
+  }
+
+  isSelected(category: Category) {
+    if (this.selectedCategory && this.selectedCategory.name == category.name) {
+      this.selectedCategory = category;
+      return true;
+    }
+    return false;
+  }
 }
-
-
-
-
-

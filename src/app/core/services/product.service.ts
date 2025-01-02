@@ -15,9 +15,9 @@ export class ProductService {
 
   constructor() { }
 
-  getAllByStorePagedAndFiltered(storeId: string, categoryName: string, pageIndex: number, pageSize: number): Observable<PageData> {
-    return this.http.get<PageData>(`${this.ENV.API_URL}/products/store/${storeId}?categoryName=${categoryName}&page=${pageIndex}&size=${pageSize}`);
-    //return this.http.get<PageProduct>(`${this.ENV.API_URL}/products/store/${storeId}?page=${pageIndex}&size=${pageSize}`);
+  getAll(): Observable<PageData> {
+    return this.http.get<PageData>(`${this.ENV.API_URL}/products`);
+    
   }
 
   getById(id: string): Observable<Product> {

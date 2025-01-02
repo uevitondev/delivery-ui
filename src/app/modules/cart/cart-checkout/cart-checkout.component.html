@@ -1,7 +1,5 @@
 <main>
-
     <div class="checkout-flex">
-        @if(authService.isLogged()){
         <div class="checkout-flex-01">
             <div class="checkout-content">
                 <div class="header">
@@ -12,22 +10,22 @@
                     <div class="checkout-item">
                         <div class="item-header">
                             <h3>Endereço de Entrega</h3>
-                            <button class="btn-primary" (click)="modalAddresses.toggle()">Alterar</button>
+                            <button class="btn-primary" (click)="openModalAddresses(templateAddresses)">Alterar</button>
+                            <ng-template cdkPortal #templateAddresses="cdkPortal">
+                                <app-modal (closeModalEvent)="closeTemplateModal()">
+                                    <app-address-list                                         
+                                        [isAddable]="true" 
+                                        [isSelectable]="true" 
+                                        [selectedId]="address.id"
+                                        (selectedAddressEvent)="setAddress($event)">
+                                    </app-address-list>
+                                </app-modal>
+                            </ng-template>
                         </div>
 
-                        <app-modal #modalAddresses>
-                            <app-address-list [isAddable]="true" [isSelectable]="true"
-                                (selectedAddressEvent)=selectAddress($event)>
-                            </app-address-list>
-                        </app-modal>
                         @if(address){
-                        <div class="address card">
-                            <p>{{address.name}} | +55 {{address.phoneNumber}}</p>
-                            <p>{{address.street}} - {{address.number}} </p>
-                            <p>{{address.complement}}</p>
-                            <p>{{address.district}}</p>
-                            <p>{{address.city}} - {{address.uf}} - {{address.zipCode}}</p>
-                        </div>
+                        <app-addresscard [address]="address">
+                        </app-addresscard>
                         }@else{
                         <div>
                             <div class="divider"></div>
@@ -39,12 +37,16 @@
                     <div class="checkout-item">
                         <div class="item-header">
                             <h3>Forma de Pagamento</h3>
-                            <button class="btn-primary" (click)="modalPayments.toggle()">Alterar</button>
+                            <button class="btn-primary" (click)="openModalPayments(modalPayments)">Alterar</button>
+                            <ng-template cdkPortal #modalPayments="cdkPortal">
+                                <app-modal (closeModalEvent)="closeTemplateModal()">
+                                    <app-payment-list 
+                                        [selectedId]="paymentMethod.id"
+                                        (selectedPaymentMethodEvent)="setPaymentMethod($event)">
+                                    </app-payment-list>
+                                </app-modal>
+                            </ng-template>
                         </div>
-                        <app-modal #modalPayments>
-                            <app-payment-list (selectedPaymentMethodEvent)=selectPaymentMethod($event)>
-                            </app-payment-list>
-                        </app-modal>
                         @if(paymentMethod){
                         <div class="payment card">
                             {{paymentMethod.name}}
@@ -85,24 +87,14 @@
                     @if(isLoading){
                     <button class="btn-primary" [disabled]="isLoading" type="button" disabled>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        <span class="sr-only">PROCESSANDO...</span>
                     </button>
                     }@else{
-                    <button class="btn-secondary" [disabled]="checkoutIsInvalid()" (click)="saveOrder()">FAZER
-                        PEDIDO</button>
+                    <button class="btn-secondary" [disabled]="checkoutIsInvalid()" (click)="newOrder()">
+                        FAZER PEDIDO
+                    </button>
                     }
                 </div>
             </div>
         </div>
-
-        }@else{
-        <div class="no-auth">
-            <p>LOGIN NECESSÁRIO</p>
-            <button (click)="routerService.toSignIn()">LOGIN</button>
-        </div>
-        }
-
     </div>
-
-
 </main>

@@ -1,27 +1,20 @@
 <main>
-  @if(isLoading){
-  <div class="category-list-loading">
-    <p>CARREGANDO CATEGORIAS...</p>
-  </div>
-  }@else{
-  <div class="categories">
-    @for(category of categories; track category.id; let i = $index){
-    <div class="category card">
-      @if(isChecked) {
-      <form [formGroup]="checkForm">
-        <div formArrayName="checkboxes">
-          <input type="checkbox" [formControlName]="i" (change)="onCheck(i)">
+  @if (isLoading) {
+    <app-loading></app-loading>
+  } @else {
+    <h3>Categorias Populares</h3>
+    <div class="categories">
+      @for (category of categories; track category.id; let i = $index) {
+        <app-categorycard
+          [category]="category"
+          (onSelectEvent)="onSelectCategory($event)"
+          [isSelected]="selectedCategory && selectedCategory.name === category.name"
+        ></app-categorycard>
+      } @empty {
+        <div class="category-list-loading">
+          <p>"VAZIO" NÃO HÁ CATEGORIAS</p>
         </div>
-      </form>
       }
-      <p>{{category.name}}</p>
     </div>
-    }@empty{
-      <div class="category-list-loading">
-        <p> "VAZIO" NÃO HÁ CATEGORIAS</p>
-      </div>   
-    }
-  </div>
   }
-
 </main>

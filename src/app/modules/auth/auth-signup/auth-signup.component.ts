@@ -1,15 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
-import { RouterService } from '../../../core/services/router.service';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
   selector: 'app-auth-signup',
   standalone: true,
   imports: [
+    RouterLink,
+    RouterOutlet,
     CommonModule,
     InputFormComponent,
     ReactiveFormsModule
@@ -18,19 +21,21 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
   styleUrl: './auth-signup.component.scss'
 })
 export class AuthSignUpComponent implements OnInit {
-  routerService = inject(RouterService);
+
+  router = inject(Router);
   authService = inject(AuthService);
   toastService = inject(ToastrService);
+  errorHandlerService = inject(ErrorHandlerService);
 
   signupForm!: FormGroup;
   isLoading: boolean = false;
 
   ngOnInit(): void {
-    this.initSignupForm();
+    this.onInitSignupForm();
   }
 
 
-  initSignupForm() {
+  onInitSignupForm() {
     this.signupForm = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]),
       lastName: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(60)]),
@@ -75,21 +80,19 @@ export class AuthSignUpComponent implements OnInit {
     this.signupForm.disable();
 
     this.authService.signup({
-      firstName: this.signupForm.controls['firstName'].value,
-      lastName: this.signupForm.controls['lastName'].value,
-      email: this.signupForm.controls['email'].value,
-      password: this.signupForm.controls['password'].value,
+      firstName: this.firstName?.value,
+      lastName: this.lastName?.value,
+      email: this.email?.value,
+      password: this.password?.value
     }).subscribe({
-      next: data => {
+      next: (response) => {
         this.isLoading = false;
-        this.toastService.success('conta criada com sucesso');
-        this.routerService.toSignUpVerification(this.signupForm.controls['email'].value);
+        this.router.navigate(['/auth/verification/', this.email?.value])
       },
-      error: e => {
+      error: (e) => {
         this.isLoading = false;
         this.signupForm.enable();
-        this.toastService.error('erro ao criar conta');
-        return;
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO CRIAR SUA CONTA");
       }
     });
   }

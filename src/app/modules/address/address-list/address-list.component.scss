@@ -1,11 +1,8 @@
 main {
-  padding: var(--padding);
-}
-
-.container {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  padding: 16px;  
 }
 
 .header {
@@ -32,41 +29,10 @@ main {
 }
 
 
-.address {
-  display: flex;
-  gap: 12px;
-}
 
-.wrapper {
-  flex: 1;
-  display: flex;
-}
-
-.details {
-  flex: 1;
-}
-
-.select {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 12px;
-}
 
 @media (max-width: 768px) {
-
   main {
     padding: 5px;
   }
-
-  .address {
-    flex-direction: column;
-  }
-
 }

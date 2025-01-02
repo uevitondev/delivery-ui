@@ -1,91 +1,83 @@
-import { animate, style, transition, trigger } from '@angular/animations';
+import { PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { delay } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { Address } from '../../../core/models/address';
 import { CartItem } from '../../../core/models/cart-item';
+import { PaymentMethod } from '../../../core/models/payment-method';
 import { ShoppingCartRequest } from '../../../core/models/shopping-cart-request';
 import { Store } from '../../../core/models/store';
 import { AddressService } from '../../../core/services/address.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { ModalService, TemplateModalOverlayRef } from '../../../core/services/modal.service';
 import { OrderService } from '../../../core/services/order.service';
-import { RouterService } from '../../../core/services/router.service';
+import { PaymentService } from '../../../core/services/payment.service';
 import { StorageService } from '../../../core/services/storage.service';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 import { AddressListComponent } from '../../address/address-list/address-list.component';
+import { AddressCardComponent } from '../../address/addresscard/addresscard.component';
 import { PaymentListComponent } from '../../payment/payment-list/payment-list.component';
 import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.component';
 import { CartitemListComponent } from '../cartitem-list/cartitem-list.component';
-import { PaymentMethod } from '../../../core/models/payment-method';
-import { PaymentService } from '../../../core/services/payment.service';
 
 @Component({
   selector: 'app-cart-checkout',
   standalone: true,
   imports: [
+    RouterLink,
+    RouterOutlet,
     CommonModule,
     ModalComponent,
     AddressListComponent,
     PaymentListComponent,
     CartItemNoteComponent,
-    CartitemListComponent
+    CartitemListComponent,
+    AddressCardComponent,
+    PortalModule,
+    ModalComponent
   ],
   templateUrl: './cart-checkout.component.html',
   styleUrl: './cart-checkout.component.scss',
-  animations: [
-
-    trigger('overlay', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('250ms', style({ opacity: .5 })),
-      ]),
-      transition(':leave', [
-        animate('500ms', style({ opacity: 0 }))
-      ])
-    ]),
-    trigger('modal', [
-      transition(':enter', [
-        style({ top: -999 }),
-        animate('500ms', style({ top: '50%' })),
-      ]),
-      transition(':leave', [
-        animate('250ms', style({ top: -999 }))
-      ])
-    ]),
-  ]
 })
 
 export class CartCheckoutComponent implements OnInit {
 
-  STORED_STORE = environment.STORED_STORE;
+  router = inject(Router);
+  modalService = inject(ModalService);
   toastService = inject(ToastrService);
   storageService = inject(StorageService);
-  routerService = inject(RouterService);
-  authService = inject(AuthService);
   addressService = inject(AddressService);
   paymentService = inject(PaymentService);
+  authService = inject(AuthService);
   cartService = inject(CartService);
   orderService = inject(OrderService);
+  errorHandlerService = inject(ErrorHandlerService);
 
+  templateRef!: TemplateModalOverlayRef;
+  STORED_STORE = environment.STORED_STORE;
   address!: Address;
   paymentMethod!: PaymentMethod;
   store!: Store;
   cartItems!: CartItem[];
-
   isLoading: boolean = false;
 
+
   ngOnInit(): void {
-    this.loadCheckoutStore();
+    this.onLoadDataCheckout();
   }
 
-  loadCheckoutStore() {
+  onLoadDataCheckout() {
+    this.isLoading = true;
     let storedStore = this.storageService.get(this.STORED_STORE);
     if (storedStore) {
       this.store = storedStore;
     }
+
+
     this.addressService.getAllByUser().subscribe({
       next: (response) => {
         if (response.length >= 1) {
@@ -93,7 +85,7 @@ export class CartCheckoutComponent implements OnInit {
         }
       },
       error: (e) => {
-        throw new Error(e);
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO CARREGAR ENDEREÇOS");
       }
     });
 
@@ -104,24 +96,28 @@ export class CartCheckoutComponent implements OnInit {
         }
       },
       error: (e) => {
-        throw new Error(e);
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO CARREGAR METHODOS DE PAGAMENTO");
       }
     });
     this.cartItems = this.cartService.cartItems();
+    this.isLoading = false;
   }
 
-  selectAddress(selectedAddress: Address): void {
-    this.address = selectedAddress;
+
+  setAddress(address: Address): void {
+    this.address = address;
+    this.closeTemplateModal();
   }
 
-  selectPaymentMethod(selectedPaymentMethod: PaymentMethod): void {
-    this.paymentMethod = selectedPaymentMethod;
+  setPaymentMethod(paymentMethod: PaymentMethod): void {
+    this.paymentMethod = paymentMethod;
+    this.closeTemplateModal();
   }
 
   checkoutIsInvalid() {
     if (
       this.address === undefined ||
-      this.store === undefined ||
+      //this.store === undefined ||
       this.paymentMethod === undefined ||
       this.cartItems.length < 1
     ) {
@@ -131,34 +127,46 @@ export class CartCheckoutComponent implements OnInit {
     }
   }
 
+  public openModalAddresses(template: TemplatePortal<any>) {
+    this.templateRef = this.modalService.open(template, {}, {
+      hasBackdropClick: true
+    });
 
-  saveOrder() {
+  }
+
+  public openModalPayments(template: TemplatePortal<any>) {
+    this.templateRef = this.modalService.open(template, {}, {
+      hasBackdropClick: true
+    });
+  }
+
+  public closeTemplateModal() {
+    this.templateRef.close();
+  }
+
+
+  newOrder() {
     this.isLoading = true;
 
     let shoppingCartRequest: ShoppingCartRequest = {
       addressId: this.address.id,
-      storeId: this.store.id,
-      paymentMethod: this.paymentMethod.name,
+      storeId: "876a9ba4-fdf6-40bd-899a-1758e7f6523e",
+      paymentMethodId: this.paymentMethod.id,
       cartItems: this.cartItems
     }
 
-    this.orderService.saveNew(shoppingCartRequest)
-      .pipe(
-        delay(5000)
-      )
-      .subscribe({
-        next: () => {
-          this.cartService.clearCart();
-          this.routerService.toOrders();
-          this.isLoading = false;
-          this.toastService.success("PEDIDO EFETUADO COM SUCESSO");
-        },
-        error: (e) => {
-          this.isLoading = false;
-          this.toastService.error("ERRO AO REALIZAR PEDIDO");
-          throw new Error(e);
-        }
-      });
+    this.orderService.newOrder(shoppingCartRequest).subscribe({
+      next: () => {
+        this.cartService.clearCart();
+        this.isLoading = false;
+        this.toastService.success("PEDIDO EFETUADO COM SUCESSO");
+        this.router.navigate(['/orders']);
+      },
+      error: (e) => {
+        this.isLoading = false;
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO FAZER PEDIDO");
+      }
+    });
   }
 
 

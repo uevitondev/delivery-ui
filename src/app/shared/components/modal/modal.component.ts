@@ -1,18 +1,26 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
   imports: [
+    CommonModule
   ],
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.scss'
+  styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit {
 
-  showModal: boolean = false;
+  @Output() closeModalEvent = new EventEmitter<boolean>(false);
 
-  toggle() {
-    this.showModal = !this.showModal;
+  constructor() { }
+
+  ngOnInit() {
   }
+
+  public closeModal() {
+    this.closeModalEvent.emit(true);
+  }
+
 }

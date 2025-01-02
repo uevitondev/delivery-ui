@@ -11,7 +11,7 @@
           <p>CARRINHO DE COMPRAS</p>
           <div class="header-actions">
             <button class="btn-primary" (click)="cartService.clearCart()">LIMPAR CARRINHO</button>
-            <button class="btn-primary" (click)="routerService.toHome()">COMPRAR MAIS</button>
+            <button class="btn-primary" [routerLink]="['/home']">COMPRAR MAIS</button>
           </div>
         </div>
 
@@ -29,7 +29,7 @@
           <p>Total: <strong>{{ cartService.cartTotal() | currency : "BRL" }}</strong></p>
         </div>
         <div class="cart-resume-actions">
-          <button class="btn-secondary" (click)="routerService.toCheckout()">CONTINUAR</button>
+          <button class="btn-secondary" [routerLink]="['/cart/checkout']">CONTINUAR</button>
         </div>
       </div>
     </div>
@@ -38,7 +38,7 @@
       <mat-icon class="cart-icon">shopping_cart</mat-icon>
       <span> "SEU CARRINHO ESTÁ VAZIO"</span>
       <div class="cart-empty-actions">
-        <button class="btn-primary" (click)="routerService.toHome()">IR PARA PRODUTOS...</button>
+        <button class="btn-primary" [routerLink]="['/home']">IR PARA PRODUTOS...</button>
       </div>
     </div>
     }

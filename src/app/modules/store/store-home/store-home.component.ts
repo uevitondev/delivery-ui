@@ -1,43 +1,81 @@
 import { Component, OnInit, ViewChild, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router
+} from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { Category } from '../../../core/models/category';
-import { StorageService } from '../../../core/services/storage.service';
-import { CategoryListComponent } from '../../category/category-list/category-list.component';
-import { ProductListComponent } from '../../product/product-list/product-list.component';
-import { RouterService } from '../../../core/services/router.service';
 import { Store } from '../../../core/models/store';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { StorageService } from '../../../core/services/storage.service';
+import { StoreService } from '../../../core/services/store.service';
+import { UtilService } from '../../../core/services/util.service';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
+import { CategoryListComponent } from '../../category/category-list/category-list.component';
+import { StoreProductListComponent } from '../store-product-list/store-product-list.component';
+import { SearchComponent } from '../../../shared/components/search/search.component';
 
 @Component({
   selector: 'app-store-home',
   standalone: true,
-  imports: [
-    CategoryListComponent,
-    ProductListComponent
-  ],
+  imports: [CategoryListComponent, StoreProductListComponent, LoadingComponent, SearchComponent],
   templateUrl: './store-home.component.html',
-  styleUrl: './store-home.component.scss'
+  styleUrl: './store-home.component.scss',
 })
 export class StoreHomeComponent implements OnInit {
+  @ViewChild(StoreProductListComponent)
+  storeProductListComponent!: StoreProductListComponent;
 
-  @ViewChild(ProductListComponent) productListComponent!: ProductListComponent;
-
-  routerService = inject(RouterService);
+  errorHandlerService = inject(ErrorHandlerService);
+  activatedRoute = inject(ActivatedRoute);
+  storeService = inject(StoreService);
   storageService = inject(StorageService);
-  STORED_STORE = environment.STORED_STORE;
+  utilService = inject(UtilService);
+  router = inject(Router);
+
+  storedStore = environment.STORED_STORE;
   store!: Store;
-  hasStore = false;
+  storeIsValid: boolean = false;
+  isLoading: boolean = false;
 
   ngOnInit(): void {
-    const storedStore = this.storageService.get(this.STORED_STORE);
-    storedStore ? (() => {
-      this.hasStore = true;
-      this.store = storedStore;
-    })() : null;
+    this.store = this.storageService.get(this.storedStore);
+    let paramValue = this.activatedRoute.snapshot.params['storeName'];
+    this.setAndValidateStoreByParamValue(paramValue);
   }
 
-  filterProductsByCategory(category: Category) {
-    this.productListComponent.filterProductsByCategory(category);
+
+  searchByCategoryName(category: Category) {
+    if (category) {
+      this.storeProductListComponent.categoryName = category.name;
+      this.storeProductListComponent.onLoadProducts();
+      //this.storeProductListComponent.filterProductsByCategory(category);
+    } else {
+      this.storeProductListComponent.categoryName = "";
+      this.storeProductListComponent.onLoadProducts();
+    }
+    
+  }
+  
+
+  searchByProductName(productName: string) {
+    this.storeProductListComponent.searchByProductName(productName);
+  }
+
+
+
+
+  setAndValidateStoreByParamValue(paramValue: string) {
+    const storedStore = this.storageService.get(this.storedStore);
+    if (
+      this.utilService.splitAndJoinString(storedStore.name, '-', ' ') ===
+      this.utilService.splitAndJoinString(paramValue, '-', ' ')
+    ) {
+      this.store = storedStore;
+      this.storeIsValid = true;
+    } else {
+      this.router.navigate(['error/notfound']);
+    }
   }
 
 }

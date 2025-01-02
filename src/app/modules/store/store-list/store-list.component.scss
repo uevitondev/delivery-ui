@@ -1,6 +1,9 @@
 main {
-  margin: 24px auto;
-  width: 90%;
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .store-list-loading,
@@ -12,38 +15,4 @@ main {
 
 .stores {
   display: flex;
-}
-
-.store {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.store-details-wrapper {
-  display: flex;
-  gap: 12px;
-
-}
-
-
-.store-logo {
-
-  img {
-    display: block;
-    max-width: 45px;
-    height: auto;
-    border-radius: 100%;
-  }
-
-}
-
-.store-details {
-  flex: 1;
-}
-
-.store-actions {
-  display: flex;
-  align-items: center;
-  align-content: center;
 }

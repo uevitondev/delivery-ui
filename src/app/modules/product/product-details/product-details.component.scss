@@ -3,7 +3,7 @@ main {
   justify-content: center;
   align-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 8px;
   padding: 12px;
   margin: 24px auto;
   width: 90%;
@@ -40,7 +40,7 @@ main {
 .product-details {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 8px;
 
   .name {
     font-size: xx-large;
@@ -59,34 +59,43 @@ main {
 
 .product-actions {
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 16px;
 
   button {
     font-size: 18px;
   }
 }
 
+.product-edit-quantity-wrapper{
+  display: flex;
+  justify-content: flex-start;
+}
 
 
 .product-edit-quantity {
   display: flex;
   align-items: center;
+  border: 1px solid gray;
 
   button {
-    padding: 5px 10px;
+    padding: 10px 16px;
     font-size: 16px;
+    font-weight: bold;
     background-color: #f0f0f0;
     border: none;
     cursor: pointer;
   }
 
   .quantity {
-    margin: 0 10px;
+    padding:  10px 16px;
     font-size: 16px;
+    font-weight: bold;
   }
+}
+
+.btn-secondary {
+  padding: 16px;
 }
 
 
@@ -110,7 +119,7 @@ main {
 
   .product-image {
     max-width: 260px;
-  
+
     img {
       width: 100%;
     }

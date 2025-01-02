@@ -5,14 +5,14 @@ import { ToastrService } from 'ngx-toastr';
 import { OrderDetails } from '../../../core/models/order-details';
 import { OrderService } from '../../../core/services/order.service';
 import { StorageService } from '../../../core/services/storage.service';
-import { StorecComponent } from '../../store/storec/storec.component';
+import { StoreCardComponent } from '../../store/storecard/storecard.component';
 
 @Component({
   selector: 'app-order-details',
   standalone: true,
   imports: [
-    StorecComponent,
-    CommonModule
+    CommonModule,
+    StoreCardComponent
   ],
   templateUrl: './order-details.component.html',
   styleUrl: './order-details.component.scss'

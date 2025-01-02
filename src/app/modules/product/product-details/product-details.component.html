@@ -17,15 +17,21 @@
         <p class="desc">{{ product.description }}</p>
       </div>
 
-      <div class="product-actions">    
-      
-        <div class="product-edit-quantity">          
-          <button (click)="decrementProductQuantity()">-</button>
-          <p class="quantity">{{ productQuantity }}</p>
-          <button (click)="incrementProductQuantity()">+</button>
+      <div class="product-actions">
+
+        <div class="product-edit-quantity-wrapper">
+          <div class="product-edit-quantity">
+            <button (click)="decrementProductQuantity()">-</button>
+            <p class="quantity">{{ productQuantity }}</p>
+            <button (click)="incrementProductQuantity()">+</button>
+          </div>
         </div>
 
-        <button class="btn-secondary" (click)="addToCart(product)">COMPRAR AGORA</button>
+   
+
+
+        <button class="btn-secondary" (click)="addToCart(product)">ADICIONAR AO CARRINHO</button>
+        <button class="btn-secondary" (click)="buyNow(product)" [routerLink]="['/cart']">COMPRAR AGORA</button>
       </div>
 
     </div>

@@ -1,19 +1,20 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { Product } from '../../../core/models/product';
 import { CartService } from '../../../core/services/cart.service';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { ProductService } from '../../../core/services/product.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
-import { RouterService } from '../../../core/services/router.service';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
+    RouterOutlet,
     NgOptimizedImage,
     InputFormComponent,
     ReactiveFormsModule
@@ -23,11 +24,10 @@ import { RouterService } from '../../../core/services/router.service';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  toastService = inject(ToastrService);
-  routerService = inject(RouterService);
   activatedRoute = inject(ActivatedRoute);
   productService = inject(ProductService);
   cartService = inject(CartService);
+  errorHandlerService = inject(ErrorHandlerService);
 
   product!: Product;
   productQuantity: number = 1;
@@ -35,7 +35,7 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     let productId = this.activatedRoute.snapshot.params['productId'];
-    this.loadProduct(productId); 
+    this.loadProduct(productId);
   }
 
   loadProduct(productId: string) {
@@ -43,8 +43,8 @@ export class ProductDetailsComponent implements OnInit {
       next: (productDto) => {
         this.product = productDto;
       },
-      error: (error) => {
-        this.toastService.error("erro ao carregar dados do produto");
+      error: (e) => {
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO CARREGAR DETALHES DO PRODUTO");
       }
     });
   }
@@ -68,8 +68,14 @@ export class ProductDetailsComponent implements OnInit {
       quantity: this.productQuantity,
       note: ''
     });
-    this.routerService.toCart();
   }
+
+  buyNow(product: Product) {
+    this.addToCart(product);
+  }
+
+
+
 
 
 

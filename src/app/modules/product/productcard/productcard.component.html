@@ -1,0 +1,15 @@
+<div class="product">
+  <a  [routerLink]="['/products/product-details/', product.id]">
+    <div class="product-img-wrapper" >
+      <img class="product-img" ngSrc={{product.imgUrl}} fill title="product image" alt="product image" priority>
+    </div>
+    <div class="product-info">
+      <p class="product-name">{{product.name}}</p>
+      <p class="product-price">{{product.price | currency : 'BRL' }}</p>
+    </div>
+  </a>
+
+  <div class="addtocart-wrapper">
+    <button class="btn-addtocart styledbutton" (click)="addToCart()">ADICIONAR AO CARRINHO</button>
+  </div>
+</div>

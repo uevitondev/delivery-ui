@@ -1,18 +1,12 @@
 main {
-  width: 90%;
-  margin: 24px auto;
-  padding: 12px;
-}
-
-.container {
   display: flex;
-  gap: 16px;
+  flex-direction: column;
+  gap: 25px;
+  width: 75%;
   padding: 12px;
+  margin: 0 auto;
 }
 
-.products-categories {
-  width: 220px;
-}
 
 .store-products {
   flex: 1;

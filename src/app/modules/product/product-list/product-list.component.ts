@@ -1,27 +1,30 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { environment } from '../../../../environments/environment';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { Category } from '../../../core/models/category';
 import { PageData } from '../../../core/models/page-data';
 import { Product } from '../../../core/models/product';
+import { Store } from '../../../core/models/store';
 import { CartService } from '../../../core/services/cart.service';
 import { CategoryService } from '../../../core/services/category.service';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { ProductService } from '../../../core/services/product.service';
-import { RouterService } from '../../../core/services/router.service';
-import { StorageService } from '../../../core/services/storage.service';
 import { StoreService } from '../../../core/services/store.service';
-import { MyPaginatorComponent } from '../../../shared/components/my-paginator/my-paginator.component';
-import { Store } from '../../../core/models/store';
-import { delay } from 'rxjs';
+import { PaginatorComponent } from '../../../shared/components/paginator/paginator.component';
+import { SearchComponent } from '../../../shared/components/search/search.component';
+import { ProductCardComponent } from '../productcard/productcard.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
   imports: [
+    RouterLink,
+    RouterOutlet,
     CommonModule,
     NgOptimizedImage,
-    MyPaginatorComponent
+    SearchComponent,
+    ProductCardComponent,
+    PaginatorComponent
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
@@ -30,18 +33,16 @@ export class ProductListComponent {
 
   @Input() store!: Store;
 
-  toastService = inject(ToastrService);
-  routerService = inject(RouterService);
-  storageService = inject(StorageService);
+  errorHandlerService = inject(ErrorHandlerService);
   cartService = inject(CartService);
   storeService = inject(StoreService);
   categoryService = inject(CategoryService);
   productService = inject(ProductService);
 
-  STORED_STORE = environment.STORED_STORE;
   isLoading: boolean = false;
   products: Product[] = [];
-  categoryName: string = "";
+  searchProductName: string = "";
+  searchProductCategory: string = "";
   orderBy: string = "";
   selectedItem: any;
 
@@ -51,12 +52,12 @@ export class ProductListComponent {
   pages: number[] = [];
 
   ngOnInit(): void {
-    this.loadProductsList(this.store.id, this.categoryName, this.pageNumber, this.pageSize);
+    this.onLoadProducts(this.pageNumber, this.pageSize);
   }
 
-  loadProductsList(storeId: string, categoryName: string, pageNumber: number, pageSize: number) {
+  onLoadProducts(pageNumber: number, pageSize: number) {
     this.isLoading = true;
-    this.productService.getAllByStorePagedAndFiltered(storeId, categoryName, pageNumber, pageSize).subscribe({
+    this.productService.getAll().subscribe({
       next: (pageData: PageData) => {
         this.products = pageData.content;
         this.pageNumber = pageData.page.number;
@@ -65,22 +66,22 @@ export class ProductListComponent {
       },
       error: (e) => {
         this.isLoading = false;
-        throw new Error(e);
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO CARREGAR PRODUTOS");
       }
     });
   }
 
 
   filterProductsAll() {
-    this.categoryName = '';
-    this.loadProductsList(this.store.id, this.categoryName, this.pageNumber, this.pageSize)
+    this.searchProductCategory = '';
+    this.onLoadProducts(this.pageNumber, this.pageSize)
   }
 
   filterProductsByCategory(category: Category) {
     category ? (() => {
-      this.categoryName = category.name;
+      this.searchProductCategory = category.name;
       this.pageNumber = 0;
-      this.loadProductsList(this.store.id, this.categoryName, this.pageNumber, this.pageSize);
+      this.onLoadProducts(this.pageNumber, this.pageSize);
     })() : this.filterProductsAll();
 
   }
@@ -96,17 +97,17 @@ export class ProductListComponent {
   setPagination(pagination: { pageNumber: number, pageSize: number }) {
     this.pageNumber = pagination.pageNumber;
     this.pageSize = pagination.pageSize;
-    this.loadProductsList(this.store.id, this.categoryName, this.pageNumber, this.pageSize);
+    this.onLoadProducts(this.pageNumber, this.pageSize);
   }
 
   setPageNumber(pageNumber: number) {
     this.pageNumber = pageNumber;
-    this.loadProductsList(this.store.id, this.categoryName, this.pageNumber, this.pageSize);
+    this.onLoadProducts(this.pageNumber, this.pageSize);
   }
 
   setPageSize(pageSize: number) {
     this.pageSize = pageSize;
-    this.loadProductsList(this.store.id, this.categoryName, this.pageNumber, this.pageSize);
+    this.onLoadProducts(this.pageNumber, this.pageSize);
   }
 
   generateNumberList(number: number): number[] {

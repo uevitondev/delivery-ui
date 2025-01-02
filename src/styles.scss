@@ -1,63 +1,18 @@
-@use '@angular/material' as mat;
-@include mat.core();
-
-
-$app-light-theme: mat.define-theme((color: (theme-type: light,
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
-      ),
-    ));
-
-$app-dark-theme: mat.define-theme((color: (theme-type: dark,
-        primary: mat.$magenta-palette,
-        tertiary: mat.$violet-palette,
-      ),
-    ));
-
-.dark-theme {
-  @include mat.all-component-colors($app-dark-theme);
-  background: mat.get-theme-color($app-dark-theme, surface);
-}
-
 @import 'ngx-toastr/toastr';
+@import "./assets/styles/themes-styles.scss";
+@import "./assets/styles/overlay-modal-styles.scss";
+@import "./assets/styles/components-styles.scss";
+
 
 :root {
   --primary: #FBD148;
   --secondary: #FAFAFA;
   --tertiary: #232423;
-  --box-shadow: 2px 2px gray;
+  --box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
   --padding: 8px;
-  --border: 1px solid gray;
+  --border: 1px solid rgb(182, 179, 179);
   --radius: 8px;
   --navbar-height: 60px;
-}
-
-.card{
-  border: var(--border);
-  border-radius: var(--radius);
-  padding: var(--padding);
-  box-shadow: var(--box-shadow);
-  background-color: var(--primary);
-  
-}
-
-
-.btn-primary {
-  font-size: 13px;
-  border-radius: 99px;
-  padding: 4px 10px;
-  border: var(--border);
-  background-color: var(--primary);
-  cursor: pointer;
-}
-
-.btn-secondary {
-  font-size: 13px;
-  border-radius: 99px;
-  padding: 4px 10px;
-  border: var(--border);
-  background-color: var(--secondary);
-  cursor: pointer;
 }
 
 * {

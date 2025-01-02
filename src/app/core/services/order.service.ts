@@ -14,7 +14,7 @@ export class OrderService {
   apiUrl = environment.API_URL;
   httpClient = inject(HttpClient);
 
-  saveNew(shoppingcart: ShoppingCartRequest): Observable<OrderResponse> {
+  newOrder(shoppingcart: ShoppingCartRequest): Observable<OrderResponse> {
     return this.httpClient.post<OrderResponse>(`${this.apiUrl}/orders`, shoppingcart);
   }
 

@@ -1,11 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { UserProfile } from '../../../core/models/user-profile';
-import { AuthService } from '../../../core/services/auth.service';
-import { RouterService } from '../../../core/services/router.service';
-import { UserService } from '../../../core/services/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
+import { UserProfile } from '../../../core/models/user-profile';
+import { AuthService } from '../../../core/services/auth.service';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { UserService } from '../../../core/services/user.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
@@ -21,29 +20,26 @@ import { InputFormComponent } from '../../../shared/components/input-form/input-
 })
 export class UserProfileComponent implements OnInit {
 
-  toastService = inject(ToastrService);
-  routerService = inject(RouterService);
   authService = inject(AuthService);
   userService = inject(UserService);
+  errorHandlerService = inject(ErrorHandlerService);
 
-  userProfile!: UserProfile;
   userProfileForm!: FormGroup;
-
+  userProfile!: UserProfile;
+  isLoading: boolean = false;
 
   ngOnInit(): void {
-    if (!this.authService.isLogged()) {
-      this.toastService.show("NECESSÁRIO LOGIN");
-      this.routerService.toSignIn();
-    }
+    this.initUserProfileForm();
+    this.loadUserAccountProfile();
+  }
 
+  initUserProfileForm() {
     this.userProfileForm = new FormGroup({
       firstName: new FormControl(''),
       lastName: new FormControl(''),
       email: new FormControl(''),
       phoneNumber: new FormControl(''),
     });
-
-    this.loadUserAccountProfile();
   }
 
 
@@ -54,7 +50,7 @@ export class UserProfileComponent implements OnInit {
         this.userProfileForm.patchValue(userProfile);
       },
       error: (e) => {
-        this.toastService.error("Erro ao listar dados!");
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO CARREGAR DADOD DE PERFIL");
       }
     });
   }

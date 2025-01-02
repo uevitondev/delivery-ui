@@ -41,11 +41,13 @@
 
           @if(showNote){
           <div class="note">
-            <button class="btn-secondary" (click)="modalNote.toggle()">Add/Editar Nota</button>
-            <app-modal #modalNote>
-              <app-cart-item-note [cartItem]="cartitem">
-              </app-cart-item-note>
-            </app-modal>
+            <button class="btn-secondary" (click)="openNoteModal()">Add/Editar Nota</button>
+            <ng-template cdkPortal #modalTemplate="cdkPortal">
+              <app-modal (closeModalEvent)="closeTemplateModal()">
+                <app-cart-item-note [cartItem]="cartitem">
+                </app-cart-item-note>
+              </app-modal>
+            </ng-template>
           </div>
           }
 

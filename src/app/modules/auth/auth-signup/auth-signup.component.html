@@ -90,13 +90,12 @@
         @if(isLoading){
           <button class="btn btn-primary" [disabled]="isLoading" type="button" disabled>
             <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            <span class="sr-only">SOLICITANDO...AGUARDE!</span>
           </button>
         }@else{
-          <button type="submit" [disabled]="signupForm.invalid">Criar Conta</button>
+          <button class="btn-primary" type="submit" [disabled]="signupForm.invalid">Criar Conta</button>
         }        
       </div>
     </form>
-    <p>Já tem uma conta? <a (click)="routerService.toSignIn()">Entrar</a></p>
+    <p>Já tem uma conta? <a  [routerLink]="['/auth/signin']">Entrar</a></p>
   </div>
 </main>

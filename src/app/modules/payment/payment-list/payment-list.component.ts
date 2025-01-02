@@ -1,6 +1,7 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
-import { PaymentService } from '../../../core/services/payment.service';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { PaymentMethod } from '../../../core/models/payment-method';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { PaymentService } from '../../../core/services/payment.service';
 
 @Component({
   selector: 'app-payment-list',
@@ -11,17 +12,21 @@ import { PaymentMethod } from '../../../core/models/payment-method';
 })
 export class PaymentListComponent implements OnInit {
 
-  @Output() selectedPaymentMethodEvent = new EventEmitter<PaymentMethod>;
+  @Output() selectedPaymentMethodEvent = new EventEmitter<PaymentMethod>();
+  @Input() selectedId!: string;
 
   paymentService = inject(PaymentService);
+  errorHandlerService = inject(ErrorHandlerService);
+
+
   paymentMethods: PaymentMethod[] = [];
   isLoading: boolean = false;
 
   ngOnInit(): void {
-    this.loadPayments();
+    this.onLoadPayments();
   }
 
-  loadPayments() {
+  onLoadPayments() {
     this.isLoading = true;
     this.paymentService.getAllPaymentMethods().subscribe({
       next: (response) => {
@@ -30,7 +35,7 @@ export class PaymentListComponent implements OnInit {
       },
       error: (e) => {
         this.isLoading = false;
-        throw new Error(e);
+        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO CARREGAR METHODOS DE PAGAMENTO");
       }
     });
   }
