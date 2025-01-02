@@ -9,18 +9,17 @@ import { StorageService } from '../../../core/services/storage.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterOutlet,
-    CommonModule,
-    NgIf,
-    MatIconModule,
-    MatMenuModule,
-  ],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss'
+    selector: 'app-navbar',
+    imports: [
+        RouterLink,
+        RouterOutlet,
+        CommonModule,
+        NgIf,
+        MatIconModule,
+        MatMenuModule,
+    ],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.scss'
 })
 export class NavBarComponent {
 

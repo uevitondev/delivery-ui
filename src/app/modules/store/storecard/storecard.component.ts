@@ -6,13 +6,12 @@ import { StorageService } from '../../../core/services/storage.service';
 import { UtilService } from '../../../core/services/util.service';
 
 @Component({
-  selector: 'app-storecard',
-  standalone: true,
-  imports: [
-    RouterLink
-  ],
-  templateUrl: './storecard.component.html',
-  styleUrl: './storecard.component.scss'
+    selector: 'app-storecard',
+    imports: [
+        RouterLink
+    ],
+    templateUrl: './storecard.component.html',
+    styleUrl: './storecard.component.scss'
 })
 export class StoreCardComponent {
 

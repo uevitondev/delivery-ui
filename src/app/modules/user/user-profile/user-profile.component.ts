@@ -8,15 +8,14 @@ import { UserService } from '../../../core/services/user.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-  selector: 'app-user-profile',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    InputFormComponent,
-    MatDialogModule
-  ],
-  templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.scss'
+    selector: 'app-user-profile',
+    imports: [
+        ReactiveFormsModule,
+        InputFormComponent,
+        MatDialogModule
+    ],
+    templateUrl: './user-profile.component.html',
+    styleUrl: './user-profile.component.scss'
 })
 export class UserProfileComponent implements OnInit {
 

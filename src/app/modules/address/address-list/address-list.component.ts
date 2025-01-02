@@ -10,16 +10,15 @@ import { AddressFormComponent } from '../address-form/address-form.component';
 import { AddressCardComponent } from '../addresscard/addresscard.component';
 
 @Component({
-  selector: 'app-address-list',
-  standalone: true,
-  imports: [
-    ModalComponent,
-    AddressFormComponent,
-    AddressCardComponent,
-    PortalModule
-  ],
-  templateUrl: './address-list.component.html',
-  styleUrl: './address-list.component.scss'
+    selector: 'app-address-list',
+    imports: [
+        ModalComponent,
+        AddressFormComponent,
+        AddressCardComponent,
+        PortalModule
+    ],
+    templateUrl: './address-list.component.html',
+    styleUrl: './address-list.component.scss'
 })
 export class AddressListComponent implements OnInit {
 

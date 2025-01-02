@@ -20,16 +20,15 @@ import { CommonModule } from '@angular/common';
 import { CategoryCardComponent } from '../categorycard/categorycard.component';
 
 @Component({
-  selector: 'app-category-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    LoadingComponent,
-    CategoryCardComponent,
-  ],
-  templateUrl: './category-list.component.html',
-  styleUrl: './category-list.component.scss',
+    selector: 'app-category-list',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        LoadingComponent,
+        CategoryCardComponent,
+    ],
+    templateUrl: './category-list.component.html',
+    styleUrl: './category-list.component.scss'
 })
 export class CategoryListComponent implements OnInit {
   errorHandlerService = inject(ErrorHandlerService);

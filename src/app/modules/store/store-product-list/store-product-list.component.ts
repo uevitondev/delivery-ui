@@ -14,11 +14,10 @@ import { ProductCardComponent } from '../../product/productcard/productcard.comp
 import { LoadingComponent } from "../../../shared/components/loading/loading.component";
 
 @Component({
-  selector: 'app-store-product-list',
-  standalone: true,
-  imports: [SearchComponent, ProductCardComponent, PaginatorComponent, LoadingComponent],
-  templateUrl: './store-product-list.component.html',
-  styleUrl: './store-product-list.component.scss',
+    selector: 'app-store-product-list',
+    imports: [SearchComponent, ProductCardComponent, PaginatorComponent, LoadingComponent],
+    templateUrl: './store-product-list.component.html',
+    styleUrl: './store-product-list.component.scss'
 })
 export class StoreProductListComponent {
   utilService = inject(UtilService);

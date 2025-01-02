@@ -7,15 +7,14 @@ import { StorageService } from '../../../core/services/storage.service';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-order-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterOutlet
-  ],
-  templateUrl: './order-list.component.html',
-  styleUrl: './order-list.component.scss'
+    selector: 'app-order-list',
+    imports: [
+        CommonModule,
+        RouterLink,
+        RouterOutlet
+    ],
+    templateUrl: './order-list.component.html',
+    styleUrl: './order-list.component.scss'
 })
 export class OrderListComponent implements OnInit {
 

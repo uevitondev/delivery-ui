@@ -16,11 +16,10 @@ import { StoreProductListComponent } from '../store-product-list/store-product-l
 import { SearchComponent } from '../../../shared/components/search/search.component';
 
 @Component({
-  selector: 'app-store-home',
-  standalone: true,
-  imports: [CategoryListComponent, StoreProductListComponent, LoadingComponent, SearchComponent],
-  templateUrl: './store-home.component.html',
-  styleUrl: './store-home.component.scss',
+    selector: 'app-store-home',
+    imports: [CategoryListComponent, StoreProductListComponent, LoadingComponent, SearchComponent],
+    templateUrl: './store-home.component.html',
+    styleUrl: './store-home.component.scss'
 })
 export class StoreHomeComponent implements OnInit {
   @ViewChild(StoreProductListComponent)

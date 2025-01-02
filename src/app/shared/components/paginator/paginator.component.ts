@@ -4,15 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-paginator',
-  standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule,
-    MatIconModule
-  ],
-  templateUrl: './paginator.component.html',
-  styleUrl: './paginator.component.scss'
+    selector: 'app-paginator',
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatIconModule
+    ],
+    templateUrl: './paginator.component.html',
+    styleUrl: './paginator.component.scss'
 })
 export class PaginatorComponent {
 

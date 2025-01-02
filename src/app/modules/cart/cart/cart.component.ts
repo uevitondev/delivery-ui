@@ -9,22 +9,21 @@ import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.componen
 import { CartitemListComponent } from '../cartitem-list/cartitem-list.component';
 
 @Component({
-  selector: 'app-cart',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterOutlet,
-    CommonModule,
-    MatIconModule,
-    NgIf,
-    MatMenuModule,
-    CartitemListComponent,
-    CartItemNoteComponent,
-    AsyncPipe,
-    CurrencyPipe
-  ],
-  templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss'
+    selector: 'app-cart',
+    imports: [
+        RouterLink,
+        RouterOutlet,
+        CommonModule,
+        MatIconModule,
+        NgIf,
+        MatMenuModule,
+        CartitemListComponent,
+        CartItemNoteComponent,
+        AsyncPipe,
+        CurrencyPipe
+    ],
+    templateUrl: './cart.component.html',
+    styleUrl: './cart.component.scss'
 })
 export class CartComponent {
   orderService = inject(OrderService);

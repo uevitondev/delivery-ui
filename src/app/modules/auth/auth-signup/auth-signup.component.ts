@@ -8,17 +8,16 @@ import { ErrorHandlerService } from '../../../core/services/error-handler.servic
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-  selector: 'app-auth-signup',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterOutlet,
-    CommonModule,
-    InputFormComponent,
-    ReactiveFormsModule
-  ],
-  templateUrl: './auth-signup.component.html',
-  styleUrl: './auth-signup.component.scss'
+    selector: 'app-auth-signup',
+    imports: [
+        RouterLink,
+        RouterOutlet,
+        CommonModule,
+        InputFormComponent,
+        ReactiveFormsModule
+    ],
+    templateUrl: './auth-signup.component.html',
+    styleUrl: './auth-signup.component.scss'
 })
 export class AuthSignUpComponent implements OnInit {
 

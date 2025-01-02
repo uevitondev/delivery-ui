@@ -4,14 +4,13 @@ import { AddressFormComponent } from '../address-form/address-form.component';
 import { ModalComponent } from '../../../shared/components/modal/modal.component';
 
 @Component({
-  selector: 'app-addresscard',
-  standalone: true,
-  imports: [
-    ModalComponent,
-    AddressFormComponent
-  ],
-  templateUrl: './addresscard.component.html',
-  styleUrl: './addresscard.component.scss'
+    selector: 'app-addresscard',
+    imports: [
+        ModalComponent,
+        AddressFormComponent
+    ],
+    templateUrl: './addresscard.component.html',
+    styleUrl: './addresscard.component.scss'
 })
 export class AddressCardComponent {
 

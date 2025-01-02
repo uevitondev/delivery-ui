@@ -4,20 +4,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@a
 type InputTypes = "text" | "number" | "email" | "password"
 
 @Component({
-  selector: 'app-input-form',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputFormComponent),
-      multi: true
-    }
-  ],
-  templateUrl: './input-form.component.html',
-  styleUrl: './input-form.component.scss'
+    selector: 'app-input-form',
+    imports: [
+        ReactiveFormsModule
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => InputFormComponent),
+            multi: true
+        }
+    ],
+    templateUrl: './input-form.component.html',
+    styleUrl: './input-form.component.scss'
 })
 export class InputFormComponent implements ControlValueAccessor {
   @Input() inputName: string = ""

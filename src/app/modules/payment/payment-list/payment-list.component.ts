@@ -4,11 +4,10 @@ import { ErrorHandlerService } from '../../../core/services/error-handler.servic
 import { PaymentService } from '../../../core/services/payment.service';
 
 @Component({
-  selector: 'app-payment-list',
-  standalone: true,
-  imports: [],
-  templateUrl: './payment-list.component.html',
-  styleUrl: './payment-list.component.scss'
+    selector: 'app-payment-list',
+    imports: [],
+    templateUrl: './payment-list.component.html',
+    styleUrl: './payment-list.component.scss'
 })
 export class PaymentListComponent implements OnInit {
 

@@ -4,12 +4,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Address } from '../../../core/models/address';
 import { AddressService } from '../../../core/services/address.service';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
   selector: 'app-address-form',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     InputFormComponent,
@@ -97,9 +96,9 @@ export class AddressFormComponent implements OnInit {
               district: response.bairro,
               city: response.localidade,
               uf: response.uf
-            }); 
+            });
           },
-          error: (e) => {            
+          error: (e) => {
             this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO CONSULTAR O CEP")
           }
         })

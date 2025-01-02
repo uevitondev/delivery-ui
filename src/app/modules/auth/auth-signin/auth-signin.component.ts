@@ -10,17 +10,16 @@ import { delay } from 'rxjs';
 
 
 @Component({
-  selector: 'app-auth-signin',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterOutlet,
-    InputFormComponent,
-    ReactiveFormsModule,
-    LoadingComponent
-],
-  templateUrl: './auth-signin.component.html',
-  styleUrl: './auth-signin.component.scss'
+    selector: 'app-auth-signin',
+    imports: [
+        RouterLink,
+        RouterOutlet,
+        InputFormComponent,
+        ReactiveFormsModule,
+        LoadingComponent
+    ],
+    templateUrl: './auth-signin.component.html',
+    styleUrl: './auth-signin.component.scss'
 })
 export class AuthSignInComponent implements OnInit {
 

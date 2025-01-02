@@ -9,11 +9,10 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-search',
-  standalone: true,
-  imports: [MatIconModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.scss',
+    selector: 'app-search',
+    imports: [MatIconModule, FormsModule, ReactiveFormsModule],
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.scss'
 })
 export class SearchComponent implements OnInit {
   @Input() placeHolder: string = 'Seu PlaceHolder';

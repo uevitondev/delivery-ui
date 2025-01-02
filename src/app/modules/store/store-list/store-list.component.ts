@@ -6,11 +6,10 @@ import { SearchComponent } from '../../../shared/components/search/search.compon
 import { StoreCardComponent } from '../storecard/storecard.component';
 
 @Component({
-  selector: 'app-store-list',
-  standalone: true,
-  imports: [StoreCardComponent, SearchComponent],
-  templateUrl: './store-list.component.html',
-  styleUrl: './store-list.component.scss',
+    selector: 'app-store-list',
+    imports: [StoreCardComponent, SearchComponent],
+    templateUrl: './store-list.component.html',
+    styleUrl: './store-list.component.scss'
 })
 export class StoreListComponent implements OnInit {
   errorHandlerService = inject(ErrorHandlerService);

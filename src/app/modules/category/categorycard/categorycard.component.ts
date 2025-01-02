@@ -5,11 +5,10 @@ import { Product } from '../../../core/models/product';
 import { Category } from '../../../core/models/category';
 
 @Component({
-  selector: 'app-categorycard',
-  standalone: true,
-  imports: [RouterLink, CommonModule, NgOptimizedImage],
-  templateUrl: './categorycard.component.html',
-  styleUrl: './categorycard.component.scss',
+    selector: 'app-categorycard',
+    imports: [RouterLink, CommonModule, NgOptimizedImage],
+    templateUrl: './categorycard.component.html',
+    styleUrl: './categorycard.component.scss'
 })
 export class CategoryCardComponent {
   @Input() category!: Category;

@@ -9,18 +9,17 @@ import { ModalComponent } from '../../../shared/components/modal/modal.component
 import { OrderListComponent } from "../../order/order-list/order-list.component";
 
 @Component({
-  selector: 'app-user-account',
-  standalone: true,
-  imports: [
-    PortalModule,
-    MatIconModule,
-    UserProfileComponent,
-    AddressListComponent,
-    ModalComponent,
-    OrderListComponent
-],
-  templateUrl: './user-account.component.html',
-  styleUrl: './user-account.component.scss'
+    selector: 'app-user-account',
+    imports: [
+        PortalModule,
+        MatIconModule,
+        UserProfileComponent,
+        AddressListComponent,
+        ModalComponent,
+        OrderListComponent
+    ],
+    templateUrl: './user-account.component.html',
+    styleUrl: './user-account.component.scss'
 })
 export class UserAccountComponent implements OnInit {
 

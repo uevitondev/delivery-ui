@@ -15,19 +15,18 @@ import { SearchComponent } from '../../../shared/components/search/search.compon
 import { ProductCardComponent } from '../productcard/productcard.component';
 
 @Component({
-  selector: 'app-product-list',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterOutlet,
-    CommonModule,
-    NgOptimizedImage,
-    SearchComponent,
-    ProductCardComponent,
-    PaginatorComponent
-  ],
-  templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+    selector: 'app-product-list',
+    imports: [
+        RouterLink,
+        RouterOutlet,
+        CommonModule,
+        NgOptimizedImage,
+        SearchComponent,
+        ProductCardComponent,
+        PaginatorComponent
+    ],
+    templateUrl: './product-list.component.html',
+    styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
 

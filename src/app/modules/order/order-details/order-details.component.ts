@@ -8,14 +8,13 @@ import { StorageService } from '../../../core/services/storage.service';
 import { StoreCardComponent } from '../../store/storecard/storecard.component';
 
 @Component({
-  selector: 'app-order-details',
-  standalone: true,
-  imports: [
-    CommonModule,
-    StoreCardComponent
-  ],
-  templateUrl: './order-details.component.html',
-  styleUrl: './order-details.component.scss'
+    selector: 'app-order-details',
+    imports: [
+        CommonModule,
+        StoreCardComponent
+    ],
+    templateUrl: './order-details.component.html',
+    styleUrl: './order-details.component.scss'
 })
 export class OrderDetailsComponent implements OnInit {
 

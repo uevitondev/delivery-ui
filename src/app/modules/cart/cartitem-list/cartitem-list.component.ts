@@ -10,20 +10,19 @@ import { AddressListComponent } from '../../address/address-list/address-list.co
 import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.component';
 
 @Component({
-  selector: 'app-cartitem-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatIconModule,
-    NgIf,
-    MatMenuModule,
-    CartItemNoteComponent,
-    ModalComponent,
-    AddressListComponent,
-    PortalModule
-  ],
-  templateUrl: './cartitem-list.component.html',
-  styleUrl: './cartitem-list.component.scss'
+    selector: 'app-cartitem-list',
+    imports: [
+        CommonModule,
+        MatIconModule,
+        NgIf,
+        MatMenuModule,
+        CartItemNoteComponent,
+        ModalComponent,
+        AddressListComponent,
+        PortalModule
+    ],
+    templateUrl: './cartitem-list.component.html',
+    styleUrl: './cartitem-list.component.scss'
 })
 export class CartitemListComponent {
 

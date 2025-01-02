@@ -6,16 +6,15 @@ import { AuthSignUpComponent } from '../auth-signup/auth-signup.component';
 import { AuthVerificationComponent } from '../auth-verification/auth-verification.component';
 
 @Component({
-  selector: 'app-auth-page',
-  standalone: true,
-  imports: [
-    AuthSignInComponent,
-    AuthResetPasswordComponent,
-    AuthSignUpComponent,
-    AuthVerificationComponent
-  ],
-  templateUrl: './auth-page.component.html',
-  styleUrl: './auth-page.component.scss'
+    selector: 'app-auth-page',
+    imports: [
+        AuthSignInComponent,
+        AuthResetPasswordComponent,
+        AuthSignUpComponent,
+        AuthVerificationComponent
+    ],
+    templateUrl: './auth-page.component.html',
+    styleUrl: './auth-page.component.scss'
 })
 export class AuthPageComponent implements OnInit {
 

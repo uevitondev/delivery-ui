@@ -7,15 +7,14 @@ import { ErrorHandlerService } from '../../../core/services/error-handler.servic
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-  selector: 'app-auth-resetpassword',
-  standalone: true,
-  imports: [
-    InputFormComponent,
-    ReactiveFormsModule,
-    InputFormComponent
-  ],
-  templateUrl: './auth-resetpassword.component.html',
-  styleUrl: './auth-resetpassword.component.scss'
+    selector: 'app-auth-resetpassword',
+    imports: [
+        InputFormComponent,
+        ReactiveFormsModule,
+        InputFormComponent
+    ],
+    templateUrl: './auth-resetpassword.component.html',
+    styleUrl: './auth-resetpassword.component.scss'
 })
 export class AuthResetPasswordComponent implements OnInit {
 

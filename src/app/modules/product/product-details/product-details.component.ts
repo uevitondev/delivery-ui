@@ -9,18 +9,17 @@ import { ProductService } from '../../../core/services/product.service';
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-  selector: 'app-product-details',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterOutlet,
-    NgOptimizedImage,
-    InputFormComponent,
-    ReactiveFormsModule
-  ],
-  templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.scss'
+    selector: 'app-product-details',
+    imports: [
+        CommonModule,
+        RouterLink,
+        RouterOutlet,
+        NgOptimizedImage,
+        InputFormComponent,
+        ReactiveFormsModule
+    ],
+    templateUrl: './product-details.component.html',
+    styleUrl: './product-details.component.scss'
 })
 export class ProductDetailsComponent implements OnInit {
 

@@ -25,23 +25,22 @@ import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.componen
 import { CartitemListComponent } from '../cartitem-list/cartitem-list.component';
 
 @Component({
-  selector: 'app-cart-checkout',
-  standalone: true,
-  imports: [
-    RouterLink,
-    RouterOutlet,
-    CommonModule,
-    ModalComponent,
-    AddressListComponent,
-    PaymentListComponent,
-    CartItemNoteComponent,
-    CartitemListComponent,
-    AddressCardComponent,
-    PortalModule,
-    ModalComponent
-  ],
-  templateUrl: './cart-checkout.component.html',
-  styleUrl: './cart-checkout.component.scss',
+    selector: 'app-cart-checkout',
+    imports: [
+        RouterLink,
+        RouterOutlet,
+        CommonModule,
+        ModalComponent,
+        AddressListComponent,
+        PaymentListComponent,
+        CartItemNoteComponent,
+        CartitemListComponent,
+        AddressCardComponent,
+        PortalModule,
+        ModalComponent
+    ],
+    templateUrl: './cart-checkout.component.html',
+    styleUrl: './cart-checkout.component.scss'
 })
 
 export class CartCheckoutComponent implements OnInit {

@@ -7,15 +7,14 @@ import { ErrorHandlerService } from '../../../core/services/error-handler.servic
 import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-  selector: 'app-auth-verification',
-  standalone: true,
-  imports: [
-    InputFormComponent,
-    ReactiveFormsModule,
-    InputFormComponent
-  ],
-  templateUrl: './auth-verification.component.html',
-  styleUrl: './auth-verification.component.scss'
+    selector: 'app-auth-verification',
+    imports: [
+        InputFormComponent,
+        ReactiveFormsModule,
+        InputFormComponent
+    ],
+    templateUrl: './auth-verification.component.html',
+    styleUrl: './auth-verification.component.scss'
 })
 export class AuthVerificationComponent implements OnInit {
 
