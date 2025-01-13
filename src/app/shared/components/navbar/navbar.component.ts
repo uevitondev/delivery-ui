@@ -1,25 +1,23 @@
-import { CommonModule, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { RouterLink } from '@angular/router';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
 import { StorageService } from '../../../core/services/storage.service';
-import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'app-navbar',
-    imports: [
-        RouterLink,
-        RouterOutlet,
-        CommonModule,
-        NgIf,
-        MatIconModule,
-        MatMenuModule,
-    ],
-    templateUrl: './navbar.component.html',
-    styleUrl: './navbar.component.scss'
+  selector: 'app-navbar',
+  imports: [
+    RouterLink,
+    CommonModule,
+    MatIconModule,
+    MatMenuModule,
+  ],
+  templateUrl: './navbar.component.html',
+  styleUrl: './navbar.component.scss'
 })
 export class NavBarComponent {
 

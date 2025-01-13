@@ -1,20 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { OrderResponse } from '../../../core/models/order-response';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { OrderService } from '../../../core/services/order.service';
 import { StorageService } from '../../../core/services/storage.service';
-import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'app-order-list',
-    imports: [
-        CommonModule,
-        RouterLink,
-        RouterOutlet
-    ],
-    templateUrl: './order-list.component.html',
-    styleUrl: './order-list.component.scss'
+  selector: 'app-order-list',
+  imports: [
+    CommonModule,
+    RouterLink,
+  ],
+  templateUrl: './order-list.component.html',
+  styleUrl: './order-list.component.scss'
 })
 export class OrderListComponent implements OnInit {
 

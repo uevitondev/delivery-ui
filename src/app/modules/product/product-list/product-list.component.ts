@@ -1,6 +1,5 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
 import { Category } from '../../../core/models/category';
 import { PageData } from '../../../core/models/page-data';
 import { Product } from '../../../core/models/product';
@@ -15,18 +14,15 @@ import { SearchComponent } from '../../../shared/components/search/search.compon
 import { ProductCardComponent } from '../productcard/productcard.component';
 
 @Component({
-    selector: 'app-product-list',
-    imports: [
-        RouterLink,
-        RouterOutlet,
-        CommonModule,
-        NgOptimizedImage,
-        SearchComponent,
-        ProductCardComponent,
-        PaginatorComponent
-    ],
-    templateUrl: './product-list.component.html',
-    styleUrl: './product-list.component.scss'
+  selector: 'app-product-list',
+  imports: [
+    CommonModule,
+    SearchComponent,
+    ProductCardComponent,
+    PaginatorComponent
+  ],
+  templateUrl: './product-list.component.html',
+  styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent {
 

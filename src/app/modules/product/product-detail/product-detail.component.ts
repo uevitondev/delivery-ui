@@ -1,27 +1,23 @@
-import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../../core/models/product';
 import { CartService } from '../../../core/services/cart.service';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { ProductService } from '../../../core/services/product.service';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-    selector: 'app-product-details',
-    imports: [
-        CommonModule,
-        RouterLink,
-        RouterOutlet,
-        NgOptimizedImage,
-        InputFormComponent,
-        ReactiveFormsModule
-    ],
-    templateUrl: './product-details.component.html',
-    styleUrl: './product-details.component.scss'
+  selector: 'app-product-details',
+  imports: [
+    CommonModule,
+    RouterLink,
+    ReactiveFormsModule
+  ],
+  templateUrl: './product-detail.component.html',
+  styleUrl: './product-detail.component.scss'
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailComponent implements OnInit {
 
   activatedRoute = inject(ActivatedRoute);
   productService = inject(ProductService);

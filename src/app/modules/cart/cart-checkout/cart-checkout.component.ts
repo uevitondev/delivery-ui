@@ -1,7 +1,7 @@
 import { PortalModule, TemplatePortal } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../../environments/environment';
 import { Address } from '../../../core/models/address';
@@ -21,26 +21,22 @@ import { ModalComponent } from '../../../shared/components/modal/modal.component
 import { AddressListComponent } from '../../address/address-list/address-list.component';
 import { AddressCardComponent } from '../../address/addresscard/addresscard.component';
 import { PaymentListComponent } from '../../payment/payment-list/payment-list.component';
-import { CartItemNoteComponent } from '../cart-item-note/cart-item-note.component';
 import { CartitemListComponent } from '../cartitem-list/cartitem-list.component';
 
 @Component({
-    selector: 'app-cart-checkout',
-    imports: [
-        RouterLink,
-        RouterOutlet,
-        CommonModule,
-        ModalComponent,
-        AddressListComponent,
-        PaymentListComponent,
-        CartItemNoteComponent,
-        CartitemListComponent,
-        AddressCardComponent,
-        PortalModule,
-        ModalComponent
-    ],
-    templateUrl: './cart-checkout.component.html',
-    styleUrl: './cart-checkout.component.scss'
+  selector: 'app-cart-checkout',
+  imports: [
+    CommonModule,
+    ModalComponent,
+    AddressListComponent,
+    PaymentListComponent,
+    CartitemListComponent,
+    AddressCardComponent,
+    PortalModule,
+    ModalComponent
+  ],
+  templateUrl: './cart-checkout.component.html',
+  styleUrl: './cart-checkout.component.scss'
 })
 
 export class CartCheckoutComponent implements OnInit {

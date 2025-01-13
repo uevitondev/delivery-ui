@@ -1,19 +1,23 @@
-@import 'ngx-toastr/toastr';
-@import "./assets/styles/themes-styles.scss";
-@import "./assets/styles/overlay-modal-styles.scss";
-@import "./assets/styles/components-styles.scss";
+@use "@angular/material" as mat;
+
+@use "ngx-toastr/toastr" as toastr;
+@use "@angular/cdk/overlay-prebuilt.css" as cdk-over;
+@use "@fontsource/jetbrains-mono" as jetbrains-mono;
+@use "@fontsource/jetbrains-mono/400.css" as jetbrains-mono-400;
+@use "@fontsource/jetbrains-mono/400-italic.css" as jetbrains-mono-400-italic;
 
 
-:root {
-  --primary: #FBD148;
-  --secondary: #FAFAFA;
-  --tertiary: #232423;
-  --box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
-  --padding: 8px;
-  --border: 1px solid rgb(182, 179, 179);
-  --radius: 8px;
-  --navbar-height: 60px;
+
+html {
+  @include mat.core();
+  @include mat.theme(
+    (
+      color: mat.$azure-palette,
+      typography: Roboto,
+    )
+  );
 }
+
 
 * {
   margin: 0;
@@ -26,6 +30,77 @@
 html,
 body {
   height: 100%;
-  min-height: 100%;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body {
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}
+
+body {
+  margin: 0;
+  //height: 100%;
+  //min-height: 100%;
+  font-family: "JetBrains Mono", Helvetica Neue, sans-serif;
+}
+
+
+:root {
+  --my_primary_color: #232423;
+  --my_secondary_color: #FAFAFA;
+  --my_primary_background_color: #FBD148;
+  --my_secondary_background_color: #FAFAFA;
+  --box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
+  --padding: 8px;
+  --border: 1px solid rgb(182, 179, 179);
+  --radius: 8px;
+  --navbar-height: 60px;
+}
+
+
+
+
+.my-overlay-modal-backdrop {
+  position: relative !important;
+  width: 100%;
+  height: 100%;
+  opacity: 0.86;
+  background: gray;
+}
+
+.my-overlay-modal-template-backdrop {
+  opacity: 0.86;
+  background: gray;
+}
+
+.my-overlay-lightbox-backdrop {
+  opacity: 0.9;
+  background: #000000;
+}
+
+.my-confirmation-modal {
+  opacity: 1;
+  background: gray;
+}
+
+.my-confirmation-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.my-modal-panel {
+  position: relative !important;
+}
+
+.my-modal-template-panel {
+  display: block;
+  height: 80vh;
+}
+
+@media (max-width: 1024px) {
+  .my-modal-template-panel {
+    height: 100vh;
+  }
 }

@@ -5,13 +5,11 @@ import { ToastrService } from 'ngx-toastr';
 import { Address } from '../../../core/models/address';
 import { AddressService } from '../../../core/services/address.service';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
   selector: 'app-address-form',
   imports: [
     ReactiveFormsModule,
-    InputFormComponent,
     MatDialogModule
   ],
   templateUrl: './address-form.component.html',

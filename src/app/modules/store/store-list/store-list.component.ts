@@ -4,6 +4,8 @@ import { ErrorHandlerService } from '../../../core/services/error-handler.servic
 import { StoreService } from '../../../core/services/store.service';
 import { SearchComponent } from '../../../shared/components/search/search.component';
 import { StoreCardComponent } from '../storecard/storecard.component';
+import { StorageService } from '../../../core/services/storage.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
     selector: 'app-store-list',
@@ -12,11 +14,14 @@ import { StoreCardComponent } from '../storecard/storecard.component';
     styleUrl: './store-list.component.scss'
 })
 export class StoreListComponent implements OnInit {
+  storedStore = environment.STORED_STORE;
   errorHandlerService = inject(ErrorHandlerService);
+  storageService = inject(StorageService);
   storeService = inject(StoreService);
   stores: Store[] = [];
   storeName: string = '';
   isLoading: boolean = false;
+
 
   ngOnInit(): void {
     this.onLoadStores();
@@ -44,7 +49,7 @@ export class StoreListComponent implements OnInit {
     this.onLoadStores();
   }
 
-  setStore(store: Store) {
-    console.log(store);
+  saveStoreInStorage(store: Store) {    
+    this.storageService.save(this.storedStore, store);
   }
 }

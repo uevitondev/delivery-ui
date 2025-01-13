@@ -1,5 +1,4 @@
 import { Component, inject, Input } from '@angular/core';
-import { Category } from '../../../core/models/category';
 import { PageData } from '../../../core/models/page-data';
 import { Product } from '../../../core/models/product';
 import { Store } from '../../../core/models/store';
@@ -8,16 +7,19 @@ import { CategoryService } from '../../../core/services/category.service';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { StoreService } from '../../../core/services/store.service';
 import { UtilService } from '../../../core/services/util.service';
-import { PaginatorComponent } from '../../../shared/components/paginator/paginator.component';
-import { SearchComponent } from '../../../shared/components/search/search.component';
-import { ProductCardComponent } from '../../product/productcard/productcard.component';
 import { LoadingComponent } from "../../../shared/components/loading/loading.component";
+import { PaginatorComponent } from '../../../shared/components/paginator/paginator.component';
+import { ProductCardComponent } from '../../product/productcard/productcard.component';
 
 @Component({
-    selector: 'app-store-product-list',
-    imports: [SearchComponent, ProductCardComponent, PaginatorComponent, LoadingComponent],
-    templateUrl: './store-product-list.component.html',
-    styleUrl: './store-product-list.component.scss'
+  selector: 'app-store-product-list',
+  imports: [
+    ProductCardComponent,
+    PaginatorComponent,
+    LoadingComponent
+  ],
+  templateUrl: './store-product-list.component.html',
+  styleUrl: './store-product-list.component.scss'
 })
 export class StoreProductListComponent {
   utilService = inject(UtilService);

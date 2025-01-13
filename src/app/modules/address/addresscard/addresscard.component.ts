@@ -1,16 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Address } from '../../../core/models/address';
-import { AddressFormComponent } from '../address-form/address-form.component';
-import { ModalComponent } from '../../../shared/components/modal/modal.component';
 
 @Component({
-    selector: 'app-addresscard',
-    imports: [
-        ModalComponent,
-        AddressFormComponent
-    ],
-    templateUrl: './addresscard.component.html',
-    styleUrl: './addresscard.component.scss'
+  selector: 'app-addresscard',
+  imports: [
+  ],
+  templateUrl: './addresscard.component.html',
+  styleUrl: './addresscard.component.scss'
 })
 export class AddressCardComponent {
 
@@ -24,13 +20,13 @@ export class AddressCardComponent {
 
   @Output() selectedAddressEvent = new EventEmitter<Address>();
 
-  onSelect() { 
+  onSelect() {
     this.selectedAddressEvent.emit(this.address);
   }
 
   onEdit() { }
   onDelete() { }
 
-  toggle(){}
+  toggle() { }
 
 }

@@ -4,17 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-    selector: 'app-auth-verification',
-    imports: [
-        InputFormComponent,
-        ReactiveFormsModule,
-        InputFormComponent
-    ],
-    templateUrl: './auth-verification.component.html',
-    styleUrl: './auth-verification.component.scss'
+  selector: 'app-auth-verification',
+  imports: [
+    ReactiveFormsModule,
+  ],
+  templateUrl: './auth-verification.component.html',
+  styleUrl: './auth-verification.component.scss'
 })
 export class AuthVerificationComponent implements OnInit {
 

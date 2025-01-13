@@ -4,17 +4,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { CartItem } from '../../../core/models/cart-item';
 import { CartService } from '../../../core/services/cart.service';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-    selector: 'app-cart-item-note',
-    imports: [
-        ReactiveFormsModule,
-        InputFormComponent,
-        MatDialogModule
-    ],
-    templateUrl: './cart-item-note.component.html',
-    styleUrl: './cart-item-note.component.scss'
+  selector: 'app-cart-item-note',
+  imports: [
+    ReactiveFormsModule,
+    MatDialogModule
+  ],
+  templateUrl: './cart-item-note.component.html',
+  styleUrl: './cart-item-note.component.scss'
 })
 export class CartItemNoteComponent implements OnInit {
   @Input() cartItem!: CartItem;

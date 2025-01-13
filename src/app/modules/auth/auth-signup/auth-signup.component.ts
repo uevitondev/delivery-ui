@@ -1,23 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-    selector: 'app-auth-signup',
-    imports: [
-        RouterLink,
-        RouterOutlet,
-        CommonModule,
-        InputFormComponent,
-        ReactiveFormsModule
-    ],
-    templateUrl: './auth-signup.component.html',
-    styleUrl: './auth-signup.component.scss'
+  selector: 'app-auth-signup',
+  imports: [
+    RouterLink,
+    CommonModule,
+    ReactiveFormsModule
+  ],
+  templateUrl: './auth-signup.component.html',
+  styleUrl: './auth-signup.component.scss'
 })
 export class AuthSignUpComponent implements OnInit {
 

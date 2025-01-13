@@ -1,25 +1,21 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { StorageService } from '../../../core/services/storage.service';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 import { LoadingComponent } from "../../../shared/components/loading/loading.component";
-import { delay } from 'rxjs';
 
 
 @Component({
-    selector: 'app-auth-signin',
-    imports: [
-        RouterLink,
-        RouterOutlet,
-        InputFormComponent,
-        ReactiveFormsModule,
-        LoadingComponent
-    ],
-    templateUrl: './auth-signin.component.html',
-    styleUrl: './auth-signin.component.scss'
+  selector: 'app-auth-signin',
+  imports: [
+    RouterLink,
+    ReactiveFormsModule,
+    LoadingComponent
+  ],
+  templateUrl: './auth-signin.component.html',
+  styleUrl: './auth-signin.component.scss'
 })
 export class AuthSignInComponent implements OnInit {
 

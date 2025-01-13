@@ -13,7 +13,7 @@
 
     <div class="stores">
       @for (store of stores; track store) {
-        <app-storecard [store]="store" (selectedStoreEvent)="setStore($event)">
+        <app-storecard [store]="store" (selectedStoreEvent)="saveStoreInStorage($event)">
         </app-storecard>
       } @empty {
         <div class="store-list-empty">

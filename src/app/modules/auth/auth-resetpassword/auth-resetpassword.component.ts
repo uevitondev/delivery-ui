@@ -4,17 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../../core/services/auth.service';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
-import { InputFormComponent } from '../../../shared/components/input-form/input-form.component';
 
 @Component({
-    selector: 'app-auth-resetpassword',
-    imports: [
-        InputFormComponent,
-        ReactiveFormsModule,
-        InputFormComponent
-    ],
-    templateUrl: './auth-resetpassword.component.html',
-    styleUrl: './auth-resetpassword.component.scss'
+  selector: 'app-auth-resetpassword',
+  imports: [
+    ReactiveFormsModule,
+  ],
+  templateUrl: './auth-resetpassword.component.html',
+  styleUrl: './auth-resetpassword.component.scss'
 })
 export class AuthResetPasswordComponent implements OnInit {
 
