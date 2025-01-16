@@ -9,16 +9,11 @@ import { ProductService } from '../../../core/services/product.service';
 
 @Component({
   selector: 'app-product-details',
-  imports: [
-    CommonModule,
-    RouterLink,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule],
   templateUrl: './product-detail.component.html',
-  styleUrl: './product-detail.component.scss'
+  styleUrl: './product-detail.component.scss',
 })
 export class ProductDetailComponent implements OnInit {
-
   activatedRoute = inject(ActivatedRoute);
   productService = inject(ProductService);
   cartService = inject(CartService);
@@ -26,7 +21,6 @@ export class ProductDetailComponent implements OnInit {
 
   product!: Product;
   productQuantity: number = 1;
-
 
   ngOnInit(): void {
     let productId = this.activatedRoute.snapshot.params['productId'];
@@ -39,11 +33,13 @@ export class ProductDetailComponent implements OnInit {
         this.product = productDto;
       },
       error: (e) => {
-        this.errorHandlerService.handleError(e, "OCORREU UM ERRO AO CARREGAR DETALHES DO PRODUTO");
-      }
+        this.errorHandlerService.handleError(
+          e,
+          'OCORREU UM ERRO AO CARREGAR DETALHES DO PRODUTO',
+        );
+      },
     });
   }
-
 
   incrementProductQuantity() {
     this.productQuantity += 1;
@@ -61,17 +57,11 @@ export class ProductDetailComponent implements OnInit {
     this.cartService.addItemToCart({
       product: product,
       quantity: this.productQuantity,
-      note: ''
+      note: '',
     });
   }
 
   buyNow(product: Product) {
     this.addToCart(product);
   }
-
-
-
-
-
-
 }

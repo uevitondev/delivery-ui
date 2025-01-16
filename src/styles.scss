@@ -1,22 +1,11 @@
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
+@use 'ngx-toastr/toastr' as toastr;
+@use '@angular/cdk/overlay-prebuilt.css' as cdk-over;
+@use '@fontsource/jetbrains-mono' as jetbrains-mono;
+@use '@fontsource/jetbrains-mono/400.css' as jetbrains-mono-400;
+@use '@fontsource/jetbrains-mono/400-italic.css' as jetbrains-mono-400-italic;
 
-@use "ngx-toastr/toastr" as toastr;
-@use "@angular/cdk/overlay-prebuilt.css" as cdk-over;
-@use "@fontsource/jetbrains-mono" as jetbrains-mono;
-@use "@fontsource/jetbrains-mono/400.css" as jetbrains-mono-400;
-@use "@fontsource/jetbrains-mono/400-italic.css" as jetbrains-mono-400-italic;
-
-
-
-html {
-  @include mat.core();
-  @include mat.theme(
-    (
-      color: mat.$azure-palette,
-      typography: Roboto,
-    )
-  );
-}
+@include mat.core();
 
 
 * {
@@ -27,20 +16,47 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: JetBrains Mono,
+    density: 0,
+  ));
+}
+
+
+.dark-theme {
+  
+  @include mat.theme((
+    color: (
+      theme-type: dark,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: JetBrains Mono,
+    density: 0,
+  ));
+}
+
+
+
+
 html,
 body {
   height: 100%;
 }
 
 body {
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-}
-
-body {
   margin: 0;
   //height: 100%;
   //min-height: 100%;
+  background: var(--mat-sys-surface);
+  //color: var(--mat-sys-on-surface);
   font-family: "JetBrains Mono", Helvetica Neue, sans-serif;
 }
 
@@ -48,13 +64,13 @@ body {
 :root {
   --my_primary_color: #232423;
   --my_secondary_color: #FAFAFA;
-  --my_primary_background_color: #FBD148;
-  --my_secondary_background_color: #FAFAFA;
-  --box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
-  --padding: 8px;
-  --border: 1px solid rgb(182, 179, 179);
-  --radius: 8px;
-  --navbar-height: 60px;
+  --my_primary_bg_color: #FBD148;
+  --my_secondary_bg_color: #FAFAFA;
+  --my_box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
+  --my_padding: 8px;
+  --my_border: 1px solid rgb(182, 179, 179);
+  --my_radius: 8px;
+  --my_navbar-height: 60px;
 }
 
 
@@ -103,4 +119,34 @@ body {
   .my-modal-template-panel {
     height: 100vh;
   }
+}
+
+
+//card
+
+.card {
+  background-color: var(--my_primary_bg_color);
+  border: var(--my_border);
+  border-radius: var(--my_radius);
+  padding: var(--my_padding);
+  box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
+}
+
+
+.btn-primary {
+  font-size: 13px;
+  border-radius: 99px;
+  padding: 4px 10px;
+  border: var(--my_border);
+  background-color: var(--my_primary_bg_color);
+  cursor: pointer;
+}
+
+.btn-secondary {
+  font-size: 13px;
+  border-radius: 99px;
+  padding: 4px 10px;
+  border: var(--border);
+  background-color: var(--my_secondary_bg_color);
+  cursor: pointer;
 }

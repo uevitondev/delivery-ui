@@ -5,9 +5,9 @@
   height: 100%;
   max-height: 450px;
   border-radius: 8px;
-  border: var(--border);
-  box-shadow: var(--box-shadow);
-  background-color: var(--primary);
+  border: var(--my_border);
+  box-shadow: var(--my_box_shadow);
+  background-color: var(--my_primary_bg_color);
   cursor: pointer;
 
   a {
