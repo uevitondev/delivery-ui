@@ -1,0 +1,40 @@
+<main>
+  <div class="container">
+    <app-search
+      [placeHolder]="'Pesquisar Produtos em ' + store.name"
+      (searchEvent)="filterProductsByName($event)"
+    ></app-search>
+
+    <app-category-list-select
+      (selectedAllCategoriesEvent)="filterProductByAllCategories($event)"
+      (selectedCategoryEvent)="filterProductsByCategory($event)"
+    >
+    </app-category-list-select>
+
+    @if (products.length > 0) {
+      <div class="products">
+        @for (product of products; track product.id) {
+          <app-productcard
+            [product]="product"
+            (addToCartEvent)="addToCart($event)"
+          >
+          </app-productcard>
+        }
+      </div>
+
+      <div class="paginator-container">
+        <app-paginator
+          [currentPageNumber]="pageNumber"
+          [currentPageSize]="pageSize"
+          [pages]="pages"
+          (changePaginatorEvent)="setPagination($event)"
+        >
+        </app-paginator>
+      </div>
+    } @else {
+      <div class="product-list-empty">
+        <p>PRODUTOS "VAZIO"</p>
+      </div>
+    }
+  </div>
+</main>

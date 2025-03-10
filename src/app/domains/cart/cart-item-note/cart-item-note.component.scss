@@ -1,0 +1,44 @@
+main {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  padding: var(--my_padding);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: var(--padding);
+}
+
+form {
+  position: relative;
+}
+
+textarea {
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  margin: 10px 0;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1.3px;
+  border-radius: 5px;
+  background-color: transparent;
+  outline: 1px solid gray;
+}
+
+textarea:focus {
+  outline: 1px solid gray;
+}
+
+.count {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}

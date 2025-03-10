@@ -1,0 +1,66 @@
+<main>
+  <div class="form-container">
+    <h1>Login</h1>
+    <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          placeholder="Digite seu email"
+        />
+        @if (email?.invalid && email?.touched) {
+          <div class="error-message">
+            @if (email?.errors?.["required"]) {
+              <small>O email é obrigatório.</small>
+            }
+            @if (email?.errors?.["email"]) {
+              <small>O email deve ser válido.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="input-group">
+        <label for="password">Senha</label>
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          placeholder="Digite sua senha"
+        />
+        @if (password?.invalid && password?.touched) {
+          <div class="error-message">
+            @if (password?.errors?.["required"]) {
+              <small>A senha é obrigatória.</small>
+            }
+            @if (password?.errors?.["minlength"]) {
+              <small>A senha deve ter no mínimo 6 caracteres.</small>
+            }
+          </div>
+        }
+        @if (message) {
+          <p class="message">{{ message }}</p>
+        }
+
+        <p>
+          <a [routerLink]="['/auth/reset-password']">esqueceu sua senha?</a>
+        </p>
+      </div>
+
+      @if (isLoading) {
+        <app-loading [isLoading]="isLoading"></app-loading>
+      } @else {
+        <button
+          class="btn-primary"
+          type="submit"
+          [disabled]="signinForm.invalid"
+        >
+          Entrar
+        </button>
+      }
+    </form>
+    <p>Não tem uma conta? <a [routerLink]="['/auth/signup']">Criar</a></p>
+  </div>
+</main>

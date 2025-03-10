@@ -1,0 +1,80 @@
+<main>
+  <div class="container">
+    @if (isLoading) {
+      <app-loading></app-loading>
+    } @else {
+      <div class="products-header">
+        <button
+          class="btn-primary"
+          (click)="this.modalService.open(templateNewProductForm)"
+        >
+          ADICIONAR NOVO PRODUTO
+        </button>
+        <ng-template cdkPortal #templateNewProductForm="cdkPortal">
+          <app-modal (closeModalEvent)="this.modalService.close(modalOverlayRef)">
+            <app-product-form
+              [formTitle]="'Editar Produto'"
+              [store]="store"
+              (productFormIsInvalid)="
+                setConfirmButtonStatusByFormStatus($event)
+              "
+            >
+            </app-product-form>
+          </app-modal>
+        </ng-template>
+      </div>
+
+      @if (products.length > 0) {
+        <div class="products">
+          @for (product of products; track product) {
+            <div class="product">
+              <div class="product-img">
+                <img src="{{ product.imgUrl }}" alt="" />
+              </div>
+              <span>{{ product.name }}</span>
+              <span class="product-desc">{{ product.description }}</span>
+              <span>{{ product.price | currency: "BRL" }}</span>
+              <span
+                ><button
+                  class="btn-secondary"
+                  (click)="this.modalService.open(templateProductForm)"
+                >
+                  Editar
+                </button></span
+              >
+              <ng-template cdkPortal #templateProductForm="cdkPortal">
+                <app-modal (closeModalEvent)="this.modalService.close(modalOverlayRef)">
+                  <app-product-form
+                    [formTitle]="'Editar Produto'"
+                    [product]="product"
+                    [store]="store"
+                    (productFormIsInvalid)="
+                      setConfirmButtonStatusByFormStatus($event)
+                    "
+                  >
+                  </app-product-form>
+                </app-modal>
+              </ng-template>
+              <span><button class="btn-primary">Deletar</button></span>
+            </div>
+            <div class="divider"></div>
+          }
+        </div>
+
+        <div class="paginator-container">
+          <app-paginator
+            [currentPageNumber]="pageNumber"
+            [currentPageSize]="pageSize"
+            [pages]="pages"
+            (changePaginatorEvent)="setPagination($event)"
+          >
+          </app-paginator>
+        </div>
+      } @else {
+        <div class="product-list-empty">
+          <p>PRODUTOS "VAZIO"</p>
+        </div>
+      }
+    }
+  </div>
+</main>

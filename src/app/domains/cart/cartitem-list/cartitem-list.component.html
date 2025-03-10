@@ -1,0 +1,79 @@
+<main>
+  <div class="cart-items">
+    @for (cartitem of cartService.cartItems(); track cartitem) {
+      <div class="cart-item card">
+        <div class="image">
+          <img src="{{ cartitem.product.imgUrl }}" alt="product icon" />
+        </div>
+
+        <div class="details">
+          <p class="cart-item-name">
+            @if (showQuantity) {
+              {{ cartitem.quantity }}x -
+            }
+            {{ cartitem.product.name }}
+          </p>
+
+          <div class="details-flex">
+            <div class="price">
+              <p>{{ cartitem.product.price | currency: "BRL" }}</p>
+            </div>
+
+            @if (showEditQuantity) {
+              <div class="edit-quantity">
+                <div class="edit-quantity-border">
+                  <button (click)="cartService.decreaseItemQuantity(cartitem)">
+                    -
+                  </button>
+                  <span class="edit-quantity-value">{{
+                    cartitem.quantity
+                  }}</span>
+                  <button (click)="cartService.increaseItemQuantity(cartitem)">
+                    +
+                  </button>
+                </div>
+              </div>
+            }
+
+            @if (showRemove) {
+              <div class="remove">
+                <mat-icon
+                  mat-icon-button
+                  (click)="cartService.removeItem(cartitem)"
+                >
+                  delete
+                </mat-icon>
+              </div>
+            }
+
+            @if (showNote) {
+              <div class="note">
+                <button
+                  class="btn-secondary"
+                  (click)="
+                    this.modalOverlayRef =
+                      this.modalService.open(appCartItemNote)
+                  "
+                >
+                  Add/Editar Nota
+                </button>
+                <ng-template cdkPortal #appCartItemNote="cdkPortal">
+                  <app-modal
+                    (closeModalEvent)="this.modalService.close(modalOverlayRef)"
+                  >
+                    <app-cart-item-note [cartItem]="cartitem">
+                    </app-cart-item-note>
+                  </app-modal>
+                </ng-template>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    } @empty {
+      <div class="cartitem-list-empty">
+        <p>CARRINHO VAZIO</p>
+      </div>
+    }
+  </div>
+</main>

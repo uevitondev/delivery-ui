@@ -1,0 +1,99 @@
+<main>
+  <h1>ADICIONAR NOVA LOJA</h1>
+
+  <form [formGroup]="newStoreForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <div class="logo-container">
+        <app-image-upload-view
+          label="Imagem/Logo da Loja"
+          (imageUploaded)="onImageUploaded($event)"
+        >
+        </app-image-upload-view>
+
+        @if (logoFile?.invalid && logoFile?.touched) {
+          <div class="error-message">
+            @if (logoFile?.errors?.["required"]) {
+              <small>O campo Imagem/Logo é obrigatório.</small>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="name">Nome</label>
+      <input
+        id="name"
+        formControlName="name"
+        type="text"
+        placeholder="Informe o nome da loja"
+      />
+      @if (name?.invalid && name?.touched) {
+        <div class="error-message">
+          @if (name?.errors?.["required"]) {
+            <small>O campo nome é obrigatório.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="input-group">
+      <label for="phoneNumber">Telefone</label>
+      <input
+        id="phoneNumber"
+        type="tel"
+        mask="(00) 0 0000 0000"
+        prefix="+55"
+        placeholder="Informe telefone de contato da loja"
+        formControlName="phoneNumber"
+      />
+      @if (phoneNumber?.invalid && phoneNumber?.touched) {
+        <div class="error-message">
+          @if (phoneNumber?.errors?.["required"]) {
+            <small>O campo telefone é obrigatório.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="input-group">
+      <label for="type">Tipo De Loja</label>
+      <select
+        class="type-select"
+        id="type"
+        type="select"
+        placeholder="Informe o tipo da loja"
+        formControlName="type"
+        (change)="changeType($event)"
+      >
+        <option value="">escolha o tipo de loja...</option>
+        @for (type of types; track type) {
+          <option [ngValue]="type">
+            {{ type }}
+          </option>
+        }
+      </select>
+      @if (type?.touched && type?.errors) {
+        <div class="error-message">
+          @if (type?.errors?.["required"]) {
+            <small>O campo tipo é obrigatório.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div>
+      @if (isLoading) {
+        <app-loading></app-loading>
+      } @else {
+        <button
+          class="btn-primary"
+          type="submit"
+          [disabled]="newStoreForm.invalid"
+        >
+          CADASTRAR LOJA
+        </button>
+      }
+    </div>
+  </form>
+</main>

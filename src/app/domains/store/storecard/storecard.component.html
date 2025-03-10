@@ -1,0 +1,11 @@
+<div class="store card-cursor" (click)="onSelect(); onRedirect()">
+  <div class="store-details-wrapper">
+    <div class="store-logo">
+      <img src="{{ store.logoUrl }}" alt="" />
+    </div>
+    <div class="store-details">
+      <p>{{ store.name }}</p>
+      <p>+55 {{ store.phoneNumber }}</p>
+    </div>
+  </div>
+</div>

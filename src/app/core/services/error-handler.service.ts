@@ -1,15 +1,12 @@
-import { Injectable, inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ErrorHandlerService {
-  toastService = inject(ToastrService);
-  handleError(error: any, message: string): void {
-    this.toastService.error(message);
-    console.error('OCORREU UM ERRO:', error.message);
+  handleError(error: any): void {
+    console.error('OCORREU UM ERRO: ', error.message);
     throwError(() => error);
   }
 }

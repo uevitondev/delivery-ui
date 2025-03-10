@@ -1,0 +1,9 @@
+<div [formGroup]="imageForm" class="image-upload-container">
+  <label>{{ label }}</label>
+  <input type="file" (change)="onFileChange($event)" accept="image/*" />
+  @if (imagePreview) {
+    <div class="image-preview">
+      <img [src]="imagePreview" alt="Preview da Imagem" />
+    </div>
+  }
+</div>

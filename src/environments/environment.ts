@@ -3,5 +3,5 @@ export const environment = {
   API_URL: 'https://delivery-backend-zmwz.onrender.com/v1',
   STORED_AUTH: 'storedAuth',
   STORED_STORE: 'storedStore',
-  STORED_CART: 'storedCart'
+  STORED_CART: 'storedCart',
 };

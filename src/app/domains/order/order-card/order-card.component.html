@@ -1,0 +1,6 @@
+<div class="order card" (click)="navigateToOrderDetail(order.id)">
+  <span>{{ order.createdAt | date: "dd/MM/yyyy HH:mm" }}</span>
+  <span>{{ order.status }}</span>
+  <span>( {{ order.paymentMethod }} )</span>
+  <span>{{ order.total | currency: "BRL" }}</span>
+</div>

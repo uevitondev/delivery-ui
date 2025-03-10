@@ -1,18 +1,24 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
-$app-light-theme: mat.define-theme((color: (theme-type: light,
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
-      ),
-    ));
+$app-light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+  )
+);
 
-$app-dark-theme: mat.define-theme((color: (theme-type: dark,
-        primary: mat.$magenta-palette,
-        tertiary: mat.$violet-palette,
-      ),
-    ));
-
-
+$app-dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$magenta-palette,
+      tertiary: mat.$violet-palette,
+    ),
+  )
+);
 
 .dark-theme {
   @include mat.all-component-colors($app-dark-theme);

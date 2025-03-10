@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
-
   private storage: Storage;
 
   constructor() {
@@ -31,5 +30,4 @@ export class StorageService {
   clear() {
     this.storage.clear();
   }
-
 }

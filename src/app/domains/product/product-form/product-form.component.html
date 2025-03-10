@@ -1,0 +1,99 @@
+<main>
+  <h1>{{formTitle}}</h1>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="input-group">
+      <div class="file-upload-container">
+        <app-image-upload-view
+          label="Imagem do Produto"
+          (imageUploaded)="onImageUploaded($event)"
+        >
+        </app-image-upload-view>
+
+        @if (imgFile?.invalid && imgFile?.touched) {
+          <div class="error-message">
+            @if (imgFile?.errors?.["required"]) {
+              <small>O campo Imagem é obrigatório.</small>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="name">Nome do Produto</label>
+      <input
+        id="name"
+        formControlName="name"
+        type="text"
+        placeholder="Informe o nome do produto"
+      />
+      @if (name?.invalid && name?.touched) {
+        <div class="error-message">
+          @if (name?.errors?.["required"]) {
+            <small>O campo nome é obrigatório.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="input-group">
+      <label for="description">Descrição</label>
+      <input
+        id="description"
+        type="text"       
+        placeholder="Informe a Descrição do Produto"
+        formControlName="description"
+      />
+      @if (description?.invalid && description?.touched) {
+        <div class="error-message">
+          @if (description?.errors?.["required"]) {
+            <small>O campo descrição é obrigatório.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="input-group">
+      <label for="price">Preço</label>
+      <input
+        id="price"
+        type="number"       
+        placeholder="Informe a Preço do Produto"
+        formControlName="price"
+      />
+      @if (price?.invalid && price?.touched) {
+        <div class="error-message">
+          @if (price?.errors?.["required"]) {
+            <small>O campo preço é obrigatório.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="input-group">
+      <label for="category">Categoria Do Produto</label>
+      <select
+        class="category-select"
+        id="category"
+        type="select"
+        placeholder="Selecione a categoria do produto"
+        formControlName="categoryId"
+      >
+        <option value="">Escolha uma categoria...</option>
+        @for (category of categories; track category) {          
+          <option [ngValue]="category.id" [selected]="product && product.categoryId === category.id"  >
+            {{ category.name }}
+          </option>
+        }
+      </select>
+      @if (categoryId?.touched && categoryId?.errors) {
+        <div class="error-message">
+          @if (categoryId?.errors?.["required"]) {
+            <small>O campo categoria é obrigatório.</small>
+          }
+        </div>
+      }
+    </div>  
+  </form>
+</main>

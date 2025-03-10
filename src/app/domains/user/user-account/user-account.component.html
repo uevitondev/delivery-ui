@@ -1,0 +1,56 @@
+<main>
+  <div class="content">
+    <div
+      class="profile card"
+      (click)="this.modalOverlayRef = this.modalService.open(appUserProfile)"
+    >
+      <p>Perfil</p>
+      <p>Visualize seus dados...</p>
+
+      <ng-template cdkPortal #appUserProfile="cdkPortal">
+        <app-modal (closeModalEvent)="this.modalService.close(modalOverlayRef)">
+          <app-user-profile></app-user-profile>
+        </app-modal>
+      </ng-template>
+    </div>
+
+    <div
+      class="orders card"
+      (click)="this.modalOverlayRef = this.modalService.open(appOrderList)"
+    >
+      <p>Pedidos</p>
+      <p>Acompanhe seu histórico de pedidos...</p>
+      <ng-template cdkPortal #appOrderList="cdkPortal">
+        <app-modal (closeModalEvent)="this.modalService.close(modalOverlayRef)">
+          <app-order-list></app-order-list>
+        </app-modal>
+      </ng-template>
+    </div>
+
+    <div
+      class="addresses card"
+      (click)="this.modalOverlayRef = this.modalService.open(appAddressList)"
+    >
+      <p>Endereços</p>
+      <p>Liste seus endereços aqui...</p>
+      <ng-template cdkPortal #appAddressList="cdkPortal">
+        <app-modal (closeModalEvent)="this.modalService.close(modalOverlayRef)">
+          <app-address-list
+            [isAddable]="true"
+            [isEditable]="true"
+            [isDeletable]="true"
+          >
+          </app-address-list>
+        </app-modal>
+      </ng-template>
+    </div>
+
+    <div class="logout card" (click)="logout()">
+      <div class="logout-header">
+        <mat-icon>exit_to_app</mat-icon>
+        <p>SAIR</p>
+      </div>
+      <p>Fazer logout...</p>
+    </div>
+  </div>
+</main>

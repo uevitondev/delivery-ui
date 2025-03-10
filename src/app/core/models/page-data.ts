@@ -1,6 +1,6 @@
-import { Page } from "./page";
+import { Page } from './page';
 
 export interface PageData {
-  content: any[],
-  page: Page
+  content: any[];
+  page: Page;
 }

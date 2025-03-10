@@ -1,6 +1,6 @@
 export interface Page {
-  number: number,
+  number: number;
   size: number;
   totalElements: number;
-  totalPages: number
+  totalPages: number;
 }

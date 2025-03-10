@@ -1,12 +1,11 @@
-@use '@angular/material' as mat;
-@use 'ngx-toastr/toastr' as toastr;
-@use '@angular/cdk/overlay-prebuilt.css' as cdk-over;
-@use '@fontsource/jetbrains-mono' as jetbrains-mono;
-@use '@fontsource/jetbrains-mono/400.css' as jetbrains-mono-400;
-@use '@fontsource/jetbrains-mono/400-italic.css' as jetbrains-mono-400-italic;
+@use "@angular/material" as mat;
+@use "ngx-toastr/toastr" as toastr;
+@use "@angular/cdk/overlay-prebuilt.css" as cdk-over;
+@use "@fontsource/jetbrains-mono" as jetbrains-mono;
+@use "@fontsource/jetbrains-mono/400.css" as jetbrains-mono-400;
+@use "@fontsource/jetbrains-mono/400-italic.css" as jetbrains-mono-400-italic;
 
 @include mat.core();
-
 
 * {
   margin: 0;
@@ -16,35 +15,33 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
 html {
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: JetBrains Mono,
-    density: 0,
-  ));
+  @include mat.theme(
+    (
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: JetBrains Mono,
+      density: 0,
+    )
+  );
 }
-
 
 .dark-theme {
-  
-  @include mat.theme((
-    color: (
-      theme-type: dark,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: JetBrains Mono,
-    density: 0,
-  ));
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: JetBrains Mono,
+      density: 0,
+    )
+  );
 }
-
-
-
 
 html,
 body {
@@ -57,24 +54,23 @@ body {
   //min-height: 100%;
   background: var(--mat-sys-surface);
   //color: var(--mat-sys-on-surface);
-  font-family: "JetBrains Mono", Helvetica Neue, sans-serif;
+  font-family:
+    "JetBrains Mono",
+    Helvetica Neue,
+    sans-serif;
 }
-
 
 :root {
   --my_primary_color: #232423;
-  --my_secondary_color: #FAFAFA;
-  --my_primary_bg_color: #FBD148;
-  --my_secondary_bg_color: #FAFAFA;
-  --my_box-shadow: 0 1px 4px rgba(0, 0, 0, .05);
+  --my_secondary_color: #fafafa;
+  --my_primary_bg_color: #fbd148;
+  --my_secondary_bg_color: #fafafa;
+  --my_box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   --my_padding: 8px;
   --my_border: 1px solid rgb(182, 179, 179);
   --my_radius: 8px;
   --my_navbar-height: 60px;
 }
-
-
-
 
 .my-overlay-modal-backdrop {
   position: relative !important;
@@ -121,7 +117,6 @@ body {
   }
 }
 
-
 //card
 
 .card {
@@ -132,6 +127,17 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
 }
 
+.card-cursor {
+  background-color: var(--my_primary_bg_color);
+  border: var(--my_border);
+  border-radius: var(--my_radius);
+  padding: var(--my_padding);
+  box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
+  cursor: pointer;
+  &:hover {
+    background-color: gray;
+  }
+}
 
 .btn-primary {
   font-size: 13px;

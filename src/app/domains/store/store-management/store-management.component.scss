@@ -1,0 +1,24 @@
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.store-header,
+.products {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: auto;
+  min-height: 200px;
+  background-color: gray;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.products-header {
+  display: flex;
+  justify-content: flex-end;
+}

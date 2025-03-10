@@ -1,0 +1,11 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 25px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+  }
+}

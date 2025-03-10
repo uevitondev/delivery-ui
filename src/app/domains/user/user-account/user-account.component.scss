@@ -1,0 +1,115 @@
+:host {
+  width: 100%;
+}
+
+main {
+  display: flex;
+  gap: 100px;
+  width: 75%;
+  padding: 12px;
+  margin: 0 auto;
+}
+
+.content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1rem;
+}
+
+.logout-header {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 12px;
+}
+
+.lateral-menu {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  min-height: 100%;
+  width: 2 50px;
+  padding: var(--padding);
+}
+
+.menu-options {
+  display: flex;
+  flex-direction: column;
+}
+
+.toggle-menu {
+  display: none;
+  padding: var(--padding);
+  //background-color: gray;
+}
+
+.view-btn {
+  background: none;
+  border: 1px solid gray;
+  padding: 8px 16px;
+  font-size: medium;
+  font-size: 18px;
+  align-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: orange;
+    color: white;
+  }
+
+  .exit_to-app {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.right {
+  flex: 1;
+  padding: var(--padding);
+  min-height: 100%;
+}
+
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+  .content {
+    flex-direction: column;
+  }
+
+  .lateral-menu.ismenuopen {
+    width: 70%;
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    top: var(--navbar-height);
+    left: 0;
+    right: 0;
+    background-color: var(--primary-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .toggle-menu {
+    display: flex;
+    padding: var(--padding);
+  }
+
+  .menu-options {
+    display: flex;
+  }
+
+  .lateral-menu.ismenuclosed {
+    display: flex;
+    .menu-options {
+      display: none;
+    }
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+}

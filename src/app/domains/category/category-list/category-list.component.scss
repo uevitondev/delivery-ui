@@ -1,0 +1,27 @@
+.category-list-empty {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.categories {
+  //background-color: gray;
+
+  width: 100%;
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+  .categories {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 450px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

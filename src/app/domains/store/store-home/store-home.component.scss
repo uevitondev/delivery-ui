@@ -1,0 +1,31 @@
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 75%;
+  padding: 12px;
+  margin: 0 auto;
+}
+
+.store-products {
+  flex: 1;
+}
+
+@media (max-width: 1024px) {
+  main {
+    width: 100%;
+    margin: 0;
+    padding: 5px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 5px;
+  }
+
+  .products-categories {
+    width: 100%;
+  }
+}

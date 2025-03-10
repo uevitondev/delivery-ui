@@ -1,0 +1,10 @@
+<form [formGroup]="categorySelectForm">
+  <select formControlName="category">
+    <option value="">TODAS CATEGORIAS...</option>
+    @for (category of categories; track category.id) {
+      <option [ngValue]="category">
+        {{ category.name }}
+      </option>
+    }
+  </select>
+</form>

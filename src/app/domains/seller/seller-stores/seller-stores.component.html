@@ -1,0 +1,16 @@
+<main>
+  <div class="container">
+    <h3>Olá Seller, essa é sua área para gerenciamento de loja!</h3>
+    <div class="header">
+      <button routerLink="/seller/stores/new">ADICIONAR NOVA LOJA</button>
+    </div>
+    <div class="stores">
+      @for (store of stores; track store) {
+        <app-storecard
+          [store]="store"      
+          [redirectUrl]="getFinalUrlByStore(store)"
+        ></app-storecard>
+      }
+    </div>
+  </div>
+</main>

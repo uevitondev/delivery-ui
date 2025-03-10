@@ -1,0 +1,35 @@
+.store {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  max-width: 350px;
+  min-width: 300px;
+  cursor: pointer;
+}
+
+.store-details-wrapper {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.store-logo {
+  width: 50px;
+  height: 50px;
+
+  img {
+    display: block;
+    height: auto;
+    height: inherit;
+    max-height: inherit;
+    width: inherit;
+    max-width: inherit;
+    object-fit: cover;
+    border-radius: 100%;
+  }
+}
+
+.store-details {
+  flex: 1;
+}

@@ -1,0 +1,162 @@
+main {
+  width: 100%;
+  min-height: 100%;
+}
+
+.cart-flex {
+  display: flex;
+  gap: 100px;
+  width: 75%;
+  padding: 12px;
+  margin: 0 auto;
+}
+
+.cart-flex-01 {
+  flex: 1;
+}
+
+.cart-content {
+  width: 100%;
+  max-width: 650px;
+  padding: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+
+  p {
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+.cart-flex-02 {
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cart-resume {
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.cart-resume-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cart-resume-title {
+  color: #222;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.cart-resume-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-empty {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+
+  .cart-icon {
+    font-size: 150px;
+    height: 150px;
+    width: 150px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .cart-flex {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .cart-header {
+    flex-direction: column;
+  }
+
+  .cart-items {
+    width: 100%;
+    flex-direction: column;
+    margin: 0;
+    padding: 5px;
+    margin-bottom: 100px;
+  }
+
+  .cart-item {
+    width: 100%;
+  }
+
+  .cart-item-details {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-item-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .cart-item-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cart-flex-02 {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    max-height: 60px;
+    padding: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .cart-resume {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0;
+    height: 100%;
+
+    .cart-resume-title {
+      display: none;
+    }
+  }
+}

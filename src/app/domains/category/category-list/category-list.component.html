@@ -1,0 +1,22 @@
+<main>
+  @if (isLoading) {
+    <app-loading></app-loading>
+  } @else {
+    <h3>Categorias Populares</h3>
+    <div class="categories">
+      @for (category of categories; track category.id; let i = $index) {
+        <app-categorycard
+          [category]="category"
+          (onSelectEvent)="onSelectCategory($event)"
+          [isSelected]="
+            selectedCategory && selectedCategory.name === category.name
+          "
+        ></app-categorycard>
+      } @empty {
+        <div class="category-list-loading">
+          <p>"VAZIO" NÃO HÁ CATEGORIAS</p>
+        </div>
+      }
+    </div>
+  }
+</main>

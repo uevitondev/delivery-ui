@@ -1,16 +1,21 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
-import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { catchError, Observable, switchMap, throwError } from "rxjs";
-import { environment } from "../../../environments/environment";
-import { AuthService } from "../services/auth.service";
-import { StorageService } from "../services/storage.service";
-import { ErrorHandlerService } from "../services/error-handler.service";
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { catchError, Observable, switchMap, throwError } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { AuthService } from '../../domains/auth/auth.service';
+import { ErrorHandlerService } from '../services/error-handler.service';
+import { StorageService } from '../services/storage.service';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
-
   router = inject(Router);
   toastService = inject(ToastrService);
   storageService = inject(StorageService);
@@ -18,20 +23,26 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   errorHandlerService = inject(ErrorHandlerService);
   STORED_AUTH = environment.STORED_AUTH;
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    request: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<any>> {
     request = request.clone({
-      withCredentials: true
+      withCredentials: true,
     });
 
     return next.handle(this.requestWithHeader(request)).pipe(
       catchError((error: HttpErrorResponse) => {
-
         if (error.status == 400) {
           this.handle400Error();
           return throwError(() => error);
         }
 
-        if (error.status === 401 && !this.isAuthUrl(request.url) && this.authService.isLogged()) {
+        if (
+          error.status === 401 &&
+          !this.isAuthUrl(request.url) &&
+          this.authService.isLogged()
+        ) {
           return this.handle401Error(request, next);
         }
 
@@ -46,11 +57,9 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         }
 
         return throwError(() => error);
-      })
+      }),
     );
-
   }
-
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
     if (!this.isAuthUrl(request.url) && this.authService.isLogged()) {
@@ -60,34 +69,31 @@ export class HttpRequestInterceptor implements HttpInterceptor {
           return next.handle(this.requestWithHeader(request));
         }),
         catchError((error) => {
-          this.errorHandlerService.handleError(error, "Sessão Expirou");
+          this.errorHandlerService.handleError(error);
           this.authService.logout();
           return throwError(() => error);
-        })
+        }),
       );
     }
 
     return next.handle(request);
-
   }
 
   private handle400Error() {
-    this.toastService.error("BAD REQUEST");
+    this.toastService.error('BAD REQUEST');
     this.router.navigate(['error/badrequest']);
   }
 
   private handle403Error() {
-    this.toastService.error("FORBIDDEN");
+    this.toastService.error('FORBIDDEN');
     this.router.navigate(['error/forbidden']);
   }
 
   private handle404Error() {
-    this.toastService.error("NOT FOUND");
-    this.router.navigate(['error/notfound']);
+    this.router.navigate(['notfound']);
   }
 
   private requestWithHeader(request: HttpRequest<any>): HttpRequest<any> {
-
     if (this.isAuthUrl(request.url)) {
       return request;
     }
@@ -95,8 +101,11 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     if (this.authService.isLogged()) {
       const storedAuth = this.storageService.get(this.STORED_AUTH);
       return request.clone({
-        headers: request.headers.set('Authorization', 'Bearer ' + storedAuth.accessToken),
-      })
+        headers: request.headers.set(
+          'Authorization',
+          'Bearer ' + storedAuth.accessToken,
+        ),
+      });
     }
     return request;
   }
@@ -104,5 +113,4 @@ export class HttpRequestInterceptor implements HttpInterceptor {
   private isAuthUrl(url: string): boolean {
     return url.includes('auth/sign-in') || url.includes('auth/refresh-token');
   }
-
 }

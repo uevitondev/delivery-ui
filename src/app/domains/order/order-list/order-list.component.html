@@ -1,0 +1,19 @@
+<main>
+  <div class="container">
+    @if (isLoading) {
+      <div class="order-list-loading">
+        <p>CARREGANDO PEDIDOS...</p>
+      </div>
+    } @else {
+      <div class="orders">
+        @for (order of orders; track order) {
+          <app-order-card [order]="order"></app-order-card>
+        } @empty {
+          <div class="order-list-empty">
+            <p>PEDIDOS "VAZIO"</p>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</main>

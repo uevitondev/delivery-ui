@@ -6,6 +6,5 @@ import { NotfoundComponent } from './notfound/notfound.component';
 export const ERROR_ROUTES: Routes = [
   { path: 'badrequest', component: BadrequestComponent },
   { path: 'forbbiden', component: ForbiddenComponent },
-  { path: 'notfound', component: NotfoundComponent }
+  { path: 'notfound', component: NotfoundComponent },
 ];
-

@@ -1,0 +1,28 @@
+<main>
+  <div class="container">
+    <div>
+      <app-search
+        [placeHolder]="'Pesquisar Loja...'"
+        (searchEvent)="searchByStoreName($event)"
+      ></app-search>
+    </div>
+
+    <div class="stores">
+      @for (store of stores; track store) {
+        <app-storecard
+          [store]="store"
+          [redirectUrl]="
+            'home/' +
+            utilService.splitStringBySpaceAndJoinByIfenLower(store.name)
+          "
+          (selectedStoreEvent)="saveStoreInStorage($event)"
+        >
+        </app-storecard>
+      } @empty {
+        <div class="store-list-empty">
+          <p>LOJAS "VAZIO"</p>
+        </div>
+      }
+    </div>
+  </div>
+</main>
