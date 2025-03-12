@@ -1,4 +1,3 @@
-
 .product {
   display: flex;
   gap: 25px;
@@ -11,10 +10,12 @@
   height: 45px;
   img {
     width: 100%;
+    width: 45px;
+    height: 45px;
   }
 }
 
-span{
+span {
   display: flex;
   flex: 1;
 }
@@ -28,7 +29,7 @@ span{
   text-overflow: ellipsis;
 }
 
-.divider{
+.divider {
   width: 100%;
   border: 1px solid black;
 }

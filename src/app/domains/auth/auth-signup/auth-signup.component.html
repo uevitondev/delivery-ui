@@ -74,6 +74,7 @@
           id="password"
           formControlName="password"
           type="password"
+          autocomplete="on"
           placeholder="Digite sua senha"
         />
         @if (password?.touched && password?.errors) {
@@ -97,6 +98,7 @@
           id="confirmPassword"
           formControlName="confirmPassword"
           type="password"
+          autocomplete="on"
           placeholder="Confirme sua senha"
         />
         @if (confirmPassword?.touched && confirmPassword?.errors) {

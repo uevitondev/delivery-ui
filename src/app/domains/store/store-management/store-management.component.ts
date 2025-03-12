@@ -4,10 +4,11 @@ import { ErrorHandlerService } from '../../../core/services/error-handler.servic
 import { Store } from '../store';
 import { StoreProductListSellerComponent } from "../store-product-list-seller/store-product-list-seller.component";
 import { StoreService } from '../store.service';
+import { OrderListStoreComponent } from "../../order/order-list-store/order-list-store.component";
 
 @Component({
   selector: 'app-seller-store-management',
-  imports: [RouterModule, StoreProductListSellerComponent],
+  imports: [RouterModule, StoreProductListSellerComponent, OrderListStoreComponent],
   templateUrl: './store-management.component.html',
   styleUrl: './store-management.component.scss',
 })

@@ -6,7 +6,7 @@
       <div class="products-header">
         <button
           class="btn-primary"
-          (click)="this.modalService.open(templateNewProductForm)"
+          (click)="this.modalOverlayRef = this.modalService.open(templateNewProductForm)"
         >
           ADICIONAR NOVO PRODUTO
         </button>
@@ -37,7 +37,7 @@
               <span
                 ><button
                   class="btn-secondary"
-                  (click)="this.modalService.open(templateProductForm)"
+                  (click)="this.modalOverlayRef = this.modalService.open(templateProductForm)"
                 >
                   Editar
                 </button></span

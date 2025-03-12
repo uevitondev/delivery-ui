@@ -25,12 +25,16 @@
       <div class="edit">
         <button
           class="btn-secondary"
-          (click)="this.modalService.open(appAddressEdit)"
+          (click)="
+            this.modalOverlayRef = this.modalService.open(appAddressEdit)
+          "
         >
           Editar
         </button>
         <ng-template cdkPortal #appAddressEdit="cdkPortal">
-          <app-modal (closeModalEvent)="this.modalService.close(modalOverlayRef)">
+          <app-modal
+            (closeModalEvent)="this.modalService.close(modalOverlayRef)"
+          >
             <app-address-edit
               [address]="address"
               [isAddressNew]="false"

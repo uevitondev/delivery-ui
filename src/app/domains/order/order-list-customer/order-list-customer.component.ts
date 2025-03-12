@@ -7,12 +7,12 @@ import { OrderResponse } from '../order-response';
 import { OrderService } from '../order.service';
 
 @Component({
-  selector: 'app-order-list',
+  selector: 'app-order-list-customer',
   imports: [CommonModule, OrderCardComponent],
-  templateUrl: './order-list.component.html',
-  styleUrl: './order-list.component.scss',
+  templateUrl: './order-list-customer.component.html',
+  styleUrl: './order-list-customer.component.scss',
 })
-export class OrderListComponent implements OnInit {
+export class OrderListCustomerComponent implements OnInit {
   errorHandlerService = inject(ErrorHandlerService);
   storageService = inject(StorageService);
   orderService = inject(OrderService);

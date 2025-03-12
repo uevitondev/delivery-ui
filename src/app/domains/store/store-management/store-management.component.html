@@ -7,15 +7,16 @@
    <h2>Gerenciar Loja</h2>
     <div class="store-header">
       <h3>Gerenciar Detalhes da Loja ({{store.name}})</h3>
+    </div>
 
+    <div class="orders-store">
+      <h3>Gerenciar Pedidos da Loja ({{store.name}})</h3>
+      <app-order-list-store [store]="store"></app-order-list-store>
     </div>
 
 
-    <div class="products">
+    <div class="products-store">
       <h3> Gerenciar Produtos da Loja ({{store.name}})</h3>
-      <div class="products-header">
-        <button class="btn-primary">ADICIONAR NOVO PRODUTO</button>
-      </div>
       <app-store-product-list-seller [store]="store"> </app-store-product-list-seller>
 
     </div>

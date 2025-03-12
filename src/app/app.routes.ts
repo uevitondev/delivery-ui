@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth-guard';
-import { NotfoundComponent } from './modules/error/notfound/notfound.component';
-import { StoreHomeComponent } from './domains/store/store-home/store-home.component';
 import { SellerDashboardComponent } from './domains/seller/seller-dashboard/seller-dashboard.component';
+import { StoreHomeComponent } from './domains/store/store-home/store-home.component';
+import { NotfoundComponent } from './modules/error/notfound/notfound.component';
 import { HomePageComponent } from './modules/home/home-page/home-page.component';
 
 export const APP_ROUTES: Routes = [
@@ -11,7 +11,6 @@ export const APP_ROUTES: Routes = [
     path: 'home',
     component: HomePageComponent,
   },
-
   { path: 'home/:storeName', component: StoreHomeComponent },
   {
     path: 'seller',

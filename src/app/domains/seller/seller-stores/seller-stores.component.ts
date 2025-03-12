@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { UtilService } from '../../../core/utils/util.service';
 import { Store } from '../../store/store';

@@ -20,6 +20,15 @@ export class OrderService {
     );
   }
 
+  getAllByStore(storeId: string): Observable<OrderResponse[]> {
+    return this.httpClient.get<OrderResponse[]>(
+      `${this.apiUrl}/orders/store/${storeId}`,
+    );
+  }
+
+
+
+
   getAllByCustomer(): Observable<OrderResponse[]> {
     return this.httpClient.get<OrderResponse[]>(
       `${this.apiUrl}/orders/customer`,

@@ -1,0 +1,11 @@
+<main>
+  <div class="container">
+    <h3>Olá Seller, essa é sua área para gerenciamento de pedidos!</h3>
+    <div class="pedidos">
+      <h3>Meus Pedidos atuais</h3>
+      @for (order of orders; track order) {
+        <app-order-card [order]="order"></app-order-card>
+      }
+    </div>
+  </div>
+</main>

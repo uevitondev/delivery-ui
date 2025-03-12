@@ -22,7 +22,7 @@
       <p>Acompanhe seu histórico de pedidos...</p>
       <ng-template cdkPortal #appOrderList="cdkPortal">
         <app-modal (closeModalEvent)="this.modalService.close(modalOverlayRef)">
-          <app-order-list></app-order-list>
+          <app-order-list-customer></app-order-list-customer>
         </app-modal>
       </ng-template>
     </div>

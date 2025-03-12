@@ -5,12 +5,12 @@ import { ModalOverlayRef, ModalService } from '../../../core/services/modal.serv
 import { ModalComponent } from '../../../modules/shared/modal/modal.component';
 import { AddressListComponent } from '../../address/address-list/address-list.component';
 import { AuthService } from '../../auth/auth.service';
-import { OrderListComponent } from '../../order/order-list/order-list.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
+import { OrderListCustomerComponent } from "../../order/order-list-customer/order-list-customer.component";
 
 @Component({
   selector: 'app-user-account',
-  imports: [PortalModule, MatIconModule, UserProfileComponent, AddressListComponent, ModalComponent, OrderListComponent],
+  imports: [PortalModule, MatIconModule, UserProfileComponent, AddressListComponent, ModalComponent, OrderListCustomerComponent],
   templateUrl: './user-account.component.html',
   styleUrl: './user-account.component.scss',
 })
