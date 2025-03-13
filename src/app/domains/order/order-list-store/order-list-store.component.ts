@@ -6,6 +6,7 @@ import { Store } from '../../store/store';
 import { OrderCardComponent } from "../order-card/order-card.component";
 import { OrderResponse } from '../order-response';
 import { OrderService } from '../order.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-order-list-store',
@@ -16,14 +17,13 @@ import { OrderService } from '../order.service';
 export class OrderListStoreComponent implements OnInit {
 
   @Input() store!: Store;
-
   // private readonly socketService = inject(SocketService);
   //private readonly errorHandlerService = inject(ErrorHandlerService);
   orderService = inject(OrderService);
 
 
   orders: OrderResponse[] = [];
-  private webSocketUrl = 'http://localhost:8080/ws'
+  private webSocketUrl = environment.WEBSOCKET_API_URL;
 
 
   ngOnInit(): void {
