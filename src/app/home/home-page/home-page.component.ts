@@ -1,0 +1,15 @@
+import { Component, inject } from '@angular/core';
+import { StoreListComponent } from '../../store/store-list/store-list.component';
+import { StorageService } from '../../services/storage.service';
+
+@Component({
+  selector: 'app-home-page',
+  imports: [StoreListComponent],
+  templateUrl: './home-page.component.html',
+  styleUrl: './home-page.component.scss',
+})
+export class HomePageComponent {
+  storageService = inject(StorageService);
+
+  ngOnInit(): void { }
+}

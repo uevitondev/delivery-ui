@@ -1,0 +1,75 @@
+<main>
+  <div class="header">
+    <div class="title">
+      <p>Meus Endereços</p>
+    </div>
+
+    @if (isAddable) {
+      <div class="addable">
+        <button
+          class="btn-primary"
+          (click)="
+            this.modalOverlayRef = this.modalService.open(appAddressCreate)
+          "
+        >
+          NOVO ENDEREÇO
+        </button>
+        <ng-template cdkPortal #appAddressCreate="cdkPortal">
+          <app-modal
+            (closeModalEvent)="this.modalService.close(modalOverlayRef)"
+          >
+            <app-address-create
+              (onAddressCreatedEvent)="
+                this.modalService.close(this.modalOverlayRef); onLoadAddresses()
+              "
+            >
+            </app-address-create>
+          </app-modal>
+        </ng-template>
+      </div>
+    }
+  </div>
+
+  @if (isLoading) {
+    <div class="address-list-loading">
+      <p>CARREGANDO ENDEREÇOS...</p>
+    </div>
+  } @else {
+    <div class="addresses">
+      @for (address of addresses; track address) {
+        <app-address-card
+          [showActions]="true"
+          [address]="address"
+          [isSelectable]="true"
+          [isUpdatable]="true"
+          [isDeletable]="true"
+          [isSelected]="true"
+          [selectedId]="selectedId ? selectedId : null"
+          (onSelectEvent)="selectAddress($event)"
+          (onUpdateEvent)="
+            this.modalOverlayRef = modalService.open(appAddressUpdate)
+          "
+          (onDeleteEvent)="deleteAddress($event)"
+        >
+        </app-address-card>
+
+        <ng-template cdkPortal #appAddressUpdate="cdkPortal">
+          <app-modal
+            (closeModalEvent)="this.modalService.close(modalOverlayRef)"
+          >
+            <app-address-update
+              [isUpdatable]="true"
+              [address]="address"
+              (onAddressUpdatedEvent)="onLoadAddresses()"
+            >
+            </app-address-update>
+          </app-modal>
+        </ng-template>
+      } @empty {
+        <div class="address-list-empty">
+          <p>"VOCÊ NÃO TEM ENDEREÇOS CADASTRADOS"</p>
+        </div>
+      }
+    </div>
+  }
+</main>

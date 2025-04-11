@@ -1,9 +1,9 @@
 .app-nav {
-  height: var(--my_navbar-height);
+  height: var(--my_navbar_height);
 }
 
 .app-route {
   margin: 0;
   padding: 0;
-  height: calc(100% - var(--my_navbar-height));
+  height: calc(100% - var(--my_navbar_height));
 }

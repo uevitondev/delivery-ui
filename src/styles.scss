@@ -7,14 +7,6 @@
 
 @include mat.core();
 
-* {
-  margin: 0;
-  border: 0;
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 html {
   @include mat.theme(
     (
@@ -43,6 +35,14 @@ html {
   );
 }
 
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 html,
 body {
   height: 100%;
@@ -66,7 +66,7 @@ body {
   --my_padding: 8px;
   --my_border: 1px solid rgb(182, 179, 179);
   --my_radius: 8px;
-  --my_navbar-height: 60px;
+  --my_navbar_height: 60px;
 }
 
 .my-overlay-modal-backdrop {
@@ -114,25 +114,12 @@ body {
   }
 }
 
-//card
-
 .card {
   background-color: var(--my_primary_bg_color);
   border: var(--my_border);
   border-radius: var(--my_radius);
-  padding: var(--my_padding);
-  box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
-}
-
-.card-cursor {
-  background-color: var(--my_primary_bg_color);
-  border: var(--my_border);
-  border-radius: var(--my_radius);
-  padding: var(--my_padding);
-  box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
-  cursor: pointer;
   &:hover {
-    background-color: gray;
+    box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
   }
 }
 
@@ -143,6 +130,10 @@ body {
   border: var(--my_border);
   background-color: var(--my_primary_bg_color);
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
+  }
 }
 
 .btn-secondary {

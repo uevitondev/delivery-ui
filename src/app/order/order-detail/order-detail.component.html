@@ -1,0 +1,77 @@
+<main>
+  @if (orderDetail) {
+    <div class="order-details-flex">
+      <h2>Detalhes do Pedido</h2>
+      @if (orderDetail; as order) {
+        <div class="header">
+          <p>Número: {{ order.number }}</p>
+          <p>Efetuado em {{ order.createdAt | date: "dd/MM/yyyy HH:mm" }}</p>         
+          <p>Status: {{ order.status }}</p>
+        </div>
+        <div class="details">
+          <div class="order-store">
+            <h4>Estabelecimento</h4>
+            @if (orderDetail.store; as store) {
+              <app-storecard [store]="store"> </app-storecard>
+            } @else {
+              <p>Não foi possível carregar dados de loja do pedido</p>
+            }
+          </div>
+          <div class="order-address">
+            <h4>Endereço de envio</h4>
+            @if (order.deliveryAddress; as address) {
+              <app-address-card [address]="address"></app-address-card>
+            } @else {
+              <p>Não foi possível carregar dados de entrega do pedido</p>
+            }
+          </div>
+          <div class="order-payment">
+            <h4>Methodo de Pagamento</h4>
+            @if (order.paymentMethod; as payment) {
+              <div class="payment">
+                <p>{{ payment }}</p>
+              </div>
+            } @else {
+              <p>Não foi possível carregar dados de pagamento do pedido</p>
+            }
+          </div>
+          <div class="order-value">
+            <h4>Valor do Pedido</h4>
+            @if (order.total; as total) {
+              <div class="total">
+                <p>{{ total | currency: "BRL" }}</p>
+              </div>
+            } @else {
+              <p>Não foi possível carregar dados para resumo do pedido</p>
+            }
+          </div>
+        </div>
+      } @else {
+        <p>Não foi possível carregar dados do pedido</p>
+      }
+
+      <div class="order-items">
+        <h4>Items</h4>
+        @for (orderitem of orderDetail.orderItems; track orderitem) {
+          <div class="order-item card">
+            <div class="order-item-image">
+              <img src="{{ orderitem.imgUrl }}" alt="" />
+            </div>
+            <div class="order-item-details">
+              <div class="details-flex-01">
+                <p>{{ orderitem.name }}</p>
+              </div>
+              <div class="details-flex-02">
+                <p>qtd: {{ orderitem.quantity }}x</p>
+                <div>
+                  <p>preço: {{ orderitem.price | currency: "BRL" }}</p>
+                  <p>subtotal: {{ orderitem.totalPrice | currency: "BRL" }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</main>

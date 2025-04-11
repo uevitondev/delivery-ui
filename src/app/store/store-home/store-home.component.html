@@ -1,0 +1,9 @@
+<main>
+  @if (isLoading) {
+    <app-loading [isLoading]="isLoading"></app-loading>
+  } @else {
+    @if (storeIsValid) {
+      <app-product-list-store [store]="store"> </app-product-list-store>
+    }
+  }
+</main>
