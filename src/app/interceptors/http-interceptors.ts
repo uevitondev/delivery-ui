@@ -5,17 +5,17 @@ import { ToastrService } from 'ngx-toastr';
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import { ErrorHandlerService } from '../services/error-handler.service';
 import { StorageService } from '../services/storage.service';
-import { environment } from '../../environments/environment.development';
 import { AuthService } from '../auth/auth.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
-  router = inject(Router);
-  toastService = inject(ToastrService);
-  storageService = inject(StorageService);
-  authService = inject(AuthService);
-  errorHandlerService = inject(ErrorHandlerService);
-  STORED_AUTH = environment.STORED_AUTH;
+  private readonly router = inject(Router);
+  private readonly toastService = inject(ToastrService);
+  private readonly storageService = inject(StorageService);
+  private readonly authService = inject(AuthService);
+  private readonly errorHandlerService = inject(ErrorHandlerService);
+  private readonly storedAuth = environment.STORED_AUTH;
 
   intercept(
     request: HttpRequest<any>,
@@ -93,7 +93,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     }
 
     if (this.authService.isLogged()) {
-      const storedAuth = this.storageService.get(this.STORED_AUTH);
+      const storedAuth = this.storageService.get(this.storedAuth);
       return request.clone({
         headers: request.headers.set(
           'Authorization',

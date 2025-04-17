@@ -3,17 +3,17 @@ import { BehaviorSubject } from 'rxjs';
 import { CartItem } from './cart-item';
 import { StoredCart } from './stored-cart';
 import { ToastrService } from 'ngx-toastr';
-import { environment } from '../../environments/environment.development';
 import { StorageService } from '../services/storage.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  toastService = inject(ToastrService);
-  storageService = inject(StorageService);
-  storedStore = environment.STORED_STORE;
-  storedCart = environment.STORED_CART;
+  private readonly toastService = inject(ToastrService);
+  private readonly storageService = inject(StorageService);
+  private readonly storedStore = environment.STORED_STORE;
+  private readonly storedCart = environment.STORED_CART;
   private cart = new BehaviorSubject<StoredCart>({ cartStoreId: '', cartItems: [] });
 
   constructor() {
@@ -51,7 +51,7 @@ export class CartService {
 
 
   addItemToCart(item: CartItem): void {
-    if (!this.belongsToSameStoreAsCart(item, this.cart.getValue()) ) {
+    if (!this.belongsToSameStoreAsCart(item, this.cart.getValue())) {
       this.toastService.warning("NÃO ADICIONADO, CATÁLOGO DO CARRINHO DE LOJA DIFERENTE");
     } else {
       const itemFound = this.cartItems().find(

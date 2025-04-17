@@ -12,11 +12,11 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './cnavbar.component.scss'
 })
 export class CnavbarComponent {
-  authService = inject(AuthService);
-  cartService = inject(CartService);
-  storageService = inject(StorageService);
+  readonly authService = inject(AuthService);
+  readonly cartService = inject(CartService);
+  readonly  storageService = inject(StorageService);
 
-  @Input() title : string = ''; 
+  @Input() title: string = '';
 
   themeIcon: string = 'dark_mode';
   userImage!: string;

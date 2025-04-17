@@ -7,8 +7,8 @@ import { PasswordResetToken } from './password-reset-token';
 import { AuthRequest } from './signin-request';
 import { SignUpRequest } from './signup-request';
 import { TokenRequest } from './token-request';
-import { environment } from '../../environments/environment.development';
 import { StorageService } from '../services/storage.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

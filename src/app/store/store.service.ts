@@ -1,27 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store } from './store';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 import { PageData } from '../models/page-data';
-import { StorageService } from '../services/storage.service';
+import { Store } from './store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
-  storageService = inject(StorageService);
-  http = inject(HttpClient);
+  private readonly http = inject(HttpClient);
 
-  apiUrl = environment.API_URL;
-
-  /*
-
-  getStoreByName(name: string): Observable<Store> {
-    return this.http.get<Store>(`${this.apiUrl}/stores/name?name=${name}`);
-  }
-
-  */
+  private readonly apiUrl = environment.API_URL;
 
   getAll(name: string): Observable<Store[]> {
     return this.http.get<Store[]>(`${this.apiUrl}/stores?name=${name}`);

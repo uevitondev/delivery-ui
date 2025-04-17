@@ -3,34 +3,34 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Address } from './address';
 import { AddressViaCep } from './address-viacep';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddressService {
-  API_URL = environment.API_URL;
-  httpClient = inject(HttpClient);
+  private readonly apiUrl = environment.API_URL;
+  private readonly httpClient = inject(HttpClient);
 
   getAddressViaCepByCep(cep: string): Observable<AddressViaCep> {
     return this.httpClient.get<AddressViaCep>(
-      `${this.API_URL}/addresses/viacep?cep=${cep}`,
+      `${this.apiUrl}/addresses/viacep?cep=${cep}`,
     );
   }
 
   getAllByUser(): Observable<Address[]> {
-    return this.httpClient.get<Address[]>(`${this.API_URL}/addresses/user/all`);
+    return this.httpClient.get<Address[]>(`${this.apiUrl}/addresses/user/all`);
   }
 
   newAddress(address: Address): Observable<any> {
-    return this.httpClient.post<any>(`${this.API_URL}/addresses/new`, address);
+    return this.httpClient.post<any>(`${this.apiUrl}/addresses/new`, address);
   }
 
   updateAddress(id: string, address: Address): Observable<any> {
-    return this.httpClient.put<any>(`${this.API_URL}/addresses/update`, address);
+    return this.httpClient.put<any>(`${this.apiUrl}/addresses/update`, address);
   }
 
   deleteAddressById(id: string): Observable<any> {
-    return this.httpClient.delete<any>(`${this.API_URL}/addresses/${id}`);
+    return this.httpClient.delete<any>(`${this.apiUrl}/addresses/${id}`);
   }
 }
