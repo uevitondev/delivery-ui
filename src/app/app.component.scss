@@ -1,9 +1,24 @@
-.app-nav {
-  height: var(--my_navbar_height);
+:host {
+  position: absolute;
+  display: flex;
+  flex-direction: column;  
+  gap: 5px;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-.app-route {
-  margin: 0;
-  padding: 0;
-  height: calc(100% - var(--my_navbar_height));
+.nav-content {
+  height: var(--navbar-height);
+}
+
+.main-content {
+  display: block;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;  
 }

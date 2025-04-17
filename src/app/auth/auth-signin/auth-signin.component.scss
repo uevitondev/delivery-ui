@@ -8,10 +8,6 @@ main {
   width: 100%;
   max-width: 450px;
   text-align: center;
-  background: #fff;
-  padding: 30px;
-  border-radius: var(--my_radius);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -66,7 +62,7 @@ button:not(:disabled):hover {
   color: black;
 }
 
-.message{
+.message {
   color: red;
 }
 

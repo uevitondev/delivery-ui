@@ -4,13 +4,9 @@ main {
   justify-content: center;
 }
 
-.form-container {
-  background: #fff;
-  padding: 30px;
-  border-radius: var(--my_radius);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  max-width: 450px;
+.form-container {  
   width: 100%;
+  max-width: 450px; 
   text-align: center;
 }
 

@@ -1,0 +1,50 @@
+<div class="my-navbar">
+  <div class="my-navbar-left">
+    <span class="navbar-brand" [routerLink]="['/home']">{{ title }}</span>
+  </div>
+
+  <div class="my-navbar-right">
+    <div class="my-navbar-links">
+      <button
+        class="nav-button"
+        [routerLink]="['/stores']"
+        (click)="isMenuOpen ? toggleMenu() : null"
+      >
+        Lojas
+      </button>
+      @if (authService.isLogged()) {
+        <button class="nav-button" [routerLink]="['/user/account']">
+          <span class="nav-button-wrapper">
+            <mat-icon>account_circle</mat-icon>
+            {{ authService.getAuthName() }}
+          </span>
+        </button>
+      } @else {
+        <button class="nav-button" [routerLink]="['/auth/signin']">
+          Login
+        </button>
+        <button class="nav-button" [routerLink]="['/auth/signup']">
+          Criar Conta
+        </button>
+      }
+    </div>
+
+    <div class="my-navbar-utils">
+      <button class="nav-button" (click)="toggleTheme()">
+        <span class="nav-button-wrapper">
+          <mat-icon>{{ themeIcon }}</mat-icon>
+        </span>
+      </button>
+
+      <button class="nav-button menu-toggle" (click)="toggleMenu()">
+        <span>
+          @if (isMenuOpen) {
+            <mat-icon>close</mat-icon>
+          } @else {
+            <mat-icon>menu</mat-icon>
+          }
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

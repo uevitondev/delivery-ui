@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { StoreListComponent } from '../../store/store-list/store-list.component';
 import { StorageService } from '../../services/storage.service';
+import { StoreListComponent } from '../../store/store-list/store-list.component';
 
 @Component({
   selector: 'app-home-page',

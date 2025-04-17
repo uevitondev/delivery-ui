@@ -4,36 +4,9 @@
 @use "@fontsource/jetbrains-mono" as jetbrains-mono;
 @use "@fontsource/jetbrains-mono/400.css" as jetbrains-mono-400;
 @use "@fontsource/jetbrains-mono/400-italic.css" as jetbrains-mono-400-italic;
-
+@use "overlay.scss";
 @include mat.core();
 
-html {
-  @include mat.theme(
-    (
-      color: (
-        theme-type: light,
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
-      ),
-      typography: JetBrains Mono,
-      density: 0,
-    )
-  );
-}
-
-.dark-theme {
-  @include mat.theme(
-    (
-      color: (
-        theme-type: dark,
-        primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
-      ),
-      typography: JetBrains Mono,
-      density: 0,
-    )
-  );
-}
 
 * {
   margin: 0;
@@ -41,16 +14,24 @@ html {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-decoration: none;
 }
 
-html,
-body {
+html {
   height: 100%;
+  background-color: var(--body-background);
+  font-size: 16px;
+  color: var(--text-color);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
-
 body {
-  margin: 0;
-  background: var(--mat-sys-surface);
+  min-height: 100%;
   font-family:
     "JetBrains Mono",
     Helvetica Neue,
@@ -58,89 +39,98 @@ body {
 }
 
 :root {
-  --my_primary_color: #232423;
-  --my_secondary_color: #fafafa;
-  --my_primary_bg_color: #fbd148;
-  --my_secondary_bg_color: #fafafa;
-  --my_box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  --my_padding: 8px;
-  --my_border: 1px solid rgb(182, 179, 179);
-  --my_radius: 8px;
-  --my_navbar_height: 60px;
+  --body-background: #e9eef3;
+  --body-background-2: #bdcfe2;
+  --graph-background: #bdcfe2;
+  --navbar-background: #fbd148;
+  --navbar-height: 65px;
+  --menu-card-background: #e9eef3;
+  --menu-card-background-active: #bdcfe2;
+  --text-color: rgb(26, 26, 26);
+  --text-color-light: rgb(57, 57, 57);
+  --text-color-invert: white;
+  --card-background:  #fbd148;
+  --accordion-button-background: #f5f5f5;
+  --accordion-button-background-invert: #d2dce7;
+  --accordion-button-border-color: #b2becd;
+  --sidebar-item-background: #d2dce7;
+  --tab-link-background: white;
+  --divider-background-color: #d4d4d4;
+  --code-editor-dragger-background-color: #f5f5f5;
+  --code-editor-background-color: #fffffe;
+  --code-editor-language-btn-background-color: #e9eef3;
+  --table-background-color: rgb(240, 240, 240);
+  --table-completed-row-color: rgb(215, 230, 215);
+  --table-highlighted-row-color: #bac0ff;
+  --table-border-color: 1px solid hsl(0, 0%, 80%);
+  --tabs-border-color: hsl(0deg, 0%, 86%);
+  --tabs-active-border-color: hsl(0deg, 0%, 21%);
+  --code-block-border-color: lightgray;
+  --code-block1-background-color: #fffffe;
+  --code-error-background: #ffebeb;
+  --code-error-color: #e0221e;
+  --navbar-active-btn-color: #dee8f3;
+  --pro-btn-background: rgb(203, 233, 203);
+  --pro-btn-background-hover: rgb(178, 213, 178);
+  --code-inline-background-color: #f5f5f5;
+  --code-inline-color: #202020;
+  --code-inline-border-color: #d8d8d8;
+  --monaco-btn-color: #f5f5f5;
+  --code-container-background: #f5f5f5;
+  --test-case-btn-background-color: #f1f1f1;
+  --border: 1px solid rgb(182, 179, 179);
 }
 
-.my-overlay-modal-backdrop {
-  position: relative !important;
-  width: 100%;
-  height: 100%;
-  opacity: 0.86;
-  background: gray;
-}
-
-.my-overlay-modal-template-backdrop {
-  opacity: 0.86;
-  background: gray;
-}
-
-.my-overlay-lightbox-backdrop {
-  opacity: 0.9;
-  background: #000000;
-}
-
-.my-confirmation-modal {
-  opacity: 1;
-  background: gray;
-}
-
-.my-confirmation-panel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.my-modal-panel {
-  position: relative !important;
-}
-
-.my-modal-template-panel {
-  display: block;
-  height: 80vh;
-}
-
-@media (max-width: 1024px) {
-  .my-modal-template-panel {
-    height: 100vh;
-  }
+html.dark-theme {
+  --body-background: #202225;
+  --body-background-2: #13181c;
+  --graph-background: #202225;
+  --navbar-background: #2f3136;
+  --navbar-height: 65px;
+  --menu-card-background: #202225;
+  --menu-card-background-active: rgb(222, 222, 222);
+  --text-color: #e1e1e1;
+  --text-color-light: #c3c3c3;
+  --text-color-invert: black;
+  --card-background: #2f3136;
+  --accordion-button-background: #2f3136;
+  --accordion-button-background-invert: #13181c;
+  --accordion-button-border-color: hsl(0deg, 0%, 86%);
+  --sidebar-item-background: #202225;
+  --tab-link-background: rgb(222, 222, 222);
+  --divider-background-color: #606060;
+  --code-editor-dragger-background-color: #202225;
+  --code-editor-background-color: #202020;
+  --code-editor-language-btn-background-color: #2f3136;
+  --table-background-color: #2f3136;
+  --table-completed-row-color: #214b52;
+  --table-highlighted-row-color: #454d9e;
+  --table-border-color: 1px solid hsl(0, 0%, 37%);
+  --tabs-border-color: hsl(0, 0%, 45%);
+  --tabs-active-border-color: hsl(0deg, 0%, 86%);
+  --code-block-border-color: rgb(99, 99, 99);
+  --code-block1-background-color: #262626;
+  --code-error-background: #ff635f1f;
+  --code-error-color: #ff5b5b;
+  --navbar-active-btn-color: #13181c;
+  --pro-btn-background: #194844;
+  --pro-btn-background-hover: #133d3d;
+  --code-inline-background-color: #363636;
+  --code-inline-color: rgb(220, 217, 217);
+  --code-inline-border-color: #f7faff1f;
+  --monaco-btn-color: #262626;
+  --code-container-background: #202225;
+  --test-case-btn-background-color: #3d3d3d;
+  --border: 1px solid hsl(0, 0%, 37%);
 }
 
 .card {
-  background-color: var(--my_primary_bg_color);
-  border: var(--my_border);
-  border-radius: var(--my_radius);
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
-  }
-}
-
-.btn-primary {
-  font-size: 13px;
-  border-radius: 99px;
-  padding: 4px 10px;
-  border: var(--my_border);
-  background-color: var(--my_primary_bg_color);
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
-  }
-}
-
-.btn-secondary {
-  font-size: 13px;
-  border-radius: 99px;
-  padding: 4px 10px;
+  background-color: var(--card-background);
   border: var(--border);
-  background-color: var(--my_secondary_bg_color);
-  cursor: pointer;
+  border-radius: 8px;
+  padding: 8px;
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0.5, 0.5);
+  }
 }
+

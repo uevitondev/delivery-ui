@@ -1,25 +1,22 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { CartService } from '../cart/cart.service';
 import { StorageService } from '../services/storage.service';
-import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-navbar',
-  imports: [RouterLink, CommonModule, MatIconModule, MatMenuModule, CdkMenuTrigger, CdkMenu, CdkMenuItem],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+  selector: 'app-cnavbar',
+  imports: [RouterLink, MatIconModule],
+  templateUrl: './cnavbar.component.html',
+  styleUrl: './cnavbar.component.scss'
 })
-export class NavBarComponent {
+export class CnavbarComponent {
   authService = inject(AuthService);
   cartService = inject(CartService);
   storageService = inject(StorageService);
 
-  @Input() navBrand: string = 'Delivery App';
+  @Input() title : string = ''; 
 
   themeIcon: string = 'dark_mode';
   userImage!: string;
@@ -37,14 +34,8 @@ export class NavBarComponent {
     return (this.themeIcon = 'dark_mode');
   }
 
-  getMatIconToggleMenu(): string { 
-    if(this.isMenuOpen){
-      return "close";
-    }
-    return "menu";
-  }
-
   logout() {
     this.authService.logout();
   }
+
 }
